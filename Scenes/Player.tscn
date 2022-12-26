@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://White-Pixel.png" type="Texture" id=1]
-[ext_resource path="res://Code/state_manager.gd" type="Script" id=2]
-[ext_resource path="res://Code/player.gd" type="Script" id=3]
-[ext_resource path="res://Code/move.gd" type="Script" id=4]
-[ext_resource path="res://Code/idle.gd" type="Script" id=5]
+[ext_resource path="res://Code/Player/state_manager.gd" type="Script" id=2]
+[ext_resource path="res://Code/Player/player.gd" type="Script" id=3]
+[ext_resource path="res://Code/Player/move.gd" type="Script" id=4]
+[ext_resource path="res://Code/Player/idle.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Idle"
@@ -97,4 +97,4 @@ move_node = NodePath("../Move")
 script = ExtResource( 4 )
 animation_name = "Move"
 idle_node = NodePath("../Idle")
-move_speed = 4000.0
+move_speed = 5000.0

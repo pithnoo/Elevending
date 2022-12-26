@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BaseState",
 "language": "GDScript",
-"path": "res://Code/base_state.gd"
+"path": "res://Code/Player/base_state.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Code/player.gd"
+"path": "res://Code/Player/player.gd"
 } ]
 _global_script_class_icons={
 "BaseState": "",

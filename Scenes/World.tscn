@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Core.tscn" type="PackedScene" id=3]
 
@@ -8,7 +9,9 @@
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Core" parent="." instance=ExtResource( 3 )]
-position = Vector2( 160, 88 )
+position = Vector2( 160, 96 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 160, 88 )
+position = Vector2( 160, 96 )
+
+[node name="Turret" parent="." instance=ExtResource( 1 )]
