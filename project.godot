@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Code/Player/player.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Turret",
+"language": "GDScript",
+"path": "res://Code/Turret/turret.gd"
+}, {
+"base": "Node",
+"class": "TurretBaseState",
+"language": "GDScript",
+"path": "res://Code/Turret/turret_base_state.gd"
 } ]
 _global_script_class_icons={
 "BaseState": "",
-"Player": ""
+"Player": "",
+"Turret": "",
+"TurretBaseState": ""
 }
 
 [application]
@@ -73,6 +85,15 @@ ui_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Core"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Grass"
+2d_physics/layer_5="Water"
+2d_physics/layer_6="Fire"
 
 [physics]
 

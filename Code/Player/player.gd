@@ -6,7 +6,6 @@ onready var states = $StateManager
 onready var sprite = $Sprite
 
 var velocity = Vector2.ZERO
-var startTime
 
 func _ready() -> void:
 	states.init(self)

@@ -59,6 +59,7 @@ graph_offset = Vector2( -58, -52 )
 
 [node name="Player" type="KinematicBody2D"]
 modulate = Color( 0, 0.552941, 1, 1 )
+collision_layer = 5
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
