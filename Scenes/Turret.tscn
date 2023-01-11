@@ -5,7 +5,7 @@
 [ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=3]
 [ext_resource path="res://Code/Turret/turret_attack.gd" type="Script" id=4]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/entity_detect.gd" type="Script" id=6]
+[ext_resource path="res://Code/Turret/entity_detect.gd" type="Script" id=6]
 
 [sub_resource type="AnimationNodeStateMachine" id=3]
 
@@ -44,16 +44,16 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
 shape = SubResource( 2 )
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateManager" type="Node" parent="."]
 script = ExtResource( 3 )
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateManager"]
 script = ExtResource( 5 )
 animation_name = "turretIdle"
 attack_node = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateManager"]
 script = ExtResource( 4 )
 animation_name = "turretAttack"
 idle_node = NodePath("../Idle")
