@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/White-Pixel.png-e5356c91e7041d3033648e3af513aa7d.stex"
+path="res://.import/vending machines.png-fb10c1fb0dab964894ec4af3749d3c98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://White-Pixel.png"
-dest_files=[ "res://.import/White-Pixel.png-e5356c91e7041d3033648e3af513aa7d.stex" ]
+source_file="res://Art/vending machines.png"
+dest_files=[ "res://.import/vending machines.png-fb10c1fb0dab964894ec4af3749d3c98.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

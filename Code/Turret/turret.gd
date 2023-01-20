@@ -20,4 +20,3 @@ func _ready():
 # only information that needs to be updated is process
 func _process(delta):
 	states.process(delta)
-
