@@ -14,10 +14,10 @@ func exit() -> void:
 	pass
 
 func input(_event: InputEvent) -> TurretBaseState:
-	return null
+  return null
 
 func process(_delta: float) -> TurretBaseState:
-	return null
+  return null
 
 func physics_process(_delta: float) -> TurretBaseState:
-	return null
+  return null
