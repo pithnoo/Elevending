@@ -11,10 +11,10 @@ func enter() -> void:
 func process(_delta: float) -> TurretBaseState:
   if turret.attackRange.entity_detected():
 	  if turret.ammo > 0 && turret.rateTimer.is_stopped():
-		  print("fired")
+		  turret.rateTimer.start(turret.cooldown)
 		  shoot()
 	  else:
-		  # change to no empty state
+		  # change to empty state
 		  pass
   else:
 	  return idle_state
@@ -22,13 +22,13 @@ func process(_delta: float) -> TurretBaseState:
   return null
 
 func shoot():
-  turret.rateTimer.start(turret.cooldown)
-
 	# instantiate projectile from scene
   var projectile = turret.Projectile.instance()
   add_child(projectile)
+  projectile.global_position = turret.firePoint.global_position
 	
-  var direction = (turret.AttackRange.entity.position - turret.global_position).normalized()
+  var direction = turret.firePoint.global_position.direction_to(turret.attackRange.entity.global_position)
 	
-  projectile.rotation = direction.angle()
-  projectile.velocity = direction * turret.projectileSpeed 
+  var projectileAngle = direction.angle()
+  projectile.rotation = projectileAngle 
+  projectile.apply_impulse(Vector2.ZERO, Vector2(turret.projectileSpeed, 0).rotated(projectileAngle))

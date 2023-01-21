@@ -42,6 +42,8 @@ __meta__ = {
 }
 Projectile = ExtResource( 7 )
 maxAmmo = 10
+cooldown = 0.5
+projectileSpeed = 5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 5 )
@@ -59,6 +61,7 @@ hframes = 2
 vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
@@ -85,6 +88,10 @@ animation_name = "Attack"
 idle_node = NodePath("../Idle")
 
 [node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FirePoint" type="Position2D" parent="."]
+position = Vector2( 0, 13 )
 
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]

@@ -6,6 +6,7 @@ onready var attackRange = $AttackRange
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
 onready var rateTimer = $FireRateTimer
+onready var firePoint = $FirePoint
 var ammo: int
 
 # turret variables to be changed by turretManager
