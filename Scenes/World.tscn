@@ -20,4 +20,8 @@ position = Vector2( 248, 104 )
 
 [node name="Turret" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, 64 )
-projectileSpeed = 100.0
+projectileSpeed = 0
+
+[node name="Turret2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 64 )
+projectileSpeed = 0

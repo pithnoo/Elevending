@@ -3,7 +3,6 @@ extends TurretBaseState
 export(NodePath) var idle_node
 
 onready var idle_state: TurretBaseState = get_node(idle_node)
-var nextTimeToFire
 
 func enter() -> void:
 	.enter()
@@ -31,4 +30,4 @@ func shoot():
 	
   var projectileAngle = direction.angle()
   projectile.rotation = projectileAngle 
-  projectile.apply_impulse(Vector2.ZERO, Vector2(turret.projectileSpeed, 0).rotated(projectileAngle))
+  projectile.apply_impulse(Vector2.ZERO, Vector2(200, 0).rotated(projectileAngle))

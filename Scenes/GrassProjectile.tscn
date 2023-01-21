@@ -6,20 +6,18 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
 
-[node name="GrassProjectile" type="Area2D"]
-rotation = 0.785398
+[node name="GrassProjectile" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 4
+gravity_scale = 0.0
 script = ExtResource( 2 )
-type = 2
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+rotation = -0.785398
 texture = ExtResource( 1 )
 hframes = 3
 frame = 1
-
-[connection signal="area_entered" from="." to="." method="_on_FireProjectile_area_entered"]

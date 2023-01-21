@@ -12,8 +12,8 @@ var ammo: int
 # turret variables to be changed by turretManager
 export(PackedScene) var Projectile
 export(int) var maxAmmo
+# export(float) var projectileSpeed
 export(float) var cooldown 
-export(float) var projectileSpeed
 
 func _ready():
   ammo = maxAmmo
