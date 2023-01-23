@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://Code/Player/base_state.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Code/Enemy/enemy.gd"
+}, {
+"base": "Node",
+"class": "EnemyBaseState",
+"language": "GDScript",
+"path": "res://Code/Enemy/enemy_base_state.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Code/Player/player.gd"
@@ -31,6 +41,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BaseState": "",
+"Enemy": "",
+"EnemyBaseState": "",
 "Player": "",
 "Turret": "",
 "TurretBaseState": ""
@@ -115,6 +127,7 @@ ui_down={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Core"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="World"
 
 [physics]
 

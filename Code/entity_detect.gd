@@ -10,5 +10,5 @@ func _on_AttackRange_body_exited(_body:Node):
 	pass
 
 func _on_AttackRange_body_entered(body:Node):
-	entity = body
-	pass
+  entity = body
+  pass

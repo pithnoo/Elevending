@@ -1,16 +1,18 @@
-extends Node
+extends EnemyBaseState
 
+export(NodePath) var follow_player_node
+export(NodePath) var idle_node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var follow_player_state: EnemyBaseState = get_node(follow_player_node)
+onready var idle_state: EnemyBaseState = get_node(idle_node)
 
+func enter() -> void:
+  .enter()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func physics_process(_delta: float) -> EnemyBaseState:
+  if enemy.playerDetection.entity_detected():
+    return follow_player_state
+  else:
+    # follow core
+    pass
+  return null

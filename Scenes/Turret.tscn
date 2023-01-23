@@ -5,8 +5,11 @@
 [ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=3]
 [ext_resource path="res://Code/Turret/turret_attack.gd" type="Script" id=4]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=5]
-[ext_resource path="res://Code/Turret/entity_detect.gd" type="Script" id=6]
+[ext_resource path="res://Code/entity_detect.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/WaterProjectile.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 14 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Attack"
@@ -29,13 +32,12 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 14 )
-
 [sub_resource type="CircleShape2D" id=2]
 radius = 88.0
 
 [node name="Turret" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -43,6 +45,11 @@ __meta__ = {
 Projectile = ExtResource( 7 )
 maxAmmo = 10
 cooldown = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 5 )
@@ -58,11 +65,6 @@ parameters/playback = SubResource( 4 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
 
 [node name="FireRateTimer" type="Timer" parent="."]
 one_shot = true

@@ -1,16 +1,21 @@
+class_name EnemyBaseState
 extends Node
 
+export(String) var animation_name
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var enemy: Enemy
 
+func enter() -> void:
+  enemy.animations.play(animation_name)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func exit() -> void:
+  pass
 
+func input(_event: InputEvent) -> EnemyBaseState:
+  return null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func process(_delta: float) -> EnemyBaseState:
+  return null
+
+func physics_process(_delta: float) -> EnemyBaseState:
+  return null

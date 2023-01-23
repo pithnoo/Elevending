@@ -1,16 +1,36 @@
 extends Node
 
+export(NodePath) var starting_state
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var current_state: EnemyBaseState
 
+func change_state(new_state: EnemyBaseState) -> void:
+  if current_state:
+	  current_state.exit()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+  current_state = new_state
+  current_state.enter()
 
+func init(enemy: Enemy) -> void:
+  for child in get_children():
+	  child.enemy = enemy
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+  change_state(get_node(starting_state))
+
+func physics_process(delta: float) -> void:
+  var new_state = current_state.physics_process(delta)
+
+  if new_state:
+	  change_state(new_state)
+
+func process(delta: float) -> void:
+  var new_state = current_state.process(delta)
+
+  if new_state:
+	  change_state(new_state)
+
+func input(event: InputEvent) -> void:
+  var new_state = current_state.input(event)
+
+  if new_state:
+	  change_state(new_state)
