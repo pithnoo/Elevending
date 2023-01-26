@@ -11,7 +11,10 @@
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 248, 104 )
+position = Vector2( 256, 104 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Core" parent="." instance=ExtResource( 3 )]
 position = Vector2( 160, 96 )

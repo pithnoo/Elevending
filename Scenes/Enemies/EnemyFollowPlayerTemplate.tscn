@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=2]
@@ -17,6 +17,9 @@ radius = 32.04
 radius = 6.4
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 0.5, 0.5 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "FollowCore"
@@ -77,7 +80,7 @@ mode = 1
 [node name="FollowPlayer" type="Node" parent="StateManager"]
 script = ExtResource( 7 )
 animation_name = "FollowPlayer"
-follow_speed = 60.0
+follow_speed = 50.0
 follow_acceleration = 300.0
 player_range = NodePath("../../AttackRange")
 core_range = NodePath("../../CoreRange")
@@ -87,7 +90,7 @@ idle_node = NodePath("../Idle")
 [node name="FollowCore" type="Node" parent="StateManager"]
 script = ExtResource( 3 )
 animation_name = "FollowCore"
-follow_speed = 50.0
+follow_speed = 30.0
 follow_acceleration = 300.0
 player_range = NodePath("../../AttackRange")
 core_range = NodePath("../../CoreRange")
@@ -117,12 +120,29 @@ collision_layer = 8
 collision_mask = 16
 script = ExtResource( 9 )
 entity_stats = NodePath("../Stats")
-type = null
+type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 visible = false
 scale = Vector2( 0.05, 0.05 )
 shape = SubResource( 1 )
+
+[node name="PlayerHitBox" type="Area2D" parent="."]
+scale = Vector2( 1, 1 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
+shape = SubResource( 12 )
+
+[node name="CoreHitBox" type="Area2D" parent="."]
+scale = Vector2( 1, 1 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoreHitBox"]
+shape = SubResource( 12 )
+
+[node name="BuffTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FollowCore = SubResource( 5 )
@@ -136,7 +156,6 @@ parameters/playback = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

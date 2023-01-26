@@ -135,6 +135,7 @@ ui_down={
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="World"
 2d_physics/layer_5="Projectile"
+2d_physics/layer_6="Item"
 
 [physics]
 
