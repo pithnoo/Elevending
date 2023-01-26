@@ -1,34 +1,95 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Art/vending machines.png" type="Texture" id=1]
 [ext_resource path="res://Code/Turret/turret.gd" type="Script" id=2]
 [ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=3]
 [ext_resource path="res://Code/Turret/turret_attack.gd" type="Script" id=4]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=5]
-[ext_resource path="res://Code/entity_detect.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/WaterProjectile.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Projectiles/WaterProjectile.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Code/Turret/turret_empty_state.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Empty"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Attack"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Empty"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Idle"
 
 [sub_resource type="AnimationNodeStateMachine" id=3]
 states/Attack/node = SubResource( 7 )
-states/Attack/position = Vector2( 751, 144 )
+states/Attack/position = Vector2( 324, 144 )
+states/Empty/node = SubResource( 10 )
+states/Empty/position = Vector2( 736, 144 )
 states/Idle/node = SubResource( 8 )
 states/Idle/position = Vector2( 520, 144 )
 start_node = "Idle"
+graph_offset = Vector2( 53, 19 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
@@ -43,7 +104,7 @@ __meta__ = {
 "_edit_group_": true
 }
 Projectile = ExtResource( 7 )
-maxAmmo = 20
+maxAmmo = 10
 cooldown = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -52,7 +113,9 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 5 )
+anims/Empty = SubResource( 9 )
 anims/Idle = SubResource( 6 )
+anims/RESET = SubResource( 11 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 3 )
@@ -64,6 +127,7 @@ parameters/playback = SubResource( 4 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 2
+frame = 1
 
 [node name="FireRateTimer" type="Timer" parent="."]
 one_shot = true
@@ -72,7 +136,6 @@ one_shot = true
 position = Vector2( 0, 13 )
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 6 )
@@ -93,6 +156,13 @@ attack_node = NodePath("../Attack")
 script = ExtResource( 4 )
 animation_name = "Attack"
 idle_node = NodePath("../Idle")
+empty_node = NodePath("../Empty")
+turret_range = NodePath("../../AttackRange")
+
+[node name="Empty" type="Node" parent="StateManager"]
+script = ExtResource( 8 )
+animation_name = "Empty"
+attack_node = NodePath("../Attack")
 
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]

@@ -13,7 +13,7 @@ func enter() -> void:
   enemy.velocity = Vector2.ZERO
 
 func follow_entity(detect, delta) -> void:
-  var target = detect.entity.global_position
+  var target = detect.entities[0].global_position
   var direction = enemy.global_position.direction_to(target)
   
   enemy.velocity = enemy.velocity.move_toward(direction * follow_speed, delta * follow_acceleration) 
