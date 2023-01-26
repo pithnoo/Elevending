@@ -2,7 +2,6 @@ class_name Enemy
 extends KinematicBody2D 
 
 # properties of enemy to be used in game
-onready var playerDetection = $AttackRange
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
 onready var sprite = $Sprite

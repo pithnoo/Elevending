@@ -12,3 +12,11 @@ func _on_AttackRange_body_exited(_body:Node):
 func _on_AttackRange_body_entered(body:Node):
   entity = body
   pass
+
+func _on_CoreRange_body_exited(_body:Node):
+  entity = null
+  pass 
+
+func _on_CoreRange_body_entered(body:Node):
+  entity = body
+  pass

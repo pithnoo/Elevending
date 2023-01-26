@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/WaterProjectile.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 14 )
+extents = Vector2( 8, 4 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "Attack"
@@ -43,12 +43,11 @@ __meta__ = {
 "_edit_group_": true
 }
 Projectile = ExtResource( 7 )
-maxAmmo = 10
+maxAmmo = 20
 cooldown = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 2 )
+position = Vector2( 0, 12 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -73,6 +72,7 @@ one_shot = true
 position = Vector2( 0, 13 )
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 6 )
