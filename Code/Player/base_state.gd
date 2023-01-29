@@ -6,7 +6,6 @@ export(String) var animation_name
 var player: Player
 
 func enter() -> void:
-#	print(animation_name)
 	player.animations.play(animation_name)
 
 func exit() -> void:

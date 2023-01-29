@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Art/player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Code/Player/state_manager.gd" type="Script" id=2]
 [ext_resource path="res://Code/Player/player.gd" type="Script" id=3]
 [ext_resource path="res://Code/Player/move.gd" type="Script" id=4]
 [ext_resource path="res://Code/Player/idle.gd" type="Script" id=5]
+[ext_resource path="res://Code/Player/roll.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 5, 5 )
@@ -61,18 +62,53 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "Roll"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateManager/Roll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_animation_finished"
+} ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Move"
 
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Roll"
+
 [sub_resource type="AnimationNodeStateMachine" id=7]
 states/Idle/node = SubResource( 5 )
-states/Idle/position = Vector2( 376, 125 )
+states/Idle/position = Vector2( 363, 125 )
 states/Move/node = SubResource( 6 )
 states/Move/position = Vector2( 573, 125 )
-start_node = "Idle"
+states/Roll/node = SubResource( 12 )
+states/Roll/position = Vector2( 779, 125 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=8]
 
@@ -109,20 +145,42 @@ starting_state = NodePath("Idle")
 script = ExtResource( 5 )
 animation_name = "Idle"
 move_node = NodePath("../Move")
+roll_node = NodePath("../Roll")
+roll_timer_node = NodePath("../../RollTimer")
 
 [node name="Move" type="Node" parent="StateManager"]
 script = ExtResource( 4 )
 animation_name = "Move"
 idle_node = NodePath("../Idle")
+roll_node = NodePath("../Roll")
+roll_timer_node = NodePath("../../RollTimer")
 move_speed = 5000.0
+
+[node name="Roll" type="Node" parent="StateManager"]
+script = ExtResource( 6 )
+animation_name = "Roll"
+idle_node = NodePath("../Idle")
+move_node = NodePath("../Move")
+roll_timer_node = NodePath("../../RollTimer")
+motion_timer_node = NodePath("../../MotionTimer")
+max_roll_speed = 300.0
+roll_cooldown = 1.0
+motion_time = 0.05
+deceleration = 0.93
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
 anims/Move = SubResource( 4 )
 anims/RESET = SubResource( 10 )
+anims/Roll = SubResource( 11 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 7 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 8 )
+
+[node name="RollTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MotionTimer" type="Timer" parent="."]
+one_shot = true
