@@ -100,6 +100,7 @@ idle_node = NodePath("../Idle")
 
 [node name="CoreRange" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
 
@@ -116,7 +117,7 @@ script = ExtResource( 1 )
 shape = SubResource( 4 )
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 16
 script = ExtResource( 9 )
 entity_stats = NodePath("../Stats")
@@ -128,14 +129,12 @@ scale = Vector2( 0.05, 0.05 )
 shape = SubResource( 1 )
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
-scale = Vector2( 1, 1 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 shape = SubResource( 12 )
 
 [node name="CoreHitBox" type="Area2D" parent="."]
-scale = Vector2( 1, 1 )
 collision_layer = 0
 collision_mask = 2
 

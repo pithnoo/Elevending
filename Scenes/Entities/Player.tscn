@@ -177,6 +177,7 @@ anims/Roll = SubResource( 11 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 7 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 8 )
 
 [node name="RollTimer" type="Timer" parent="."]

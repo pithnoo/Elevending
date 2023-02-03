@@ -1,10 +1,12 @@
-extends AnimatedSprite 
+extends RigidBody2D
 
-# Called when the node enters the scene tree for the first time.
+onready var timer: Timer = $Timer
+
+export(float) var life_time
+
 func _ready():
-	connect("animation_finished", self, "_on_animation_finished") 
-	frame = 0
-	play("Animate")
+	timer.start(life_time)
 
-func _on_animation_finished():
-	queue_free()
+func _process(_delta: float):
+	if timer.is_stopped():
+		queue_free()
