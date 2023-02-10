@@ -18,3 +18,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
+
+func _on_Stats_no_health():
+	# change to dead state
+	pass # Replace with function body.
