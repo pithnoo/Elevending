@@ -39,5 +39,4 @@ func _on_HurtBox_area_entered(area:Area2D):
 				area.element.FIRE:
 					emit_signal("buff_enemy")
 					
-	#print(area)
 	area.destroy()

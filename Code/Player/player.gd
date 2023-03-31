@@ -10,6 +10,8 @@ onready var sprite = $Sprite
 var velocity = Vector2.ZERO
 var facing_direction: int
 
+export(PackedScene) var deathEffect
+
 func _ready() -> void:
 	states.init(self)
 
@@ -20,5 +22,5 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 
 func _on_Stats_no_health():
-	# change to dead state
-	pass # Replace with function body.
+	# instantiate death effect
+	queue_free()

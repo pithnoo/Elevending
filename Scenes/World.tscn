@@ -11,22 +11,19 @@
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 256, 104 )
+position = Vector2( 256, 80 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Core" parent="." instance=ExtResource( 3 )]
-position = Vector2( 160, 96 )
+position = Vector2( 160, 72 )
 
 [node name="Turret" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 64 )
-
-[node name="Turret2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 192, 64 )
+position = Vector2( 232, 88 )
 
 [node name="EnemyFollowCore" parent="." instance=ExtResource( 4 )]
-position = Vector2( 24, 56 )
+position = Vector2( 88, 192 )
 
 [node name="EnemyFollowPlayer" parent="." instance=ExtResource( 5 )]
-position = Vector2( 80, 152 )
+position = Vector2( 296, 16 )

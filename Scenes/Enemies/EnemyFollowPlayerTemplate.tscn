@@ -130,6 +130,7 @@ shape = SubResource( 1 )
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 shape = SubResource( 12 )

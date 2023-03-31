@@ -22,7 +22,6 @@ func _process(delta):
 func _physics_process(delta: float) -> void:
   states.physics_process(delta)
 
-
 func _on_Stats_no_health():
   # instantiate death effect
   queue_free()
