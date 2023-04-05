@@ -1,9 +1,7 @@
-extends Area2D
-
-enum element { GRASS, WATER, FIRE }
+class_name Hazard
+extends Area2D 
 
 export(PackedScene) var deathEffect
-export(element) var type
 export(int) var damage
 
 func destroy():

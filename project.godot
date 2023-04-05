@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/Enemy/enemy_follow_state.gd"
 }, {
+"base": "Area2D",
+"class": "Hazard",
+"language": "GDScript",
+"path": "res://Code/Properties/Hazard/hazard.gd"
+}, {
+"base": "Area2D",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://Code/Properties/HurtBox/hurt_box.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -49,6 +59,8 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyBaseState": "",
 "EnemyFollowState": "",
+"Hazard": "",
+"HurtBox": "",
 "Player": "",
 "Turret": "",
 "TurretBaseState": ""

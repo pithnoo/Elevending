@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=2]
@@ -8,7 +8,9 @@
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=6]
 [ext_resource path="res://Code/Enemy/enemy_follow_player.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Stats.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Code/Enemy/enemy_hurt_box.gd" type="Script" id=9]
+[ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=9]
+[ext_resource path="res://Code/Properties/Hazard/hazard.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Projectiles/ProjectileEffectFire.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 32.04
@@ -98,6 +100,11 @@ mode = 1
 follow_player_node = NodePath("../FollowPlayer")
 idle_node = NodePath("../Idle")
 
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+
 [node name="CoreRange" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
@@ -128,16 +135,13 @@ visible = false
 scale = Vector2( 0.05, 0.05 )
 shape = SubResource( 1 )
 
-[node name="PlayerHitBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
-shape = SubResource( 12 )
-
 [node name="CoreHitBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+scale = Vector2( 1, 1 )
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 10 )
+deathEffect = ExtResource( 11 )
+damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoreHitBox"]
 shape = SubResource( 12 )
@@ -153,10 +157,6 @@ anims/Idle = SubResource( 7 )
 tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
-texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

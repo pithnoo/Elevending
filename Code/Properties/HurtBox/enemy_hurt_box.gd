@@ -1,8 +1,4 @@
-extends Area2D 
-
-export(NodePath) var entity_stats
-
-onready var stats = get_node(entity_stats)
+extends HurtBox 
 
 signal buff_enemy 
 

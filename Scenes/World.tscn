@@ -10,20 +10,22 @@
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 256, 80 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Core" parent="." instance=ExtResource( 3 )]
+[node name="Entities" type="YSort" parent="YSort"]
+
+[node name="Core" parent="YSort/Entities" instance=ExtResource( 3 )]
 position = Vector2( 160, 72 )
 
-[node name="Turret" parent="." instance=ExtResource( 1 )]
+[node name="Turret" parent="YSort/Entities" instance=ExtResource( 1 )]
 position = Vector2( 232, 88 )
 
-[node name="EnemyFollowCore" parent="." instance=ExtResource( 4 )]
+[node name="EnemyFollowCore" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 88, 192 )
 
-[node name="EnemyFollowPlayer" parent="." instance=ExtResource( 5 )]
+[node name="EnemyFollowPlayer" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 296, 16 )
