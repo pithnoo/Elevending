@@ -73,6 +73,10 @@ run/main_scene="res://Scenes/World.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/warnings/enable=false
+
 [display]
 
 window/size/width=320

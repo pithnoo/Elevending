@@ -23,4 +23,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_Stats_no_health():
 	# instantiate death effect
+	var effect = deathEffect.instance()
+	var main = get_tree().current_scene
+
+	main.add_child(effect)
+	effect.global_position = global_position
+
 	queue_free()

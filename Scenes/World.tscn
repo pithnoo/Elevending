@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Entities/Turret.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Entities/Core.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/EnemyFollowCoreTemplate.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Enemies/EnemyFollowPlayerTemplate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/FireTurret.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/GrassTurret.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 
@@ -21,11 +22,29 @@ __meta__ = {
 [node name="Core" parent="YSort/Entities" instance=ExtResource( 3 )]
 position = Vector2( 160, 72 )
 
+[node name="FireTurret" parent="YSort/Entities" instance=ExtResource( 5 )]
+position = Vector2( 81, 89 )
+
+[node name="GrassTurret" parent="YSort/Entities" instance=ExtResource( 6 )]
+position = Vector2( 84, 29 )
+
 [node name="Turret" parent="YSort/Entities" instance=ExtResource( 1 )]
 position = Vector2( 232, 88 )
 
-[node name="EnemyFollowCore" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 88, 192 )
+[node name="Turret2" parent="YSort/Entities" instance=ExtResource( 1 )]
+position = Vector2( 232, 32 )
 
-[node name="EnemyFollowPlayer" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 296, 16 )
+[node name="EnemyFollowCore" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -1.99997, 158 )
+
+[node name="EnemyFollowCore4" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -22, 81 )
+
+[node name="EnemyFollowCore5" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -25, 5.00002 )
+
+[node name="EnemyFollowCore2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 256, 155 )
+
+[node name="EnemyFollowCore3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 153, 179 )
