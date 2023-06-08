@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Art/vending machines.png" type="Texture" id=7]
 [ext_resource path="res://Code/Turret/turret_empty_state.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Projectiles/GrassProjectile.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=10]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"
@@ -70,6 +72,35 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
+[sub_resource type="Animation" id=16]
+resource_name = "Start"
+length = 0.2
+step = 0.005
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.02, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Attack"
 
@@ -91,6 +122,11 @@ graph_offset = Vector2( 53, 19 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 11 )
+shader_param/active = false
+shader_param/colour = Color( 0.568627, 0.858824, 0.411765, 1 )
+
 [sub_resource type="CircleShape2D" id=2]
 radius = 88.0
 
@@ -98,7 +134,6 @@ radius = 88.0
 extents = Vector2( 8, 4 )
 
 [node name="GrassTurret" type="StaticBody2D"]
-position = Vector2( 82, 89 )
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 5 )
@@ -112,7 +147,7 @@ cooldown = 0.5
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 4 )
-starting_state = NodePath("Idle")
+starting_state = NodePath("Start")
 
 [node name="Idle" type="Node" parent="StateManager"]
 script = ExtResource( 2 )
@@ -131,6 +166,11 @@ script = ExtResource( 8 )
 animation_name = "Empty"
 attack_node = NodePath("../Attack")
 
+[node name="Start" type="Node" parent="StateManager"]
+script = ExtResource( 10 )
+animation_name = "Start"
+idle_node = NodePath("../Idle")
+
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )
 
@@ -139,6 +179,7 @@ anims/Attack = SubResource( 11 )
 anims/Empty = SubResource( 12 )
 anims/Idle = SubResource( 13 )
 anims/RESET = SubResource( 14 )
+anims/Start = SubResource( 16 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 3 )
@@ -150,6 +191,7 @@ parameters/playback = SubResource( 15 )
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 17 )
 texture = ExtResource( 7 )
 hframes = 2
 vframes = 4
@@ -168,5 +210,6 @@ shape = SubResource( 2 )
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
+[connection signal="animation_finished" from="AnimationPlayer" to="StateManager/Start" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]

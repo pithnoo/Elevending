@@ -29,7 +29,10 @@ func shoot(target):
   # instantiate projectile from scene
   var projectile = turret.Projectile.instance()
   var muzzleFlash = turret.projectileEffect.instance()
-  add_child(projectile)
+
+  var main = get_tree().current_scene
+
+  main.add_child(projectile)
   add_child(muzzleFlash)
 
   var shootPoint = turret.firePoint.global_position
@@ -41,4 +44,4 @@ func shoot(target):
 	
   var projectileAngle = direction.angle()
   projectile.rotation = projectileAngle 
-  projectile.apply_impulse(Vector2.ZERO, Vector2(250, 0).rotated(projectileAngle))
+  projectile.apply_impulse(Vector2.ZERO, Vector2(280, 0).rotated(projectileAngle))

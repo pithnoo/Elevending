@@ -1,5 +1,5 @@
 extends Hazard 
 
-enum element { GRASS, WATER, FIRE }
+enum element { FIRE, WATER, GRASS }
 
 export(element) var type

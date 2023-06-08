@@ -7,6 +7,7 @@ export(NodePath) var core_range
 
 onready var player_detect = get_node(player_range)
 onready var core_detect = get_node(core_range)
+
 onready var follow_core_state: EnemyBaseState = get_node(follow_core_node)
 onready var follow_player_state: EnemyBaseState = get_node(follow_player_node)
 
