@@ -10,27 +10,27 @@
 [node name="YSort" type="YSort" parent="."]
 position = Vector2( 80, 52 )
 
-[node name="Turrets" type="Node2D" parent="YSort"]
-
-[node name="TurretManager" parent="YSort/Turrets" instance=ExtResource( 1 )]
-position = Vector2( 72, 120 )
-
-[node name="TurretManager2" parent="YSort/Turrets" instance=ExtResource( 1 )]
-position = Vector2( 240, 120 )
-turretInput = 1
-
-[node name="TurretManager3" parent="YSort/Turrets" instance=ExtResource( 1 )]
-position = Vector2( 240, 32 )
-turretInput = 2
-
-[node name="TurretManager4" parent="YSort/Turrets" instance=ExtResource( 1 )]
-position = Vector2( 72, 32 )
-turretInput = 3
-
 [node name="Entities" type="YSort" parent="YSort"]
 
 [node name="Core" parent="YSort/Entities" instance=ExtResource( 3 )]
 position = Vector2( 160, 72 )
+
+[node name="Turrets" type="Node2D" parent="YSort/Entities"]
+
+[node name="TurretManager" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
+position = Vector2( 72, 120 )
+
+[node name="TurretManager2" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
+position = Vector2( 240, 120 )
+turretInput = 1
+
+[node name="TurretManager3" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
+position = Vector2( 240, 32 )
+turretInput = 2
+
+[node name="TurretManager4" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
+position = Vector2( 72, 32 )
+turretInput = 3
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 256, 80 )
