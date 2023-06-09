@@ -147,7 +147,7 @@ animation_name = "Move"
 idle_node = NodePath("../Idle")
 roll_node = NodePath("../Roll")
 roll_timer_node = NodePath("../../RollTimer")
-move_speed = 5000.0
+move_speed = 6000.0
 
 [node name="Roll" type="Node" parent="StateManager"]
 script = ExtResource( 6 )
