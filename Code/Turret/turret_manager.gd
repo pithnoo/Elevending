@@ -31,8 +31,6 @@ func _process(delta):
 
 	if switchInput && switchTimer.is_stopped():
 
-		print(switchInput)
-
 		switchTimer.start(cooldown)
 
 		var wr = weakref(currentTurret)

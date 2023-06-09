@@ -13,8 +13,6 @@ var ammo: int
 export(PackedScene) var Projectile
 export(PackedScene) var projectileEffect 
 export(int) var maxAmmo
-
-# export(float) var projectileSpeed
 export(float) var cooldown 
 
 func _ready():

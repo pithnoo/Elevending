@@ -9,5 +9,4 @@ func _on_Stats_no_health():
 	queue_free()
 
 func _on_HurtBox_area_entered(area:Area2D):
-	#print("check")
 	pass

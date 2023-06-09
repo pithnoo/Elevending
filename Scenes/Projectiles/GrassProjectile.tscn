@@ -32,6 +32,7 @@ collision_mask = 0
 script = ExtResource( 2 )
 deathEffect = ExtResource( 3 )
 damage = 1
+type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 2 )

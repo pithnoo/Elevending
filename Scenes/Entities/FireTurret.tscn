@@ -44,6 +44,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "Idle"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -72,7 +73,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=19]
 resource_name = "Start"
 length = 0.2
 step = 0.005
@@ -99,6 +100,32 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateManager/Start")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=7]
@@ -128,6 +155,7 @@ graph_offset = Vector2( -20, 76 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/active = false
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
@@ -136,7 +164,7 @@ shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 radius = 88.0
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 4 )
+extents = Vector2( 8, 9.5 )
 
 [node name="FireTurret" type="StaticBody2D"]
 collision_layer = 8
@@ -175,6 +203,7 @@ attack_node = NodePath("../Attack")
 script = ExtResource( 10 )
 animation_name = "Start"
 idle_node = NodePath("../Idle")
+empty_node = NodePath("../Empty")
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )
@@ -184,7 +213,7 @@ anims/Attack = SubResource( 11 )
 anims/Empty = SubResource( 12 )
 anims/Idle = SubResource( 13 )
 anims/RESET = SubResource( 14 )
-anims/Start = SubResource( 16 )
+anims/Start = SubResource( 19 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 3 )
@@ -212,9 +241,8 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
+position = Vector2( 0, -1.5 )
 shape = SubResource( 1 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="StateManager/Start" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]
