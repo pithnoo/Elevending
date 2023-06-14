@@ -186,21 +186,23 @@ material = SubResource( 13 )
 texture = ExtResource( 1 )
 hframes = 14
 
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+modulate = Color( 0, 0.27451, 1, 1 )
+collision_layer = 0
+collision_mask = 64
+script = ExtResource( 9 )
+entity_stats = NodePath("../Stats")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( -1, 2 )
+shape = SubResource( 9 )
+
 [node name="ItemBox" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemBox"]
 modulate = Color( 1, 0.913725, 0, 1 )
-position = Vector2( -1, 2 )
-shape = SubResource( 9 )
-
-[node name="HurtBox" type="Area2D" parent="."]
-visible = false
-modulate = Color( 0, 0.27451, 1, 1 )
-script = ExtResource( 9 )
-entity_stats = NodePath("../Stats")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( -1, 2 )
 shape = SubResource( 9 )
 
@@ -210,3 +212,4 @@ position = Vector2( -1, 1.5 )
 shape = SubResource( 2 )
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]

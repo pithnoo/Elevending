@@ -6,7 +6,7 @@ export(String) var animation_name
 var enemy: Enemy
 
 func enter() -> void:
-  enemy.animations.play(animation_name)
+	enemy.animations.play(animation_name)
 
 func exit() -> void:
   pass

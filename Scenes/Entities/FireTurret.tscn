@@ -175,7 +175,6 @@ __meta__ = {
 }
 Projectile = ExtResource( 7 )
 projectileEffect = ExtResource( 6 )
-maxAmmo = 10
 cooldown = 0.5
 
 [node name="StateManager" type="Node" parent="."]

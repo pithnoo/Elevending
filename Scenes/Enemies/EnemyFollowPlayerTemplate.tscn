@@ -1,8 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=2]
-[ext_resource path="res://Code/Enemy/enemy_follow_core.gd" type="Script" id=3]
+[ext_resource path="res://Code/Enemy/enemy_secondary_follow.gd" type="Script" id=3]
 [ext_resource path="res://Code/Enemy/enemy.gd" type="Script" id=4]
 [ext_resource path="res://Art/White-Pixel.png" type="Texture" id=5]
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=6]
@@ -19,6 +19,9 @@ radius = 32.04
 radius = 6.4
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 0.5, 0.5 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 0.5, 0.5 )
@@ -53,10 +56,13 @@ graph_offset = Vector2( -63, 30 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
+[sub_resource type="CircleShape2D" id=14]
+radius = 1.0
+
 [node name="EnemyFollowPlayer" type="KinematicBody2D"]
 scale = Vector2( 10, 10 )
-collision_layer = 12
-collision_mask = 8
+collision_layer = 4
+collision_mask = 0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -64,7 +70,7 @@ __meta__ = {
 maxHealth = 10
 
 [node name="Stats" parent="." instance=ExtResource( 8 )]
-max_health = 5
+max_health = 3
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -73,36 +79,33 @@ starting_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateManager"]
 script = ExtResource( 6 )
 animation_name = "Idle"
-follow_core_node = NodePath("../FollowCore")
-follow_player_node = NodePath("../FollowPlayer")
+follow_node = NodePath("../FollowCore")
 player_range = NodePath("../../AttackRange")
 core_range = NodePath("../../CoreRange")
-mode = 1
+
+[node name="FollowCore" type="Node" parent="StateManager"]
+script = ExtResource( 3 )
+animation_name = "FollowCore"
+follow_speed = 15.0
+follow_acceleration = 300.0
+idle_node = NodePath("../Idle")
+attack_node = NodePath("../FollowPlayer")
+core_range = NodePath("../../CoreRange")
+player_range = NodePath("../../AttackRange")
 
 [node name="FollowPlayer" type="Node" parent="StateManager"]
 script = ExtResource( 7 )
 animation_name = "FollowPlayer"
 follow_speed = 50.0
 follow_acceleration = 300.0
+follow_node = NodePath("../FollowCore")
 player_range = NodePath("../../AttackRange")
-core_range = NodePath("../../CoreRange")
-follow_core_node = NodePath("../FollowCore")
-idle_node = NodePath("../Idle")
-
-[node name="FollowCore" type="Node" parent="StateManager"]
-script = ExtResource( 3 )
-animation_name = "FollowCore"
-follow_speed = 30.0
-follow_acceleration = 300.0
-player_range = NodePath("../../AttackRange")
-core_range = NodePath("../../CoreRange")
-mode = 1
-follow_player_node = NodePath("../FollowPlayer")
-idle_node = NodePath("../Idle")
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 5 )
+
+[node name="BuffTimer" type="Timer" parent="."]
 
 [node name="CoreRange" type="Area2D" parent="."]
 visible = false
@@ -115,7 +118,6 @@ self_modulate = Color( 0.101961, 1, 0, 1 )
 shape = SubResource( 11 )
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 script = ExtResource( 1 )
 
@@ -134,7 +136,18 @@ visible = false
 scale = Vector2( 0.05, 0.05 )
 shape = SubResource( 1 )
 
+[node name="PlayerHitBox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource( 10 )
+deathEffect = ExtResource( 11 )
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
+shape = SubResource( 13 )
+
 [node name="CoreHitBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 10 )
@@ -143,8 +156,6 @@ damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoreHitBox"]
 shape = SubResource( 12 )
-
-[node name="BuffTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FollowCore = SubResource( 5 )
@@ -158,9 +169,7 @@ active = true
 parameters/playback = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-scale = Vector2( 0.05, 0.05 )
-shape = SubResource( 1 )
+shape = SubResource( 14 )
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_entered"]

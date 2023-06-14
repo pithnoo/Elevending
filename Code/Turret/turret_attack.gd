@@ -44,4 +44,4 @@ func shoot(target):
 	
   var projectileAngle = direction.angle()
   projectile.rotation = projectileAngle 
-  projectile.apply_impulse(Vector2.ZERO, Vector2(280, 0).rotated(projectileAngle))
+  projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectileAngle))

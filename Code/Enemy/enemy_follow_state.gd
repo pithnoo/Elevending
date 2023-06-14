@@ -3,11 +3,6 @@ class_name EnemyFollowState
 
 export(float) var follow_speed 
 export(float) var follow_acceleration 
-export(NodePath) var player_range
-export(NodePath) var core_range
-
-onready var player_detect = get_node(player_range)
-onready var core_detect = get_node(core_range)
 
 func enter() -> void:
   enemy.velocity = Vector2.ZERO
