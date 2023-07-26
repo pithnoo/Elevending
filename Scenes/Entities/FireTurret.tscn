@@ -161,7 +161,7 @@ shader_param/active = false
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 88.0
+radius = 100.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 9.5 )
@@ -231,7 +231,7 @@ vframes = 4
 frame = 1
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
+position = Vector2( 0, 50 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 1 )

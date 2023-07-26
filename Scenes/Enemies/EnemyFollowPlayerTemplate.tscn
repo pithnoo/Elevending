@@ -118,6 +118,7 @@ self_modulate = Color( 0.101961, 1, 0, 1 )
 shape = SubResource( 11 )
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 script = ExtResource( 1 )
 

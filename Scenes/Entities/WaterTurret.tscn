@@ -194,7 +194,7 @@ shader_param/active = false
 shader_param/colour = Color( 0.560784, 0.827451, 1, 1 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 88.0
+radius = 100.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 9.5 )
@@ -208,7 +208,6 @@ __meta__ = {
 }
 Projectile = ExtResource( 7 )
 projectileEffect = ExtResource( 9 )
-maxAmmo = 10
 cooldown = 0.5
 
 [node name="StateManager" type="Node" parent="."]
@@ -265,7 +264,7 @@ vframes = 4
 frame = 1
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
+position = Vector2( 0, 50 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 6 )

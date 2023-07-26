@@ -9,6 +9,7 @@ onready var hurtBox = $HurtBox
 
 var velocity = Vector2.ZERO
 export(int) var maxHealth
+export(bool) var is_flying
 
 # variables to be changed by the enemy manager
 var health: int
