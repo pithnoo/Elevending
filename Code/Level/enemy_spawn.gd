@@ -1,5 +1,6 @@
 extends SpawnPoint 
 
+export(int) var wave_cooldown
 export(Array, NodePath) var spawn_points
 export(Array, String) var wave_codes
 

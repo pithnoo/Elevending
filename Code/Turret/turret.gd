@@ -11,6 +11,9 @@ onready var firePoint = $FirePoint
 # ammo is set in turret_manager
 var ammo: int
 
+# by default, turret should not be manually controlled
+var manualControl: bool = false
+
 # turret variables to be changed by turretManager
 export(PackedScene) var Projectile
 export(PackedScene) var projectileEffect 

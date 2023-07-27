@@ -2,11 +2,17 @@ extends Node
 
 export(float) var cooldown
 export(int) var startingTurret
+
 export(Array, PackedScene) var turrets
+export(NodePath) var other_turret
 
 export(String) var turretInput 
+export(String) var manualInput
+export(String) var resetInput
 
-var switchInput
+var switchInput: bool
+var manualControl: bool
+var resetControl: bool
 
 onready var switchTimer = $SwitchTimer
 
@@ -23,6 +29,19 @@ func _process(delta):
 
 	# so that the keyboard input can be adjusted in editor
 	switchInput = Input.is_action_just_pressed(turretInput)
+	manualControl = Input.is_action_just_pressed(manualInput)
+	resetControl = Input.is_action_just_pressed(resetInput)
+
+	# if one turret is currently manually controlled, then the other turret must be automated
+	if manualControl:
+		currentTurret.manualControl = true
+		get_node(other_turret).currentTurret.manualControl = false
+		print("switched")
+
+	# if reset, both turrets should now resume automated attack
+	if resetControl:
+		print("reset")
+		currentTurret.manualControl = false
 
 	if switchInput && switchTimer.is_stopped() && currentTurret.ammo != 0:
 
@@ -48,4 +67,3 @@ func switch_turret(turretIndex: int):
 	currentTurret = turrets[turretIndex].instance()
 	add_child(currentTurret)
 	currentTurret.ammo = currentAmmo
-

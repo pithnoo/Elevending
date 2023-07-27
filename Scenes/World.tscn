@@ -1,14 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Entities/TurretManager.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Entities/Core.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/EnemyFollowPlayerTemplate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemies/EnemyFollowCoreTemplate.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.1053, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -25,29 +21,26 @@ position = Vector2( 191, 0 )
 
 [node name="TurretManager" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
 position = Vector2( 111, 48 )
+other_turret = NodePath("../TurretManager2")
 turretInput = "turret1"
+manualInput = "manual1"
+resetInput = "reset"
 currentAmmo = 20
-
-[node name="Player" parent="YSort/Entities/Turrets/TurretManager" instance=ExtResource( 2 )]
-position = Vector2( 145, -24 )
 
 [node name="TurretManager2" parent="YSort/Entities/Turrets" instance=ExtResource( 1 )]
 position = Vector2( 271, 48 )
+other_turret = NodePath("../TurretManager")
 turretInput = "turret2"
+manualInput = "manual2"
+resetInput = "reset"
+currentAmmo = 20
 
 [node name="EnemySpawnZone" type="Node2D" parent="."]
 script = ExtResource( 6 )
 spawn_cooldown = 1
 entities = [ ExtResource( 5 ), ExtResource( 4 ) ]
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_codes = [ "1000", "0000" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnZone"]
-visible = false
-modulate = Color( 0, 0.133333, 1, 1 )
-position = Vector2( 192, 236 )
-scale = Vector2( 19, 2 )
-shape = SubResource( 1 )
+wave_codes = [ "00000000" ]
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawnZone"]
 one_shot = true

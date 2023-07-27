@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=2]
-[ext_resource path="res://Code/Turret/turret_attack.gd" type="Script" id=3]
+[ext_resource path="res://Code/Turret/turret_attack_auto.gd" type="Script" id=3]
 [ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=4]
 [ext_resource path="res://Code/Turret/turret.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Projectiles/ProjectileEffectGrass.tscn" type="PackedScene" id=6]
