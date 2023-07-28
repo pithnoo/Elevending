@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Projectiles/GrassProjectile.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=10]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
+[ext_resource path="res://Scenes/ParticleEffects/SelectedGrass.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"
@@ -177,6 +178,9 @@ __meta__ = {
 Projectile = ExtResource( 9 )
 projectileEffect = ExtResource( 6 )
 cooldown = 0.5
+
+[node name="SelectedGrass" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0, 2 )
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 4 )
