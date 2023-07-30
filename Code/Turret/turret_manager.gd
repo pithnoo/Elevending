@@ -34,9 +34,14 @@ func _process(delta):
 
 	# if one turret is currently manually controlled, then the other turret must be automated
 	if manualControl:
-		currentTurret.manualControl = true
-		get_node(other_turret).currentTurret.manualControl = false
-		print("switched")
+		if currentTurret.manualControl == false:
+			currentTurret.manualControl = true
+			get_node(other_turret).currentTurret.manualControl = false
+
+		elif currentTurret.manualControl == true:
+			currentTurret.manualControl = false
+
+		# print("switched")
 
 	# if reset, both turrets should now resume automated attack
 	if resetControl:

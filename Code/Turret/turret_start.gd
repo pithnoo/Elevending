@@ -5,16 +5,18 @@ export(NodePath) var empty_node
 
 onready var empty_state: TurretBaseState = get_node(empty_node)
 onready var idle_state: TurretBaseState = get_node(idle_node)
-var animation_finished = false
+var animation_finished
 
 func enter() -> void:
 	.enter()
+	animation_finished = false
 
 func process(_delta: float) -> TurretBaseState:
-	if turret.ammo <= 0:
-		return empty_state
 	if animation_finished:
-		return idle_state
+		if turret.ammo <= 0:
+			return empty_state
+		else:
+			return idle_state
 	
 	return null
 

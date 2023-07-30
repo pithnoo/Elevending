@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=10]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
 [ext_resource path="res://Scenes/ParticleEffects/SelectedFire.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Turret/turret_attack_manual.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"
@@ -53,6 +54,61 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "Manual"
+length = 0.2
+step = 0.005
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.02, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateManager/Start")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -138,6 +194,9 @@ animation = "Empty"
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Idle"
 
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Manual"
+
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Start"
 
@@ -148,6 +207,8 @@ states/Empty/node = SubResource( 10 )
 states/Empty/position = Vector2( 520, 230 )
 states/Idle/node = SubResource( 8 )
 states/Idle/position = Vector2( 520, 144 )
+states/Manual/node = SubResource( 21 )
+states/Manual/position = Vector2( 719, 144 )
 states/Start/node = SubResource( 18 )
 states/Start/position = Vector2( 324, 230 )
 start_node = "Idle"
@@ -179,6 +240,7 @@ projectileEffect = ExtResource( 6 )
 cooldown = 0.5
 
 [node name="SelectedFire" parent="." instance=ExtResource( 12 )]
+visible = false
 position = Vector2( 0, 2 )
 
 [node name="StateManager" type="Node" parent="."]
@@ -189,12 +251,14 @@ starting_state = NodePath("Start")
 script = ExtResource( 2 )
 animation_name = "Idle"
 attack_node = NodePath("../Attack")
+manual_node = NodePath("../Manual")
 
 [node name="Attack" type="Node" parent="StateManager"]
 script = ExtResource( 3 )
 animation_name = "Attack"
 idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
+manual_node = NodePath("../Manual")
 turret_range = NodePath("../../AttackRange")
 
 [node name="Empty" type="Node" parent="StateManager"]
@@ -208,6 +272,13 @@ animation_name = "Start"
 idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
 
+[node name="Manual" type="Node" parent="StateManager"]
+script = ExtResource( 13 )
+animation_name = "Manual"
+empty_node = NodePath("../Empty")
+start_node = NodePath("../Start")
+manual_effect = NodePath("../../SelectedFire")
+
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )
 
@@ -215,6 +286,7 @@ position = Vector2( 0, 13 )
 anims/Attack = SubResource( 11 )
 anims/Empty = SubResource( 12 )
 anims/Idle = SubResource( 13 )
+anims/Manual = SubResource( 20 )
 anims/RESET = SubResource( 14 )
 anims/Start = SubResource( 19 )
 
