@@ -24,7 +24,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.560784, 0.827451, 1, 1 )
 
-[node name="SelectedWater" type="Particles2D"]
+[node name="SelectedGrass" type="Particles2D"]
 amount = 10
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )

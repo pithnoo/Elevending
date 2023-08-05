@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crosshair-Sheet.png-f75d69d27ef15b814a817faff5c25e38.stex"
+path="res://.import/mediumAirWater.png-1b534ffbc612d621c8a3d9b2748a9f2d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/crosshair-Sheet.png"
-dest_files=[ "res://.import/crosshair-Sheet.png-f75d69d27ef15b814a817faff5c25e38.stex" ]
+source_file="res://Art/Playtest Sprites/mediumAirWater.png"
+dest_files=[ "res://.import/mediumAirWater.png-1b534ffbc612d621c8a3d9b2748a9f2d.stex" ]
 
 [params]
 

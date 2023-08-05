@@ -1,9 +1,12 @@
 extends HurtBox 
 
-signal buff_enemy 
+signal enemy_buffed 
 
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
+export(PackedScene) var buff_particle
+
+var buffed : bool = false
 
 func _on_HurtBox_area_entered(area:Area2D):
 	match type:
@@ -11,7 +14,7 @@ func _on_HurtBox_area_entered(area:Area2D):
 			# type matchups for grass
 			match area.type:
 				area.element.GRASS:
-					emit_signal("buff_enemy")
+					buff_enemy()
 				area.element.WATER:
 					stats.health -= area.damage / 2
 				area.element.FIRE:
@@ -22,7 +25,7 @@ func _on_HurtBox_area_entered(area:Area2D):
 				area.element.GRASS:
 					stats.health -= area.damage
 				area.element.WATER:
-					emit_signal("buff_enemy")
+					buff_enemy()
 				area.element.FIRE:
 					stats.health -= area.damage / 2
 		damage_type.FIRE:
@@ -33,6 +36,11 @@ func _on_HurtBox_area_entered(area:Area2D):
 				area.element.WATER:
 					stats.health -= area.damage
 				area.element.FIRE:
-					emit_signal("buff_enemy")
+					buff_enemy()
 					
 	area.destroy()
+
+func buff_enemy() -> void:
+	if !buffed:
+		emit_signal("enemy_buffed")
+		buffed = true

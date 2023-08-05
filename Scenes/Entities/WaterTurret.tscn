@@ -320,6 +320,7 @@ one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 13 )
+scale = Vector2( 1.0037, 1 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
@@ -336,6 +337,7 @@ script = ExtResource( 6 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -1.5 )
 shape = SubResource( 1 )
 

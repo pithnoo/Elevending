@@ -45,8 +45,9 @@ func _process(delta):
 
 	# if reset, both turrets should now resume automated attack
 	if resetControl:
-		print("reset")
 		currentTurret.manualControl = false
+
+		# print("reset")
 
 	if switchInput && switchTimer.is_stopped() && currentTurret.ammo != 0:
 

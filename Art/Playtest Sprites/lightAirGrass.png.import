@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bulletEffect.png-8049a68a1b8f758b62a8b15d67f5cc5f.stex"
+path="res://.import/lightAirGrass.png-c43fc642fc5a28e0b7f94b530294180e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/bulletEffect.png"
-dest_files=[ "res://.import/bulletEffect.png-8049a68a1b8f758b62a8b15d67f5cc5f.stex" ]
+source_file="res://Art/Playtest Sprites/lightAirGrass.png"
+dest_files=[ "res://.import/lightAirGrass.png-c43fc642fc5a28e0b7f94b530294180e.stex" ]
 
 [params]
 
