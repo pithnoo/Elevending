@@ -197,8 +197,9 @@ shoot={
 2d_physics/layer_2="Core"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="World"
-2d_physics/layer_5="Projectile"
+2d_physics/layer_5="ProjectileGround"
 2d_physics/layer_6="Item"
+2d_physics/layer_7="ProjectileAir"
 
 [physics]
 

@@ -9,7 +9,6 @@ onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
 
 export(int) var maxHealth
-export(bool) var is_flying
 
 export(float) var follow_speed 
 export(float) var follow_acceleration 
@@ -39,7 +38,6 @@ func _on_Stats_no_health():
   queue_free()
 
 func _on_HurtBox_enemy_buffed():
-	print("buffed")
 	hitBox.damage *= 2
 	follow_speed /= 2
 

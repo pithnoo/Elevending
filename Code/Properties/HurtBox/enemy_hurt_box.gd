@@ -4,11 +4,15 @@ signal enemy_buffed
 
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
-export(PackedScene) var buff_particle
+
+export(NodePath) var hit_flash
 
 var buffed : bool = false
 
 func _on_HurtBox_area_entered(area:Area2D):
+
+	get_node(hit_flash).play("Start")
+
 	match type:
 		damage_type.GRASS:
 			# type matchups for grass

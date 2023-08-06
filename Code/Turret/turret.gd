@@ -15,8 +15,6 @@ var ammo: int
 var manualControl: bool = false
 
 # turret variables to be changed by turretManager
-export(PackedScene) var Projectile
-export(PackedScene) var projectileEffect 
 export(float) var cooldown 
 
 func _ready():

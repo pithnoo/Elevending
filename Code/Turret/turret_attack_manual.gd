@@ -9,6 +9,9 @@ onready var start_state: TurretBaseState = get_node(start_node)
 
 var shootInput: bool
 
+export(PackedScene) var Projectile
+export(PackedScene) var projectileEffect 
+
 func enter() -> void:
 	.enter()
 	get_node(manual_effect).visible = true
@@ -32,8 +35,8 @@ func shoot(target):
   turret.ammo -= 1
   
   # instantiate projectile from scene
-  var projectile = turret.Projectile.instance()
-  var muzzleFlash = turret.projectileEffect.instance()
+  var projectile = Projectile.instance()
+  var muzzleFlash = projectileEffect.instance()
 
   var main = get_tree().current_scene
 

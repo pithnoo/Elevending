@@ -18,7 +18,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 32 )
 color = Color( 0.568627, 0.858824, 0.411765, 1 )
 
-[node name="BuffWater" type="Particles2D"]
+[node name="BuffGrass" type="Particles2D"]
 amount = 4
 process_material = SubResource( 33 )
 texture = ExtResource( 1 )

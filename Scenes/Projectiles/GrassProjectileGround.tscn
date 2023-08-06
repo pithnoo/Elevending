@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Art/Projectiles/bullets.png" type="Texture" id=1]
+[ext_resource path="res://Art/bullets-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Code/Properties/Hazard/projectile.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Projectiles/ProjectileEffectGrass.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Code/Properties/effect.gd" type="Script" id=4]
@@ -11,7 +11,7 @@ radius = 2.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 2.5
 
-[node name="GrassProjectile" type="RigidBody2D"]
+[node name="GrassProjectileAir" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 2
 gravity_scale = 0.0
@@ -23,8 +23,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 rotation = -0.785398
 texture = ExtResource( 1 )
-hframes = 3
-frame = 1
+hframes = 4
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 16

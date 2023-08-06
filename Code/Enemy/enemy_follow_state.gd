@@ -11,4 +11,5 @@ func follow_entity(detect, delta) -> void:
   
   enemy.velocity = enemy.velocity.move_toward(direction * enemy.follow_speed, delta * enemy.follow_acceleration) 
   enemy.velocity = enemy.move_and_slide(enemy.velocity)
+
   enemy.sprite.flip_h = enemy.velocity.x < 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=2]
@@ -6,13 +6,15 @@
 [ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=4]
 [ext_resource path="res://Code/Turret/turret.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Projectiles/ProjectileEffectFire.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Projectiles/FireProjectile.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Projectiles/FireProjectileAir.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Art/vending machines.png" type="Texture" id=8]
 [ext_resource path="res://Code/Turret/turret_empty_state.gd" type="Script" id=9]
 [ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=10]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
 [ext_resource path="res://Scenes/ParticleEffects/SelectedFire.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Code/Turret/turret_attack_manual.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/Projectiles/ShootEffectFire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Projectiles/FireProjectileGround.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"
@@ -235,8 +237,6 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
-Projectile = ExtResource( 7 )
-projectileEffect = ExtResource( 6 )
 cooldown = 0.5
 
 [node name="SelectedFire" parent="." instance=ExtResource( 12 )]
@@ -260,6 +260,8 @@ idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
 manual_node = NodePath("../Manual")
 turret_range = NodePath("../../AttackRange")
+Projectile = ExtResource( 15 )
+projectileEffect = ExtResource( 14 )
 
 [node name="Empty" type="Node" parent="StateManager"]
 script = ExtResource( 9 )
@@ -278,6 +280,8 @@ animation_name = "Manual"
 empty_node = NodePath("../Empty")
 start_node = NodePath("../Start")
 manual_effect = NodePath("../../SelectedFire")
+Projectile = ExtResource( 7 )
+projectileEffect = ExtResource( 6 )
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )
@@ -307,6 +311,7 @@ vframes = 4
 frame = 1
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 50 )
 collision_layer = 0
 collision_mask = 4
@@ -316,6 +321,7 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -1.5 )
 shape = SubResource( 1 )
 
