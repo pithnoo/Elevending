@@ -200,6 +200,7 @@ shoot={
 2d_physics/layer_5="ProjectileGround"
 2d_physics/layer_6="Item"
 2d_physics/layer_7="ProjectileAir"
+2d_physics/layer_8="EnemyAir"
 
 [physics]
 

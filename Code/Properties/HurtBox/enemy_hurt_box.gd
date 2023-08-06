@@ -1,6 +1,7 @@
 extends HurtBox 
 
 signal enemy_buffed 
+signal enemy_stunned
 
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
@@ -41,6 +42,10 @@ func _on_HurtBox_area_entered(area:Area2D):
 					stats.health -= area.damage
 				area.element.FIRE:
 					buff_enemy()
+		damage_type.GROUND:
+			emit_signal("enemy_stunned")
+		_:
+			stats.health -= area.damage
 					
 	area.destroy()
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shootEffect-Sheet.png-cf97e39841010417a2baaeee32a55966.stex"
+path="res://.import/White-Pixel.png-f0525b20023e9433ec0e43dfeb7f4b28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/shootEffect-Sheet.png"
-dest_files=[ "res://.import/shootEffect-Sheet.png-cf97e39841010417a2baaeee32a55966.stex" ]
+source_file="res://Art/Playtest Sprites/White-Pixel.png"
+dest_files=[ "res://.import/White-Pixel.png-f0525b20023e9433ec0e43dfeb7f4b28.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

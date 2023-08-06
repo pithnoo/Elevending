@@ -8,8 +8,8 @@ onready var states = $StateManager
 onready var rateTimer = $FireRateTimer
 onready var firePoint = $FirePoint
 
-# ammo is set in turret_manager
-var ammo: int
+# ammo is set in turret_manager, or to be set by turret if seperate
+export(int) var ammo
 
 # by default, turret should not be manually controlled
 var manualControl: bool = false

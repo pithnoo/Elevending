@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bulletEffectsGround.png-3f0255be05931990c92b9985f83a851b.stex"
+path="res://.import/bullets-Sheet.png-d6b8ca51a8d3a1e97ab826b03d9bac3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/bulletEffectsGround.png"
-dest_files=[ "res://.import/bulletEffectsGround.png-3f0255be05931990c92b9985f83a851b.stex" ]
+source_file="res://Art/Projectiles/bullets-Sheet.png"
+dest_files=[ "res://.import/bullets-Sheet.png-d6b8ca51a8d3a1e97ab826b03d9bac3a.stex" ]
 
 [params]
 

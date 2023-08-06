@@ -17,6 +17,7 @@ export(Color) var buff_colour
 export(NodePath) var buff_particle
 
 signal enemy_dead
+var is_stunned : bool = false
 
 # variables to be changed by the enemy manager
 var health: int
@@ -44,3 +45,7 @@ func _on_HurtBox_enemy_buffed():
 	sprite.modulate = buff_colour
 	
 	get_node(buff_particle).visible = true
+
+
+func _on_HurtBox_enemy_stunned():
+	is_stunned = true
