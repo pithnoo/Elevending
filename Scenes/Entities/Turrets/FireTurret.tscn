@@ -11,10 +11,10 @@
 [ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Turret/turret.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileGround.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Code/Turret/turret_attack_manual.gd" type="Script" id=12]
+[ext_resource path="res://Code/Turret/Attack States/turret_attack_manual.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/ParticleEffects/SelectedFire.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileAir.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Code/Turret/turret_attack_auto.gd" type="Script" id=15]
+[ext_resource path="res://Code/Turret/Attack States/turret_attack_auto.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"

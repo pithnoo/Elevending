@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Node 
 
 onready var timer: Timer = $Timer
 

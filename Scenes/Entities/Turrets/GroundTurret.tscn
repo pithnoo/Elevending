@@ -1,0 +1,230 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Art/vending machines2-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Code/Turret/turret.gd" type="Script" id=2]
+[ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=3]
+[ext_resource path="res://Code/Turret/Attack States/turret_attack_close.gd" type="Script" id=4]
+[ext_resource path="res://Code/Properties/Hazard/projectile.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/ParticleEffects/SelectedGround.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
+[ext_resource path="res://Code/Turret/destroy_turret.gd" type="Script" id=12]
+
+[sub_resource type="Animation" id=12]
+resource_name = "Attack"
+length = 1.85
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.2, 1.8, 1.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.75, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 6, 7, 8, 9, 10, 11, 12 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.55, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("StateManager/Attack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Attack"
+
+[sub_resource type="AnimationNodeStateMachine" id=3]
+states/Attack/node = SubResource( 7 )
+states/Attack/position = Vector2( 324, 144 )
+start_node = "Attack"
+graph_offset = Vector2( -186, 57 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+shader_param/active = false
+shader_param/colour = Color( 0.619608, 0.619608, 0.384314, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 9.5 )
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 32.0
+
+[node name="GroundTurret" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+ammo = 5
+cooldown = 0.5
+
+[node name="DestroyTurret" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource( 3 )
+starting_state = NodePath("Attack")
+
+[node name="Attack" type="Node" parent="StateManager"]
+script = ExtResource( 4 )
+animation_name = "Attack"
+finish_particle = ExtResource( 6 )
+emission_position = NodePath("../../EmissionPoint")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 12 )
+anims/RESET = SubResource( 11 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 3 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 13 )
+scale = Vector2( 1.0037, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 7.5 )
+hframes = 15
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -1.5 )
+shape = SubResource( 1 )
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2( 0, 9 )
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 5 )
+damage = 3
+type = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 14 )
+disabled = true
+
+[node name="EmissionPoint" type="Position2D" parent="."]
+position = Vector2( 0, 13 )
