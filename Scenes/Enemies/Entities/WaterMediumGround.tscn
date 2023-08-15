@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://Art/Playtest Sprites/heavyGroundFire.png" type="Texture" id=1]
+[ext_resource path="res://Art/Playtest Sprites/mediumGroundWater.png" type="Texture" id=1]
 [ext_resource path="res://Code/Enemy/enemy.gd" type="Script" id=2]
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=3]
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=4]
@@ -9,10 +9,14 @@
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=7]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=8]
 [ext_resource path="res://Code/Properties/Hazard/hazard.gd" type="Script" id=9]
-[ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Enemies/Effects/GroundMedium.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=11]
+[ext_resource path="res://Scenes/ParticleEffects/TurretBuff/BuffWater.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Enemy/enemy_stunned.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/ParticleEffects/StunParticle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/ParticleEffects/EnemyDeath/EnemyDeathWater.tscn" type="PackedScene" id=15]
 
-[sub_resource type="Animation" id=5]
-resource_name = "FollowCore"
+[sub_resource type="Animation" id=22]
 
 [sub_resource type="Animation" id=6]
 resource_name = "FollowPlayer"
@@ -20,13 +24,44 @@ resource_name = "FollowPlayer"
 [sub_resource type="Animation" id=7]
 resource_name = "Idle"
 
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Start"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "FollowCore"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeStateMachine" id=2]
+[sub_resource type="AnimationNodeStateMachine" id=23]
 states/FollowCore/node = SubResource( 8 )
 states/FollowCore/position = Vector2( 655, 112 )
 states/Idle/node = SubResource( 10 )
@@ -34,31 +69,43 @@ states/Idle/position = Vector2( 870, 112 )
 start_node = "Idle"
 graph_offset = Vector2( 76, 38 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+shader_param/active = false
+shader_param/colour = Color( 0.560784, 0.827451, 1, 1 )
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 200.0
+radius = 500.0
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 10, 6 )
+extents = Vector2( 11, 6 )
 
 [sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 12, 7 )
+extents = Vector2( 11, 7 )
 
-[sub_resource type="CircleShape2D" id=14]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id=20]
 
-[node name="EnemyFollowCore" type="KinematicBody2D"]
+[node name="WaterMediumGround" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 4
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+death_particle = ExtResource( 15 )
 maxHealth = 10
+follow_speed = 12.0
+follow_acceleration = 300.0
+buff_colour = Color( 0.560784, 0.827451, 1, 1 )
+buff_particle = NodePath("BuffWater")
+
+[node name="ParticlePosition" type="Position2D" parent="."]
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 12
+max_health = 4
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -74,26 +121,44 @@ core_range = NodePath("../../CoreRange")
 [node name="FollowCore" type="Node" parent="StateManager"]
 script = ExtResource( 6 )
 animation_name = "FollowCore"
-follow_speed = 10.0
-follow_acceleration = 300.0
 idle_node = NodePath("../Idle")
+stun_node = NodePath("../Stunned")
 core_range = NodePath("../../CoreRange")
 
-[node name="BuffTimer" type="Timer" parent="."]
+[node name="Stunned" type="Node" parent="StateManager"]
+script = ExtResource( 13 )
+animation_name = "Idle"
+follow_node = NodePath("../FollowCore")
+stun_timer = NodePath("../../StunTimer")
+stun_particle = ExtResource( 14 )
+
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FollowCore = SubResource( 5 )
+anims/FollowCore = SubResource( 22 )
 anims/FollowPlayer = SubResource( 6 )
 anims/Idle = SubResource( 7 )
 
+[node name="HitFlash" type="AnimationPlayer" parent="."]
+reset_on_save = false
+anims/RESET = SubResource( 18 )
+anims/Start = SubResource( 19 )
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 2 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 3 )
+parameters/playback = SubResource( 24 )
+
+[node name="BuffWater" parent="." instance=ExtResource( 12 )]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 17 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 5 )
+flip_h = true
 
 [node name="CoreRange" type="Area2D" parent="."]
 visible = false
@@ -111,23 +176,22 @@ collision_layer = 0
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2( 0, -2 )
+position = Vector2( 0, 2 )
 shape = SubResource( 15 )
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 16
+collision_mask = 80
 script = ExtResource( 8 )
 entity_stats = NodePath("../Stats")
-type = 2
+type = 1
+hit_flash = NodePath("../HitFlash")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, -2 )
 shape = SubResource( 16 )
 
 [node name="CoreHitBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 9 )
@@ -135,12 +199,11 @@ deathEffect = ExtResource( 10 )
 damage = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoreHitBox"]
-position = Vector2( 0, -2 )
+visible = false
 shape = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 14 )
+shape = SubResource( 20 )
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_entered"]
@@ -148,3 +211,5 @@ shape = SubResource( 14 )
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
+[connection signal="enemy_buffed" from="HurtBox" to="." method="_on_HurtBox_enemy_buffed"]
+[connection signal="enemy_stunned" from="HurtBox" to="." method="_on_HurtBox_enemy_stunned"]

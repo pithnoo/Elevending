@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Art/particle1.png" type="Texture" id=1]
+[ext_resource path="res://Code/Effects/effect.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=4]
+resource_local_to_scene = true
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.083871 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.331461, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 3 )
+color = Color( 0.619608, 0.619608, 0.384314, 1 )
+color_ramp = SubResource( 5 )
+
+[node name="SelectedGround" type="Particles2D"]
+amount = 3
+lifetime = 2.0
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+life_time = 1.8
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

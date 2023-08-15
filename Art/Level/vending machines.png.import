@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vending machines2-Sheet.png-f235e819ed5673d0d8213b63e2e77cd3.stex"
+path="res://.import/vending machines.png-83938602b6a90b1111bff85a2d81adbc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/vending machines2-Sheet.png"
-dest_files=[ "res://.import/vending machines2-Sheet.png-f235e819ed5673d0d8213b63e2e77cd3.stex" ]
+source_file="res://Art/Level/vending machines.png"
+dest_files=[ "res://.import/vending machines.png-83938602b6a90b1111bff85a2d81adbc.stex" ]
 
 [params]
 

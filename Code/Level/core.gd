@@ -8,5 +8,5 @@ func _on_Stats_no_health():
 	print("game over")
 	queue_free()
 
-func _on_HurtBox_area_entered(area:Area2D):
+func _on_AttackHurtBox_area_entered(area:Area2D):
 	pass

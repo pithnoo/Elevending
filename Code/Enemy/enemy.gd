@@ -7,6 +7,9 @@ onready var states = $StateManager
 onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
+onready var particlePosition = $ParticlePosition
+
+export(PackedScene) var death_particle
 
 export(int) var maxHealth
 
@@ -35,6 +38,14 @@ func _physics_process(delta: float) -> void:
 
 func _on_Stats_no_health():
   # instantiate death effect
+  var particle = death_particle.instance()
+  var main = get_tree().current_scene
+  main.add_child(particle)
+
+  particle.global_position = particlePosition.global_position
+
+	
+  # signal of enemy's death for wave manager
   emit_signal("enemy_dead")
 
   queue_free()

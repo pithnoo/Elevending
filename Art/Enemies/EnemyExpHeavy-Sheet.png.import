@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vending machines.png-fb10c1fb0dab964894ec4af3749d3c98.stex"
+path="res://.import/EnemyExpHeavy-Sheet.png-03e06aea8daeeef3d9b1d6997add2921.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/vending machines.png"
-dest_files=[ "res://.import/vending machines.png-fb10c1fb0dab964894ec4af3749d3c98.stex" ]
+source_file="res://Art/Enemies/EnemyExpHeavy-Sheet.png"
+dest_files=[ "res://.import/EnemyExpHeavy-Sheet.png-03e06aea8daeeef3d9b1d6997add2921.stex" ]
 
 [params]
 
