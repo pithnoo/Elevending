@@ -8,7 +8,7 @@
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=6]
 [ext_resource path="res://Code/Enemy/enemy_primary_follow.gd" type="Script" id=7]
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Stats.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/LevelComponents/Stats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/ParticleEffects/EnemyDeath/EnemyDeathFire.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
@@ -67,14 +67,14 @@ states/FollowCore/position = Vector2( 655, 112 )
 states/Idle/node = SubResource( 24 )
 states/Idle/position = Vector2( 870, 112 )
 start_node = "Idle"
-graph_offset = Vector2( 76, 38 )
+graph_offset = Vector2( 268.143, 38 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
 [sub_resource type="ShaderMaterial" id=33]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/active = false
+shader_param/active = true
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 
 [sub_resource type="CircleShape2D" id=27]

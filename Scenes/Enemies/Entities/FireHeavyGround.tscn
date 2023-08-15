@@ -7,7 +7,7 @@
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=5]
 [ext_resource path="res://Code/Enemy/enemy_primary_follow.gd" type="Script" id=6]
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Stats.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/LevelComponents/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=9]
 [ext_resource path="res://Art/Playtest Sprites/heavyGroundFire.png" type="Texture" id=10]
 

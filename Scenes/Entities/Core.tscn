@@ -1,8 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Art/Level/shop.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Stats.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=3]
+[ext_resource path="res://Art/Level/shop-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Code/Level/core.gd" type="Script" id=4]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=5]
 
@@ -32,11 +30,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 6 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Start"
 length = 0.2
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
 tracks/0/interp = 1
@@ -46,23 +55,102 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ true, false ]
 }
+
+[sub_resource type="Animation" id=7]
+resource_name = "Hurt"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hurt_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/Hurt/node = SubResource( 13 )
+states/Hurt/position = Vector2( 636, 96 )
+states/Idle/node = SubResource( 14 )
+states/Idle/position = Vector2( 459, 96 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="Core" type="StaticBody2D"]
 collision_layer = 2
 script = ExtResource( 4 )
-
-[node name="Stats" parent="." instance=ExtResource( 2 )]
-max_health = 20
+hit_flash = NodePath("HitFlash")
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )
 texture = ExtResource( 1 )
+hframes = 24
+frame = 1
 
 [node name="AttackHurtBox" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHurtBox"]
 modulate = Color( 0.568627, 1, 0, 1 )
@@ -74,8 +162,6 @@ visible = false
 modulate = Color( 0, 0.156863, 1, 1 )
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 3 )
-entity_stats = NodePath("../Stats")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( -2.5, -2 )
@@ -91,7 +177,16 @@ reset_on_save = false
 anims/RESET = SubResource( 4 )
 anims/Start = SubResource( 5 )
 
-[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hurt = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 12 )
+
 [connection signal="area_entered" from="AttackHurtBox" to="." method="_on_AttackHurtBox_area_entered"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
