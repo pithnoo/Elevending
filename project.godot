@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "EnemyBaseState",
 "class": "EnemyFollowState",
 "language": "GDScript",
-"path": "res://Code/Enemy/enemy_follow_state.gd"
+"path": "res://Code/Enemy/FollowStates/enemy_follow_state.gd"
 }, {
 "base": "Area2D",
 "class": "Hazard",

@@ -1,20 +1,20 @@
 [gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://Code/Turret/turret_empty_state.gd" type="Script" id=1]
-[ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=2]
-[ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=3]
-[ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=4]
-[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=5]
-[ext_resource path="res://Art/Level/vending machines.png" type="Texture" id=6]
-[ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Projectiles/Fire/ShootEffectFire.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Code/Turret/turret.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileGround.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Code/Turret/Attack States/turret_attack_manual.gd" type="Script" id=12]
-[ext_resource path="res://Scenes/ParticleEffects/TurretSelected/SelectedFire.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileAir.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Code/Turret/Attack States/turret_attack_auto.gd" type="Script" id=15]
+[ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
+[ext_resource path="res://Code/Turret/turret_empty_state.gd" type="Script" id=3]
+[ext_resource path="res://Code/Turret/turret_state_manager.gd" type="Script" id=4]
+[ext_resource path="res://Code/Turret/turret.gd" type="Script" id=5]
+[ext_resource path="res://Code/Turret/turret_start.gd" type="Script" id=6]
+[ext_resource path="res://Code/Turret/turret_idle.gd" type="Script" id=7]
+[ext_resource path="res://Art/Level/vending machines.png" type="Texture" id=8]
+[ext_resource path="res://Code/Turret/Attack States/turret_attack_manual.gd" type="Script" id=9]
+[ext_resource path="res://Code/Turret/Attack States/turret_attack_auto.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Projectiles/Fire/ShootEffectFire.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileGround.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Turrets/TurretSelected/SelectedFire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Projectiles/Fire/FireProjectileAir.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=11]
 resource_name = "Attack"
@@ -220,7 +220,7 @@ graph_offset = Vector2( -20, 76 )
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
-shader = ExtResource( 5 )
+shader = ExtResource( 2 )
 shader_param/active = false
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 
@@ -233,55 +233,55 @@ extents = Vector2( 8, 9.5 )
 [node name="FireTurret" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource( 10 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 cooldown = 0.5
 
-[node name="SelectedFire" parent="." instance=ExtResource( 13 )]
+[node name="SelectedFire" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 0, 2 )
 
 [node name="StateManager" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 starting_state = NodePath("Start")
 
 [node name="Idle" type="Node" parent="StateManager"]
-script = ExtResource( 3 )
+script = ExtResource( 7 )
 animation_name = "Idle"
 attack_node = NodePath("../Attack")
 manual_node = NodePath("../Manual")
 
 [node name="Attack" type="Node" parent="StateManager"]
-script = ExtResource( 15 )
+script = ExtResource( 10 )
 animation_name = "Attack"
 idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
 manual_node = NodePath("../Manual")
 turret_range = NodePath("../../AttackRange")
-Projectile = ExtResource( 11 )
-projectileEffect = ExtResource( 8 )
+Projectile = ExtResource( 13 )
+projectileEffect = ExtResource( 11 )
 
 [node name="Empty" type="Node" parent="StateManager"]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 animation_name = "Empty"
 attack_node = NodePath("../Attack")
 
 [node name="Start" type="Node" parent="StateManager"]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 animation_name = "Start"
 idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
 
 [node name="Manual" type="Node" parent="StateManager"]
-script = ExtResource( 12 )
+script = ExtResource( 9 )
 animation_name = "Manual"
 empty_node = NodePath("../Empty")
 start_node = NodePath("../Start")
 manual_effect = NodePath("../../SelectedFire")
-Projectile = ExtResource( 14 )
-projectileEffect = ExtResource( 9 )
+Projectile = ExtResource( 15 )
+projectileEffect = ExtResource( 12 )
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )
@@ -305,7 +305,7 @@ one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 17 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 hframes = 2
 vframes = 4
 frame = 1
@@ -315,7 +315,7 @@ visible = false
 position = Vector2( 0, 50 )
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
 shape = SubResource( 2 )

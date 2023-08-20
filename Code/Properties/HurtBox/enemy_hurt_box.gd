@@ -42,15 +42,16 @@ func _on_HurtBox_area_entered(area:Area2D):
 					stats.health -= area.damage
 				area.element.FIRE:
 					buff_enemy()
-		_:
-			stats.health -= area.damage
 					
+	# depending on the type of damage rather than the enemies type
 	match area.type:
 		area.element.GROUND:
 			emit_signal("enemy_stunned")
+		area.element.ELECTRIC:
+			stats.health -= area.damage
+			area.destroy()
 		_:
 			area.destroy()
-			
 
 func buff_enemy() -> void:
 	if !buffed:

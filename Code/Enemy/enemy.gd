@@ -8,13 +8,18 @@ onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
 onready var particlePosition = $ParticlePosition
+onready var particleGenerator = $ParticleGenerator
 
 export(PackedScene) var death_particle
 
 export(int) var maxHealth
+export(int) var enemyDamage
 
 export(float) var follow_speed 
 export(float) var follow_acceleration 
+
+export(float) var resistance
+var knockback = Vector2.ZERO
 
 export(Color) var buff_colour
 export(NodePath) var buff_particle
@@ -28,22 +33,21 @@ var health: int
 var velocity = Vector2.ZERO
 
 func _ready():
-  states.init(self)
+	states.init(self)
+	hitBox.damage = enemyDamage
 
 func _process(delta):
   states.process(delta)
 
 func _physics_process(delta: float) -> void:
+  knockback = knockback.move_toward(Vector2.ZERO, resistance * delta)
+  knockback = move_and_slide(knockback)
+
   states.physics_process(delta)
 
 func _on_Stats_no_health():
   # instantiate death effect
-  var particle = death_particle.instance()
-  var main = get_tree().current_scene
-  main.add_child(particle)
-
-  particle.global_position = particlePosition.global_position
-
+  particleGenerator.generate_particle(death_particle, particlePosition)
 	
   # signal of enemy's death for wave manager
   emit_signal("enemy_dead")
@@ -51,7 +55,9 @@ func _on_Stats_no_health():
   queue_free()
 
 func _on_HurtBox_enemy_buffed():
-	hitBox.damage *= 2
+	# note that this is only executed once because of enemy hurt box script
+	enemyDamage *= 2
+	hitBox.damage = enemyDamage
 	follow_speed /= 2
 
 	sprite.modulate = buff_colour

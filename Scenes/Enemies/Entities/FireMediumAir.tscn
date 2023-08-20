@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
@@ -6,14 +6,19 @@
 [ext_resource path="res://Code/Properties/Hazard/hazard.gd" type="Script" id=4]
 [ext_resource path="res://Code/Enemy/enemy.gd" type="Script" id=5]
 [ext_resource path="res://Code/Enemy/enemy_state_manager.gd" type="Script" id=6]
-[ext_resource path="res://Code/Enemy/enemy_primary_follow.gd" type="Script" id=7]
+[ext_resource path="res://Code/Enemy/FollowStates/enemy_secondary_follow.gd" type="Script" id=7]
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/LevelComponents/Stats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/ParticleEffects/EnemyDeath/EnemyDeathFire.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathFire.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
 [ext_resource path="res://Art/Playtest Sprites/lightAirFire.png" type="Texture" id=13]
-[ext_resource path="res://Scenes/ParticleEffects/TurretBuff/BuffFire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffFire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Code/Effects/generate_particle.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Enemies/Charges/Medium/chargeMediumFire.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Code/Enemy/enemy_attack.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpMedium.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/Charges/EnemyCharge.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Animation" id=20]
 resource_name = "FollowCore"
@@ -74,39 +79,41 @@ graph_offset = Vector2( 268.143, 38 )
 [sub_resource type="ShaderMaterial" id=33]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/active = true
+shader_param/active = false
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 
 [sub_resource type="CircleShape2D" id=27]
 radius = 500.0
 
-[sub_resource type="RectangleShape2D" id=28]
-extents = Vector2( 6, 6 )
+[sub_resource type="CircleShape2D" id=35]
+radius = 24.0832
 
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 6, 6 )
 
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8, 8 )
 
 [node name="FireMediumGround" type="KinematicBody2D"]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 128
+collision_mask = 0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 death_particle = ExtResource( 11 )
 maxHealth = 10
+enemyDamage = 4
 follow_speed = 12.0
 follow_acceleration = 100.0
+resistance = 200.0
 buff_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
 buff_particle = NodePath("BuffFire")
 
 [node name="ParticlePosition" type="Position2D" parent="."]
-
-[node name="Stats" parent="." instance=ExtResource( 9 )]
-max_health = 4
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -121,11 +128,33 @@ core_range = NodePath("../../CoreRange")
 
 [node name="FollowCore" type="Node" parent="StateManager"]
 script = ExtResource( 7 )
-animation_name = "FollowCore"
 idle_node = NodePath("../Idle")
+attack_node = NodePath("../Attack")
 core_range = NodePath("../../CoreRange")
+attack_range = NodePath("../../AttackRange")
+
+[node name="Attack" type="Node" parent="StateManager"]
+script = ExtResource( 17 )
+idle_node = NodePath("../Idle")
+charge_timer_node = NodePath("../../ChargeTimer")
+particle_generator_node = NodePath("../../ParticleGenerator")
+core_range = NodePath("../../CoreRange")
+enemy_attack = ExtResource( 18 )
+enemy_charge = ExtResource( 16 )
+charge_effect = ExtResource( 19 )
+charge_time = 2
+repulsion_speed = 250.0
+
+[node name="Stats" parent="." instance=ExtResource( 9 )]
+max_health = 4
+
+[node name="ParticleGenerator" type="Node2D" parent="."]
+script = ExtResource( 15 )
 
 [node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -169,12 +198,13 @@ shape = SubResource( 27 )
 
 [node name="AttackRange" type="Area2D" parent="."]
 visible = false
+modulate = Color( 1, 0, 0.843137, 1 )
 collision_layer = 0
-script = ExtResource( 3 )
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
 position = Vector2( 0, 2 )
-shape = SubResource( 28 )
+shape = SubResource( 35 )
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
@@ -190,7 +220,7 @@ shape = SubResource( 29 )
 
 [node name="CoreHitBox" type="Area2D" parent="."]
 visible = false
-collision_layer = 4
+collision_layer = 0
 collision_mask = 0
 script = ExtResource( 4 )
 deathEffect = ExtResource( 1 )
@@ -207,8 +237,7 @@ shape = SubResource( 34 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_entered"]
 [connection signal="body_exited" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_exited"]
-[connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_AttackRange_body_exited"]
+[connection signal="body_entered" from="AttackRange" to="StateManager/FollowCore" method="_on_AttackRange_body_entered"]
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
 [connection signal="enemy_buffed" from="HurtBox" to="." method="_on_HurtBox_enemy_buffed"]
 [connection signal="enemy_stunned" from="HurtBox" to="." method="_on_HurtBox_enemy_stunned"]

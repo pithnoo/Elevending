@@ -4,14 +4,20 @@ export(NodePath) var hit_flash
 
 onready var animations = $AnimationPlayer
 
+# if the enemy area collides with the core
+# the core can pass this value
+var knockback_vector = Vector2.DOWN
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animations.play("Idle")
 
 func _on_AttackHurtBox_area_entered(area:Area2D):
+	print("core recorded: ", area.damage, " damage from ", area)
 	decrease_health()
 
 func _on_HurtBox_area_entered(area:Area2D):
+	print("core recorded: ", area.damage, " damage from ", area)
 	decrease_health()
 	area.destroy()
 

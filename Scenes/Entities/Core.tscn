@@ -14,7 +14,7 @@ shader_param/colour = Color( 0.658824, 0.462745, 0.337255, 1 )
 extents = Vector2( 48, 54 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 53.5, 53.5 )
+extents = Vector2( 53.5, 52.75 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -168,8 +168,7 @@ position = Vector2( -2.5, -2 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.5, 0 )
+position = Vector2( -0.5, -0.75 )
 shape = SubResource( 2 )
 
 [node name="HitFlash" type="AnimationPlayer" parent="."]
