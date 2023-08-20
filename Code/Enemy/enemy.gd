@@ -7,8 +7,8 @@ onready var states = $StateManager
 onready var sprite = $Sprite
 onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
-onready var particlePosition = $ParticlePosition
 onready var particleGenerator = $ParticleGenerator
+onready var particlePosition = $ParticlePosition
 
 export(PackedScene) var death_particle
 
