@@ -1,14 +1,17 @@
 extends Node
 
+signal ammo_reload
+signal fire_rate_doubled
+signal health_restore(value)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+
+func reload():
+	emit_signal("ammo_reload")
+
+func increase_fire_rate():
+	emit_signal("fire_rate_doubled")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

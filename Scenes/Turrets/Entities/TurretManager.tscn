@@ -8,8 +8,13 @@
 [node name="TurretManager" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 4 )
+boostTime = 2
+fireRate = 0.5
 cooldown = 0.2
 turrets = [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ]
 
 [node name="SwitchTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BoostTimer" type="Timer" parent="."]
 one_shot = true

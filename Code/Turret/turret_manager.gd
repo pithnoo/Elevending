@@ -1,5 +1,11 @@
 extends Node
 
+onready var boostTimer = $BoostTimer
+export(int) var boostTime
+
+export(float) var fireRate
+var fireRateBuffer
+
 export(float) var cooldown
 export(int) var startingTurret
 
@@ -9,28 +15,38 @@ export(NodePath) var other_turret
 export(String) var turretInput 
 export(String) var manualInput
 export(String) var resetInput
+export(String) var itemInput
 
 var switchInput: bool
 var manualControl: bool
 var resetControl: bool
+var itemControl: bool
 
 onready var switchTimer = $SwitchTimer
 
 var currentTurret
-export(int) var currentAmmo = 10
+export(int) var maxAmmo = 10
+var currentAmmo : int
 
-var activeTurret: int = 0
+var activeTurret : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	currentAmmo = maxAmmo
 	switch_turret(startingTurret)
 
-func _process(delta):
+	# connecting signals from level manager
+	GameManager.connect("ammo_reload", self, "turret_reload")
+	GameManager.connect("fire_rate_doubled", self, "increase_fire_rate")
 
+func _process(delta):
 	# so that the keyboard input can be adjusted in editor
 	switchInput = Input.is_action_just_pressed(turretInput)
 	manualControl = Input.is_action_just_pressed(manualInput)
 	resetControl = Input.is_action_just_pressed(resetInput)
+
+	# to set both turrets as inactive to collect items
+	itemControl = Input.is_action_just_pressed(itemInput)
 
 	# if one turret is currently manually controlled, then the other turret must be automated
 	if manualControl:
@@ -41,13 +57,9 @@ func _process(delta):
 		elif currentTurret.manualControl == true:
 			currentTurret.manualControl = false
 
-		# print("switched")
-
 	# if reset, both turrets should now resume automated attack
-	if resetControl:
+	if resetControl || itemControl:
 		currentTurret.manualControl = false
-
-		# print("reset")
 
 	if switchInput && switchTimer.is_stopped() && currentTurret.ammo != 0:
 
@@ -73,3 +85,11 @@ func switch_turret(turretIndex: int):
 	currentTurret = turrets[turretIndex].instance()
 	add_child(currentTurret)
 	currentTurret.ammo = currentAmmo
+
+func turret_reload():
+	currentTurret.ammo = maxAmmo
+	print(currentTurret.ammo)
+
+func increase_fire_rate():
+	fireRateBuffer = currentTurret.cooldown
+	currentTurret.cooldown = fireRate / 2

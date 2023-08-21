@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/powerUpBox-Sheet.png-1a79bc8aa8f55310914d30e2f6c1647c.stex"
+path="res://.import/playerCollection-Sheet.png-ea8269d416dc06d1c1d7e64d67475ea6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/powerUpBox-Sheet.png"
-dest_files=[ "res://.import/powerUpBox-Sheet.png-1a79bc8aa8f55310914d30e2f6c1647c.stex" ]
+source_file="res://Art/playerCollection-Sheet.png"
+dest_files=[ "res://.import/playerCollection-Sheet.png-ea8269d416dc06d1c1d7e64d67475ea6.stex" ]
 
 [params]
 

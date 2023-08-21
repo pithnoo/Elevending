@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Enemies/Entities/FireMediumAir.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/LevelComponents/CollectionStation.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=18]
 
@@ -19,6 +20,9 @@
 [node name="Core" parent="YSort/Entities" instance=ExtResource( 6 )]
 position = Vector2( 192, 0 )
 
+[node name="CollectionStation" parent="YSort/Entities/Core" instance=ExtResource( 8 )]
+position = Vector2( -3, 72 )
+
 [node name="Turrets" type="Node2D" parent="YSort/Entities"]
 
 [node name="TurretManager" parent="YSort/Entities/Turrets" instance=ExtResource( 7 )]
@@ -27,7 +31,7 @@ other_turret = NodePath("../TurretManager2")
 turretInput = "turret1"
 manualInput = "manual1"
 resetInput = "reset"
-currentAmmo = 100
+itemInput = "item"
 
 [node name="TurretManager2" parent="YSort/Entities/Turrets" instance=ExtResource( 7 )]
 position = Vector2( 271, 48 )
@@ -35,7 +39,7 @@ other_turret = NodePath("../TurretManager")
 turretInput = "turret2"
 manualInput = "manual2"
 resetInput = "reset"
-currentAmmo = 100
+itemInput = "item"
 
 [node name="EnemySpawnZone" type="Node2D" parent="."]
 script = ExtResource( 3 )

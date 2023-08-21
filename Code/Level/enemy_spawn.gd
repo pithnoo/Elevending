@@ -14,6 +14,9 @@ var random = RandomNumberGenerator.new()
 
 onready var waveTimer = $WaveTimer
 
+signal wave_complete
+signal level_complete
+
 func _ready():
 	# setting the current number of enemies supposed to be active, based on entered list
 	current_entity_number = wave_codes[current_wave].length()
@@ -50,6 +53,26 @@ func _process(delta):
 				current_entity_number = wave_codes[current_wave].length()
 
 				waveTimer.start(wave_cooldown)
+
+				# for level manager
+				emit_signal("wave_complete")
 			else:
 				# if anything else, final wave must've been reached
 				waves_complete = true
+
+				# for level manager
+				emit_signal("level_complete")
+
+
+func spawn(index: int, spawnPoint) -> void:
+	spawnTimer.start(spawn_cooldown)
+
+	var entity = entities[index].instance()
+	entity.connect("enemy_dead", self, "enemy_down")
+
+	add_child(entity)
+	
+	entity.global_position = spawnPoint.global_position
+
+func enemy_down() -> void:
+	current_entity_number -= 1
