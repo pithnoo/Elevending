@@ -14,11 +14,13 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.630952, 0 ), 0.0, 0.0, 0, 
 curve = SubResource( 4 )
 
 [sub_resource type="ParticlesMaterial" id=3]
+resource_local_to_scene = true
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 5 )
+color = Color( 0.901961, 0.564706, 0.305882, 1 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 4 )
@@ -64,6 +66,7 @@ tracks/0/keys = {
 [node name="ItemProjectile" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource( 3 )
 hit_flash = NodePath("HitFlash")
 particle_generator = NodePath("ParticleGenerator")
@@ -75,7 +78,9 @@ projectile_life_time = 1
 [node name="EffectPosition" type="Position2D" parent="."]
 
 [node name="Particles2D" type="Particles2D" parent="."]
-amount = 5
+amount = 15
+lifetime = 0.75
+local_coords = false
 process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 
@@ -87,6 +92,7 @@ hframes = 46
 frame = 15
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 1 )
 collision_layer = 0
 collision_mask = 256

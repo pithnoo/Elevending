@@ -49,7 +49,8 @@ func _physics_process(delta):
 		# to ensure that the animation doesn't play if the same key is pressed twice
 		is_active = true
 
-		Input.set_custom_mouse_cursor(load(item_crosshair))
+		# 40 40 offset to center the designed cursor based on the mouse position
+		Input.set_custom_mouse_cursor(load(item_crosshair), Input.CURSOR_ARROW, Vector2(40,40))
 	
 	if ((turret_control1 || turret_control2 || reset_control) && is_active):
 		animations.play("Closed")
@@ -57,7 +58,7 @@ func _physics_process(delta):
 		# to ensure that the animation doesn't play if the same key is pressed twice
 		is_active = false
 
-		Input.set_custom_mouse_cursor(load(default_crosshair))
+		Input.set_custom_mouse_cursor(load(default_crosshair), Input.CURSOR_ARROW, Vector2(40,40))
 
 	if shoot_control && is_active && can_shoot:
 		animations.play("Open")
