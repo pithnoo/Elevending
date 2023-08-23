@@ -1,16 +1,23 @@
-extends Node
+extends ItemTurretState
 
+export(NodePath) var electric_node
+onready var electric_state = get_node(electric_node)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var ground_cursor
 
+func enter() -> void:
+	.enter()
+	set_cursor(ground_cursor)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func process(_delta: float) -> ItemBaseState:
+	if item.item_control:
+		return electric_state
 
+	if item.closing:
+		return close_state
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if item.shoot_control && place_timer.is_stopped():
+		place_timer.start(place_time)
+		place_turret()
+
+	return null

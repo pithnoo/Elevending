@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/ItemCollection/item_base_state.gd"
 }, {
+"base": "ItemBaseState",
+"class": "ItemTurretState",
+"language": "GDScript",
+"path": "res://Code/ItemCollection/turret_state.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -78,6 +83,7 @@ _global_script_class_icons={
 "HurtBox": "",
 "Item": "",
 "ItemBaseState": "",
+"ItemTurretState": "",
 "Player": "",
 "SpawnPoint": "",
 "Turret": "",

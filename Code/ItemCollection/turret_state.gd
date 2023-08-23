@@ -1,16 +1,35 @@
-extends Node
+extends ItemBaseState
+class_name ItemTurretState
 
+export(NodePath) var close_node
+onready var close_state = get_node(close_node)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(PackedScene) var turret_to_place
+export(PackedScene) var muzzle_flash
+export(NodePath) var shoot_point
 
+export(NodePath) var timer_node
+onready var place_timer = get_node(timer_node)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+export(float) var place_time
 
+func set_cursor(turret_cursor):
+	#Input.set_custom_mouse_cursor(load(turret_cursor))
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func place_turret():
+	item.animations.play(animation_name)
+
+	var effect = muzzle_flash.instance()
+	var fire_point = get_node(shoot_point).global_position
+
+	var turret = turret_to_place.instance()
+	var main = get_tree().current_scene
+
+	main.add_child(turret)
+	main.add_child(effect)
+
+	var turret_position = get_viewport().get_mouse_position()
+
+	turret.global_position = turret_position
+	effect.global_position = fire_point
