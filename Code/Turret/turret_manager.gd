@@ -32,6 +32,7 @@ var activeTurret : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	fireRateBuffer = fireRate
 	currentAmmo = maxAmmo
 	switch_turret(startingTurret)
 
@@ -40,6 +41,12 @@ func _ready():
 	GameManager.connect("fire_rate_doubled", self, "increase_fire_rate")
 
 func _process(delta):
+
+	if boostTimer.is_stopped():
+		fireRate = fireRateBuffer
+		currentTurret.cooldown = fireRateBuffer
+		currentTurret.decreaseAmmo = true
+
 	# so that the keyboard input can be adjusted in editor
 	switchInput = Input.is_action_just_pressed(turretInput)
 	manualControl = Input.is_action_just_pressed(manualInput)
@@ -85,11 +92,15 @@ func switch_turret(turretIndex: int):
 	currentTurret = turrets[turretIndex].instance()
 	add_child(currentTurret)
 	currentTurret.ammo = currentAmmo
+	currentTurret.cooldown = fireRate
 
 func turret_reload():
 	currentTurret.ammo = maxAmmo
-	print(currentTurret.ammo)
 
 func increase_fire_rate():
+	currentTurret.decreaseAmmo = false
 	fireRateBuffer = currentTurret.cooldown
-	currentTurret.cooldown = fireRate / 2
+	fireRate /= 2
+	currentTurret.cooldown = fireRate
+
+	boostTimer.start(boostTime)

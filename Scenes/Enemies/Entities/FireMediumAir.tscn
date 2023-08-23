@@ -14,7 +14,7 @@
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
 [ext_resource path="res://Art/Playtest Sprites/lightAirFire.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffFire.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Code/Effects/generate_particle.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/ParticleGenerator.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Enemies/Charges/Medium/chargeMediumFire.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/Enemy/enemy_attack.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpMedium.tscn" type="PackedScene" id=18]
@@ -110,8 +110,7 @@ resistance = 200.0
 buff_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
 buff_particle = NodePath("BuffFire")
 
-[node name="ParticleGenerator" type="Node2D" parent="."]
-script = ExtResource( 15 )
+[node name="ParticleGenerator" parent="." instance=ExtResource( 15 )]
 
 [node name="ParticlePosition" type="Position2D" parent="."]
 

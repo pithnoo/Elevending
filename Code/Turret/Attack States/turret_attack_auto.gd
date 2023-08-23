@@ -31,24 +31,25 @@ func process(_delta: float) -> TurretBaseState:
 	return null
 
 func shoot(target):
-  turret.ammo -= 1
-  
-  # instantiate projectile from scene
-  var projectile = Projectile.instance()
-  var muzzleFlash = projectileEffect.instance()
+	if turret.decreaseAmmo:
+		turret.ammo -= 1
 
-  var main = get_tree().current_scene
+	# instantiate projectile from scene
+	var projectile = Projectile.instance()
+	var muzzleFlash = projectileEffect.instance()
 
-  main.add_child(projectile)
-  add_child(muzzleFlash)
+	var main = get_tree().current_scene
 
-  var shootPoint = turret.firePoint.global_position
-  
-  projectile.global_position = shootPoint
-  muzzleFlash.global_position = shootPoint
-	
-  var direction = shootPoint.direction_to(target.global_position) 
-	
-  var projectileAngle = direction.angle()
-  projectile.rotation = projectileAngle 
-  projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectileAngle))
+	main.add_child(projectile)
+	add_child(muzzleFlash)
+
+	var shootPoint = turret.firePoint.global_position
+
+	projectile.global_position = shootPoint
+	muzzleFlash.global_position = shootPoint
+
+	var direction = shootPoint.direction_to(target.global_position) 
+
+	var projectileAngle = direction.angle()
+	projectile.rotation = projectileAngle 
+	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectileAngle))

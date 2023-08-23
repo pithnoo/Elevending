@@ -13,6 +13,7 @@ export(int) var ammo
 
 # by default, turret should not be manually controlled
 var manualControl: bool = false
+var decreaseAmmo: bool = true
 
 # turret variables to be changed by turretManager
 export(float) var cooldown 

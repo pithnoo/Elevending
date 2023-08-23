@@ -7,7 +7,6 @@ onready var timer: Timer = $Timer
 
 export(float) var life_time
 
-
 func _ready():
 	timer.start(life_time)
 

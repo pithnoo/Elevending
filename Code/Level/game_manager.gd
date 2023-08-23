@@ -15,7 +15,5 @@ func reload():
 func increase_fire_rate():
 	emit_signal("fire_rate_doubled")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

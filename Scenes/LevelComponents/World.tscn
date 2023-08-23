@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=18]
 
@@ -77,6 +80,15 @@ position = Vector2( 288, 232 )
 [node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 352, 232 )
 
+[node name="AmmoReload" parent="EnemySpawnZone" instance=ExtResource( 11 )]
+position = Vector2( 136, 176 )
+
+[node name="HealShop" parent="EnemySpawnZone" instance=ExtResource( 10 )]
+position = Vector2( 184, 176 )
+
+[node name="RapidFire" parent="EnemySpawnZone" instance=ExtResource( 9 )]
+position = Vector2( 232, 176 )
+
 [node name="ItemSpawnZone" type="Area2D" parent="."]
 position = Vector2( 188, 136 )
 __meta__ = {
@@ -84,6 +96,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemSpawnZone"]
+visible = false
 modulate = Color( 0, 1, 0.6, 1 )
 scale = Vector2( 14, 7 )
 shape = SubResource( 18 )
