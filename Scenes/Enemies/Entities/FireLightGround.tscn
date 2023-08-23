@@ -74,8 +74,6 @@ core_range = NodePath("../../CoreRange")
 [node name="FollowCore" type="Node" parent="StateManager"]
 script = ExtResource( 6 )
 animation_name = "FollowCore"
-follow_speed = 30.0
-follow_acceleration = 300.0
 idle_node = NodePath("../Idle")
 core_range = NodePath("../../CoreRange")
 
