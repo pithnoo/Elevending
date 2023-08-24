@@ -138,6 +138,7 @@ states/Idle/position = Vector2( 459, 96 )
 
 [node name="Core" type="StaticBody2D"]
 collision_layer = 2
+collision_mask = 0
 script = ExtResource( 4 )
 hit_flash = NodePath("HitFlash")
 
@@ -168,6 +169,7 @@ position = Vector2( -2.5, -2 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -0.5, -0.75 )
 shape = SubResource( 2 )
 
