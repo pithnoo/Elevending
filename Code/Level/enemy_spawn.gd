@@ -8,7 +8,8 @@ var current_wave : int = 0
 var current_enemy : int = 0
 var enemies_to_spawn : int
 
-var waves_complete: bool = false
+var waves_complete : bool = false
+var can_items_spawn : bool = false
 
 var random = RandomNumberGenerator.new()
 
@@ -26,8 +27,10 @@ func _ready():
 func _process(delta):
 	# continues to spawn until end of array is reached
 	if waveTimer.is_stopped() && !waves_complete:
-		if spawnTimer.is_stopped() && current_enemy < wave_codes[current_wave].length(): 
 
+		can_items_spawn = true
+
+		if spawnTimer.is_stopped() && current_enemy < wave_codes[current_wave].length(): 
 			entityID = int(wave_codes[current_wave][current_enemy])
 
 			random.randomize()
@@ -54,14 +57,18 @@ func _process(delta):
 
 				waveTimer.start(wave_cooldown)
 
-				# for level manager
+				# for game manager
 				emit_signal("wave_complete")
+
+				can_items_spawn = false
 			else:
 				# if anything else, final wave must've been reached
 				waves_complete = true
 
 				# for level manager
 				emit_signal("level_complete")
+
+				can_items_spawn = false
 
 
 func spawn(index: int, spawnPoint) -> void:

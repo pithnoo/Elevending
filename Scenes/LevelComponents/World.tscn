@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=2]
@@ -8,8 +8,10 @@
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=8]
-
-[sub_resource type="RectangleShape2D" id=18]
+[ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=13]
 
 [node name="World" type="Node2D"]
 
@@ -21,7 +23,7 @@
 position = Vector2( 192, 0 )
 
 [node name="CollectionStation" parent="YSort/Entities/Core" instance=ExtResource( 8 )]
-position = Vector2( -3, 72 )
+position = Vector2( -3, 68 )
 
 [node name="Turrets" type="Node2D" parent="YSort/Entities"]
 
@@ -49,7 +51,7 @@ spawn_cooldown = 1
 entities = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ) ]
 wave_cooldown = 2
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_codes = [ "" ]
+wave_codes = [ "0003322" ]
 
 [node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
 one_shot = true
@@ -77,23 +79,32 @@ position = Vector2( 288, 232 )
 [node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 352, 232 )
 
-[node name="ItemSpawnZone" type="Area2D" parent="."]
-position = Vector2( 188, 136 )
+[node name="ItemSpawnZone" type="Node2D" parent="."]
+script = ExtResource( 13 )
+spawn_cooldown = 3
+entities = [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ) ]
+crates_before_reload = 8
+max_existing_items = 5
+distance_between_items = 30.0
+wave_spawn_node = NodePath("../EnemySpawnZone")
+
+[node name="SpawnArea" type="ReferenceRect" parent="ItemSpawnZone"]
+margin_left = 65.0
+margin_top = 88.0
+margin_right = 315.0
+margin_bottom = 200.0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="ItemSpawnPosition" type="Position2D" parent="ItemSpawnZone"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemSpawnZone"]
-visible = false
-modulate = Color( 0, 1, 0.6, 1 )
-scale = Vector2( 14, 7 )
-shape = SubResource( 18 )
-
 [node name="SpawnTimer" type="Timer" parent="ItemSpawnZone"]
 one_shot = true
+
+[node name="ItemSpawnPosition" type="Position2D" parent="ItemSpawnZone"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 192, 108 )
 current = true
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 320, 96 )

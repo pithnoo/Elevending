@@ -81,12 +81,13 @@ collision_layer = 256
 collision_mask = 0
 script = ExtResource( 2 )
 death_effect = ExtResource( 3 )
+life_time = 10.0
 type = 2
 
 [node name="ItemPosition" type="Position2D" parent="."]
-position = Vector2( 0, 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -5 )
 texture = ExtResource( 1 )
 hframes = 46
 frame = 9
@@ -108,4 +109,3 @@ active = true
 parameters/playback = SubResource( 9 )
 
 [node name="ItemTimer" parent="." instance=ExtResource( 4 )]
-life_time = 15.0

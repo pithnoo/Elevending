@@ -14,10 +14,7 @@ var item_control : bool
 var turret_control1 : bool
 var turret_control2 : bool
 var reset_control : bool
-
-# shooting item collection
 var shoot_control : bool
-var can_shoot : bool = true
 
 # export file path by string resulted in some quirks, better to manuall reference than use the editor (Godot 3.5)
 #export(String, FILE, "*png") var item_crosshair
@@ -42,8 +39,6 @@ func _process(delta):
 		# to ensure that the animation doesn't play if the same key is pressed twice
 		is_active = false
 		closing = true
-
-		print("active")
 
 	states.process(delta)
 
