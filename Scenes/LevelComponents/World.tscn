@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://Art/Level/shopUI-Sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=13]
+[ext_resource path="res://m5x7.ttf" type="DynamicFontData" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 14 )
 
 [node name="World" type="Node2D"]
 
@@ -122,3 +126,49 @@ current = true
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 320, 96 )
+
+[node name="StatsUI" type="Control" parent="."]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 360.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="StatsUI"]
+margin_left = -303.0
+margin_top = -65.0
+margin_right = -265.0
+margin_bottom = -39.0
+custom_fonts/font = SubResource( 1 )
+text = "20"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="StatsUI"]
+margin_left = -303.0
+margin_top = -50.0
+margin_right = -265.0
+margin_bottom = -24.0
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="StatsUI"]
+margin_left = -34.0
+margin_top = -65.0
+margin_right = 4.0
+margin_bottom = -39.0
+custom_fonts/font = SubResource( 1 )
+text = "05"
+align = 1
+valign = 1
+
+[node name="Label4" type="Label" parent="StatsUI"]
+margin_left = -34.0
+margin_top = -49.0
+margin_right = 4.0
+margin_bottom = -23.0
+custom_fonts/font = SubResource( 1 )
+text = "05"
+align = 1
+valign = 1
