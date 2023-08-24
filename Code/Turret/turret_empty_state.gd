@@ -1,7 +1,6 @@
 extends TurretBaseState
 
 export(NodePath) var attack_node
-
 onready var attack_state: TurretBaseState = get_node(attack_node)
 
 signal turret_empty

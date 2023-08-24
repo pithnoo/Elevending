@@ -136,6 +136,7 @@ animation_name = "Idle"
 follow_node = NodePath("../FollowCore")
 stun_timer = NodePath("../../StunTimer")
 stun_particle = ExtResource( 14 )
+stun_time = 3
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true

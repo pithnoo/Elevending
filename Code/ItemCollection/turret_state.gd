@@ -17,8 +17,7 @@ onready var place_timer = get_node(timer_node)
 export(float) var place_time
 
 func set_cursor(turret_cursor):
-	#Input.set_custom_mouse_cursor(load(turret_cursor))
-	pass
+	Input.set_custom_mouse_cursor(turret_cursor)
 
 func place_turret():
 	item.animations.play(animation_name)

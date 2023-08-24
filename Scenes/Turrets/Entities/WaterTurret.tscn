@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Code/Properties/entity_detect.gd" type="Script" id=1]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Scenes/Projectiles/Water/ShootEffectWater.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Turrets/TurretSelected/SelectedWater.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Projectiles/Water/WaterProjectileGround.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemies/Charges/Medium/chargeMediumWater.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Attack"
@@ -256,7 +258,11 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
+power_up_effect = ExtResource( 16 )
+power_up_position = NodePath("PowerPoint")
 cooldown = 0.5
+
+[node name="ParticleGenerator" parent="." instance=ExtResource( 17 )]
 
 [node name="SelectedWater" parent="." instance=ExtResource( 14 )]
 visible = false
@@ -301,6 +307,8 @@ start_node = NodePath("../Start")
 manual_effect = NodePath("../../SelectedWater")
 Projectile = ExtResource( 11 )
 projectileEffect = ExtResource( 12 )
+
+[node name="PowerPoint" type="Position2D" parent="."]
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )

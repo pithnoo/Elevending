@@ -209,6 +209,7 @@ electric_node = NodePath("../Electric")
 shoot_point = NodePath("../../ShootPoint")
 item_to_shoot = ExtResource( 4 )
 muzzle_flash = ExtResource( 5 )
+item_crosshair = "res://Art/Level/boxCrosshair.png"
 
 [node name="Ground" type="Node" parent="StateManager"]
 script = ExtResource( 9 )
@@ -221,6 +222,7 @@ shoot_point = NodePath("../../ShootPoint")
 timer_node = NodePath("../../Timer")
 place_time = 0.7
 electric_node = NodePath("../Electric")
+turret_cursor = "res://Art/Projectiles/crosshair1.png"
 
 [node name="Electric" type="Node" parent="StateManager"]
 script = ExtResource( 12 )
@@ -232,6 +234,7 @@ muzzle_flash = ExtResource( 14 )
 shoot_point = NodePath("../../ShootPoint")
 timer_node = NodePath("../../Timer")
 place_time = 0.7
+turret_cursor = "res://Art/Projectiles/crosshair1.png"
 
 [node name="ShootPoint" type="Position2D" parent="."]
 position = Vector2( 0, -3 )

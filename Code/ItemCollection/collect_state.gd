@@ -11,7 +11,8 @@ onready var closed_state = get_node(closed_node)
 onready var ground_state = get_node(ground_node)
 onready var electric_state = get_node(electric_node)
 
-var item_crosshair = "res://Art/Projectiles/crosshair1.png"
+#var item_crosshair = "res://Art/Projectiles/crosshair1.png"
+export(String, FILE, "*png") var item_crosshair 
 
 var shoot_control : bool
 var can_shoot : bool = true
@@ -65,14 +66,13 @@ func shoot_item():
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectile_angle))
 
 func level_heal():
-	print("healed")
+	#print("healed")
+	pass
 
 func level_ammo():
-	print("reloaded turrets")
 	GameManager.emit_signal("ammo_reload")
 
 func level_shoot():
-	print("increase fire rate")
 	GameManager.emit_signal("fire_rate_doubled")
 
 func reset_shot():

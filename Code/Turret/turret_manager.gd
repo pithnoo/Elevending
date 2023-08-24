@@ -95,9 +95,11 @@ func switch_turret(turretIndex: int):
 	currentTurret.cooldown = fireRate
 
 func turret_reload():
+	currentTurret.power_up()
 	currentTurret.ammo = maxAmmo
 
 func increase_fire_rate():
+	currentTurret.power_up()
 	currentTurret.decreaseAmmo = false
 	fireRateBuffer = currentTurret.cooldown
 	fireRate /= 2

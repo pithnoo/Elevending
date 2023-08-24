@@ -83,7 +83,7 @@ position = Vector2( 352, 232 )
 script = ExtResource( 13 )
 spawn_cooldown = 3
 entities = [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ) ]
-crates_before_reload = 8
+crates_before_reload = 5
 max_existing_items = 5
 distance_between_items = 30.0
 wave_spawn_node = NodePath("../EnemySpawnZone")
@@ -93,6 +93,7 @@ margin_left = 65.0
 margin_top = 88.0
 margin_right = 315.0
 margin_bottom = 200.0
+border_color = Color( 0.992157, 1, 0, 1 )
 __meta__ = {
 "_edit_group_": true
 }

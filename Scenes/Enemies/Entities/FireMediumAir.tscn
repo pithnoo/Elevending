@@ -14,7 +14,7 @@
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
 [ext_resource path="res://Art/Playtest Sprites/lightAirFire.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffFire.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/ParticleGenerator.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Enemies/Charges/Medium/chargeMediumFire.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/Enemy/enemy_attack.gd" type="Script" id=17]
 [ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpMedium.tscn" type="PackedScene" id=18]
@@ -97,7 +97,7 @@ extents = Vector2( 6, 6 )
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8, 8 )
 
-[node name="FireMediumGround" type="KinematicBody2D"]
+[node name="FireMediumAir" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 5 )
@@ -183,16 +183,15 @@ position = Vector2( 0, -0.462505 )
 texture = ExtResource( 13 )
 flip_h = true
 
-[node name="HurtBox" type="Area2D" parent="Sprite"]
-position = Vector2( 0, 0.462505 )
+[node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 64
 script = ExtResource( 10 )
-entity_stats = NodePath("../../Stats")
+entity_stats = NodePath("../Stats")
 type = 2
-hit_flash = NodePath("../../HitFlash")
+hit_flash = NodePath("../HitFlash")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource( 29 )
 
 [node name="CoreRange" type="Area2D" parent="."]
@@ -232,9 +231,9 @@ visible = false
 shape = SubResource( 34 )
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="area_entered" from="Sprite/HurtBox" to="Sprite/HurtBox" method="_on_HurtBox_area_entered"]
-[connection signal="enemy_buffed" from="Sprite/HurtBox" to="." method="_on_HurtBox_enemy_buffed"]
-[connection signal="enemy_stunned" from="Sprite/HurtBox" to="." method="_on_HurtBox_enemy_stunned"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
+[connection signal="enemy_buffed" from="HurtBox" to="." method="_on_HurtBox_enemy_buffed"]
+[connection signal="enemy_stunned" from="HurtBox" to="." method="_on_HurtBox_enemy_stunned"]
 [connection signal="body_entered" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_entered"]
 [connection signal="body_exited" from="CoreRange" to="CoreRange" method="_on_CoreRange_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="StateManager/FollowCore" method="_on_AttackRange_body_entered"]

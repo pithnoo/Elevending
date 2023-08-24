@@ -1,10 +1,11 @@
 extends ItemTurretState
 
-var electric_cursor
+#var electric_cursor = "res://Art/Level/ElectricCursor.png"
+export(String, FILE, "*png") var turret_cursor
 
 func enter() -> void:
 	.enter()
-	set_cursor(electric_cursor)
+	Input.set_custom_mouse_cursor(load(turret_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
 
 func process(_delta: float) -> ItemBaseState:
 	if item.item_control || GameManager.electric_turret_number <= 0:

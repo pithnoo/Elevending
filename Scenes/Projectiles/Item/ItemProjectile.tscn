@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/particle1.png" type="Texture" id=2]
 [ext_resource path="res://Code/Properties/Hazard/item_hit_box.gd" type="Script" id=3]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=4]
-[ext_resource path="res://Scenes/ParticleGenerator.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Projectiles/Item/ItemDestroy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve" id=4]
