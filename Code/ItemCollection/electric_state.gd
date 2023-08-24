@@ -1,8 +1,5 @@
 extends ItemTurretState
 
-export(NodePath) var collect_node
-onready var collect_state = get_node(collect_node)
-
 var electric_cursor
 
 func enter() -> void:
@@ -10,13 +7,14 @@ func enter() -> void:
 	set_cursor(electric_cursor)
 
 func process(_delta: float) -> ItemBaseState:
-	if item.item_control:
+	if item.item_control || GameManager.electric_turret_number <= 0:
 		return collect_state
 
 	if item.closing:
 		return close_state
 
 	if item.shoot_control && place_timer.is_stopped():
+		GameManager.electric_turret_number -= 1
 		place_timer.start(place_time)
 		place_turret()
 		

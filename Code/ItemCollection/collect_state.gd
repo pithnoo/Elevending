@@ -2,12 +2,14 @@ extends ItemBaseState
 
 export(NodePath) var closed_node
 export(NodePath) var ground_node
+export(NodePath) var electric_node
 export(NodePath) var shoot_point
 export(PackedScene) var item_to_shoot
 export(PackedScene) var muzzle_flash
 
 onready var closed_state = get_node(closed_node)
 onready var ground_state = get_node(ground_node)
+onready var electric_state = get_node(electric_node)
 
 var item_crosshair = "res://Art/Projectiles/crosshair1.png"
 
@@ -24,8 +26,10 @@ func process(_delta : float) -> ItemBaseState:
 		can_shoot = false
 		shoot_item()
 	
-	if item.item_control:
+	if item.item_control && GameManager.ground_turret_number > 0:
 		return ground_state
+	elif item.item_control && GameManager.electric_turret_number > 0:
+		return electric_state
 
 	if item.closing:
 		return closed_state

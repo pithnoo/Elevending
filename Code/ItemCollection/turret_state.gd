@@ -4,6 +4,9 @@ class_name ItemTurretState
 export(NodePath) var close_node
 onready var close_state = get_node(close_node)
 
+export(NodePath) var collect_node
+onready var collect_state = get_node(collect_node)
+
 export(PackedScene) var turret_to_place
 export(PackedScene) var muzzle_flash
 export(NodePath) var shoot_point

@@ -19,13 +19,6 @@ var reset_control : bool
 var shoot_control : bool
 var can_shoot : bool = true
 
-# custom turret collection
-export(PackedScene) var ground_turret
-export(PackedScene) var electric_turret
-
-export(int) var ground_turret_number
-export(int) var electric_turret_number
-
 # export file path by string resulted in some quirks, better to manuall reference than use the editor (Godot 3.5)
 #export(String, FILE, "*png") var item_crosshair
 #export(String, FILE, "*png") var default_crosshair

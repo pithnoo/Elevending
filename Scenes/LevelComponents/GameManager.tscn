@@ -4,3 +4,5 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource( 1 )
+ground_turret_number = 5
+electric_turret_number = 5
