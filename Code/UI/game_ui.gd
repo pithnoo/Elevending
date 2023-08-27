@@ -2,11 +2,14 @@ extends Control
 
 var hearts setget set_hearts
 var max_hearts setget set_max_hearts
-
 var currency setget set_currency
+var num_ground setget set_ground
+var num_electric setget set_electric
 
 onready var health_label = $Health
 onready var currency_label = $Currency
+onready var ground_label = $GroundTurretNumber
+onready var electric_label = $ElectricTurretNumber
 
 func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts)
@@ -26,9 +29,25 @@ func set_currency(value):
 	if currency_label != null:
 		currency_label.text = str(currency)
 
+func set_ground(value):
+	num_ground = value
+	
+	if ground_label != null:
+		ground_label.text = str(num_ground)
+
+func set_electric(value):
+	num_electric = value
+	
+	if electric_label != null:
+		electric_label.text = str(num_electric)
+
 func _ready():
 	self.max_hearts = CoreStats.max_health
 	self.hearts = CoreStats.health
+	self.num_ground = GameManager.ground_turret_number
+	self.num_electric = GameManager.electric_turret_number
 	
 	CoreStats.connect("health_changed", self, "set_hearts")
 	GameManager.connect("currency_changed", self, "set_currency")
+	GameManager.connect("ground_changed", self, "set_ground")
+	GameManager.connect("electric_changed", self, "set_electric")

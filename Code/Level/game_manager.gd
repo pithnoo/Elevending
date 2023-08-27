@@ -5,10 +5,10 @@ signal ammo_reload
 signal fire_rate_doubled
 var is_manual : bool = false
 
-export(int) var max_ground_turrets = 0
-export(int) var max_electric_turrets = 0
-onready var ground_turret_number : int setget set_ground
-onready var electric_turret_number : int setget set_electric
+export(int) var max_ground_turrets
+export(int) var max_electric_turrets
+onready var ground_turret_number setget set_ground
+onready var electric_turret_number setget set_electric
 
 signal ground_changed(value)
 signal electric_changed(value)

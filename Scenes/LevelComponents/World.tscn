@@ -66,17 +66,17 @@ margin_top = -65.0
 margin_right = 4.0
 margin_bottom = -39.0
 custom_fonts/font = SubResource( 1 )
-text = "5"
+text = "0"
 align = 1
 valign = 1
 
 [node name="GroundTurretNumber" type="Label" parent="StatsUI"]
 margin_left = -34.0
-margin_top = -49.0
+margin_top = -50.0
 margin_right = 4.0
-margin_bottom = -23.0
+margin_bottom = -24.0
 custom_fonts/font = SubResource( 1 )
-text = "5"
+text = "0"
 align = 1
 valign = 1
 
