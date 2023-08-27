@@ -12,7 +12,10 @@ func set_max_health(value):
 	emit_signal("max_health_changed")
 
 func set_health(value):
-	health = value
+	# to ensure that health doesn't exceed its max, or becomes negative
+	# useful for UI
+	health = clamp(value, 0, max_health)
+
 	emit_signal("health_changed", health)
 
 	if health <= 0:

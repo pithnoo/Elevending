@@ -13,16 +13,18 @@ func _ready():
 	animations.play("Idle")
 
 func _on_AttackHurtBox_area_entered(area:Area2D):
-	print("core recorded: ", area.damage, " damage from ", area)
-	decrease_health()
+	#print("core recorded: ", area.damage, " damage from ", area)
+
+	decrease_health(area.damage)
 
 func _on_HurtBox_area_entered(area:Area2D):
-	print("core recorded: ", area.damage, " damage from ", area)
-	decrease_health()
+	#print("core recorded: ", area.damage, " damage from ", area)
+
+	decrease_health(area.damage)
 	area.destroy()
 
-func decrease_health() -> void:
-	CoreStats.health -= 1
+func decrease_health(damage_taken : int) -> void:
+	CoreStats.health -= damage_taken
 
 	animations.play("Hurt")
 	

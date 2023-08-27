@@ -209,6 +209,7 @@ electric_node = NodePath("../Electric")
 shoot_point = NodePath("../../ShootPoint")
 item_to_shoot = ExtResource( 4 )
 muzzle_flash = ExtResource( 5 )
+heal_amount = 10
 item_crosshair = "res://Art/Level/boxCrosshair.png"
 
 [node name="Ground" type="Node" parent="StateManager"]

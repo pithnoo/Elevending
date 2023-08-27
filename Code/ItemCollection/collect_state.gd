@@ -7,6 +7,8 @@ export(NodePath) var shoot_point
 export(PackedScene) var item_to_shoot
 export(PackedScene) var muzzle_flash
 
+export(int) var heal_amount
+
 onready var closed_state = get_node(closed_node)
 onready var ground_state = get_node(ground_node)
 onready var electric_state = get_node(electric_node)
@@ -66,8 +68,7 @@ func shoot_item():
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectile_angle))
 
 func level_heal():
-	#print("healed")
-	pass
+	CoreStats.health += heal_amount
 
 func level_ammo():
 	GameManager.emit_signal("ammo_reload")

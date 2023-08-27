@@ -14,6 +14,7 @@ export(PackedScene) var death_particle
 
 export(int) var maxHealth
 export(int) var enemyDamage
+export(int) var enemyValue
 
 export(float) var follow_speed 
 export(float) var follow_acceleration 
@@ -46,13 +47,15 @@ func _physics_process(delta: float) -> void:
   states.physics_process(delta)
 
 func _on_Stats_no_health():
-  # instantiate death effect
-  particleGenerator.generate_particle(death_particle, particlePosition)
-	
-  # signal of enemy's death for wave manager
-  emit_signal("enemy_dead")
+	# instantiate death effect
+	particleGenerator.generate_particle(death_particle, particlePosition)
 
-  queue_free()
+	# signal of enemy's death for wave manager
+	emit_signal("enemy_dead")
+
+	GameManager.game_currency += enemyValue
+
+	queue_free()
 
 func _on_HurtBox_enemy_buffed():
 	# note that this is only executed once because of enemy hurt box script

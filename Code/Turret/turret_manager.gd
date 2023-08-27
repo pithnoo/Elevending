@@ -2,6 +2,7 @@ extends Node
 
 onready var boostTimer = $BoostTimer
 export(int) var boostTime
+var has_boosted : bool = false
 
 export(float) var fireRate
 var fireRateBuffer
@@ -44,8 +45,11 @@ func _process(delta):
 
 	if boostTimer.is_stopped():
 		fireRate = fireRateBuffer
+
 		currentTurret.cooldown = fireRateBuffer
 		currentTurret.decreaseAmmo = true
+
+		has_boosted = false
 
 	# so that the keyboard input can be adjusted in editor
 	switchInput = Input.is_action_just_pressed(turretInput)
@@ -99,10 +103,16 @@ func turret_reload():
 	currentTurret.ammo = maxAmmo
 
 func increase_fire_rate():
-	currentTurret.power_up()
-	currentTurret.decreaseAmmo = false
-	fireRateBuffer = currentTurret.cooldown
-	fireRate /= 2
-	currentTurret.cooldown = fireRate
+	if !has_boosted:
+		has_boosted = true
 
+		currentTurret.power_up()
+		currentTurret.decreaseAmmo = false
+
+		fireRateBuffer = currentTurret.cooldown
+		fireRate /= 2
+		currentTurret.cooldown = fireRate
+
+	# if the turret has already increased, then just prolong the boost time
 	boostTimer.start(boostTime)
+

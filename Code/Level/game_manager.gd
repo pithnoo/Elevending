@@ -1,19 +1,41 @@
 extends Node
 
+# turrets
 signal ammo_reload
 signal fire_rate_doubled
-signal health_restore(value)
-
 var is_manual : bool = false
 
-export(int) var ground_turret_number = 0
-export(int) var electric_turret_number = 0
+export(int) var max_ground_turrets = 0
+export(int) var max_electric_turrets = 0
+onready var ground_turret_number : int setget set_ground
+onready var electric_turret_number : int setget set_electric
+
+signal ground_changed(value)
+signal electric_changed(value)
+
+var game_currency : int = 0 setget set_currency
+signal currency_changed(value)
+
+# game
+signal game_over
+signal next_level
+
+func set_currency(value):
+	game_currency = value
+
+	emit_signal("currency_changed", value)
+
+func set_ground(value):
+	ground_turret_number = value
+
+	emit_signal("ground_changed", value)
+
+func set_electric(value):
+	electric_turret_number = value
+
+	emit_signal("electric_changed", value)
 
 func _ready():
-	pass # Replace with function body.
-
-func reload():
-	emit_signal("ammo_reload")
-
-func increase_fire_rate():
-	emit_signal("fire_rate_doubled")
+	self.game_currency = 0
+	self.ground_turret_number = max_ground_turrets
+	self.electric_turret_number = max_electric_turrets
