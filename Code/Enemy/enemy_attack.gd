@@ -41,7 +41,12 @@ func physics_process(delta: float) -> EnemyBaseState:
 	return null
 
 func attack():
-	var target = core_detect.entities[0].global_position
+	var target
+	if core_detect.entities.size() > 0: 
+		target = core_detect.entities[0].global_position
+	else:
+		target = Vector2.ZERO
+
 	var direction = enemy.global_position.direction_to(target) * -1
 
 	var attack_effect = enemy_attack.instance()

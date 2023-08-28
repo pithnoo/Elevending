@@ -197,6 +197,7 @@ reset_input = "reset"
 [node name="NoTurret" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoTurret"]
+visible = false
 position = Vector2( 0, -29 )
 shape = SubResource( 14 )
 
