@@ -61,6 +61,8 @@ func _process(delta):
 
 	# if one turret is currently manually controlled, then the other turret must be automated
 	if manualControl:
+		GameManager.is_manual = true
+
 		if currentTurret.manualControl == false:
 			currentTurret.manualControl = true
 			get_node(other_turret).currentTurret.manualControl = false
@@ -71,6 +73,7 @@ func _process(delta):
 	# if reset, both turrets should now resume automated attack
 	if resetControl || itemControl:
 		currentTurret.manualControl = false
+		GameManager.is_manual = false
 
 	if switchInput && switchTimer.is_stopped() && currentTurret.ammo != 0:
 
@@ -97,6 +100,8 @@ func switch_turret(turretIndex: int):
 	add_child(currentTurret)
 	currentTurret.ammo = currentAmmo
 	currentTurret.cooldown = fireRate
+
+	GameManager.is_manual = false
 
 func turret_reload():
 	currentTurret.power_up()

@@ -22,6 +22,7 @@ var shoot_control : bool
 
 var is_active : bool = false
 var closing : bool = false
+var can_place : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,3 +45,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	states.physics_process(delta)
+
+func _on_NoTurret_mouse_exited():
+	can_place = true
+
+func _on_NoTurret_mouse_entered():
+	can_place = false
