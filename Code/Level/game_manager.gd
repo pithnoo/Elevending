@@ -16,6 +16,10 @@ signal electric_changed(value)
 var game_currency : int = 0 setget set_currency
 signal currency_changed(value)
 
+# for enemy spawn manager
+signal show_wave(value)
+signal start_wave
+
 # game
 signal game_over
 signal next_level

@@ -45,7 +45,7 @@ func attack():
 	if core_detect.entities.size() > 0: 
 		target = core_detect.entities[0].global_position
 	else:
-		target = Vector2.ZERO
+		target = Vector2.UP
 
 	var direction = enemy.global_position.direction_to(target) * -1
 

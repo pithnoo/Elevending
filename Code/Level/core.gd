@@ -32,6 +32,8 @@ func decrease_health(damage_taken : int) -> void:
 	
 	if CoreStats.health <= 0:
 		print("game over")
+
+		GameManager.emit_signal("game_over")
 		queue_free()
 
 func hurt_finished():

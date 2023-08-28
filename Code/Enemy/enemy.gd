@@ -69,3 +69,6 @@ func _on_HurtBox_enemy_buffed():
 
 func _on_HurtBox_enemy_stunned():
 	is_stunned = true
+
+func _on_CoreHitBox_collided():
+	emit_signal("enemy_dead")

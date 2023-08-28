@@ -10,57 +10,59 @@
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Art/Level/shopUI-Sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=13]
 [ext_resource path="res://m5x7.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 14 )
 
 [node name="World" type="Node2D"]
 
-[node name="ShopUi-Left" type="Sprite" parent="."]
+[node name="LevelUI" type="Node2D" parent="."]
+
+[node name="ShopScreen" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 58, 40 )
-texture = ExtResource( 11 )
-hframes = 6
-frame = 2
+wave_spawner_node = NodePath("../../EnemySpawnZone")
+starting_animation = "StatsIdle"
+idle_animation = "WaveIdleLeft"
 
-[node name="ShopUi-Right" type="Sprite" parent="."]
+[node name="ShopScreen2" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 328, 40 )
-texture = ExtResource( 11 )
-hframes = 6
-frame = 1
+wave_spawner_node = NodePath("../../EnemySpawnZone")
+starting_animation = "TurretIdle"
+idle_animation = "WaveIdleRight"
 
-[node name="StatsUI" type="Control" parent="."]
+[node name="StatsUI" type="Control" parent="LevelUI"]
 margin_left = 320.0
 margin_top = 96.0
 margin_right = 360.0
 margin_bottom = 136.0
 script = ExtResource( 15 )
 
-[node name="Health" type="Label" parent="StatsUI"]
-margin_left = -303.0
+[node name="Health" type="Label" parent="LevelUI/StatsUI"]
+margin_left = -245.0
 margin_top = -66.0
-margin_right = -265.0
+margin_right = -207.0
 margin_bottom = -37.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
 valign = 1
 
-[node name="Currency" type="Label" parent="StatsUI"]
-margin_left = -303.0
+[node name="Currency" type="Label" parent="LevelUI/StatsUI"]
+margin_left = -245.0
 margin_top = -50.0
-margin_right = -265.0
+margin_right = -207.0
 margin_bottom = -24.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
 valign = 1
 
-[node name="ElectricTurretNumber" type="Label" parent="StatsUI"]
+[node name="ElectricTurretNumber" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -34.0
 margin_top = -65.0
 margin_right = 4.0
@@ -70,13 +72,37 @@ text = "0"
 align = 1
 valign = 1
 
-[node name="GroundTurretNumber" type="Label" parent="StatsUI"]
+[node name="GroundTurretNumber" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -34.0
 margin_top = -50.0
 margin_right = 4.0
 margin_bottom = -24.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
+align = 1
+valign = 1
+
+[node name="Wave1" type="Label" parent="LevelUI/StatsUI"]
+visible = false
+margin_left = -252.0
+margin_top = -59.0
+margin_right = -214.0
+margin_bottom = -30.0
+custom_fonts/font = SubResource( 1 )
+text = "WAVE
+1"
+align = 1
+valign = 1
+
+[node name="Wave2" type="Label" parent="LevelUI/StatsUI"]
+visible = false
+margin_left = -40.0
+margin_top = -59.0
+margin_right = -2.0
+margin_bottom = -30.0
+custom_fonts/font = SubResource( 1 )
+text = "WAVE
+1"
 align = 1
 valign = 1
 
@@ -138,9 +164,9 @@ one_shot = true
 script = ExtResource( 3 )
 spawn_cooldown = 1
 entities = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ) ]
-wave_cooldown = 2
+wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_codes = [ "333333" ]
+wave_codes = [ "2222222", "2222000", "3333333", "00033322", "00003333223333" ]
 
 [node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
 one_shot = true
@@ -171,6 +197,4 @@ position = Vector2( 352, 232 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 192, 108 )
 current = true
-
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 320, 96 )
+smoothing_enabled = true

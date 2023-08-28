@@ -218,3 +218,4 @@ shape = SubResource( 21 )
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
 [connection signal="enemy_buffed" from="HurtBox" to="." method="_on_HurtBox_enemy_buffed"]
 [connection signal="enemy_stunned" from="HurtBox" to="." method="_on_HurtBox_enemy_stunned"]
+[connection signal="collided" from="CoreHitBox" to="." method="_on_CoreHitBox_collided"]
