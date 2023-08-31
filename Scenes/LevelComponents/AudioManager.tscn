@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="AudioManager" type="Node"]
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+
+[node name="EnemyHurt" type="AudioStreamPlayer2D" parent="."]
+
+[node name="EnemyDestroyed" type="AudioStreamPlayer2D" parent="."]

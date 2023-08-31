@@ -101,6 +101,7 @@ config/icon="res://icon.png"
 
 CoreStats="*res://Scenes/LevelComponents/CoreStats.tscn"
 GameManager="*res://Scenes/LevelComponents/GameManager.tscn"
+AudioManager="*res://Scenes/LevelComponents/AudioManager.tscn"
 
 [debug]
 
