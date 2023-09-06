@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=2]
@@ -10,16 +10,164 @@
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Code/UI/pause.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=13]
-[ext_resource path="res://m5x7.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Art/Level/blindsTransition1.png" type="Texture" id=14]
 [ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=15]
 [ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Art/Level/PauseMenu.png" type="Texture" id=17]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=18]
+[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=19]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 14 )
+font_data = ExtResource( 19 )
 
-[node name="World" type="Node2D"]
+[sub_resource type="AtlasTexture" id=2]
+resource_local_to_scene = true
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=3]
+resource_local_to_scene = true
+atlas = ExtResource( 18 )
+region = Rect2( 19, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 19 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 18 )
+region = Rect2( 38, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 18 )
+region = Rect2( 57, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 18 )
+region = Rect2( 114, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 18 )
+region = Rect2( 133, 0, 19, 13 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "BlindsTransition"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blinds:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( -2, -4, -2 ),
+"update": 0,
+"values": [ Vector2( -8, -296 ), Vector2( -8, -40 ), Vector2( -8, -56 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blinds:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -8, -296 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UpgradeTransition:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -384, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ReturnTransition:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 384, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "ReturnEnter"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ReturnTransition:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 384, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "ReturnExit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ReturnTransition:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -384, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "UpgradeEnter"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpgradeTransition:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( -384, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "UpgradeExit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpgradeTransition:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 384, 0 ) ]
+}
+
+[node name="World" type="CanvasLayer"]
+layer = -1
 
 [node name="LevelUI" type="Node2D" parent="."]
 
@@ -44,9 +192,9 @@ script = ExtResource( 15 )
 
 [node name="Health" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -245.0
-margin_top = -66.0
+margin_top = -67.0
 margin_right = -207.0
-margin_bottom = -37.0
+margin_bottom = -38.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
@@ -54,9 +202,9 @@ valign = 1
 
 [node name="Currency" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -245.0
-margin_top = -50.0
+margin_top = -51.0
 margin_right = -207.0
-margin_bottom = -24.0
+margin_bottom = -25.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
@@ -64,9 +212,9 @@ valign = 1
 
 [node name="ElectricTurretNumber" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -34.0
-margin_top = -65.0
+margin_top = -66.0
 margin_right = 4.0
-margin_bottom = -39.0
+margin_bottom = -40.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
@@ -74,9 +222,9 @@ valign = 1
 
 [node name="GroundTurretNumber" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -34.0
-margin_top = -50.0
+margin_top = -51.0
 margin_right = 4.0
-margin_bottom = -24.0
+margin_bottom = -25.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
@@ -85,24 +233,22 @@ valign = 1
 [node name="Wave1" type="Label" parent="LevelUI/StatsUI"]
 visible = false
 margin_left = -252.0
-margin_top = -59.0
+margin_top = -61.0
 margin_right = -214.0
-margin_bottom = -30.0
+margin_bottom = -32.0
 custom_fonts/font = SubResource( 1 )
-text = "WAVE
-1"
+text = "WAVE 1"
 align = 1
 valign = 1
 
 [node name="Wave2" type="Label" parent="LevelUI/StatsUI"]
 visible = false
 margin_left = -40.0
-margin_top = -59.0
+margin_top = -61.0
 margin_right = -2.0
-margin_bottom = -30.0
+margin_bottom = -32.0
 custom_fonts/font = SubResource( 1 )
-text = "WAVE
-1"
+text = "WAVE 1"
 align = 1
 valign = 1
 
@@ -141,7 +287,7 @@ script = ExtResource( 13 )
 spawn_cooldown = 3
 entities = [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ) ]
 crates_before_reload = 5
-max_existing_items = 5
+max_existing_items = 20
 distance_between_items = 30.0
 wave_spawn_node = NodePath("../EnemySpawnZone")
 
@@ -198,3 +344,119 @@ position = Vector2( 352, 232 )
 position = Vector2( 192, 108 )
 current = true
 smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
+
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer/PauseMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+color = Color( 0, 0, 0, 0.509804 )
+
+[node name="PauseOverlay" type="TextureRect" parent="CanvasLayer/PauseMenu"]
+margin_left = 128.0
+margin_top = 80.0
+margin_right = 253.0
+margin_bottom = 150.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 4
+
+[node name="ResumeButton" type="TextureButton" parent="CanvasLayer/PauseMenu/PauseOverlay"]
+margin_left = 8.0
+margin_top = 31.0
+margin_right = 43.0
+margin_bottom = 69.0
+texture_normal = SubResource( 2 )
+texture_hover = SubResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/PauseOverlay/ResumeButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = -6.0
+margin_right = 38.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "resume"
+align = 1
+
+[node name="SettingsButton" type="TextureButton" parent="CanvasLayer/PauseMenu/PauseOverlay"]
+margin_left = 44.0
+margin_top = 31.0
+margin_right = 79.0
+margin_bottom = 69.0
+texture_normal = SubResource( 4 )
+texture_hover = SubResource( 5 )
+expand = true
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="CanvasLayer/PauseMenu/PauseOverlay/SettingsButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -1.0
+margin_top = -6.0
+margin_right = 39.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "settings"
+align = 1
+
+[node name="RetryButton" type="TextureButton" parent="CanvasLayer/PauseMenu/PauseOverlay"]
+margin_left = 81.0
+margin_top = 31.0
+margin_right = 116.0
+margin_bottom = 69.0
+texture_normal = SubResource( 6 )
+texture_hover = SubResource( 7 )
+expand = true
+stretch_mode = 3
+
+[node name="Label3" type="Label" parent="CanvasLayer/PauseMenu/PauseOverlay/RetryButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = -6.0
+margin_right = 38.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "menu"
+align = 1
+
+[node name="Tween" type="Tween" parent="CanvasLayer/PauseMenu"]
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Blinds" type="TextureRect" parent="SceneTransition"]
+margin_left = -8.0
+margin_top = -296.0
+margin_right = 92.0
+margin_bottom = -223.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 14 )
+
+[node name="UpgradeTransition" type="ColorRect" parent="SceneTransition"]
+margin_left = -384.0
+margin_right = 0.00012207
+margin_bottom = 216.0
+color = Color( 0.901961, 0.564706, 0.305882, 1 )
+
+[node name="ReturnTransition" type="ColorRect" parent="SceneTransition"]
+margin_left = 384.0
+margin_right = 767.999
+margin_bottom = 216.0
+color = Color( 0.180392, 0.133333, 0.184314, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransition"]
+anims/BlindsTransition = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+anims/ReturnEnter = SubResource( 12 )
+anims/ReturnExit = SubResource( 14 )
+anims/UpgradeEnter = SubResource( 11 )
+anims/UpgradeExit = SubResource( 13 )

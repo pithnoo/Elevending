@@ -53,8 +53,8 @@ func display_wave(value):
 	wave_label2.visible = true
 
 	if wave_label1 != null && wave_label2 != null:
-		wave_label1.text = "WAVE\n" + str(value)
-		wave_label2.text = "WAVE\n" + str(value)
+		wave_label1.text = "WAVE " + str(value)
+		wave_label2.text = "WAVE " + str(value)
 
 func hide_wave():
 	health_label.visible = true

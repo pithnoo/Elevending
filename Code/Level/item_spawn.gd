@@ -40,7 +40,7 @@ func gen_random_pos():
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 
-	var current_point = spawn_area.rect_position + Vector2(randf() * spawn_area.rect_size.x, randf() * spawn_area.rect_size.y) 
+	var current_point = spawn_area.rect_position + Vector2(randf() * spawn_area.rect_size.x, randf() * spawn_area.rect_size.y)
 
 	for prev_point in current_item_positions:
 		if current_point.distance_to(prev_point) < distance_between_items:

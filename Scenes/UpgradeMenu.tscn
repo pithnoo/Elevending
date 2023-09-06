@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="UpgradeMenu" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 384.0
+margin_bottom = 216.0
+color = Color( 0.901961, 0.564706, 0.305882, 1 )
