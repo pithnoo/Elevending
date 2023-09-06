@@ -93,15 +93,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Elevending"
-run/main_scene="res://Scenes/LevelComponents/World.tscn"
+run/main_scene="res://Scenes/World.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
 [autoload]
 
-CoreStats="*res://Scenes/LevelComponents/CoreStats.tscn"
-GameManager="*res://Scenes/LevelComponents/GameManager.tscn"
-AudioManager="*res://Scenes/LevelComponents/AudioManager.tscn"
+CoreStats="*res://Scenes/GameComponents/CoreStats.tscn"
+GameManager="*res://Scenes/GameComponents/GameManager.tscn"
+AudioManager="*res://Scenes/GameComponents/AudioManager.tscn"
+SceneTransition="*res://Scenes/GameComponents/SceneTransition.tscn"
 
 [debug]
 

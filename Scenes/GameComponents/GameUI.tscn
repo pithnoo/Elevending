@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Code/UI/pause.gd" type="Script" id=1]
+[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Art/Level/PauseMenu.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=2]
+resource_local_to_scene = true
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=3]
+resource_local_to_scene = true
+atlas = ExtResource( 3 )
+region = Rect2( 19, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 2 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 38, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 57, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 114, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 133, 0, 19, 13 )
+
+[node name="GameUI" type="CanvasLayer"]
+
+[node name="PauseMenu" type="Control" parent="."]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+menu = "res://Scenes/GameComponents/UpgradeMenu.tscn"
+
+[node name="BlackOverlay" type="ColorRect" parent="PauseMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+color = Color( 0, 0, 0, 0.509804 )
+
+[node name="PauseOverlay" type="TextureRect" parent="PauseMenu"]
+margin_left = 128.0
+margin_top = 80.0
+margin_right = 253.0
+margin_bottom = 150.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 4
+
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu/PauseOverlay"]
+margin_left = 8.0
+margin_top = 31.0
+margin_right = 43.0
+margin_bottom = 69.0
+texture_normal = SubResource( 2 )
+texture_hover = SubResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="PauseMenu/PauseOverlay/ResumeButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = -6.0
+margin_right = 38.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "resume"
+align = 1
+
+[node name="SettingsButton" type="TextureButton" parent="PauseMenu/PauseOverlay"]
+margin_left = 44.0
+margin_top = 31.0
+margin_right = 79.0
+margin_bottom = 69.0
+texture_normal = SubResource( 4 )
+texture_hover = SubResource( 5 )
+expand = true
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="PauseMenu/PauseOverlay/SettingsButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -1.0
+margin_top = -6.0
+margin_right = 39.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "settings"
+align = 1
+
+[node name="MenuButton" type="TextureButton" parent="PauseMenu/PauseOverlay"]
+margin_left = 81.0
+margin_top = 31.0
+margin_right = 116.0
+margin_bottom = 69.0
+texture_normal = SubResource( 6 )
+texture_hover = SubResource( 7 )
+expand = true
+stretch_mode = 3
+
+[node name="Label3" type="Label" parent="PauseMenu/PauseOverlay/MenuButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = -6.0
+margin_right = 38.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "menu"
+align = 1
+
+[node name="Tween" type="Tween" parent="PauseMenu"]
+
+[connection signal="pressed" from="PauseMenu/PauseOverlay/ResumeButton" to="PauseMenu" method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="PauseMenu/PauseOverlay/SettingsButton" to="PauseMenu" method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="PauseMenu/PauseOverlay/MenuButton" to="PauseMenu" method="_on_MenuButton_pressed"]
