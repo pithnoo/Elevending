@@ -4,5 +4,9 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource( 1 )
+neutral_cursor = "res://Art/Crosshairs/crosshair3.png"
+manual_cursor = "res://Art/Crosshairs/crosshair2.png"
+item_cursor = "res://Art/Crosshairs/boxCrosshair.png"
+turret_cursor = "res://Art/Crosshairs/crosshair1.png"
 max_ground_turrets = 5
 max_electric_turrets = 5

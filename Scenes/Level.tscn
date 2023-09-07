@@ -1,39 +1,45 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Enemies/Entities/FireMediumGround.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Enemies/Entities/FireMediumAir.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
+[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Enemies/Entities/FireMediumGround.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/Entities/FireMediumAir.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Code/Level/level_data.gd" type="Script" id=17]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 13 )
+font_data = ExtResource( 6 )
 
-[node name="World" type="CanvasLayer"]
-layer = -1
+[node name="Level" type="Node2D"]
+script = ExtResource( 17 )
 
-[node name="GameUI" parent="." instance=ExtResource( 12 )]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 192, 108 )
+current = true
+smoothing_enabled = true
 
-[node name="LevelUI" type="CanvasLayer" parent="."]
+[node name="GameUI" parent="." instance=ExtResource( 14 )]
 
-[node name="ShopScreen" parent="LevelUI" instance=ExtResource( 17 )]
+[node name="LevelUI" type="Node2D" parent="."]
+
+[node name="ShopScreen" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 58, 40 )
 wave_spawner_node = NodePath("../../EnemySpawnZone")
 starting_animation = "StatsIdle"
 idle_animation = "WaveIdleLeft"
 
-[node name="ShopScreen2" parent="LevelUI" instance=ExtResource( 17 )]
+[node name="ShopScreen2" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 328, 40 )
 wave_spawner_node = NodePath("../../EnemySpawnZone")
 starting_animation = "TurretIdle"
@@ -44,7 +50,7 @@ margin_left = 320.0
 margin_top = 96.0
 margin_right = 360.0
 margin_bottom = 136.0
-script = ExtResource( 8 )
+script = ExtResource( 12 )
 
 [node name="Health" type="Label" parent="LevelUI/StatsUI"]
 margin_left = -245.0
@@ -112,10 +118,10 @@ valign = 1
 
 [node name="Entities" type="YSort" parent="YSort"]
 
-[node name="Core" parent="YSort/Entities" instance=ExtResource( 16 )]
+[node name="Core" parent="YSort/Entities" instance=ExtResource( 8 )]
 position = Vector2( 195, 0 )
 
-[node name="CollectionStation" parent="YSort/Entities" instance=ExtResource( 11 )]
+[node name="CollectionStation" parent="YSort/Entities" instance=ExtResource( 13 )]
 position = Vector2( 192, 68 )
 
 [node name="Turrets" type="Node2D" parent="YSort/Entities"]
@@ -139,9 +145,9 @@ itemInput = "item"
 maxAmmo = 20
 
 [node name="ItemSpawnZone" type="Node2D" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 spawn_cooldown = 3
-entities = [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ]
+entities = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
 crates_before_reload = 5
 max_existing_items = 20
 distance_between_items = 30.0
@@ -163,9 +169,9 @@ one_shot = true
 [node name="ItemSpawnPosition" type="Position2D" parent="ItemSpawnZone"]
 
 [node name="EnemySpawnZone" type="Node2D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 spawn_cooldown = 1
-entities = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ]
+entities = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
 wave_codes = [ "0000", "1111" ]
@@ -195,8 +201,3 @@ position = Vector2( 288, 232 )
 
 [node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 352, 232 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 192, 108 )
-current = true
-smoothing_enabled = true

@@ -13,15 +13,12 @@ onready var closed_state = get_node(closed_node)
 onready var ground_state = get_node(ground_node)
 onready var electric_state = get_node(electric_node)
 
-#var item_crosshair = "res://Art/Projectiles/crosshair1.png"
-export(String, FILE, "*png") var item_crosshair 
-
 var shoot_control : bool
 var can_shoot : bool = true
 
 func enter() -> void:
 	.enter()
-	Input.set_custom_mouse_cursor(load(item_crosshair), Input.CURSOR_ARROW, Vector2(40,40))
+	GameManager.change_game_cursor(2)
 
 func process(_delta : float) -> ItemBaseState:
 

@@ -36,13 +36,23 @@ region = Rect2( 133, 0, 19, 13 )
 
 [node name="GameUI" type="CanvasLayer"]
 
+[node name="CompleteMenu" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BlackOverlay" type="ColorRect" parent="CompleteMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+color = Color( 0, 0, 0, 0.509804 )
+
 [node name="PauseMenu" type="Control" parent="."]
 pause_mode = 2
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
-menu = "res://Scenes/GameComponents/MainMenu.tscn"
+menu = "res://Scenes/MainMenu.tscn"
 
 [node name="BlackOverlay" type="ColorRect" parent="PauseMenu"]
 margin_right = 384.0

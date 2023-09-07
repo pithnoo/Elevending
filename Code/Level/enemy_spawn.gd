@@ -4,13 +4,12 @@ export(int) var wave_cooldown
 export(Array, NodePath) var spawn_points
 export(Array, String) var wave_codes
 
-# var current_wave : int = 0
-
 var current_enemy : int = 0
 var enemies_to_spawn : int
 
 var waves_complete : bool = false
 var can_items_spawn : bool = false
+var can_enemies_spawn : bool
 
 var random = RandomNumberGenerator.new()
 
@@ -24,6 +23,8 @@ func _ready():
 
 	#GameManager.emit_signal("show_wave", current_wave + 1)
 	GameManager.display_wave()
+
+	can_enemies_spawn = true
 
 func _process(delta):
 	# continues to spawn until end of array is reached
@@ -57,20 +58,24 @@ func _process(delta):
 				# next wave
 				GameManager.current_wave += 1
 
-				#GameManager.emit_signal("show_wave", current_wave + 1)
-				GameManager.display_wave()
-
 				# to reset number of enemies that will be spawned
 				current_entity_number = wave_codes[GameManager.current_wave].length()
 
 				waveTimer.start(wave_cooldown)
+
+				#GameManager.emit_signal("show_wave", current_wave + 1)
+
+				GameManager.display_wave()
+
+				can_items_spawn = false
 			else:
 				# if anything else, final wave must've been reached
 				waves_complete = true
 
-				# level complete
 				can_items_spawn = false
 
+				# level complete
+				GameManager.emit_signal("level_complete")
 
 func spawn(index: int, spawnPoint) -> void:
 	spawnTimer.start(spawn_cooldown)

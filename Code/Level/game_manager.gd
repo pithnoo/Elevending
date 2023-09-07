@@ -1,5 +1,16 @@
 extends Node
 
+# to ensure player can't pause during transitions
+var can_pause : bool = true
+
+# cursors
+export(String, FILE, "*png") var neutral_cursor
+export(String, FILE, "*png") var manual_cursor
+export(String, FILE, "*png") var item_cursor
+export(String, FILE, "*png") var turret_cursor
+
+var current_cursor : int
+
 # turrets
 signal ammo_reload
 signal fire_rate_doubled
@@ -23,8 +34,27 @@ signal start_wave
 
 # game
 signal game_over
-signal next_level
+signal level_complete
+signal display_rating(value)
 
+func change_game_cursor(cursor_type):
+	current_cursor = cursor_type
+
+	# 40 40 offset to center the designed cursor based on the mouse position
+	match cursor_type:
+		0:
+			Input.set_custom_mouse_cursor(load(neutral_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+		1:	
+			Input.set_custom_mouse_cursor(load(manual_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+		2:
+			Input.set_custom_mouse_cursor(load(item_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+		3:
+			Input.set_custom_mouse_cursor(load(turret_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+		_:
+			print("invalid cursor type")
+
+
+# for game UI
 func display_wave():
 	emit_signal("show_wave", current_wave + 1)
 
@@ -52,5 +82,4 @@ func reset_game_values():
 	self.electric_turret_number = max_electric_turrets
 
 func _ready():
-	print("active")
 	reset_game_values()

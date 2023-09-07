@@ -40,7 +40,6 @@ func place_turret():
 
 func change_cursor():
 	if item.can_place:
-		Input.set_custom_mouse_cursor(load(turret_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+		GameManager.change_game_cursor(3)
 	else:
-		Input.set_custom_mouse_cursor(load(neutral_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
-
+		GameManager.change_game_cursor(0)
