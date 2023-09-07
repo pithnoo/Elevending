@@ -1,4 +1,8 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sounds/switch.wav" type="AudioStream" id=1]
+[ext_resource path="res://Sounds/reload.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sounds/powerUp.wav" type="AudioStream" id=3]
 
 [node name="AudioManager" type="Node"]
 
@@ -9,3 +13,12 @@
 [node name="EnemyHurt" type="AudioStreamPlayer2D" parent="."]
 
 [node name="EnemyDestroyed" type="AudioStreamPlayer2D" parent="."]
+
+[node name="TurretSwitch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[node name="ItemPowerUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Reload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

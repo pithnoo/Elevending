@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
-[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Enemies/Entities/FireMediumGround.tscn" type="PackedScene" id=9]
@@ -23,6 +23,9 @@ font_data = ExtResource( 6 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 17 )
+coin_requirement1 = 2
+coin_requirement2 = 4
+coin_requirement3 = 8
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 192, 108 )

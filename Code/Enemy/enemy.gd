@@ -14,7 +14,6 @@ export(PackedScene) var death_particle
 
 export(int) var maxHealth
 export(int) var enemyDamage
-export(int) var enemyValue
 
 export(float) var follow_speed 
 export(float) var follow_acceleration 
@@ -53,7 +52,7 @@ func _on_Stats_no_health():
 	# signal of enemy's death for wave manager
 	emit_signal("enemy_dead")
 
-	GameManager.game_currency += enemyValue
+	GameManager.game_currency += 1
 
 	queue_free()
 

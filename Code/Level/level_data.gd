@@ -20,6 +20,6 @@ func rate_level():
 		# in any other case, the score exceeds all coin requirements
 		level_rating = 3
 
-	print(level_rating)
+	print("level score: ", level_rating)
 
 	GameManager.emit_signal("display_rating", level_rating)

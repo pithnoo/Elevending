@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://TinyUnicode.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Code/test.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -39,12 +39,12 @@ stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/PlayButton"]
 modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
-margin_left = -2.0
-margin_top = -6.0
-margin_right = 38.0
-margin_bottom = 8.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 46.0
+margin_bottom = 6.0
 custom_fonts/font = SubResource( 3 )
-text = "resume"
+text = "this is menu"
 align = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/PlayButton" to="." method="_on_PlayButton_pressed"]
