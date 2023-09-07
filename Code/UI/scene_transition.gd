@@ -2,6 +2,8 @@ extends CanvasLayer
 
 onready var animations = $AnimationPlayer
 
+signal show_upgrades 
+
 func change_scene(transition_target : String, transition_type : int):
 	match transition_type:
 		1:
@@ -18,19 +20,40 @@ func change_scene(transition_target : String, transition_type : int):
 			print("transition does not exist")
 
 func blind_transition(target : String) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 	animations.play("BlindsTransition")
 	yield(animations, "animation_finished")
+
 	get_tree().change_scene(target)
+
 	animations.play_backwards("BlindsTransition")
+	yield(animations, "animation_finished")
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func upgrade_transition(target : String) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 	animations.play("UpgradeEnter")
 	yield(animations, "animation_finished")
+
 	get_tree().change_scene(target)
 	animations.play("UpgradeExit")
 
+	yield(animations, "animation_finished")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	emit_signal("show_upgrades")
+
 func return_transition(target : String) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 	animations.play("ReturnEnter")
 	yield(animations, "animation_finished")
+
 	get_tree().change_scene(target)
 	animations.play("ReturnExit")
+
+	yield(animations, "animation_finished")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

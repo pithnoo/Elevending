@@ -17,12 +17,16 @@ var game_currency : int = 0 setget set_currency
 signal currency_changed(value)
 
 # for enemy spawn manager
+var current_wave : int = 0
 signal show_wave(value)
 signal start_wave
 
 # game
 signal game_over
 signal next_level
+
+func display_wave():
+	emit_signal("show_wave", current_wave + 1)
 
 func set_currency(value):
 	game_currency = value
@@ -39,7 +43,14 @@ func set_electric(value):
 
 	emit_signal("electric_changed", value)
 
-func _ready():
+# returning to the games menu, values should be reset should the player
+# try again
+func reset_game_values():
+	current_wave = 0
 	self.game_currency = 0
 	self.ground_turret_number = max_ground_turrets
 	self.electric_turret_number = max_electric_turrets
+
+func _ready():
+	print("active")
+	reset_game_values()

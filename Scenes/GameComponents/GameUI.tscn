@@ -42,7 +42,7 @@ visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
-menu = "res://Scenes/GameComponents/UpgradeMenu.tscn"
+menu = "res://Scenes/GameComponents/MainMenu.tscn"
 
 [node name="BlackOverlay" type="ColorRect" parent="PauseMenu"]
 margin_right = 384.0

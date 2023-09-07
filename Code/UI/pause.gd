@@ -10,10 +10,16 @@ func _input(event):
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)
+	var current_pause_state = not get_tree().paused
+	get_tree().paused = current_pause_state
+
 	#SceneTransition.upgrade_transition(menu)
 	#SceneTransition.return_transition(menu)
 
+	GameManager.reset_game_values()
+
 func _on_SettingsButton_pressed():
+	# display settings overlay
 	pass # Replace with function body.
 
 func _on_ResumeButton_pressed():
