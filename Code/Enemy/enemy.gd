@@ -46,6 +46,8 @@ func _physics_process(delta: float) -> void:
   states.physics_process(delta)
 
 func _on_Stats_no_health():
+	AudioManager.play("EnemyDestroyed")
+
 	# instantiate death effect
 	particleGenerator.generate_particle(death_particle, particlePosition)
 

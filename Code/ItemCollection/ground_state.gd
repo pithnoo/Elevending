@@ -5,7 +5,7 @@ onready var electric_state = get_node(electric_node)
 
 func enter() -> void:
 	.enter()
-	#Input.set_custom_mouse_cursor(load(turret_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
+	AudioManager.play("AbilitySwitch")
 
 func process(_delta: float) -> ItemBaseState:
 	if GameManager.ground_turret_number <= 0:

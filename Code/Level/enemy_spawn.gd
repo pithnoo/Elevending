@@ -4,6 +4,9 @@ export(int) var wave_cooldown
 export(Array, NodePath) var spawn_points
 export(Array, String) var wave_codes
 
+export(NodePath) var enemy_holder_node
+onready var enemy_holder = get_node(enemy_holder_node)
+
 var current_enemy : int = 0
 var enemies_to_spawn : int
 
@@ -83,7 +86,7 @@ func spawn(index: int, spawnPoint) -> void:
 	var entity = entities[index].instance()
 	entity.connect("enemy_dead", self, "enemy_down")
 
-	add_child(entity)
+	enemy_holder.add_child(entity)
 	
 	entity.global_position = spawnPoint.global_position
 

@@ -19,6 +19,7 @@ var can_shoot : bool = true
 func enter() -> void:
 	.enter()
 	GameManager.change_game_cursor(2)
+	AudioManager.play("AbilitySwitch")
 
 func process(_delta : float) -> ItemBaseState:
 
@@ -38,6 +39,7 @@ func process(_delta : float) -> ItemBaseState:
 
 # for item collection
 func shoot_item():
+	AudioManager.play("ItemCollect")
 	item.animations.play(animation_name)
 
 	var projectile = item_to_shoot.instance()
@@ -65,12 +67,15 @@ func shoot_item():
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectile_angle))
 
 func level_heal():
+	AudioManager.play("ItemPowerUp")
 	CoreStats.health += heal_amount
 
 func level_ammo():
+	AudioManager.play("Reload")
 	GameManager.emit_signal("ammo_reload")
 
 func level_shoot():
+	AudioManager.play("ItemPowerUp")
 	GameManager.emit_signal("fire_rate_doubled")
 
 func reset_shot():

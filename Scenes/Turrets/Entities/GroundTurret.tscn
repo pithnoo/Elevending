@@ -69,9 +69,12 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.85 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.45, 1.85 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "turret_slam"
+}, {
 "args": [  ],
 "method": "attack_finished"
 } ]
@@ -201,7 +204,6 @@ anims/RESET = SubResource( 11 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]

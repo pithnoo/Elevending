@@ -281,6 +281,7 @@ script = ExtResource( 6 )
 animation_name = "Start"
 idle_node = NodePath("../Idle")
 empty_node = NodePath("../Empty")
+will_place = true
 
 [node name="FirePoint" type="Position2D" parent="."]
 position = Vector2( 0, 13 )

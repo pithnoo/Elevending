@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/switch.wav-114378a718710d742d149d6cf1a6b6ce.sample"
+path="res://.import/shutter.wav-04fd791910794c59b9123bcb05cd084c.sample"
 
 [deps]
 
-source_file="res://Sounds/switch.wav"
-dest_files=[ "res://.import/switch.wav-114378a718710d742d149d6cf1a6b6ce.sample" ]
+source_file="res://Sounds/SFX/shutter.wav"
+dest_files=[ "res://.import/shutter.wav-04fd791910794c59b9123bcb05cd084c.sample" ]
 
 [params]
 

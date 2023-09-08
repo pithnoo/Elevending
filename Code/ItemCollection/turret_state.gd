@@ -30,7 +30,7 @@ func place_turret():
 	var turret = turret_to_place.instance()
 	var main = get_tree().current_scene
 
-	main.add_child(turret)
+	item.turret_holder.add_child(turret)
 	main.add_child(effect)
 
 	var turret_position = get_viewport().get_mouse_position()

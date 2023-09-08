@@ -38,13 +38,13 @@ smoothing_enabled = true
 
 [node name="ShopScreen" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 58, 40 )
-wave_spawner_node = NodePath("../../EnemySpawnZone")
+wave_spawner_node = NodePath("../../YSort/EnemySpawnZone")
 starting_animation = "StatsIdle"
 idle_animation = "WaveIdleLeft"
 
 [node name="ShopScreen2" parent="LevelUI" instance=ExtResource( 16 )]
 position = Vector2( 328, 40 )
-wave_spawner_node = NodePath("../../EnemySpawnZone")
+wave_spawner_node = NodePath("../../YSort/EnemySpawnZone")
 starting_animation = "TurretIdle"
 idle_animation = "WaveIdleRight"
 
@@ -119,44 +119,52 @@ valign = 1
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Entities" type="YSort" parent="YSort"]
+[node name="EnemySpawnZone" type="Node2D" parent="YSort"]
+script = ExtResource( 1 )
+spawn_cooldown = 1
+entities = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ]
+wave_cooldown = 3
+spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
+wave_codes = [ "0000", "1111" ]
+enemy_holder_node = NodePath("../EntityHolder/EnemyHolder")
 
-[node name="Core" parent="YSort/Entities" instance=ExtResource( 8 )]
-position = Vector2( 195, 0 )
+[node name="WaveTimer" type="Timer" parent="YSort/EnemySpawnZone"]
+one_shot = true
 
-[node name="CollectionStation" parent="YSort/Entities" instance=ExtResource( 13 )]
-position = Vector2( 192, 68 )
+[node name="SpawnTimer" type="Timer" parent="YSort/EnemySpawnZone"]
+one_shot = true
 
-[node name="Turrets" type="Node2D" parent="YSort/Entities"]
+[node name="SpawnPoints" type="Node2D" parent="YSort/EnemySpawnZone"]
 
-[node name="TurretManager" parent="YSort/Entities/Turrets" instance=ExtResource( 15 )]
-position = Vector2( 128, 64 )
-other_turret = NodePath("../TurretManager2")
-turretInput = "turret1"
-manualInput = "manual1"
-resetInput = "reset"
-itemInput = "item"
-maxAmmo = 20
+[node name="Spawn1" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 32, 232 )
 
-[node name="TurretManager2" parent="YSort/Entities/Turrets" instance=ExtResource( 15 )]
-position = Vector2( 256, 64 )
-other_turret = NodePath("../TurretManager")
-turretInput = "turret2"
-manualInput = "manual2"
-resetInput = "reset"
-itemInput = "item"
-maxAmmo = 20
+[node name="Spawn2" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 96, 232 )
 
-[node name="ItemSpawnZone" type="Node2D" parent="."]
+[node name="Spawn3" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 160, 232 )
+
+[node name="Spawn4" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 224, 232 )
+
+[node name="Spawn5" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 288, 232 )
+
+[node name="Spawn6" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+position = Vector2( 352, 232 )
+
+[node name="ItemSpawnZone" type="Node2D" parent="YSort"]
 script = ExtResource( 5 )
 spawn_cooldown = 3
 entities = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
+item_holder_node = NodePath("../EntityHolder/ItemHolder")
 crates_before_reload = 5
 max_existing_items = 20
 distance_between_items = 30.0
 wave_spawn_node = NodePath("../EnemySpawnZone")
 
-[node name="SpawnArea" type="ReferenceRect" parent="ItemSpawnZone"]
+[node name="SpawnArea" type="ReferenceRect" parent="YSort/ItemSpawnZone"]
 margin_left = 65.0
 margin_top = 88.0
 margin_right = 315.0
@@ -166,41 +174,42 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="SpawnTimer" type="Timer" parent="ItemSpawnZone"]
+[node name="SpawnTimer" type="Timer" parent="YSort/ItemSpawnZone"]
 one_shot = true
 
-[node name="ItemSpawnPosition" type="Position2D" parent="ItemSpawnZone"]
+[node name="ItemSpawnPosition" type="Position2D" parent="YSort/ItemSpawnZone"]
 
-[node name="EnemySpawnZone" type="Node2D" parent="."]
-script = ExtResource( 1 )
-spawn_cooldown = 1
-entities = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ]
-wave_cooldown = 3
-spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_codes = [ "0000", "1111" ]
+[node name="Core" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 195, 0 )
 
-[node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
-one_shot = true
+[node name="CollectionStation" parent="YSort" instance=ExtResource( 13 )]
+position = Vector2( 192, 68 )
+turret_holder_node = NodePath("../EntityHolder/TurretHolder")
 
-[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone"]
-one_shot = true
+[node name="Turrets" type="Node2D" parent="YSort"]
 
-[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone"]
+[node name="TurretManager" parent="YSort/Turrets" instance=ExtResource( 15 )]
+position = Vector2( 128, 64 )
+other_turret = NodePath("../TurretManager2")
+turretInput = "turret1"
+manualInput = "manual1"
+resetInput = "reset"
+itemInput = "item"
+maxAmmo = 20
 
-[node name="Spawn1" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 32, 232 )
+[node name="TurretManager2" parent="YSort/Turrets" instance=ExtResource( 15 )]
+position = Vector2( 256, 64 )
+other_turret = NodePath("../TurretManager")
+turretInput = "turret2"
+manualInput = "manual2"
+resetInput = "reset"
+itemInput = "item"
+maxAmmo = 20
 
-[node name="Spawn2" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 96, 232 )
+[node name="EntityHolder" type="YSort" parent="YSort"]
 
-[node name="Spawn3" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 160, 232 )
+[node name="TurretHolder" type="Node2D" parent="YSort/EntityHolder"]
 
-[node name="Spawn4" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 224, 232 )
+[node name="EnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
 
-[node name="Spawn5" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 288, 232 )
-
-[node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
-position = Vector2( 352, 232 )
+[node name="ItemHolder" type="Node2D" parent="YSort/EntityHolder"]

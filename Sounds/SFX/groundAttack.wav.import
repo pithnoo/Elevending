@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/powerUp.wav-64769d09fb746ae54f1d493b9db6d360.sample"
+path="res://.import/groundAttack.wav-72ca1eeb22cb0d1fc0aa3145a994d527.sample"
 
 [deps]
 
-source_file="res://Sounds/powerUp.wav"
-dest_files=[ "res://.import/powerUp.wav-64769d09fb746ae54f1d493b9db6d360.sample" ]
+source_file="res://Sounds/SFX/groundAttack.wav"
+dest_files=[ "res://.import/groundAttack.wav-72ca1eeb22cb0d1fc0aa3145a994d527.sample" ]
 
 [params]
 

@@ -22,6 +22,7 @@ func change_scene(transition_target : String, transition_type : int):
 """
 
 func blind_transition(target : String) -> void:
+	AudioManager.play("BlindTransition")
 	GameManager.can_pause = false
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

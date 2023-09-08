@@ -15,6 +15,7 @@ export(PackedScene) var projectileEffect
 func enter() -> void:
 	.enter()
 	get_node(manual_effect).visible = true
+	AudioManager.play("TurretPlace")
 
 func process(delta: float) -> TurretBaseState:
 
@@ -32,6 +33,7 @@ func process(delta: float) -> TurretBaseState:
 	return null
 
 func shoot(target):
+	AudioManager.play("ManualShoot")
 	if turret.decreaseAmmo:
 		turret.ammo -= 1
 

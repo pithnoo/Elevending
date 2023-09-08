@@ -4,6 +4,9 @@ extends Node
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
 
+export(NodePath) var turret_holder_node
+onready var turret_holder = get_node(turret_holder_node)
+
 # input tests
 export(String) var item_input
 export(String) var turret_input1

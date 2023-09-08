@@ -31,6 +31,7 @@ func process(_delta: float) -> TurretBaseState:
 	return null
 
 func shoot(target):
+	AudioManager.play("Shoot")
 	if turret.decreaseAmmo:
 		turret.ammo -= 1
 

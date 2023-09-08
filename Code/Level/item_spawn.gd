@@ -1,5 +1,8 @@
 extends SpawnPoint 
 
+export(NodePath) var item_holder_node
+onready var item_holder = get_node(item_holder_node)
+
 export(int) var crates_before_reload 
 var items_since_reload: int = 0
 
@@ -63,7 +66,7 @@ func spawn(index : int, spawnPoint) -> void:
 	var entity = entities[index].instance()
 	entity.connect("used", self, "item_used")	
 
-	add_child(entity)
+	item_holder.add_child(entity)
 
 	entity.global_position = spawnPoint
 
