@@ -72,4 +72,5 @@ func _on_HurtBox_enemy_stunned():
 	is_stunned = true
 
 func _on_CoreHitBox_collided():
+	AudioManager.play("EnemyDestroyed")
 	emit_signal("enemy_dead")

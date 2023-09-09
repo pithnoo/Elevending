@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Code/screen_shake.gd" type="Script" id=1]
+
+[node name="ScreenShake" type="Node"]
+script = ExtResource( 1 )
+noise_shake_speed = 30.0
+noise_shake_strength = 5.0
+random_shake_strength = 30.0
+shake_decay_rate = 60.0

@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Art/Level/blindsTransition1.png" type="Texture" id=1]
 [ext_resource path="res://Code/UI/scene_transition.gd" type="Script" id=2]
+[ext_resource path="res://Art/Level/blindsTransition2.png" type="Texture" id=3]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/DestroyedParticle.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=9]
 resource_name = "BlindsTransition"
@@ -16,6 +20,51 @@ tracks/0/keys = {
 "transitions": PoolRealArray( -2, -4, -2 ),
 "update": 0,
 "values": [ Vector2( -6, -296 ), Vector2( -6, -40 ), Vector2( -6, -56 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "GameOver"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOver:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( -8, -296 ), Vector2( -8, -10 ), Vector2( -8, -30 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "game_over_effect"
+} ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "GameReturn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOver:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( -8, -296 ), Vector2( -8, 0 ), Vector2( -8, -30 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -55,6 +104,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 384, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GameOver:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -8, -296 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -117,10 +178,58 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 384, 0 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 114, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 133, 0, 19, 13 )
+
 [node name="SceneTransition" type="CanvasLayer"]
 pause_mode = 2
-layer = 2
+follow_viewport_enable = true
 script = ExtResource( 2 )
+particle_position_node = NodePath("GameOver/ParticlePosiiton")
+destroy_effect = ExtResource( 6 )
+
+[node name="ScreenShake" parent="." instance=ExtResource( 5 )]
+noise_shake_strength = 60.0
+shake_decay_rate = 3.0
+camera_node = NodePath("../TransitionCamera")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BlindsTransition = SubResource( 9 )
+anims/GameOver = SubResource( 15 )
+anims/GameReturn = SubResource( 18 )
+anims/RESET = SubResource( 10 )
+anims/ReturnEnter = SubResource( 12 )
+anims/ReturnExit = SubResource( 14 )
+anims/UpgradeEnter = SubResource( 11 )
+anims/UpgradeExit = SubResource( 13 )
+
+[node name="GameOver" type="TextureRect" parent="."]
+margin_left = -8.0
+margin_top = -296.0
+margin_right = 92.0
+margin_bottom = -223.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+
+[node name="MenuReturn" type="TextureButton" parent="GameOver"]
+margin_left = 36.5
+margin_top = 32.25
+margin_right = 62.5
+margin_bottom = 52.25
+texture_normal = SubResource( 16 )
+texture_hover = SubResource( 17 )
+expand = true
+stretch_mode = 3
+
+[node name="ParticlePosiiton" type="Position2D" parent="GameOver"]
+position = Vector2( 50, -38 )
 
 [node name="Blinds" type="TextureRect" parent="."]
 margin_left = -8.0
@@ -133,21 +242,22 @@ expand = true
 stretch_mode = 4
 
 [node name="UpgradeTransition" type="ColorRect" parent="."]
+visible = false
 margin_left = -384.0
 margin_right = 0.00012207
 margin_bottom = 216.0
 color = Color( 0.901961, 0.564706, 0.305882, 1 )
 
 [node name="ReturnTransition" type="ColorRect" parent="."]
+visible = false
 margin_left = 384.0
 margin_right = 767.998
 margin_bottom = 216.0
 color = Color( 0.180392, 0.133333, 0.184314, 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BlindsTransition = SubResource( 9 )
-anims/RESET = SubResource( 10 )
-anims/ReturnEnter = SubResource( 12 )
-anims/ReturnExit = SubResource( 14 )
-anims/UpgradeEnter = SubResource( 11 )
-anims/UpgradeExit = SubResource( 13 )
+[node name="TransitionCamera" type="Camera2D" parent="."]
+position = Vector2( 192, 108 )
+current = true
+smoothing_enabled = true
+
+[connection signal="pressed" from="GameOver/MenuReturn" to="." method="_on_MenuReturn_pressed"]

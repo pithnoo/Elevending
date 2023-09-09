@@ -1,25 +1,26 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
-[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/Entities/GrassMediumGround.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Enemies/Entities/FireMediumGround.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/Entities/FireMediumAir.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Enemies/Entities/WaterMediumGround.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Art/Level/complete.png" type="Texture" id=16]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=17]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=18]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 6 )
+font_data = ExtResource( 18 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 17 )
@@ -27,144 +28,68 @@ coin_requirement1 = 2
 coin_requirement2 = 4
 coin_requirement3 = 8
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="ScreenShake" parent="." instance=ExtResource( 12 )]
+pause_mode = 2
+noise_shake_strength = 60.0
+shake_decay_rate = 3.0
+camera_node = NodePath("../LevelCamera")
+
+[node name="LevelCamera" type="Camera2D" parent="."]
+pause_mode = 2
 position = Vector2( 192, 108 )
 current = true
 smoothing_enabled = true
 
 [node name="GameUI" parent="." instance=ExtResource( 14 )]
 
-[node name="LevelUI" type="Node2D" parent="."]
+[node name="LevelUI" parent="." instance=ExtResource( 6 )]
 
-[node name="ShopScreen" parent="LevelUI" instance=ExtResource( 16 )]
-position = Vector2( 58, 40 )
-wave_spawner_node = NodePath("../../YSort/EnemySpawnZone")
-starting_animation = "StatsIdle"
-idle_animation = "WaveIdleLeft"
-
-[node name="ShopScreen2" parent="LevelUI" instance=ExtResource( 16 )]
-position = Vector2( 328, 40 )
-wave_spawner_node = NodePath("../../YSort/EnemySpawnZone")
-starting_animation = "TurretIdle"
-idle_animation = "WaveIdleRight"
-
-[node name="StatsUI" type="Control" parent="LevelUI"]
-margin_left = 320.0
-margin_top = 96.0
-margin_right = 360.0
-margin_bottom = 136.0
-script = ExtResource( 12 )
-
-[node name="Health" type="Label" parent="LevelUI/StatsUI"]
-margin_left = -245.0
-margin_top = -67.0
-margin_right = -207.0
-margin_bottom = -38.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="Currency" type="Label" parent="LevelUI/StatsUI"]
-margin_left = -245.0
-margin_top = -51.0
-margin_right = -207.0
-margin_bottom = -25.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="ElectricTurretNumber" type="Label" parent="LevelUI/StatsUI"]
-margin_left = -34.0
-margin_top = -66.0
-margin_right = 4.0
-margin_bottom = -40.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="GroundTurretNumber" type="Label" parent="LevelUI/StatsUI"]
-margin_left = -34.0
-margin_top = -51.0
-margin_right = 4.0
-margin_bottom = -25.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="Wave1" type="Label" parent="LevelUI/StatsUI"]
-visible = false
-margin_left = -252.0
-margin_top = -61.0
-margin_right = -214.0
-margin_bottom = -32.0
-custom_fonts/font = SubResource( 1 )
-text = "WAVE 1"
-align = 1
-valign = 1
-
-[node name="Wave2" type="Label" parent="LevelUI/StatsUI"]
-visible = false
-margin_left = -40.0
-margin_top = -61.0
-margin_right = -2.0
-margin_bottom = -32.0
-custom_fonts/font = SubResource( 1 )
-text = "WAVE 1"
-align = 1
-valign = 1
-
-[node name="YSort" type="YSort" parent="."]
-
-[node name="EnemySpawnZone" type="Node2D" parent="YSort"]
+[node name="EnemySpawnZone" type="Node2D" parent="."]
 script = ExtResource( 1 )
 spawn_cooldown = 1
 entities = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_codes = [ "0000", "1111" ]
-enemy_holder_node = NodePath("../EntityHolder/EnemyHolder")
+wave_codes = [ "33333333" ]
+enemy_holder_node = NodePath("../YSort/EntityHolder/EnemyHolder")
 
-[node name="WaveTimer" type="Timer" parent="YSort/EnemySpawnZone"]
+[node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
 one_shot = true
 
-[node name="SpawnTimer" type="Timer" parent="YSort/EnemySpawnZone"]
+[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone"]
 one_shot = true
 
-[node name="SpawnPoints" type="Node2D" parent="YSort/EnemySpawnZone"]
+[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone"]
 
-[node name="Spawn1" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn1" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 32, 232 )
 
-[node name="Spawn2" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn2" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 96, 232 )
 
-[node name="Spawn3" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn3" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 160, 232 )
 
-[node name="Spawn4" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn4" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 224, 232 )
 
-[node name="Spawn5" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn5" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 288, 232 )
 
-[node name="Spawn6" type="Position2D" parent="YSort/EnemySpawnZone/SpawnPoints"]
+[node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
 position = Vector2( 352, 232 )
 
-[node name="ItemSpawnZone" type="Node2D" parent="YSort"]
+[node name="ItemSpawnZone" type="Node2D" parent="."]
 script = ExtResource( 5 )
 spawn_cooldown = 3
 entities = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
-item_holder_node = NodePath("../EntityHolder/ItemHolder")
+item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 crates_before_reload = 5
 max_existing_items = 20
 distance_between_items = 30.0
 wave_spawn_node = NodePath("../EnemySpawnZone")
 
-[node name="SpawnArea" type="ReferenceRect" parent="YSort/ItemSpawnZone"]
+[node name="SpawnArea" type="ReferenceRect" parent="ItemSpawnZone"]
 margin_left = 65.0
 margin_top = 88.0
 margin_right = 315.0
@@ -174,17 +99,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="SpawnTimer" type="Timer" parent="YSort/ItemSpawnZone"]
+[node name="SpawnTimer" type="Timer" parent="ItemSpawnZone"]
 one_shot = true
 
-[node name="ItemSpawnPosition" type="Position2D" parent="YSort/ItemSpawnZone"]
+[node name="ItemSpawnPosition" type="Position2D" parent="ItemSpawnZone"]
+
+[node name="YSort" type="YSort" parent="."]
 
 [node name="Core" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 195, 0 )
-
-[node name="CollectionStation" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( 192, 68 )
-turret_holder_node = NodePath("../EntityHolder/TurretHolder")
 
 [node name="Turrets" type="Node2D" parent="YSort"]
 
@@ -206,10 +129,37 @@ resetInput = "reset"
 itemInput = "item"
 maxAmmo = 20
 
+[node name="CollectionStation" parent="YSort/Turrets" instance=ExtResource( 13 )]
+position = Vector2( 192, 68 )
+turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
+
 [node name="EntityHolder" type="YSort" parent="YSort"]
 
 [node name="TurretHolder" type="Node2D" parent="YSort/EntityHolder"]
 
+[node name="ItemHolder" type="Node2D" parent="YSort/EntityHolder"]
+
 [node name="EnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
 
-[node name="ItemHolder" type="Node2D" parent="YSort/EntityHolder"]
+[node name="Complete" type="Sprite" parent="."]
+position = Vector2( 192, 106 )
+texture = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="Complete"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = 1.0
+margin_right = 40.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 1 )
+text = "next level"
+
+[node name="Label2" type="Label" parent="Complete"]
+visible = false
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -33.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 1 )
+text = "menu"
