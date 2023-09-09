@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
@@ -15,12 +15,7 @@
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Art/Level/complete.png" type="Texture" id=16]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=17]
-[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=18]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 18 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 17 )
@@ -140,26 +135,3 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="ItemHolder" type="Node2D" parent="YSort/EntityHolder"]
 
 [node name="EnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
-
-[node name="Complete" type="Sprite" parent="."]
-position = Vector2( 192, 106 )
-texture = ExtResource( 16 )
-
-[node name="Label" type="Label" parent="Complete"]
-modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
-margin_left = -2.0
-margin_top = 1.0
-margin_right = 40.0
-margin_bottom = 15.0
-custom_fonts/font = SubResource( 1 )
-text = "next level"
-
-[node name="Label2" type="Label" parent="Complete"]
-visible = false
-modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
-margin_left = -33.0
-margin_top = 1.0
-margin_right = 9.0
-margin_bottom = 15.0
-custom_fonts/font = SubResource( 1 )
-text = "menu"

@@ -1,9 +1,36 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Code/UI/pause.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Art/Level/PauseMenu.png" type="Texture" id=4]
+[ext_resource path="res://Art/Level/complete.png" type="Texture" id=5]
+[ext_resource path="res://Art/Level/note.png" type="Texture" id=6]
+[ext_resource path="res://Art/Level/noteEmpty.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 114, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 133, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 2 )
+
+[sub_resource type="AtlasTexture" id=11]
+resource_local_to_scene = true
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=12]
+resource_local_to_scene = true
+atlas = ExtResource( 3 )
+region = Rect2( 19, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=14]
+font_data = ExtResource( 2 )
 
 [sub_resource type="AtlasTexture" id=2]
 resource_local_to_scene = true
@@ -46,6 +73,75 @@ margin_right = 384.0
 margin_bottom = 216.0
 color = Color( 0, 0, 0, 0.509804 )
 
+[node name="Complete" type="TextureRect" parent="CompleteMenu"]
+margin_left = 115.0
+margin_top = 67.0
+margin_right = 272.0
+margin_bottom = 164.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 4
+
+[node name="NoteUIEmpty" type="TextureRect" parent="CompleteMenu/Complete"]
+margin_left = 36.0
+margin_top = 32.0
+margin_right = 123.0
+margin_bottom = 54.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 2
+
+[node name="NoteUIFull" type="TextureRect" parent="CompleteMenu/Complete"]
+margin_left = 36.0
+margin_top = 32.0
+margin_right = 123.0
+margin_bottom = 54.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 2
+
+[node name="MenuButton" type="TextureButton" parent="CompleteMenu/Complete"]
+margin_left = 40.0
+margin_top = 56.0
+margin_right = 75.0
+margin_bottom = 94.0
+texture_normal = SubResource( 9 )
+texture_hover = SubResource( 10 )
+expand = true
+stretch_mode = 3
+
+[node name="MenuLabel" type="Label" parent="CompleteMenu/Complete"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = 38.0
+margin_top = 52.0
+margin_right = 78.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 13 )
+text = "menu"
+align = 1
+
+[node name="ResumeButton" type="TextureButton" parent="CompleteMenu/Complete"]
+margin_left = 80.0
+margin_top = 56.0
+margin_right = 115.0
+margin_bottom = 94.0
+texture_normal = SubResource( 11 )
+texture_hover = SubResource( 12 )
+expand = true
+stretch_mode = 3
+
+[node name="NextLabel" type="Label" parent="CompleteMenu/Complete"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = 78.0
+margin_top = 52.0
+margin_right = 120.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 14 )
+text = "next level"
+align = 1
+
+[node name="Tween" type="Tween" parent="CompleteMenu"]
+
 [node name="PauseMenu" type="Control" parent="."]
 pause_mode = 2
 visible = false
@@ -79,6 +175,26 @@ expand = true
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="PauseMenu/PauseOverlay/ResumeButton"]
+modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
+margin_left = -2.0
+margin_top = -6.0
+margin_right = 38.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 8 )
+text = "resume"
+align = 1
+
+[node name="ResumeButton2" type="TextureButton" parent="PauseMenu/PauseOverlay"]
+margin_left = 8.0
+margin_top = 31.0
+margin_right = 43.0
+margin_bottom = 69.0
+texture_normal = SubResource( 2 )
+texture_hover = SubResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="PauseMenu/PauseOverlay/ResumeButton2"]
 modulate = Color( 0.901961, 0.564706, 0.305882, 1 )
 margin_left = -2.0
 margin_top = -6.0
@@ -131,5 +247,6 @@ align = 1
 [node name="Tween" type="Tween" parent="PauseMenu"]
 
 [connection signal="pressed" from="PauseMenu/PauseOverlay/ResumeButton" to="PauseMenu" method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="PauseMenu/PauseOverlay/ResumeButton2" to="PauseMenu" method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseMenu/PauseOverlay/SettingsButton" to="PauseMenu" method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="PauseMenu/PauseOverlay/MenuButton" to="PauseMenu" method="_on_MenuButton_pressed"]
