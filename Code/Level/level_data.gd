@@ -1,11 +1,15 @@
 extends Node2D
 
-export(int) var level_index
+export(String, FILE, "*.tscn,*.scn") var next_level
+
+export(int) var level_number
+onready var level_index = level_number - 1
+
 export(int) var coin_requirement1
 export(int) var coin_requirement2
 export(int) var coin_requirement3
 
-var current_level_rating : int
+var previous_level_rating : int
 var level_rating : int
 
 # bool to check if the level already has a rating
@@ -14,10 +18,11 @@ var has_rating : bool
 onready var level_camera = $LevelCamera
 
 func _ready():
+	LevelManager.connect("next_level", self, "goto_next_level")
 	# if the level already has a rating, then the size of the array
 	# should be equal to the array index
 	if LevelManager.level_ratings.size() > level_index:
-		current_level_rating = LevelManager.level_ratings[level_index]
+		previous_level_rating = LevelManager.level_ratings[level_index]
 		has_rating = true
 	else:
 		has_rating = false
@@ -43,13 +48,21 @@ func rate_level():
 
 	# if the levels rating is higher than what is currently saved
 	# write new value rating
-	if has_rating && level_rating > current_level_rating:
+	if has_rating && level_rating > previous_level_rating:
 		LevelManager.level_ratings[level_index] = level_rating
-
 		print("rewritten")
-	else:
+	elif !has_rating:
 		LevelManager.level_ratings.append(level_rating)
 
-	print(LevelManager.level_ratings)
+	if level_index > LevelManager.levels_unlocked:
+		LevelManager.levels_unlocked = level_index
+		#print(LevelManager.levels_unlocked)
+
+	#print(LevelManager.level_ratings)
 
 	GameManager.emit_signal("display_rating", level_rating)
+
+func goto_next_level():
+	# transition to next level
+	GameManager.reset_game_values()
+	SceneTransition.blind_transition(next_level)

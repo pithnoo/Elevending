@@ -7,7 +7,7 @@
 [ext_resource path="res://Art/Level/complete.png" type="Texture" id=5]
 [ext_resource path="res://Art/Level/note.png" type="Texture" id=6]
 [ext_resource path="res://Art/Level/noteEmpty.png" type="Texture" id=7]
-[ext_resource path="res://Code/CompleteMenu.gd" type="Script" id=8]
+[ext_resource path="res://Code/complete_menu.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=15]
 resource_name = "Complete"

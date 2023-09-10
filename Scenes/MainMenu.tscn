@@ -44,7 +44,7 @@ margin_top = -8.0
 margin_right = 46.0
 margin_bottom = 6.0
 custom_fonts/font = SubResource( 3 )
-text = "this is menu"
+text = "this is menu 1 2 3 4"
 align = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/PlayButton" to="." method="_on_PlayButton_pressed"]

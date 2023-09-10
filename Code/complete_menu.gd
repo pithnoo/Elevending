@@ -45,7 +45,7 @@ func _ready():
 	GameManager.connect("display_rating", self, "set_notes")
 
 func _on_NextButton_pressed():
-	pass # Replace with function body.
+	LevelManager.emit_signal("next_level")
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)
