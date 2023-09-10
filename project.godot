@@ -73,6 +73,16 @@ _global_script_classes=[ {
 "class": "TurretBaseState",
 "language": "GDScript",
 "path": "res://Code/Turret/turret_base_state.gd"
+}, {
+"base": "Resource",
+"class": "game",
+"language": "GDScript",
+"path": "res://Resources/ResourceCode/game.gd"
+}, {
+"base": "Resource",
+"class": "level",
+"language": "GDScript",
+"path": "res://Resources/ResourceCode/level.gd"
 } ]
 _global_script_class_icons={
 "BaseState": "",
@@ -87,13 +97,15 @@ _global_script_class_icons={
 "Player": "",
 "SpawnPoint": "",
 "Turret": "",
-"TurretBaseState": ""
+"TurretBaseState": "",
+"game": "",
+"level": ""
 }
 
 [application]
 
 config/name="Elevending"
-run/main_scene="res://Scenes/Level.tscn"
+run/main_scene="res://Scenes/Levels/Level1.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
@@ -103,6 +115,7 @@ CoreStats="*res://Scenes/GameComponents/CoreStats.tscn"
 GameManager="*res://Scenes/GameComponents/GameManager.tscn"
 AudioManager="*res://Scenes/GameComponents/AudioManager.tscn"
 SceneTransition="*res://Scenes/GameComponents/SceneTransition.tscn"
+LevelManager="*res://Code/Level/level_manager.gd"
 
 [debug]
 

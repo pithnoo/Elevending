@@ -82,9 +82,9 @@ valign = 1
 
 [node name="Wave2" type="Label" parent="StatsUI"]
 visible = false
-margin_left = -40.0
+margin_left = -41.0
 margin_top = -61.0
-margin_right = -2.0
+margin_right = -3.0
 margin_bottom = -32.0
 custom_fonts/font = SubResource( 1 )
 text = "WAVE 1"

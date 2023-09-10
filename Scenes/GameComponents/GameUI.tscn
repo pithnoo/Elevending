@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Code/UI/pause.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,38 @@
 [ext_resource path="res://Art/Level/complete.png" type="Texture" id=5]
 [ext_resource path="res://Art/Level/note.png" type="Texture" id=6]
 [ext_resource path="res://Art/Level/noteEmpty.png" type="Texture" id=7]
+[ext_resource path="res://Code/CompleteMenu.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=15]
+resource_name = "Complete"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Complete:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 115, -107 ), Vector2( 115, 80 ), Vector2( 115, 67 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Complete:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 115, -107 ) ]
+}
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
@@ -64,9 +96,22 @@ region = Rect2( 133, 0, 19, 13 )
 [node name="GameUI" type="CanvasLayer"]
 
 [node name="CompleteMenu" type="Control" parent="."]
+pause_mode = 2
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 8 )
+menu = "res://Scenes/MainMenu.tscn"
+time_till_display = 2.0
+notes_UI_empty_node = NodePath("Complete/NoteUIEmpty")
+notes_UI_full_node = NodePath("Complete/NoteUIFull")
+
+[node name="Timer" type="Timer" parent="CompleteMenu"]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CompleteMenu"]
+anims/Complete = SubResource( 15 )
+anims/RESET = SubResource( 16 )
 
 [node name="BlackOverlay" type="ColorRect" parent="CompleteMenu"]
 margin_right = 384.0
@@ -75,9 +120,9 @@ color = Color( 0, 0, 0, 0.509804 )
 
 [node name="Complete" type="TextureRect" parent="CompleteMenu"]
 margin_left = 115.0
-margin_top = 67.0
+margin_top = -107.0
 margin_right = 272.0
-margin_bottom = 164.0
+margin_bottom = -10.0001
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 4
@@ -101,9 +146,9 @@ expand = true
 stretch_mode = 2
 
 [node name="MenuButton" type="TextureButton" parent="CompleteMenu/Complete"]
-margin_left = 40.0
+margin_left = 39.0
 margin_top = 56.0
-margin_right = 75.0
+margin_right = 74.0
 margin_bottom = 94.0
 texture_normal = SubResource( 9 )
 texture_hover = SubResource( 10 )
@@ -120,7 +165,7 @@ custom_fonts/font = SubResource( 13 )
 text = "menu"
 align = 1
 
-[node name="ResumeButton" type="TextureButton" parent="CompleteMenu/Complete"]
+[node name="NextButton" type="TextureButton" parent="CompleteMenu/Complete"]
 margin_left = 80.0
 margin_top = 56.0
 margin_right = 115.0
@@ -139,8 +184,6 @@ margin_bottom = 66.0
 custom_fonts/font = SubResource( 14 )
 text = "next level"
 align = 1
-
-[node name="Tween" type="Tween" parent="CompleteMenu"]
 
 [node name="PauseMenu" type="Control" parent="."]
 pause_mode = 2
@@ -244,8 +287,8 @@ custom_fonts/font = SubResource( 8 )
 text = "menu"
 align = 1
 
-[node name="Tween" type="Tween" parent="PauseMenu"]
-
+[connection signal="pressed" from="CompleteMenu/Complete/MenuButton" to="CompleteMenu" method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="CompleteMenu/Complete/NextButton" to="CompleteMenu" method="_on_NextButton_pressed"]
 [connection signal="pressed" from="PauseMenu/PauseOverlay/ResumeButton" to="PauseMenu" method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseMenu/PauseOverlay/ResumeButton2" to="PauseMenu" method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseMenu/PauseOverlay/SettingsButton" to="PauseMenu" method="_on_SettingsButton_pressed"]

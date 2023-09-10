@@ -16,6 +16,7 @@ signal ammo_reload
 signal fire_rate_doubled
 var is_manual : bool = false
 
+# in game values to be set in ui
 export(int) var max_ground_turrets
 export(int) var max_electric_turrets
 onready var ground_turret_number setget set_ground
@@ -27,14 +28,18 @@ signal electric_changed(value)
 var game_currency : int = 0 setget set_currency
 signal currency_changed(value)
 
-# for enemy spawn manager
+# for enemy spawn manager to display wave
 var current_wave : int = 0
 signal show_wave(value)
 signal start_wave
 
-# game
+# for level transition, so that game over transition can play
 signal game_over
+
+# for enemy spawn manager, to show all waves spawned
 signal level_complete
+
+# for complete UI
 signal display_rating(value)
 
 func change_game_cursor(cursor_type):
@@ -52,7 +57,6 @@ func change_game_cursor(cursor_type):
 			Input.set_custom_mouse_cursor(load(turret_cursor), Input.CURSOR_ARROW, Vector2(40, 40))
 		_:
 			print("invalid cursor type")
-
 
 # for game UI
 func display_wave():

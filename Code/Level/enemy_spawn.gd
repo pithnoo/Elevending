@@ -66,8 +66,6 @@ func _process(delta):
 
 				waveTimer.start(wave_cooldown)
 
-				#GameManager.emit_signal("show_wave", current_wave + 1)
-
 				GameManager.display_wave()
 
 				can_items_spawn = false
