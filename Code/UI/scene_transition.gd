@@ -116,7 +116,7 @@ func game_over_effect() -> void:
 	particle_position.add_child(effect)
 	effect.global_position = particle_position.global_position
 
-func _on_MenuReturn_pressed():
+func _on_MenuButton_pressed():
 	animations.play_backwards("GameReturn")
 	can_press = false
 
