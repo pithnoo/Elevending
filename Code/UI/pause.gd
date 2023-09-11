@@ -21,12 +21,13 @@ func _on_MenuButton_pressed():
 	GameManager.reset_game_values()
 
 func _on_SettingsButton_pressed():
-	# display settings overlay
-	pass
+	AudioManager.play("ButtonPress")
+	GameManager.emit_signal("show_sound_settings")
 
 func _on_ResumeButton_pressed():
 	var current_pause_state = not get_tree().paused
 	get_tree().paused = current_pause_state
 	visible = current_pause_state
 
+	AudioManager.play("ButtonPress")
 	GameManager.change_game_cursor(cursor_buffer)

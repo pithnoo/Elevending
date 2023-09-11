@@ -42,6 +42,9 @@ signal level_complete
 # for complete UI
 signal display_rating(value)
 
+# for sound menu
+signal show_sound_settings
+
 func change_game_cursor(cursor_type):
 	current_cursor = cursor_type
 

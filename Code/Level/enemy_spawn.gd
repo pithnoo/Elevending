@@ -2,7 +2,20 @@ extends SpawnPoint
 
 export(int) var wave_cooldown
 export(Array, NodePath) var spawn_points
-export(Array, String) var wave_codes
+
+# variables used to convert user entered wave codes to be read
+export(Array, String) var wave_holder
+var waves_to_spawn : Array
+var wave_value : String
+var wave_store : Array
+
+# used to decide the length of each wave (current_entity_number)
+var wave_lengths : Array
+
+# this is what is read to start waves
+# of type int
+var wave_codes : Array
+
 
 export(NodePath) var enemy_holder_node
 onready var enemy_holder = get_node(enemy_holder_node)
@@ -19,9 +32,7 @@ var random = RandomNumberGenerator.new()
 onready var waveTimer = $WaveTimer
 
 func _ready():
-	# setting the current number of enemies supposed to be active, based on entered list
-	current_entity_number = wave_codes[GameManager.current_wave].length()
-
+	print("check")
 	waveTimer.start(wave_cooldown)
 
 	#GameManager.emit_signal("show_wave", current_wave + 1)
@@ -29,6 +40,29 @@ func _ready():
 
 	can_enemies_spawn = true
 
+	for waves in wave_holder:
+		for value in waves:
+			if value == " ":
+				waves_to_spawn.append(wave_value)
+				wave_value = ""
+			else:
+				wave_value += value
+		
+		waves_to_spawn.append(wave_value)
+		wave_value = ""
+	
+		var wave_buffer = waves_to_spawn.duplicate()
+
+		wave_codes.append(wave_buffer)
+		wave_lengths.append(wave_buffer.size())
+
+		waves_to_spawn.clear()
+	
+	# setting the current number of enemies supposed to be active, based on entered list
+	current_entity_number = wave_lengths[GameManager.current_wave]
+
+	print(wave_codes)
+	
 func _process(delta):
 	# continues to spawn until end of array is reached
 	if waveTimer.is_stopped() && !waves_complete:
@@ -37,7 +71,7 @@ func _process(delta):
 
 		can_items_spawn = true
 
-		if spawnTimer.is_stopped() && current_enemy < wave_codes[GameManager.current_wave].length(): 
+		if spawnTimer.is_stopped() && current_enemy < wave_lengths[GameManager.current_wave]: 
 			entityID = int(wave_codes[GameManager.current_wave][current_enemy])
 
 			random.randomize()
@@ -62,7 +96,8 @@ func _process(delta):
 				GameManager.current_wave += 1
 
 				# to reset number of enemies that will be spawned
-				current_entity_number = wave_codes[GameManager.current_wave].length()
+				#current_entity_number = wave_codes[GameManager.current_wave].length()
+				current_entity_number = wave_lengths[GameManager.current_wave]
 
 				waveTimer.start(wave_cooldown)
 
