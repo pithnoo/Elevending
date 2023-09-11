@@ -5,7 +5,7 @@ extends KinematicBody2D
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
 onready var sprite = $Sprite
-onready var hurtBox = $HurtBox
+#onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
 onready var particleGenerator = $ParticleGenerator
 onready var particlePosition = $ParticlePosition

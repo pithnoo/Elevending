@@ -39,7 +39,6 @@ func decrease_health(damage_taken : int) -> void:
 	
 	if CoreStats.health <= 0:
 		if !game_over:
-
 			AudioManager.play("CoreDown")
 
 			core_detection.queue_free()

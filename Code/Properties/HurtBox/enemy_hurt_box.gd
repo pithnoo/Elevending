@@ -21,25 +21,25 @@ func _on_HurtBox_area_entered(area:Area2D):
 				area.element.GRASS:
 					buff_enemy()
 				area.element.WATER:
-					stats.health -= area.damage / 2
-				area.element.FIRE:
 					stats.health -= area.damage
+				area.element.FIRE:
+					stats.health -= area.damage * 2
 		damage_type.WATER:
 			# type matchups for water
 			match area.type:
 				area.element.GRASS:
-					stats.health -= area.damage
+					stats.health -= area.damage * 2
 				area.element.WATER:
 					buff_enemy()
 				area.element.FIRE:
-					stats.health -= area.damage / 2
+					stats.health -= area.damage
 		damage_type.FIRE:
 			# type matchups for fire 
 			match area.type:
 				area.element.GRASS:
-					stats.health -= area.damage / 2
-				area.element.WATER:
 					stats.health -= area.damage
+				area.element.WATER:
+					stats.health -= area.damage * 2
 				area.element.FIRE:
 					buff_enemy()
 					
@@ -47,6 +47,7 @@ func _on_HurtBox_area_entered(area:Area2D):
 	match area.type:
 		area.element.GROUND:
 			emit_signal("enemy_stunned")
+			stats.health -= area.damage
 		area.element.ELECTRIC:
 			stats.health -= area.damage
 			area.destroy()

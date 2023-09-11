@@ -18,7 +18,6 @@ func _input(event):
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)
-	GameManager.reset_game_values()
 
 func _on_SettingsButton_pressed():
 	AudioManager.play("ButtonPress")

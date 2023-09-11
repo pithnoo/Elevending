@@ -32,7 +32,6 @@ var random = RandomNumberGenerator.new()
 onready var waveTimer = $WaveTimer
 
 func _ready():
-	print("check")
 	waveTimer.start(wave_cooldown)
 
 	#GameManager.emit_signal("show_wave", current_wave + 1)
@@ -61,7 +60,7 @@ func _ready():
 	# setting the current number of enemies supposed to be active, based on entered list
 	current_entity_number = wave_lengths[GameManager.current_wave]
 
-	print(wave_codes)
+	#print(wave_codes)
 	
 func _process(delta):
 	# continues to spawn until end of array is reached

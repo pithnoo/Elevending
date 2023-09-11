@@ -6,6 +6,8 @@ export(NodePath) var attack_node
 export(NodePath) var core_range
 export(NodePath) var attack_range
 
+export(bool) var is_flipped
+
 onready var core_detect = get_node(core_range)
 
 onready var idle_state: EnemyBaseState = get_node(idle_node)
@@ -22,7 +24,7 @@ func physics_process(delta: float) -> EnemyBaseState:
 		canAttack = false
 		return attack_state
 	elif core_detect.entity_detected():
-		follow_entity(core_detect, delta)
+		follow_entity(core_detect, delta, is_flipped)
 	else:
 		return idle_state
 

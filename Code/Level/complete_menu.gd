@@ -49,4 +49,3 @@ func _on_NextButton_pressed():
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)
-	GameManager.reset_game_values()

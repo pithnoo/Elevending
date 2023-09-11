@@ -10,14 +10,14 @@
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/LevelComponents/Stats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathFire.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathWater.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
-[ext_resource path="res://Art/Enemies/lightAirFire-Sheet.png" type="Texture" id=13]
-[ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffFire.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffWater.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Art/Enemies/lightAirWater-Sheet.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Enemies/Charges/Medium/chargeMediumFire.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpLight.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/Enemy/enemy_attack.gd" type="Script" id=17]
-[ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpMedium.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/Charges/Light/chargeLightWater.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Enemies/Charges/EnemyCharge.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Animation" id=20]
@@ -28,31 +28,19 @@ resource_name = "FollowPlayer"
 
 [sub_resource type="Animation" id=22]
 resource_name = "Idle"
-length = 4.0
+length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 4 ),
-"transitions": PoolRealArray( -2, -2, -2 ),
-"update": 0,
-"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ), Vector2( 0, -2 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ]
+"values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
 [sub_resource type="Animation" id=36]
@@ -136,13 +124,13 @@ shader_param/active = false
 shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
 
 [sub_resource type="RectangleShape2D" id=29]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7, 5.44784 )
 
 [sub_resource type="CircleShape2D" id=27]
 radius = 500.0
 
 [sub_resource type="CircleShape2D" id=35]
-radius = 24.0
+radius = 17.0
 
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 6, 6 )
@@ -150,18 +138,18 @@ extents = Vector2( 6, 6 )
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8, 8 )
 
-[node name="FireMediumAir" type="KinematicBody2D"]
+[node name="WaterLightAir" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 5 )
 death_particle = ExtResource( 11 )
-maxHealth = 10
-enemyDamage = 4
-follow_speed = 15.0
+maxHealth = 4
+enemyDamage = 1
+follow_speed = 40.0
 follow_acceleration = 100.0
-resistance = 200.0
-buff_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
-buff_particle = NodePath("BuffFire")
+resistance = 220.0
+buff_colour = Color( 0.560784, 0.827451, 1, 1 )
+buff_particle = NodePath("BuffWater")
 
 [node name="ParticleGenerator" parent="." instance=ExtResource( 15 )]
 
@@ -191,14 +179,17 @@ idle_node = NodePath("../Idle")
 charge_timer_node = NodePath("../../ChargeTimer")
 particle_generator_node = NodePath("../../ParticleGenerator")
 core_range = NodePath("../../CoreRange")
-enemy_attack = ExtResource( 18 )
-enemy_charge = ExtResource( 16 )
+enemy_attack = ExtResource( 16 )
+enemy_charge = ExtResource( 18 )
 charge_effect = ExtResource( 19 )
-charge_time = 2
+charge_time = 1
 repulsion_speed = 250.0
 
 [node name="Stats" parent="." instance=ExtResource( 9 )]
 max_health = 4
+
+[node name="BuffWater" parent="." instance=ExtResource( 13 )]
+visible = false
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
@@ -222,31 +213,29 @@ tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 3 )
 
-[node name="BuffFire" parent="." instance=ExtResource( 14 )]
-visible = false
-
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 1, 20 )
 texture = ExtResource( 12 )
 hframes = 3
+frame = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 33 )
 position = Vector2( 0, 3 )
-texture = ExtResource( 13 )
-flip_h = true
-hframes = 4
+texture = ExtResource( 14 )
+hframes = 6
 
 [node name="HurtBox" type="Area2D" parent="Sprite"]
-visible = false
+position = Vector2( -2, 0 )
 collision_layer = 0
 collision_mask = 64
 script = ExtResource( 10 )
 entity_stats = NodePath("../../Stats")
-type = 2
+type = 1
 hit_flash = NodePath("../../HitFlash")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtBox"]
+position = Vector2( 3, -0.44784 )
 shape = SubResource( 29 )
 
 [node name="CoreRange" type="Area2D" parent="."]

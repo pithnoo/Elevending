@@ -27,3 +27,4 @@ func _process(_delta : float):
 	if is_pressed():
 		# go to level
 		SceneTransition.blind_transition(level_buffer)	
+		GameManager.reset_game_values()
