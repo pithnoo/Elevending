@@ -17,23 +17,6 @@ onready var transition_camera = $TransitionCamera
 
 signal transition_shake
 
-"""
-func change_scene(transition_target : String, transition_type : int):
-	match transition_type:
-		1:
-			# blinds transition
-			blind_transition(transition_target)
-		2:
-			# upgrade transition
-			upgrade_transition(transition_target)
-		3:
-			# return to return transition
-			return_transition(transition_target)
-		_:
-			# in case invalid value is entered
-			print("transition does not exist")
-"""
-
 func blind_transition(target : String) -> void:
 	AudioManager.play("BlindTransition")
 	GameManager.can_pause = false
@@ -49,10 +32,10 @@ func blind_transition(target : String) -> void:
 	animations.play_backwards("BlindsTransition")
 	yield(animations, "animation_finished")
 
+	GameManager.change_game_cursor(0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	GameManager.can_pause = true
 
-	get_tree().paused = false
+	GameManager.can_pause = true
 
 func upgrade_transition(target : String) -> void:
 	GameManager.can_pause = false
@@ -122,3 +105,6 @@ func _on_MenuButton_pressed():
 
 	yield(animations, "animation_finished")
 	get_tree().paused = false 
+
+func unpause():
+	get_tree().paused = false

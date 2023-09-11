@@ -19,6 +19,7 @@ onready var level_camera = $LevelCamera
 
 func _ready():
 	LevelManager.connect("next_level", self, "goto_next_level")
+
 	# if the level already has a rating, then the size of the array
 	# should be equal to the array index
 	if LevelManager.level_ratings.size() > level_index:
@@ -54,8 +55,8 @@ func rate_level():
 	elif !has_rating:
 		LevelManager.level_ratings.append(level_rating)
 
-	if level_index > LevelManager.levels_unlocked:
-		LevelManager.levels_unlocked = level_index
+	if level_index == LevelManager.levels_unlocked - 1:
+		LevelManager.levels_unlocked = level_number + 1
 		#print(LevelManager.levels_unlocked)
 
 	#print(LevelManager.level_ratings)

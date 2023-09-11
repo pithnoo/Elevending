@@ -21,6 +21,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -6, -296 ), Vector2( -6, -40 ), Vector2( -6, -56 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unpause"
+} ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "GameOver"
@@ -211,9 +225,9 @@ anims/UpgradeEnter = SubResource( 11 )
 anims/UpgradeExit = SubResource( 13 )
 
 [node name="Blinds" type="TextureRect" parent="."]
-margin_left = -8.0
+margin_left = -6.0
 margin_top = -296.0
-margin_right = 92.0
+margin_right = 94.0
 margin_bottom = -223.0
 rect_scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
