@@ -129,6 +129,7 @@ animation_name = "FollowCore"
 idle_node = NodePath("../Idle")
 stun_node = NodePath("../Stunned")
 core_range = NodePath("../../CoreRange")
+is_flipped = true
 
 [node name="Stunned" type="Node" parent="StateManager"]
 script = ExtResource( 14 )

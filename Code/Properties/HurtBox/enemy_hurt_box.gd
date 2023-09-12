@@ -37,7 +37,7 @@ func _on_HurtBox_area_entered(area:Area2D):
 			# type matchups for fire 
 			match area.type:
 				area.element.GRASS:
-					stats.health -= area.damage
+					stats.health -= area.damage * 2
 				area.element.WATER:
 					stats.health -= area.damage * 2
 				area.element.FIRE:
@@ -49,7 +49,7 @@ func _on_HurtBox_area_entered(area:Area2D):
 			emit_signal("enemy_stunned")
 			stats.health -= area.damage
 		area.element.ELECTRIC:
-			stats.health -= area.damage
+			stats.health -= area.damage * 2
 			area.destroy()
 		_:
 			area.destroy()

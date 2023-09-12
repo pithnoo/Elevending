@@ -19,9 +19,13 @@ func enter() -> void:
 
 func process(delta: float) -> TurretBaseState:
 
-	shootInput = Input.is_action_just_pressed("shoot")
+	if Input.is_action_just_pressed("shoot"):
+		shootInput = true
+	if Input.is_action_just_released("shoot"):
+		shootInput = false
 
 	if turret.manualControl == false || turret.ammo <= 0:
+		shootInput = false
 		get_node(manual_effect).visible = false 
 		return start_state
 
