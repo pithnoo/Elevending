@@ -2,6 +2,7 @@ extends Node
 
 # to ensure player can't pause during transitions
 var can_pause : bool = true
+var game_over : bool = false
 
 # cursors
 export(String, FILE, "*png") var neutral_cursor

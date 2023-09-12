@@ -6,7 +6,8 @@ onready var animations = $AnimationPlayer
 
 export(String, FILE, "*.tscn,*.scn") var menu
 
-var game_over : bool
+# now relying on global value from game manager
+# var game_over : bool
 
 export(NodePath) var core_detection_node
 onready var core_detection = get_node(core_detection_node)
@@ -18,7 +19,7 @@ var knockback_vector = Vector2.DOWN
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animations.play("Idle")
-	game_over = false
+	GameManager.game_over = false
 
 func _on_AttackHurtBox_area_entered(area:Area2D):
 	#print("core recorded: ", area.damage, " damage from ", area)
@@ -32,13 +33,13 @@ func _on_HurtBox_area_entered(area:Area2D):
 	area.destroy()
 
 func decrease_health(damage_taken : int) -> void:
-	if !game_over:
+	if !GameManager.game_over:
 		CoreStats.health -= damage_taken
 		animations.play("Hurt")
 		get_node(hit_flash).play("Start")
 	
 	if CoreStats.health <= 0:
-		if !game_over:
+		if !GameManager.game_over:
 			AudioManager.play("CoreDown")
 
 			core_detection.queue_free()
@@ -47,7 +48,7 @@ func decrease_health(damage_taken : int) -> void:
 
 			# so that the game over event doesn't trigger multiple times
 			# when core is damaged
-			game_over = true
+			GameManager.game_over = true
 
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

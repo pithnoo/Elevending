@@ -17,23 +17,24 @@ onready var animations = $AnimationPlayer
 onready var timer = $Timer
 
 func set_notes(value):
-	GameManager.can_pause = false
+	if !GameManager.game_over:
+		GameManager.can_pause = false
 
-	timer.start()
-	yield(timer, "timeout")
+		timer.start()
+		yield(timer, "timeout")
 
-	get_tree().paused = true
+		get_tree().paused = true
 
-	GameManager.change_game_cursor(0)
+		GameManager.change_game_cursor(0)
 
-	visible = true
+		visible = true
 
-	animations.play("Complete")
-	notes = clamp(value, 0, max_notes)
+		animations.play("Complete")
+		notes = clamp(value, 0, max_notes)
 
-	if notesUIFull != null:
-		# 28 is the pixel size of the note sprite
-		notesUIFull.rect_size.x = notes * 28
+		if notesUIFull != null:
+			# 28 is the pixel size of the note sprite
+			notesUIFull.rect_size.x = notes * 28
 
 func _ready():
 	visible = false

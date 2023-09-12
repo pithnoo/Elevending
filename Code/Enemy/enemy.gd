@@ -7,6 +7,7 @@ onready var states = $StateManager
 onready var sprite = $Sprite
 #onready var hurtBox = $HurtBox
 onready var hitBox = $CoreHitBox
+onready var softCollision = $SoftCollision
 onready var particleGenerator = $ParticleGenerator
 onready var particlePosition = $ParticlePosition
 
