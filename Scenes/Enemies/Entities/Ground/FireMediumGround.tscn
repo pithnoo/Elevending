@@ -134,7 +134,7 @@ extents = Vector2( 6, 6 )
 extents = Vector2( 8, 8 )
 
 [sub_resource type="CircleShape2D" id=37]
-radius = 16.4924
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id=36]
 
@@ -148,7 +148,7 @@ __meta__ = {
 death_particle = ExtResource( 16 )
 maxHealth = 10
 enemyDamage = 4
-follow_speed = 12.0
+follow_speed = 15.0
 follow_acceleration = 100.0
 buff_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
 buff_particle = NodePath("BuffFire")

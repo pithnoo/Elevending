@@ -33,3 +33,6 @@ func _process(delta):
 
 func power_up():
 	particleGenerator.generate_particle(power_up_effect, power_position)
+
+func reset_targets():
+	attackRange.clear_bodies()

@@ -22,7 +22,8 @@ func process(_delta: float) -> TurretBaseState:
 	if turret.attackRange.entity_detected():
 		if turret.ammo > 0 && turret.rateTimer.is_stopped():
 			turret.rateTimer.start(turret.cooldown)
-			shoot(turret_detect.entities[0])
+			#shoot(turret_detect.entities[0])
+			shoot(turret_detect.find_closest_target())
 		elif turret.ammo <= 0:
 			return empty_state
 	else:

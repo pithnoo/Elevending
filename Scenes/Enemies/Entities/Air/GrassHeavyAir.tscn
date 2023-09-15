@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Projectiles/Fire/ProjectileEffectFire.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
@@ -10,15 +10,16 @@
 [ext_resource path="res://Code/Enemy/enemy_idle.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/LevelComponents/Stats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Code/Properties/HurtBox/enemy_hurt_box.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathWater.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathGrass.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=12]
-[ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffWater.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Art/Enemies/lightAirWater-Sheet.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Enemies/EnemyBuff/BuffGrass.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Art/Enemies/heavyAirGrass-Sheet.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpLight.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemies/Charges/Heavy/chargeHeavyGrass.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Code/Enemy/enemy_attack.gd" type="Script" id=17]
-[ext_resource path="res://Scenes/Enemies/Charges/Light/chargeLightWater.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/Attacks/EnemyExpHeavy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Enemies/Charges/EnemyCharge.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Code/Enemy/soft_collision.gd" type="Script" id=20]
 
 [sub_resource type="Animation" id=20]
 resource_name = "FollowCore"
@@ -28,7 +29,7 @@ resource_name = "FollowPlayer"
 
 [sub_resource type="Animation" id=22]
 resource_name = "Idle"
-length = 0.6
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -40,7 +41,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ 1, 2, 3, 4, 5, 1 ]
 }
 
 [sub_resource type="Animation" id=36]
@@ -121,16 +122,16 @@ graph_offset = Vector2( 268.143, 38 )
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/active = false
-shader_param/colour = Color( 0.968627, 0.588235, 0.0901961, 1 )
+shader_param/colour = Color( 0.568627, 0.858824, 0.411765, 1 )
 
 [sub_resource type="RectangleShape2D" id=29]
-extents = Vector2( 7, 5.44784 )
+extents = Vector2( 8, 11.5 )
 
 [sub_resource type="CircleShape2D" id=27]
 radius = 500.0
 
 [sub_resource type="CircleShape2D" id=35]
-radius = 17.0
+radius = 26.0
 
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 6, 6 )
@@ -138,22 +139,26 @@ extents = Vector2( 6, 6 )
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8, 8 )
 
-[node name="WaterLightAir" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=37]
+radius = 8.94427
+
+[node name="GrassHeavyAir" type="KinematicBody2D"]
 collision_layer = 128
 collision_mask = 0
 script = ExtResource( 5 )
 death_particle = ExtResource( 11 )
-maxHealth = 4
-enemyDamage = 1
-follow_speed = 40.0
+maxHealth = 14
+enemyDamage = 5
+follow_speed = 7.0
 follow_acceleration = 100.0
-resistance = 220.0
-buff_colour = Color( 0.560784, 0.827451, 1, 1 )
-buff_particle = NodePath("BuffWater")
+resistance = 170.0
+buff_colour = Color( 0.568627, 0.858824, 0.411765, 1 )
+buff_particle = NodePath("BuffGrass")
 
 [node name="ParticleGenerator" parent="." instance=ExtResource( 15 )]
 
 [node name="ParticlePosition" type="Position2D" parent="."]
+position = Vector2( 0, 3 )
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -172,6 +177,7 @@ idle_node = NodePath("../Idle")
 attack_node = NodePath("../Attack")
 core_range = NodePath("../../CoreRange")
 attack_range = NodePath("../../AttackRange")
+is_flipped = true
 
 [node name="Attack" type="Node" parent="StateManager"]
 script = ExtResource( 17 )
@@ -179,17 +185,14 @@ idle_node = NodePath("../Idle")
 charge_timer_node = NodePath("../../ChargeTimer")
 particle_generator_node = NodePath("../../ParticleGenerator")
 core_range = NodePath("../../CoreRange")
-enemy_attack = ExtResource( 16 )
-enemy_charge = ExtResource( 18 )
+enemy_attack = ExtResource( 18 )
+enemy_charge = ExtResource( 16 )
 charge_effect = ExtResource( 19 )
-charge_time = 1
+charge_time = 4
 repulsion_speed = 250.0
 
 [node name="Stats" parent="." instance=ExtResource( 9 )]
-max_health = 4
-
-[node name="BuffWater" parent="." instance=ExtResource( 13 )]
-visible = false
+max_health = 16
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
@@ -213,11 +216,13 @@ tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 3 )
 
+[node name="BuffGrass" parent="." instance=ExtResource( 13 )]
+visible = false
+
 [node name="Shadow" type="Sprite" parent="."]
-position = Vector2( 1, 20 )
+position = Vector2( 0, 20 )
 texture = ExtResource( 12 )
 hframes = 3
-frame = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 33 )
@@ -226,16 +231,14 @@ texture = ExtResource( 14 )
 hframes = 6
 
 [node name="HurtBox" type="Area2D" parent="Sprite"]
-position = Vector2( -2, 0 )
+visible = false
 collision_layer = 0
 collision_mask = 64
 script = ExtResource( 10 )
 entity_stats = NodePath("../../Stats")
-type = 1
 hit_flash = NodePath("../../HitFlash")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtBox"]
-position = Vector2( 3, -0.44784 )
 shape = SubResource( 29 )
 
 [node name="CoreRange" type="Area2D" parent="."]
@@ -273,6 +276,15 @@ shape = SubResource( 28 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 34 )
+
+[node name="SoftCollision" type="Area2D" parent="."]
+position = Vector2( 0, 4 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollision"]
+shape = SubResource( 37 )
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Sprite/HurtBox" to="Sprite/HurtBox" method="_on_HurtBox_area_entered"]

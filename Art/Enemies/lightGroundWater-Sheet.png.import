@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lightGroundWatelightGroundWater-Sheet.png-4923a4e593d616aa01a3067f969970d8.stex"
+path="res://.import/lightGroundWater-Sheet.png-85141f24357e92eddc0e93c73d50375d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemies/lightGroundWatelightGroundWater-Sheet.png"
-dest_files=[ "res://.import/lightGroundWatelightGroundWater-Sheet.png-4923a4e593d616aa01a3067f969970d8.stex" ]
+source_file="res://Art/Enemies/lightGroundWater-Sheet.png"
+dest_files=[ "res://.import/lightGroundWater-Sheet.png-85141f24357e92eddc0e93c73d50375d.stex" ]
 
 [params]
 

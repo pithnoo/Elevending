@@ -98,6 +98,7 @@ func switch_turret(turretIndex: int):
 	# sets the current turret based on array in editor
 	currentTurret = turrets[turretIndex].instance()
 	add_child(currentTurret)
+
 	currentTurret.ammo = currentAmmo
 	currentTurret.cooldown = fireRate
 
