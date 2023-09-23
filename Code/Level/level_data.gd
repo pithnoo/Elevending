@@ -9,6 +9,9 @@ export(int) var coin_requirement1
 export(int) var coin_requirement2
 export(int) var coin_requirement3
 
+export(int) var level_ground_turrets
+export(int) var level_electric_turrets
+
 var previous_level_rating : int
 var level_rating : int
 
@@ -18,6 +21,7 @@ var has_rating : bool
 onready var level_camera = $LevelCamera
 
 func _ready():
+
 	LevelManager.connect("next_level", self, "goto_next_level")
 
 	# if the level already has a rating, then the size of the array

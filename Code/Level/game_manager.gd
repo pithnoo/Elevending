@@ -18,8 +18,9 @@ signal fire_rate_doubled
 var is_manual : bool = false
 
 # in game values to be set in ui
-export(int) var max_ground_turrets
-export(int) var max_electric_turrets
+var max_ground_turrets
+var max_electric_turrets
+
 onready var ground_turret_number setget set_ground
 onready var electric_turret_number setget set_electric
 
