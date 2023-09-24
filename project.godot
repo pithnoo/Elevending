@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/Player/player.gd"
 }, {
+"base": "Resource",
+"class": "SaveFile",
+"language": "GDScript",
+"path": "res://Resources/game_data.gd"
+}, {
 "base": "Node",
 "class": "SpawnPoint",
 "language": "GDScript",
@@ -73,16 +78,6 @@ _global_script_classes=[ {
 "class": "TurretBaseState",
 "language": "GDScript",
 "path": "res://Code/Turret/turret_base_state.gd"
-}, {
-"base": "Resource",
-"class": "game",
-"language": "GDScript",
-"path": "res://Resources/ResourceCode/game.gd"
-}, {
-"base": "Resource",
-"class": "level",
-"language": "GDScript",
-"path": "res://Resources/ResourceCode/level.gd"
 } ]
 _global_script_class_icons={
 "BaseState": "",
@@ -95,11 +90,10 @@ _global_script_class_icons={
 "ItemBaseState": "",
 "ItemTurretState": "",
 "Player": "",
+"SaveFile": "",
 "SpawnPoint": "",
 "Turret": "",
-"TurretBaseState": "",
-"game": "",
-"level": ""
+"TurretBaseState": ""
 }
 
 [application]

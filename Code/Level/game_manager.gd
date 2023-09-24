@@ -87,9 +87,6 @@ func set_electric(value):
 func reset_game_values():
 	current_wave = 0
 	self.game_currency = 0
-	self.ground_turret_number = max_ground_turrets
-	self.electric_turret_number = max_electric_turrets
-	CoreStats.health = CoreStats.max_health
 
 func _ready():
 	reset_game_values()

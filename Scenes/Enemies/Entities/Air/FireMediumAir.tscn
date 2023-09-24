@@ -202,7 +202,7 @@ charge_time = 2
 repulsion_speed = 250.0
 
 [node name="Stats" parent="." instance=ExtResource( 9 )]
-max_health = 4
+max_health = 8
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true

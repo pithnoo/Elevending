@@ -149,7 +149,7 @@ __meta__ = {
 }
 death_particle = ExtResource( 15 )
 maxHealth = 10
-enemyDamage = 4
+enemyDamage = 1
 follow_speed = 40.0
 follow_acceleration = 300.0
 buff_colour = Color( 0.560784, 0.827451, 1, 1 )

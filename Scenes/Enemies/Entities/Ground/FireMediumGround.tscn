@@ -159,7 +159,7 @@ script = ExtResource( 17 )
 [node name="ParticlePosition" type="Position2D" parent="."]
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 8
+max_health = 10
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 3 )

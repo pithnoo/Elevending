@@ -11,6 +11,7 @@ export(int) var coin_requirement3
 
 export(int) var level_ground_turrets
 export(int) var level_electric_turrets
+export(int) var core_health
 
 var previous_level_rating : int
 var level_rating : int
@@ -21,6 +22,9 @@ var has_rating : bool
 onready var level_camera = $LevelCamera
 
 func _ready():
+	CoreStats.health = core_health
+	GameManager.ground_turret_number = level_ground_turrets
+	GameManager.electric_turret_number = level_electric_turrets
 
 	LevelManager.connect("next_level", self, "goto_next_level")
 
@@ -55,12 +59,14 @@ func rate_level():
 	# write new value rating
 	if has_rating && level_rating > previous_level_rating:
 		LevelManager.level_ratings[level_index] = level_rating
+		LevelManager.save_level_progress()
 		print("rewritten")
 	elif !has_rating:
 		LevelManager.level_ratings.append(level_rating)
 
 	if level_index == LevelManager.levels_unlocked - 1:
 		LevelManager.levels_unlocked = level_number + 1
+		LevelManager.save_level_progress()
 		#print(LevelManager.levels_unlocked)
 
 	#print(LevelManager.level_ratings)

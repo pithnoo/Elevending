@@ -17,8 +17,11 @@ var wave_lengths : Array
 var wave_codes : Array
 
 
-export(NodePath) var enemy_holder_node
-onready var enemy_holder = get_node(enemy_holder_node)
+export(NodePath) var ground_enemy_holder_node
+onready var ground_enemy_holder = get_node(ground_enemy_holder_node)
+
+export(NodePath) var air_enemy_holder_node 
+onready var air_enemy_holder = get_node(air_enemy_holder_node)
 
 var current_enemy : int = 0
 var enemies_to_spawn : int
@@ -84,7 +87,7 @@ func _process(delta):
 			# moves onto next enemy on wave sequence
 			current_enemy += 1
 			
-		if current_entity_number == 0:
+		if current_entity_number <= 0:
 			# reset enemy counter, first enemy of wave
 			current_enemy = 0
 
@@ -118,7 +121,13 @@ func spawn(index: int, spawnPoint) -> void:
 	var entity = entities[index].instance()
 	entity.connect("enemy_dead", self, "enemy_down")
 
-	enemy_holder.add_child(entity)
+	# for layering
+	# all ground units have an index lower than 8
+	if index > 8:
+		ground_enemy_holder.add_child(entity)
+	# if the index is greater than 8, then enemy to spawn must be an air unit
+	else:
+		air_enemy_holder.add_child(entity)
 	
 	entity.global_position = spawnPoint.global_position
 
