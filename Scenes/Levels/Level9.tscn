@@ -41,6 +41,9 @@ level_number = 9
 coin_requirement1 = 2
 coin_requirement2 = 4
 coin_requirement3 = 8
+level_ground_turrets = 5
+level_electric_turrets = 5
+core_health = 30
 
 [node name="ScreenShake" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
