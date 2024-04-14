@@ -42,7 +42,7 @@ func _ready():
 	level_camera.current = true
 
 	# during transitions, the player will be unable to pause
-	GameManager.can_pause = true
+  #GameManager.can_pause = true
 
 func rate_level():
 	if GameManager.game_currency < coin_requirement1:

@@ -23,7 +23,6 @@ func blind_transition(target : String) -> void:
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-	#animations.play("GameOver")
 	animations.play("BlindsTransition")
 	yield(animations, "animation_finished")
 
@@ -35,7 +34,8 @@ func blind_transition(target : String) -> void:
 	GameManager.change_game_cursor(0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	GameManager.can_pause = true
+  # WARNING: this should be set if the tutorial panel isn't called
+
 
 func upgrade_transition(target : String) -> void:
 	GameManager.can_pause = false
@@ -107,4 +107,6 @@ func _on_MenuButton_pressed():
 	get_tree().paused = false 
 
 func unpause():
-	get_tree().paused = false
+  if not GameManager.has_tutorial:
+    get_tree().paused = false
+    GameManager.can_pause = true

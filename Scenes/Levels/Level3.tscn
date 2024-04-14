@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/Air/FireHeavyAir.tscn" type="PackedScene" id=2]
@@ -28,6 +28,41 @@
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/FireLightGround.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassLightGround.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterLightGround.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=29]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=30]
+[ext_resource path="res://Art/tutorial panel.png" type="Texture" id=31]
+[ext_resource path="res://Code/UI/tutorial.gd" type="Script" id=32]
+[ext_resource path="res://Art/Level/powerUpBox-Sheet.png" type="Texture" id=33]
+[ext_resource path="res://Art/playerCollection-Sheet.png" type="Texture" id=34]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 29 )
+region = Rect2( 0, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 29 )
+region = Rect2( 19, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 30 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 33 )
+region = Rect2( 144, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 34 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 34 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 30 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 30 )
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 16 )
@@ -36,10 +71,9 @@ __meta__ = {
 }
 next_level = "res://Scenes/Levels/Level4.tscn"
 level_number = 3
-coin_requirement1 = 10
-coin_requirement2 = 20
-coin_requirement3 = 41
-level_ground_turrets = 3
+coin_requirement1 = 6
+coin_requirement2 = 12
+coin_requirement3 = 24
 core_health = 25
 
 [node name="ScreenShake" parent="." instance=ExtResource( 11 )]
@@ -54,11 +88,106 @@ position = Vector2( 192, 108 )
 current = true
 smoothing_enabled = true
 
+[node name="TutorialUI" type="CanvasLayer" parent="."]
+
+[node name="TutorialMenu" type="Control" parent="TutorialUI"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 32 )
+
+[node name="ColorRect" type="ColorRect" parent="TutorialUI/TutorialMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.509804 )
+
+[node name="TutorialOverlay" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+texture = ExtResource( 31 )
+
+[node name="TutorialButton" type="TextureButton" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
+margin_left = 280.0
+margin_top = 144.0
+margin_right = 320.0
+margin_bottom = 184.0
+texture_normal = SubResource( 1 )
+texture_hover = SubResource( 2 )
+expand = true
+stretch_mode = 3
+
+[node name="Subtitle" type="Label" parent="TutorialUI/TutorialMenu"]
+modulate = Color( 0.180392, 0.133333, 0.184314, 1 )
+margin_left = 162.0
+margin_top = 56.0
+margin_right = 218.0
+margin_bottom = 85.0
+custom_fonts/font = SubResource( 3 )
+text = "Item Collection"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_left = 224.0
+margin_top = 81.0
+margin_right = 264.0
+margin_bottom = 121.0
+texture = SubResource( 4 )
+
+[node name="TextureRect2" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 152.0
+margin_bottom = 120.0
+texture = SubResource( 5 )
+
+[node name="TextureRect3" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_left = 152.0
+margin_top = 80.0
+margin_right = 184.0
+margin_bottom = 120.0
+texture = SubResource( 6 )
+
+[node name="Subtitle3" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
+margin_left = 72.0
+margin_top = 112.0
+margin_right = 312.0
+margin_bottom = 152.0
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Hit [color=#FFA500]A[/color] to activate [color=#FFA500]item machine[/color] 
+"
+text = "Hit A to activate item machine 
+"
+scroll_active = false
+
+[node name="Subtitle9" type="Label" parent="TutorialUI/TutorialMenu"]
+margin_left = 120.0
+margin_top = 72.0
+margin_right = 184.0
+margin_bottom = 117.0
+custom_fonts/font = SubResource( 8 )
+text = "->"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Subtitle10" type="Label" parent="TutorialUI/TutorialMenu"]
+margin_left = 171.0
+margin_top = 72.0
+margin_right = 235.0
+margin_bottom = 117.0
+custom_fonts/font = SubResource( 8 )
+text = "Shoot ->"
+align = 1
+valign = 1
+autowrap = true
+
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
 [node name="LevelUI" parent="." instance=ExtResource( 14 )]
 
-[node name="EnemySpawnZone" type="Node2D" parent="."]
+[node name="EnemySpawnZone2" type="Node2D" parent="."]
 script = ExtResource( 17 )
 __meta__ = {
 "_editor_description_": ""
@@ -67,34 +196,34 @@ spawn_cooldown = 1
 entities = [ ExtResource( 28 ), ExtResource( 9 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 8 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_holder = [ "0 0 0 0 0 0 0 0 0", "0 0 0 0 3 3 3 3", "6 6 6 6 3 0 0 3 3 0 0", "4 4 3 3 3 6 6 7 6 0 0 0 0" ]
+wave_holder = [ "1 1 1 1 2 2 2 2", "1 1 4 4 5 5 5", "7 7 8 8 1 1 1 4 4" ]
 ground_enemy_holder_node = NodePath("../YSort/EntityHolder/GroundEnemyHolder")
 air_enemy_holder_node = NodePath("../YSort/EntityHolder/AirEnemyHolder")
 
-[node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
+[node name="WaveTimer" type="Timer" parent="EnemySpawnZone2"]
 one_shot = true
 
-[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone"]
+[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone2"]
 one_shot = true
 
-[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone"]
+[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone2"]
 
-[node name="Spawn1" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn1" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 32, 232 )
 
-[node name="Spawn2" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn2" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 96, 232 )
 
-[node name="Spawn3" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn3" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 160, 232 )
 
-[node name="Spawn4" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn4" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 224, 232 )
 
-[node name="Spawn5" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn5" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 288, 232 )
 
-[node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn6" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 352, 232 )
 
 [node name="ItemSpawnZone" type="Node2D" parent="."]
@@ -105,7 +234,7 @@ item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 crates_before_reload = 5
 max_existing_items = 20
 distance_between_items = 30.0
-wave_spawn_node = NodePath("../EnemySpawnZone")
+wave_spawn_node = NodePath("../EnemySpawnZone2")
 
 [node name="SpawnArea" type="ReferenceRect" parent="ItemSpawnZone"]
 margin_left = 65.0
@@ -160,3 +289,5 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="AirEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
 
 [node name="GroundEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
+
+[connection signal="pressed" from="TutorialUI/TutorialMenu/TutorialOverlay/TutorialButton" to="TutorialUI/TutorialMenu" method="_on_TutorialButton_pressed"]

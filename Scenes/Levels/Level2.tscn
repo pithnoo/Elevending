@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Entities/Air/FireHeavyAir.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterMediumGround.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
@@ -28,6 +27,24 @@
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/FireLightGround.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassLightGround.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterLightGround.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=29]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=30]
+[ext_resource path="res://Art/tutorial panel.png" type="Texture" id=31]
+[ext_resource path="res://Code/UI/tutorial.gd" type="Script" id=32]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 29 )
+region = Rect2( 0, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 29 )
+region = Rect2( 19, 0, 19, 13 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 30 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 30 )
 
 [node name="Level2" type="Node2D"]
 script = ExtResource( 16 )
@@ -36,9 +53,9 @@ __meta__ = {
 }
 next_level = "res://Scenes/Levels/Level3.tscn"
 level_number = 2
-coin_requirement1 = 6
-coin_requirement2 = 12
-coin_requirement3 = 24
+coin_requirement1 = 10
+coin_requirement2 = 20
+coin_requirement3 = 41
 core_health = 20
 
 [node name="ScreenShake" parent="." instance=ExtResource( 11 )]
@@ -53,11 +70,80 @@ position = Vector2( 192, 108 )
 current = true
 smoothing_enabled = true
 
+[node name="TutorialUI" type="CanvasLayer" parent="."]
+
+[node name="TutorialMenu" type="Control" parent="TutorialUI"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 32 )
+
+[node name="ColorRect" type="ColorRect" parent="TutorialUI/TutorialMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.509804 )
+
+[node name="TutorialOverlay" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+texture = ExtResource( 31 )
+
+[node name="TutorialButton" type="TextureButton" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
+margin_left = 280.0
+margin_top = 144.0
+margin_right = 320.0
+margin_bottom = 184.0
+texture_normal = SubResource( 1 )
+texture_hover = SubResource( 2 )
+expand = true
+stretch_mode = 3
+
+[node name="Subtitle" type="Label" parent="TutorialUI/TutorialMenu"]
+modulate = Color( 0.180392, 0.133333, 0.184314, 1 )
+margin_left = 162.0
+margin_top = 56.0
+margin_right = 218.0
+margin_bottom = 85.0
+custom_fonts/font = SubResource( 3 )
+text = "Aiming"
+align = 1
+valign = 1
+
+[node name="Subtitle2" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
+margin_left = 72.0
+margin_top = 80.0
+margin_right = 312.0
+margin_bottom = 120.0
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Hit [color=#FFA500]W[/color] to manually aim with [color=#FFA500]left[/color] machine, 
+and [color=#FFA500]E[/color]  for the [color=#FFA500]right[/color]
+[color=#FFA500]Reset[/color] all machines to normal with [color=#FFA500]Space[/color] 
+"
+text = "Hit W to manually aim with left machine, 
+and E  for the right
+Reset all machines to normal with Space 
+"
+scroll_active = false
+
+[node name="Subtitle4" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 280.0
+margin_bottom = 168.0
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Point and click to aim and shoot with [color=#FFA500]mouse[/color]
+"
+text = "Point and click to aim and shoot with mouse
+"
+scroll_active = false
+
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
 [node name="LevelUI" parent="." instance=ExtResource( 14 )]
 
-[node name="EnemySpawnZone" type="Node2D" parent="."]
+[node name="EnemySpawnZone2" type="Node2D" parent="."]
 script = ExtResource( 17 )
 __meta__ = {
 "_editor_description_": ""
@@ -66,34 +152,34 @@ spawn_cooldown = 1
 entities = [ ExtResource( 28 ), ExtResource( 9 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 8 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_holder = [ "1 1 1 1 2 2 2 2", "1 1 4 4 5 5 5", "7 7 8 8 1 1 1 4 4" ]
+wave_holder = [ "0 0 0 0 0 0 0 0 0", "0 0 0 0 3 3 3 3", "6 6 6 6 3 0 0 3 3 0 0", "4 4 3 3 3 6 6 7 6 0 0 0 0" ]
 ground_enemy_holder_node = NodePath("../YSort/EntityHolder/GroundEnemyHolder")
 air_enemy_holder_node = NodePath("../YSort/EntityHolder/AirEnemyHolder")
 
-[node name="WaveTimer" type="Timer" parent="EnemySpawnZone"]
+[node name="WaveTimer" type="Timer" parent="EnemySpawnZone2"]
 one_shot = true
 
-[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone"]
+[node name="SpawnTimer" type="Timer" parent="EnemySpawnZone2"]
 one_shot = true
 
-[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone"]
+[node name="SpawnPoints" type="Node2D" parent="EnemySpawnZone2"]
 
-[node name="Spawn1" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn1" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 32, 232 )
 
-[node name="Spawn2" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn2" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 96, 232 )
 
-[node name="Spawn3" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn3" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 160, 232 )
 
-[node name="Spawn4" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn4" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 224, 232 )
 
-[node name="Spawn5" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn5" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 288, 232 )
 
-[node name="Spawn6" type="Position2D" parent="EnemySpawnZone/SpawnPoints"]
+[node name="Spawn6" type="Position2D" parent="EnemySpawnZone2/SpawnPoints"]
 position = Vector2( 352, 232 )
 
 [node name="ItemSpawnZone" type="Node2D" parent="."]
@@ -102,9 +188,8 @@ spawn_cooldown = 6
 entities = [ ExtResource( 1 ) ]
 item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 crates_before_reload = 5
-max_existing_items = 20
 distance_between_items = 30.0
-wave_spawn_node = NodePath("../EnemySpawnZone")
+wave_spawn_node = NodePath("../EnemySpawnZone2")
 
 [node name="SpawnArea" type="ReferenceRect" parent="ItemSpawnZone"]
 margin_left = 65.0
@@ -135,7 +220,7 @@ turretInput = "turret1"
 manualInput = "manual1"
 resetInput = "reset"
 itemInput = "item"
-maxAmmo = 20
+maxAmmo = 10000
 
 [node name="TurretManager2" parent="YSort/Turrets" instance=ExtResource( 10 )]
 position = Vector2( 256, 64 )
@@ -144,11 +229,7 @@ turretInput = "turret2"
 manualInput = "manual2"
 resetInput = "reset"
 itemInput = "item"
-maxAmmo = 20
-
-[node name="CollectionStation" parent="YSort/Turrets" instance=ExtResource( 12 )]
-position = Vector2( 192, 68 )
-turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
+maxAmmo = 10000
 
 [node name="EntityHolder" type="YSort" parent="YSort"]
 
@@ -159,3 +240,5 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="AirEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
 
 [node name="GroundEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
+
+[connection signal="pressed" from="TutorialUI/TutorialMenu/TutorialOverlay/TutorialButton" to="TutorialUI/TutorialMenu" method="_on_TutorialButton_pressed"]

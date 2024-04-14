@@ -2,6 +2,8 @@ extends Node
 
 # to ensure player can't pause during transitions
 var can_pause : bool = true
+# this ensures that when a tutorial is in level, blind transition won't unpause
+var has_tutorial : bool = false
 var game_over : bool = false
 
 # cursors

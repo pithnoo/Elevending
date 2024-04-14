@@ -31,7 +31,7 @@
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassLightGround.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterLightGround.tscn" type="PackedScene" id=30]
 
-[node name="Level1" type="Node2D"]
+[node name="Level9" type="Node2D"]
 script = ExtResource( 16 )
 __meta__ = {
 "_editor_description_": ""

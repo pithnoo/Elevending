@@ -132,6 +132,7 @@ window/stretch/aspect="keep"
 
 display=false
 cursor=false
+sizw=false
 
 [gui]
 
@@ -257,4 +258,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
+environment/default_clear_color=Color( 0.321569, 0.282353, 0.223529, 1 )
 environment/default_environment="res://default_env.tres"
