@@ -58,10 +58,10 @@ region = Rect2( 0, 0, 32, 32 )
 atlas = ExtResource( 34 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 30 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 30 )
 
 [node name="Level3" type="Node2D"]
@@ -116,52 +116,39 @@ texture_hover = SubResource( 2 )
 expand = true
 stretch_mode = 3
 
-[node name="Subtitle" type="Label" parent="TutorialUI/TutorialMenu"]
+[node name="Subtitle" type="Label" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 modulate = Color( 0.180392, 0.133333, 0.184314, 1 )
 margin_left = 162.0
 margin_top = 56.0
-margin_right = 218.0
+margin_right = 224.0
 margin_bottom = 85.0
 custom_fonts/font = SubResource( 3 )
 text = "Item Collection"
 align = 1
 valign = 1
 
-[node name="TextureRect" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+[node name="TextureRect" type="TextureRect" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 margin_left = 224.0
 margin_top = 81.0
 margin_right = 264.0
 margin_bottom = 121.0
 texture = SubResource( 4 )
 
-[node name="TextureRect2" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+[node name="TextureRect2" type="TextureRect" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 margin_left = 120.0
 margin_top = 80.0
 margin_right = 152.0
 margin_bottom = 120.0
 texture = SubResource( 5 )
 
-[node name="TextureRect3" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+[node name="TextureRect3" type="TextureRect" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 margin_left = 152.0
 margin_top = 80.0
 margin_right = 184.0
 margin_bottom = 120.0
 texture = SubResource( 6 )
 
-[node name="Subtitle3" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
-margin_left = 72.0
-margin_top = 112.0
-margin_right = 312.0
-margin_bottom = 152.0
-custom_fonts/normal_font = SubResource( 7 )
-bbcode_enabled = true
-bbcode_text = "[center]Hit [color=#FFA500]A[/color] to activate [color=#FFA500]item machine[/color] 
-"
-text = "Hit A to activate item machine 
-"
-scroll_active = false
-
-[node name="Subtitle9" type="Label" parent="TutorialUI/TutorialMenu"]
+[node name="Subtitle9" type="Label" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 margin_left = 120.0
 margin_top = 72.0
 margin_right = 184.0
@@ -172,7 +159,7 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Subtitle10" type="Label" parent="TutorialUI/TutorialMenu"]
+[node name="Subtitle10" type="Label" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
 margin_left = 171.0
 margin_top = 72.0
 margin_right = 235.0
@@ -182,6 +169,43 @@ text = "Shoot ->"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="Subtitle3" type="RichTextLabel" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
+margin_left = 72.0
+margin_top = 117.0
+margin_right = 312.0
+margin_bottom = 157.0
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Hit [color=#FFA500]A[/color] to activate [color=#FFA500]item collector machine[/color] 
+"
+text = "Hit A to activate item collector machine 
+"
+scroll_active = false
+
+[node name="Subtitle4" type="RichTextLabel" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
+margin_left = 102.0
+margin_top = 133.0
+margin_right = 288.0
+margin_bottom = 176.0
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Your machines will now have [color=#FFA500]limited ammo[/color]
+Hit	to reload
+Aim the same way you do [color=#FFA500]manual aim[/color]
+"
+text = "Your machines will now have limited ammo
+Hit	to reload
+Aim the same way you do manual aim
+"
+scroll_active = false
+
+[node name="TextureRect4" type="TextureRect" parent="TutorialUI/TutorialMenu/TutorialOverlay"]
+margin_left = 115.0
+margin_top = 136.0
+margin_right = 155.0
+margin_bottom = 176.0
+texture = SubResource( 4 )
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
