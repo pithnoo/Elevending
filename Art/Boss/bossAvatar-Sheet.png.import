@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bowls-Sheet.png-4fa9d92f8ca2ddffe21133dfde12b067.stex"
+path="res://.import/bossAvatar-Sheet.png-142bd43ef30df7353da89b139260137f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/bowls-Sheet.png"
-dest_files=[ "res://.import/bowls-Sheet.png-4fa9d92f8ca2ddffe21133dfde12b067.stex" ]
+source_file="res://Art/Boss/bossAvatar-Sheet.png"
+dest_files=[ "res://.import/bossAvatar-Sheet.png-142bd43ef30df7353da89b139260137f.stex" ]
 
 [params]
 

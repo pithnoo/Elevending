@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bars-Sheet.png-4c25b228e4c40f3a889aa77b58254635.stex"
+path="res://.import/bossHealth-Sheet.png-538aac2563438a466c2fc7dbf3fe8156.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/bars-Sheet.png"
-dest_files=[ "res://.import/bars-Sheet.png-4c25b228e4c40f3a889aa77b58254635.stex" ]
+source_file="res://Art/Boss/bossHealth-Sheet.png"
+dest_files=[ "res://.import/bossHealth-Sheet.png-538aac2563438a466c2fc7dbf3fe8156.stex" ]
 
 [params]
 

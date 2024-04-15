@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.5, 14.5 )
+
+[node name="Boss" type="KinematicBody2D"]
+
+[node name="BossAvatar" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+hframes = 23
+
+[node name="Machine" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
+texture = ExtResource( 3 )
+hframes = 5
+
+[node name="BossCounter" type="Sprite" parent="Machine"]
+visible = false
+position = Vector2( 10, 4 )
+texture = ExtResource( 2 )
+hframes = 5
+
+[node name="BossHealth" type="Sprite" parent="Machine"]
+position = Vector2( -9, 3 )
+texture = ExtResource( 4 )
+hframes = 5
+
+[node name="EnemyShadows-Sheet-export" type="Sprite" parent="."]
+position = Vector2( 0, 24 )
+texture = ExtResource( 5 )
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 1 )

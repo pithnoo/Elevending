@@ -25,6 +25,7 @@ var knockback = Vector2.ZERO
 export(Color) var buff_colour
 export(NodePath) var buff_particle
 
+var is_dead : bool = false
 signal enemy_dead
 
 var is_stunned : bool = false
@@ -47,17 +48,19 @@ func _physics_process(delta: float) -> void:
   states.physics_process(delta)
 
 func _on_Stats_no_health():
-	AudioManager.play("EnemyDestroyed")
+  AudioManager.play("EnemyDestroyed")
 
-	# instantiate death effect
-	particleGenerator.generate_particle(death_particle, particlePosition)
+  # instantiate death effect
+  particleGenerator.generate_particle(death_particle, particlePosition)
 
-	# signal of enemy's death for wave manager
-	emit_signal("enemy_dead")
+  # signal of enemy's death for wave manager
+  if not is_dead:
+    emit_signal("enemy_dead")
+    is_dead = true
 
-	GameManager.game_currency += 1
+  GameManager.game_currency += 1
 
-	queue_free()
+  queue_free()
 
 func _on_HurtBox_enemy_buffed():
 	# note that this is only executed once because of enemy hurt box script
@@ -73,5 +76,11 @@ func _on_HurtBox_enemy_stunned():
 	is_stunned = true
 
 func _on_CoreHitBox_collided():
-	AudioManager.play("EnemyDestroyed")
-	emit_signal("enemy_dead")
+  AudioManager.play("EnemyDestroyed")
+
+	# signal of enemy's death for wave manager
+  if not is_dead:
+    emit_signal("enemy_dead")
+    is_dead = true
+
+  queue_free()

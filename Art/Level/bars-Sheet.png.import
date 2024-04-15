@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/levelShelf.png-fab22e3fadc449564a3f0bb10a649e96.stex"
+path="res://.import/bars-Sheet.png-7e15a543123355a521711c728f3db6fc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/levelShelf.png"
-dest_files=[ "res://.import/levelShelf.png-fab22e3fadc449564a3f0bb10a649e96.stex" ]
+source_file="res://Art/Level/bars-Sheet.png"
+dest_files=[ "res://.import/bars-Sheet.png-7e15a543123355a521711c728f3db6fc.stex" ]
 
 [params]
 

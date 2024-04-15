@@ -127,11 +127,11 @@ margin_bottom = 120.0
 custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]Hit [color=#FFA500]W[/color] to manually aim with [color=#FFA500]left[/color] machine, 
-and [color=#FFA500]E[/color]  for the [color=#FFA500]right[/color]
+and [color=#FFA500]E[/color] for the [color=#FFA500]right[/color] machine
 [color=#FFA500]Reset[/color] all machines to normal with [color=#FFA500]Space[/color] 
 "
 text = "Hit W to manually aim with left machine, 
-and E  for the right
+and E for the right machine
 Reset all machines to normal with Space 
 "
 scroll_active = false
