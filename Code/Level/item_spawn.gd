@@ -16,11 +16,18 @@ onready var spawn_area = $SpawnArea
 export(NodePath) var wave_spawn_node
 onready var wave_spawner = get_node(wave_spawn_node)
 
+var can_spawn_items : bool = false
+
 var current_item_positions : Array
 var prev_point = Vector2.ZERO
 
 func _process(delta):
-	if wave_spawner.can_items_spawn:
+	if wave_spawn_node == "":
+		can_spawn_items = true
+	else:
+		can_spawn_items = wave_spawner.can_items_spawn
+
+	if can_spawn_items:
 		if spawnTimer.is_stopped():
 			items_since_reload += 1
 

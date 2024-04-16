@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playerCollection-Sheet.png-ea8269d416dc06d1c1d7e64d67475ea6.stex"
+path="res://.import/LevelNumbers.png-e744685f57de19ce799c5b329c908c40.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/playerCollection-Sheet.png"
-dest_files=[ "res://.import/playerCollection-Sheet.png-ea8269d416dc06d1c1d7e64d67475ea6.stex" ]
+source_file="res://Art/Level/LevelNumbers.png"
+dest_files=[ "res://.import/LevelNumbers.png-e744685f57de19ce799c5b329c908c40.stex" ]
 
 [params]
 

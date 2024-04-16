@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LevelNumbers.png-c551307b1fe0f66e0099824478670406.stex"
+path="res://.import/skull level.png-fe16fca17071f3044398a0e63ff35f24.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/LevelNumbers.png"
-dest_files=[ "res://.import/LevelNumbers.png-c551307b1fe0f66e0099824478670406.stex" ]
+source_file="res://Art/Level/skull level.png"
+dest_files=[ "res://.import/skull level.png-fe16fca17071f3044398a0e63ff35f24.stex" ]
 
 [params]
 

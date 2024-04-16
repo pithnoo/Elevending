@@ -165,7 +165,7 @@ graph_offset = Vector2( -186, 57 )
 [sub_resource type="ShaderMaterial" id=13]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/active = false
+shader_param/active = true
 shader_param/colour = Color( 0.619608, 0.619608, 0.384314, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]

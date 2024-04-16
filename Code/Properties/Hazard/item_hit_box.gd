@@ -31,6 +31,8 @@ func _on_HitBox_area_entered(area:Area2D):
 			emit_signal("item_ammo")
 		area.item_type.SHOOT:
 			emit_signal("item_shoot")
+		_:
+			AudioManager.play("Reload")
 
 	area.destroy()
 

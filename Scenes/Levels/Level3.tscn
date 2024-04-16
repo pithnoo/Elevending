@@ -33,7 +33,7 @@
 [ext_resource path="res://Art/tutorial panel.png" type="Texture" id=31]
 [ext_resource path="res://Code/UI/tutorial.gd" type="Script" id=32]
 [ext_resource path="res://Art/Level/powerUpBox-Sheet.png" type="Texture" id=33]
-[ext_resource path="res://Art/playerCollection-Sheet.png" type="Texture" id=34]
+[ext_resource path="res://Art/Level/playerCollection-Sheet.png" type="Texture" id=34]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 29 )

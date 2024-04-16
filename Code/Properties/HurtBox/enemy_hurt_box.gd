@@ -6,8 +6,6 @@ signal enemy_stunned
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
 
-export(NodePath) var hit_flash
-
 var buffed : bool = false
 
 func _on_HurtBox_area_entered(area:Area2D):

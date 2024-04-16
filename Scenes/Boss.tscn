@@ -1,38 +1,138 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=4]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=5]
+[ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=6]
+[ext_resource path="res://Code/Properties/stats.gd" type="Script" id=7]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 8 )
+shader_param/active = false
+shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 8 )
+shader_param/active = false
+shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.5, 14.5 )
+extents = Vector2( 19.5, 16 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 2.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 2.8 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ), Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 19, 20, 21, 15, 16, 17, 18, 19, 20, 21, 15, 16, 17, 18, 19, 20, 21, 15, 16, 17, 18, 19, 20, 21 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/BossAvatar:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=4]
+states/Idle/node = SubResource( 6 )
+states/Idle/position = Vector2( 334, 96 )
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
 
 [node name="Boss" type="KinematicBody2D"]
 
-[node name="BossAvatar" type="Sprite" parent="."]
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 7 )
+max_health = 100
+
+[node name="BossContainer" type="Node2D" parent="."]
+position = Vector2( 0, -3 )
+
+[node name="BossAvatar" type="Sprite" parent="BossContainer"]
+material = SubResource( 7 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 hframes = 23
 
-[node name="Machine" type="Sprite" parent="."]
+[node name="Machine" type="Sprite" parent="BossContainer"]
+material = SubResource( 8 )
 position = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 hframes = 5
 
-[node name="BossCounter" type="Sprite" parent="Machine"]
+[node name="BossCounter" type="Sprite" parent="BossContainer/Machine"]
 visible = false
 position = Vector2( 10, 4 )
 texture = ExtResource( 2 )
 hframes = 5
 
-[node name="BossHealth" type="Sprite" parent="Machine"]
+[node name="BossHealth" type="Sprite" parent="BossContainer/Machine"]
 position = Vector2( -9, 3 )
 texture = ExtResource( 4 )
 hframes = 5
 
-[node name="EnemyShadows-Sheet-export" type="Sprite" parent="."]
+[node name="HurtBox" type="Area2D" parent="BossContainer"]
+position = Vector2( 0, -0.375315 )
+collision_layer = 0
+collision_mask = 64
+script = ExtResource( 6 )
+entity_stats = NodePath("../../Stats")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossContainer/HurtBox"]
+visible = false
+position = Vector2( -0.5, -1.47042 )
+shape = SubResource( 1 )
+
+[node name="BossShadow" type="Sprite" parent="."]
 position = Vector2( 0, 24 )
 texture = ExtResource( 5 )
 hframes = 3
@@ -41,3 +141,13 @@ hframes = 3
 visible = false
 position = Vector2( -0.5, -0.5 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 4 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 5 )

@@ -33,7 +33,7 @@
 [ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=31]
 [ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=32]
 [ext_resource path="res://Code/UI/tutorial.gd" type="Script" id=33]
-[ext_resource path="res://Art/playerCollection-Sheet.png" type="Texture" id=34]
+[ext_resource path="res://Art/Level/playerCollection-Sheet.png" type="Texture" id=34]
 [ext_resource path="res://Art/Level/vending machines2-Sheet.png" type="Texture" id=35]
 
 [sub_resource type="AtlasTexture" id=1]
