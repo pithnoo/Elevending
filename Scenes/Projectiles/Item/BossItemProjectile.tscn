@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Art/Boss/damageBox-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Art/particle1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=4]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Projectiles/Item/BossItemDestroy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Code/Boss/boss_projectile.gd" type="Script" id=7]
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.630952, 0 ), 0.0, 0.0, 0, 0 ]
@@ -63,10 +64,12 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[node name="BossItemProjectile" type="RigidBody2D"]
+[node name="BossItemProjectile" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 0
-gravity_scale = 0.0
+script = ExtResource( 7 )
+projectile_speed = 1000.0
+position_node = NodePath("EffectPosition")
 
 [node name="ParticleGenerator" parent="." instance=ExtResource( 5 )]
 
@@ -109,3 +112,5 @@ anims/Start = SubResource( 8 )
 
 [node name="LifeTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="collided" from="HitBox" to="." method="_on_HitBox_collided"]

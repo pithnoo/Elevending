@@ -38,9 +38,9 @@ __meta__ = {
 }
 next_level = "res://Scenes/Levels/Level9.tscn"
 level_number = 8
-coin_requirement1 = 49
-coin_requirement2 = 98
-coin_requirement3 = 197
+coin_requirement1 = 37
+coin_requirement2 = 75
+coin_requirement3 = 150
 level_ground_turrets = 5
 level_electric_turrets = 5
 core_health = 30

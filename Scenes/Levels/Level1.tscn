@@ -83,7 +83,7 @@ next_level = "res://Scenes/Levels/Level2.tscn"
 level_number = 1
 coin_requirement1 = 9
 coin_requirement2 = 18
-coin_requirement3 = 35
+coin_requirement3 = 36
 core_health = 20
 
 [node name="ScreenShake" parent="." instance=ExtResource( 11 )]

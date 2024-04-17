@@ -5,6 +5,7 @@ onready var particle_position = $ParticlePosition
 
 export(PackedScene) var death_effect 
 export(PackedScene) var death_particle
+export(PackedScene) var boss_projectile
 
 export(bool) var is_hard
 
@@ -23,6 +24,11 @@ func _ready():
 	# INFO: to make sure that the counter remains in the correct orientation
 	count_sprite.flip_h = machine_container.get_scale().x < 0
 
+func shoot():
+	# TODO: add enemy attack sound effect
+	particle_generator.generate_particle(boss_projectile, particle_position)
+	particle_generator.generate_particle(death_effect, particle_position)
+	queue_free()
 
 func _on_Stats_no_health():
 	AudioManager.play("EnemyDestroyed")

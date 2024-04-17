@@ -6,6 +6,9 @@ var can_pause : bool = true
 var has_tutorial : bool = false
 var game_over : bool = false
 
+# a global position that should be known by boss projectiles to save performance
+var core_position
+
 # cursors
 export(String, FILE, "*png") var neutral_cursor
 export(String, FILE, "*png") var manual_cursor

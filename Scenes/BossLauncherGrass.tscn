@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Code/Properties/HurtBox/launcher_hurt_box.gd" type="Script" id=1]
 [ext_resource path="res://Code/Properties/stats.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Projectiles/Item/BossItemDestroy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathGrass.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Projectiles/Item/BossItemProjectile.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
@@ -38,6 +39,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 10 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot"
+} ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -199,6 +214,7 @@ tracks/1/keys = {
 script = ExtResource( 5 )
 death_effect = ExtResource( 9 )
 death_particle = ExtResource( 10 )
+boss_projectile = ExtResource( 11 )
 count_animations = NodePath("BossContainer/Machine/CounterPlayer")
 machine_node = NodePath(".")
 count_sprite_node = NodePath("BossContainer/Machine/BossCounter")
@@ -213,11 +229,11 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, 0.10301 )
+position = Vector2( 0, 1.36347 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )
-position = Vector2( 2, -16 )
+position = Vector2( 4, -15.6917 )
 texture = ExtResource( 4 )
 hframes = 23
 frame = 15

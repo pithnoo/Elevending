@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/PowerUps/BossItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
-[ext_resource path="res://Art/Boss/bossMachine-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Turrets/Entities/BossTurret.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossLauncherGrass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=10]
@@ -24,9 +23,9 @@ __meta__ = {
 }
 next_level = "res://Scenes/MainMenu.tscn"
 level_number = 9
-coin_requirement1 = 2
-coin_requirement2 = 4
-coin_requirement3 = 8
+coin_requirement1 = 25
+coin_requirement2 = 50
+coin_requirement3 = 100
 level_ground_turrets = 5
 level_electric_turrets = 5
 core_health = 30
@@ -126,26 +125,6 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="Boss2" parent="YSort/Turrets" instance=ExtResource( 31 )]
 position = Vector2( 353, 24 )
 scale = Vector2( -1, 1 )
-
-[node name="BossMachine-Sheet2" type="Sprite" parent="YSort/Turrets"]
-position = Vector2( 148, 168 )
-texture = ExtResource( 6 )
-hframes = 3
-
-[node name="BossMachine-Sheet3" type="Sprite" parent="YSort/Turrets"]
-position = Vector2( 192, 168 )
-texture = ExtResource( 6 )
-hframes = 3
-
-[node name="BossMachine-Sheet4" type="Sprite" parent="YSort/Turrets"]
-position = Vector2( 236, 168 )
-texture = ExtResource( 6 )
-hframes = 3
-
-[node name="BossMachine-Sheet5" type="Sprite" parent="YSort/Turrets"]
-position = Vector2( 280, 168 )
-texture = ExtResource( 6 )
-hframes = 3
 
 [node name="EntityHolder" type="YSort" parent="YSort"]
 

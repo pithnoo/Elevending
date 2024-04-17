@@ -3,6 +3,7 @@ extends Node
 export(NodePath) var hit_flash
 
 onready var animations = $AnimationPlayer
+onready var core_position = $CorePosition
 
 export(String, FILE, "*.tscn,*.scn") var menu
 
@@ -19,6 +20,8 @@ var knockback_vector = Vector2.DOWN
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animations.play("Idle")
+	GameManager.core_position = core_position
+	print("updated")
 	GameManager.game_over = false
 
 func _on_AttackHurtBox_area_entered(area:Area2D):

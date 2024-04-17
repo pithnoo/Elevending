@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/tutorial panel.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://Art/Playtest Sprites/mediumAirGrass.png" type="Texture" id=35]
 [ext_resource path="res://Art/Playtest Sprites/lightAirFire.png" type="Texture" id=36]
 [ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=37]
+[ext_resource path="res://Art/Level/powerUpBox-Sheet.png" type="Texture" id=38]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 32 )
@@ -53,6 +54,10 @@ font_data = ExtResource( 31 )
 atlas = ExtResource( 37 )
 region = Rect2( 0, 0, 17, 6 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 38 )
+region = Rect2( 64, 0, 16, 24 )
+
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 31 )
 
@@ -63,9 +68,9 @@ __meta__ = {
 }
 next_level = "res://Scenes/Levels/Level6.tscn"
 level_number = 5
-coin_requirement1 = 12
-coin_requirement2 = 25
-coin_requirement3 = 51
+coin_requirement1 = 7
+coin_requirement2 = 15
+coin_requirement3 = 31
 level_ground_turrets = 5
 core_health = 25
 
@@ -168,6 +173,14 @@ margin_bottom = 132.0
 texture = SubResource( 4 )
 stretch_mode = 4
 
+[node name="TextureRect7" type="TextureRect" parent="TutorialUI/TutorialMenu"]
+margin_left = 127.0
+margin_top = 145.0
+margin_right = 151.0
+margin_bottom = 176.0
+texture = SubResource( 6 )
+stretch_mode = 4
+
 [node name="Subtitle2" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
 margin_left = 105.0
 margin_top = 118.0
@@ -179,6 +192,17 @@ bbcode_text = "[center]To hit air units, [color=#FFA500]manual aim[/color] is re
 They are [color=#FFA500]unaffected [/color]by ground attacks"
 text = "To hit air units, manual aim is required
 They are unaffected by ground attacks"
+scroll_active = false
+
+[node name="Subtitle3" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
+margin_left = 146.0
+margin_top = 158.0
+margin_right = 245.0
+margin_bottom = 174.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = " [color=#FFA500]Doubles[/color] rate of fire"
+text = " Doubles rate of fire"
 scroll_active = false
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
@@ -194,7 +218,7 @@ spawn_cooldown = 1
 entities = [ ExtResource( 30 ), ExtResource( 9 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 7 ), ExtResource( 25 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 3 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_holder = [ "10 10 10 10 13 13 13 16 16 16", "10 10 4 4 4 16 16 16", "6 6 6 6 16 16 16 16 6 6 6 0 0 0" ]
+wave_holder = [ "10 10 10 10 10", "13 13 13 13 13", "16 16 16 16 16", "10 10 10 13 13 13", "10 10 10 10 13 13 13 16 16 16" ]
 ground_enemy_holder_node = NodePath("../YSort/EntityHolder/GroundEnemyHolder")
 air_enemy_holder_node = NodePath("../YSort/EntityHolder/AirEnemyHolder")
 
@@ -287,5 +311,7 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="AirEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
 
 [node name="GroundEnemyHolder" type="Node2D" parent="YSort/EntityHolder"]
+
+[node name="6 6 6 6 16 16 16 16 6 6 6 0 0 0" type="Node" parent="."]
 
 [connection signal="pressed" from="TutorialUI/TutorialMenu/TutorialOverlay/TutorialButton" to="TutorialUI/TutorialMenu" method="_on_TutorialButton_pressed"]

@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://Code/Player/base_state.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Code/Boss/boss.gd"
+}, {
+"base": "Node",
+"class": "BossBaseState",
+"language": "GDScript",
+"path": "res://Code/Boss/boss_base_state.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Code/Enemy/enemy.gd"
@@ -81,6 +91,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BaseState": "",
+"Boss": "",
+"BossBaseState": "",
 "Enemy": "",
 "EnemyBaseState": "",
 "EnemyFollowState": "",

@@ -36,11 +36,11 @@ script = ExtResource( 16 )
 __meta__ = {
 "_editor_description_": ""
 }
-next_level = "res://Scenes/Levels/Level7.tscn"
+next_level = "res://Scenes/Levels/Level8.tscn"
 level_number = 7
-coin_requirement1 = 33
-coin_requirement2 = 67
-coin_requirement3 = 134
+coin_requirement1 = 24
+coin_requirement2 = 49
+coin_requirement3 = 99
 level_ground_turrets = 5
 level_electric_turrets = 3
 core_health = 30
@@ -54,7 +54,6 @@ camera_node = NodePath("../LevelCamera")
 [node name="LevelCamera" type="Camera2D" parent="."]
 pause_mode = 2
 position = Vector2( 192, 108 )
-current = true
 smoothing_enabled = true
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]

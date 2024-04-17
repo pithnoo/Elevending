@@ -189,6 +189,9 @@ hit_flash = NodePath("HitFlash")
 menu = "res://Scenes/MainMenu.tscn"
 core_detection_node = NodePath("CollisionShape2D")
 
+[node name="CorePosition" type="Position2D" parent="."]
+position = Vector2( -8, 24 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )
 texture = ExtResource( 1 )
