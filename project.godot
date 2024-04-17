@@ -262,6 +262,7 @@ pause={
 2d_physics/layer_8="EnemyAir"
 2d_physics/layer_9="PowerUp"
 2d_physics/layer_10="EnemyAttack"
+2d_physics/layer_11="Boss"
 
 [physics]
 

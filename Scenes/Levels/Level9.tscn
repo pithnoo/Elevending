@@ -1,12 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/PowerUps/BossItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Turrets/Entities/BossTurret.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/BossLauncherGrass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
@@ -122,10 +120,6 @@ maxAmmo = 20
 position = Vector2( 192, 68 )
 turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 
-[node name="Boss2" parent="YSort/Turrets" instance=ExtResource( 31 )]
-position = Vector2( 353, 24 )
-scale = Vector2( -1, 1 )
-
 [node name="EntityHolder" type="YSort" parent="YSort"]
 
 [node name="TurretHolder" type="Node2D" parent="YSort/EntityHolder"]
@@ -162,14 +156,11 @@ position = Vector2( 32, 24 )
 [node name="AttackPosition2" type="Position2D" parent="BossAttackPositions"]
 position = Vector2( 353, 24 )
 
-[node name="BossTurret" parent="." instance=ExtResource( 7 )]
-position = Vector2( 104, 168 )
-turret_time = 5
+[node name="AttackPosition3" type="Position2D" parent="BossAttackPositions"]
+position = Vector2( -32, 168 )
 
-[node name="BossLauncherGrass" parent="." instance=ExtResource( 8 )]
-position = Vector2( 32, 24 )
+[node name="AttackPosition4" type="Position2D" parent="BossAttackPositions"]
+position = Vector2( 416, 168 )
 
-[node name="BossLauncherGrass2" parent="." instance=ExtResource( 8 )]
-visible = false
-position = Vector2( 352, 24 )
-scale = Vector2( -1, 1 )
+[node name="Boss" parent="." instance=ExtResource( 31 )]
+position = Vector2( 192, 120 )

@@ -7,9 +7,6 @@ onready var core_position = $CorePosition
 
 export(String, FILE, "*.tscn,*.scn") var menu
 
-# now relying on global value from game manager
-# var game_over : bool
-
 export(NodePath) var core_detection_node
 onready var core_detection = get_node(core_detection_node)
 
@@ -21,7 +18,6 @@ var knockback_vector = Vector2.DOWN
 func _ready():
 	animations.play("Idle")
 	GameManager.core_position = core_position
-	print("updated")
 	GameManager.game_over = false
 
 func _on_AttackHurtBox_area_entered(area:Area2D):

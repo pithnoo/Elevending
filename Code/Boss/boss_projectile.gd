@@ -11,7 +11,6 @@ func _ready():
 	velocity = Vector2.ZERO
 
 func _physics_process(delta):
-	print("updated")
 	var target = GameManager.core_position.global_position
 	var direction = projectile_position.global_position.direction_to(target)
 

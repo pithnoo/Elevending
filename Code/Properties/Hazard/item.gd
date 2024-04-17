@@ -19,7 +19,6 @@ func _ready():
 func _process(delta):
 	if item_timer.is_stopped():
 		if type == item_type.BOSS:
-			# TODO: Here we're gonna put the point where a projectile is shot
 			var projectile = boss_projectile.instance()
 			var main = get_tree().current_scene	
 			main.add_child(projectile)

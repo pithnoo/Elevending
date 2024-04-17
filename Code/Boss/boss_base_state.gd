@@ -8,14 +8,17 @@ var boss: Boss
 func enter() -> void:
 	boss.animations.play(animation_name)
 
+	# INFO: after teleporting, the boss needs to reappear
+	boss.visible = true
+
 func exit() -> void:
   pass
 
-func input(_event: InputEvent) -> EnemyBaseState:
+func input(_event: InputEvent) -> BossBaseState:
   return null
 
-func process(_delta: float) -> EnemyBaseState:
+func process(_delta: float) -> BossBaseState:
   return null
 
-func physics_process(_delta: float) -> EnemyBaseState:
+func physics_process(_delta: float) -> BossBaseState:
   return null
