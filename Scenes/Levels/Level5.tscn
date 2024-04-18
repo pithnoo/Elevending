@@ -72,7 +72,7 @@ coin_requirement1 = 7
 coin_requirement2 = 15
 coin_requirement3 = 31
 level_ground_turrets = 5
-core_health = 25
+core_health = 30
 
 [node name="ScreenShake" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
