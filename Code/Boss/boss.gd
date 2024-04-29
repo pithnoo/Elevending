@@ -7,10 +7,15 @@ onready var boss_timer = $BossTimer
 onready var particle_generator = $ParticleGenerator
 onready var particle_position = $ParticlePosition
 
+export(NodePath) var ground_enemy_holder_node
+onready var ground_enemy_holder = get_node(ground_enemy_holder_node)
+
 # global counter to ensure that the boss doesn't enter it twice
 var vending_counter : int
 var hard_phase : bool = false
 var velocity
+
+export(Array, NodePath) var vending_positions
 
 func _ready():
 	states.init(self)

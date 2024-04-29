@@ -14,7 +14,7 @@ export(float) var easy_pause_time
 export(float) var hard_pause_time
 export(float) var move_speed
 
-# TODO: make a smoke partcile 2D to set active
+# TODO: make a smoke particle 2D to set active
 export(NodePath) var smoke_node
 onready var smoke_particle = get_node(smoke_node)
 
@@ -28,6 +28,11 @@ func enter():
 	# INFO: set boss in starting position to then place hazards
 	boss.global_position = start_position
 
+	for vending_position in boss.vending_positions:
+		var position = get_node(vending_position)
+		position.connect("easy_position", self, "spawn")
+		position.connect("hard_position", self, "spawn_hard")
+			
 	boss.velocity = Vector2.ZERO
 
 	# to show smoke as the boss is moving
@@ -43,6 +48,15 @@ func physics_process(delta):
 		boss.velocity = boss.move_and_slide(boss.velocity)
 	
 	if boss.global_position == end_position:
+		smoke_particle.visible = false 
 		return teleport_state
 
 	return null
+
+func spawn():
+	# INFO: particle generator will auto fetch boss global position so should be fine
+	boss.particle_generator.generate_particle(boss_vending_machine, boss)
+
+func spawn_hard():
+	if boss.hard_phase:
+		spawn()

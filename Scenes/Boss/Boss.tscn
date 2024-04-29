@@ -1,27 +1,33 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=3]
-[ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=4]
-[ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=5]
-[ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=6]
-[ext_resource path="res://Code/Properties/stats.gd" type="Script" id=7]
-[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=8]
-[ext_resource path="res://Code/Boss/BossStates/boss_stun_state.gd" type="Script" id=9]
-[ext_resource path="res://Code/Boss/BossStates/boss_ghost_state.gd" type="Script" id=11]
-[ext_resource path="res://Code/Boss/BossStates/boss_vending_state.gd" type="Script" id=12]
-[ext_resource path="res://Code/Boss/BossStates/boss_summon_state.gd" type="Script" id=13]
-[ext_resource path="res://Code/Boss/BossStates/boss_anim_state.gd" type="Script" id=14]
-[ext_resource path="res://Code/Boss/BossStates/boss_idle.gd" type="Script" id=15]
+[ext_resource path="res://Code/Properties/stats.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
+[ext_resource path="res://Code/Boss/BossStates/boss_summon_state.gd" type="Script" id=3]
+[ext_resource path="res://Code/Boss/BossStates/boss_ghost_state.gd" type="Script" id=4]
+[ext_resource path="res://Code/Boss/BossStates/boss_vending_state.gd" type="Script" id=5]
+[ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=6]
+[ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=7]
+[ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=8]
+[ext_resource path="res://Code/Boss/BossStates/boss_idle.gd" type="Script" id=9]
+[ext_resource path="res://Code/Boss/BossStates/boss_stun_state.gd" type="Script" id=10]
+[ext_resource path="res://Code/Boss/BossStates/boss_anim_state.gd" type="Script" id=11]
+[ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=12]
+[ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=13]
+[ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Code/Boss/BossStates/boss_teleport_state.gd" type="Script" id=16]
+[ext_resource path="res://Code/Boss/BossStates/boss_dead_state.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterLightGround.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassLightGround.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/FireLightGround.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 8 )
+shader = ExtResource( 2 )
 shader_param/active = false
 shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
 
 [sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 8 )
+shader = ExtResource( 2 )
 shader_param/active = false
 shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
 
@@ -187,42 +193,52 @@ radius = 5.09902
 
 [node name="Boss" type="KinematicBody2D"]
 
+[node name="ParticleGenerator" parent="." instance=ExtResource( 15 )]
+
 [node name="BossTimer" type="Timer" parent="."]
 
 [node name="Stats" type="Node" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 1 )
 max_health = 100
 
 [node name="StateManager" type="Node" parent="."]
 
 [node name="Start" type="Node" parent="StateManager"]
-script = ExtResource( 14 )
+script = ExtResource( 11 )
 animation_name = "Start"
 
 [node name="Dead" type="Node" parent="StateManager"]
-script = ExtResource( 14 )
-animation_name = "Dead"
+script = ExtResource( 17 )
 
 [node name="Idle" type="Node" parent="StateManager"]
-script = ExtResource( 15 )
+script = ExtResource( 9 )
 animation_name = "Idle"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
 
 [node name="Teleport" type="Node" parent="StateManager"]
+script = ExtResource( 16 )
+animation_name = "Idle"
 
 [node name="Stun" type="Node" parent="StateManager"]
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="GhostAttack" type="Node" parent="StateManager"]
-script = ExtResource( 11 )
+script = ExtResource( 4 )
+animation_name = "Idle"
 
 [node name="VendingAttack" type="Node" parent="StateManager"]
-script = ExtResource( 12 )
+script = ExtResource( 5 )
+animation_name = "Vending"
 
 [node name="SummonAttack" type="Node" parent="StateManager"]
-script = ExtResource( 13 )
+script = ExtResource( 3 )
+animation_name = "Idle"
+teleport_node = NodePath("../Teleport")
+entities = [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ]
+easy_entity_number = 6
+hard_entity_number = 10
 
 [node name="BossContainer" type="Node2D" parent="."]
 position = Vector2( 0, -3 )
@@ -230,31 +246,31 @@ position = Vector2( 0, -3 )
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )
 position = Vector2( 0, -16 )
-texture = ExtResource( 1 )
+texture = ExtResource( 14 )
 hframes = 23
 
 [node name="Machine" type="Sprite" parent="BossContainer"]
 material = SubResource( 8 )
 position = Vector2( 0, 1 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 hframes = 5
 
 [node name="BossCounter" type="Sprite" parent="BossContainer/Machine"]
 visible = false
 position = Vector2( 10, 4 )
-texture = ExtResource( 2 )
+texture = ExtResource( 13 )
 hframes = 5
 
 [node name="BossHealth" type="Sprite" parent="BossContainer/Machine"]
 position = Vector2( -9, 3 )
-texture = ExtResource( 4 )
+texture = ExtResource( 8 )
 hframes = 5
 
 [node name="HurtBox" type="Area2D" parent="BossContainer"]
 position = Vector2( 0, -0.375315 )
 collision_layer = 0
 collision_mask = 64
-script = ExtResource( 6 )
+script = ExtResource( 12 )
 entity_stats = NodePath("../../Stats")
 hit_flash = NodePath("../../HitFlash")
 
@@ -265,7 +281,7 @@ shape = SubResource( 1 )
 
 [node name="BossShadow" type="Sprite" parent="."]
 position = Vector2( 0, 24 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

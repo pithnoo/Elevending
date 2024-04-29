@@ -6,9 +6,9 @@
 [ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=4]
 [ext_resource path="res://Code/Effects/generate_particle.gd" type="Script" id=5]
 [ext_resource path="res://Code/Boss/boss_turret.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Projectiles/Item/BossItemDestroy.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/BossTurretDeath.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Projectiles/Item/BossItemProjectile.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Boss/BossItemDestroy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Boss/BossTurretDeath.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Boss/BossItemProjectile.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 2 )

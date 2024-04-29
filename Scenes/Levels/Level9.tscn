@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/PowerUps/BossItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Boss/BossItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Boss/VendingPositionEasy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Boss/VendingPositionHard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
@@ -69,7 +71,7 @@ one_shot = true
 
 [node name="BossItemSpawnZone" type="Node2D" parent="."]
 script = ExtResource( 5 )
-spawn_cooldown = 5
+spawn_cooldown = 1000
 entities = [ ExtResource( 3 ) ]
 item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 max_existing_items = 5
@@ -132,20 +134,20 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 [node name="VendingAttackPositions" type="Node2D" parent="."]
 position = Vector2( 0, 8 )
 
-[node name="Vending1" type="Position2D" parent="VendingAttackPositions"]
-position = Vector2( 104, 160 )
-
-[node name="Vending2" type="Position2D" parent="VendingAttackPositions"]
-position = Vector2( 148, 160 )
-
-[node name="Vending3" type="Position2D" parent="VendingAttackPositions"]
+[node name="VendingPositionEasy" parent="VendingAttackPositions" instance=ExtResource( 6 )]
 position = Vector2( 192, 160 )
 
-[node name="Vending4" type="Position2D" parent="VendingAttackPositions"]
-position = Vector2( 236, 160 )
+[node name="VendingPositionEasy2" parent="VendingAttackPositions" instance=ExtResource( 6 )]
+position = Vector2( 104, 160 )
 
-[node name="Vending5" type="Position2D" parent="VendingAttackPositions"]
+[node name="VendingPositionEasy3" parent="VendingAttackPositions" instance=ExtResource( 6 )]
 position = Vector2( 280, 160 )
+
+[node name="VendingPositionHard" parent="VendingAttackPositions" instance=ExtResource( 7 )]
+position = Vector2( 148, 160 )
+
+[node name="VendingPositionHard2" parent="VendingAttackPositions" instance=ExtResource( 7 )]
+position = Vector2( 236, 160 )
 
 [node name="BossAttackPositions" type="Node2D" parent="."]
 

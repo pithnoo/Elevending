@@ -8,21 +8,21 @@
 [ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Projectiles/Item/BossItemDestroy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Boss/BossItemDestroy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathGrass.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Projectiles/Item/BossItemProjectile.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Boss/BossItemProjectile.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/active = false
-shader_param/colour = Color( 0.301961, 0.607843, 0.901961, 1 )
+shader_param/colour = Color( 0.984314, 0.419608, 0.113725, 1 )
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/active = false
-shader_param/colour = Color( 0.301961, 0.607843, 0.901961, 1 )
+shader_param/colour = Color( 0.984314, 0.419608, 0.113725, 1 )
 
 [sub_resource type="Animation" id=15]
 resource_name = "EasyCounter"
@@ -210,7 +210,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[node name="BossLauncherWater" type="Node2D"]
+[node name="BossLauncherFire" type="Node2D"]
 script = ExtResource( 5 )
 death_effect = ExtResource( 9 )
 death_particle = ExtResource( 10 )
@@ -229,7 +229,7 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, 1.6862 )
+position = Vector2( 0, -0.765172 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )
@@ -243,7 +243,7 @@ material = SubResource( 8 )
 position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 hframes = 5
-frame = 3
+frame = 1
 
 [node name="BossCounter" type="Sprite" parent="BossContainer/Machine"]
 position = Vector2( 10, 4 )
@@ -262,7 +262,7 @@ collision_mask = 64
 script = ExtResource( 1 )
 entity_stats = NodePath("../../Stats")
 hit_flash = NodePath("../../HitFlash")
-type = 1
+type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossContainer/HurtBox"]
 visible = false

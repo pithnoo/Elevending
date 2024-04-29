@@ -28,6 +28,7 @@ onready var switchTimer = $SwitchTimer
 var currentTurret
 export(int) var maxAmmo = 10
 var currentAmmo : int
+var currentManual : bool
 
 var activeTurret : int = 0
 
@@ -85,6 +86,7 @@ func _process(delta):
 		if wr.get_ref():
 			currentTurret.queue_free()
 			currentAmmo = currentTurret.ammo
+			currentManual = currentTurret.manualControl
 
 		activeTurret += 1
 
@@ -101,6 +103,7 @@ func switch_turret(turretIndex: int):
 
 	currentTurret.ammo = currentAmmo
 	currentTurret.cooldown = fireRate
+	currentTurret.manualControl = currentManual
 
 	GameManager.is_manual = false
 
