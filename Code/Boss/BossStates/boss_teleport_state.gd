@@ -11,12 +11,15 @@ export(float) var easy_cooldown
 
 func enter():
 	.enter()
+	boss.global_position = idle_position
+
 	if boss.hard_phase:
 		boss.boss_timer.start(hard_cooldown)
 	else:
 		boss.boss_timer.start(easy_cooldown)
 
-	boss.global_position = idle_position
+func disappear():
+	boss.visible = false
 
 func process(delta):
 	if boss.boss_timer.is_stopped():

@@ -19,3 +19,9 @@ func process(delta):
 func machine_down():
 	# TODO: connect this to the summoned machine
 	summon_counter -= 1
+
+func spawn_left():
+	pass
+
+func spawn_right():
+	pass

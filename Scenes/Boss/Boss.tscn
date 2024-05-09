@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Code/Properties/stats.gd" type="Script" id=1]
 [ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=2]
@@ -107,16 +107,138 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("BossContainer/HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BossContainer/BossAvatar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "Start"
 
+[sub_resource type="Animation" id=17]
+resource_name = "Teleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("StateManager/Teleport")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disappear"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Attack"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Dead"
+
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Idle"
 
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Start"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Teleport"
+
 [sub_resource type="AnimationNodeStateMachine" id=4]
+states/Attack/node = SubResource( 18 )
+states/Attack/position = Vector2( 506, 96 )
+states/Dead/node = SubResource( 19 )
+states/Dead/position = Vector2( 686, 96 )
 states/Idle/node = SubResource( 6 )
 states/Idle/position = Vector2( 334, 96 )
+states/Start/node = SubResource( 20 )
+states/Start/position = Vector2( 177, 96 )
+states/Teleport/node = SubResource( 21 )
+states/Teleport/position = Vector2( 177, 182 )
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=5]
@@ -244,6 +366,7 @@ hard_entity_number = 10
 position = Vector2( 0, -3 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
+visible = false
 material = SubResource( 7 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 14 )
@@ -267,6 +390,7 @@ texture = ExtResource( 8 )
 hframes = 5
 
 [node name="HurtBox" type="Area2D" parent="BossContainer"]
+visible = false
 position = Vector2( 0, -0.375315 )
 collision_layer = 0
 collision_mask = 64
@@ -275,7 +399,6 @@ entity_stats = NodePath("../../Stats")
 hit_flash = NodePath("../../HitFlash")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossContainer/HurtBox"]
-visible = false
 position = Vector2( -0.5, -1.47042 )
 shape = SubResource( 1 )
 
@@ -295,6 +418,7 @@ anims/Dead = SubResource( 14 )
 anims/Idle = SubResource( 10 )
 anims/RESET = SubResource( 3 )
 anims/Start = SubResource( 15 )
+anims/Teleport = SubResource( 17 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 4 )
