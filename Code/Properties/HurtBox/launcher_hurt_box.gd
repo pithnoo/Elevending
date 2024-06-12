@@ -3,7 +3,8 @@ extends HurtBox
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
 
-func _on_HurtBox_area_entered(area:Area2D):
+
+func _on_HurtBox_area_entered(area: Area2D):
 	match type:
 		damage_type.GRASS:
 			match area.type:

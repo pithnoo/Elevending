@@ -3,9 +3,11 @@ extends ItemTurretState
 export(NodePath) var electric_node
 onready var electric_state = get_node(electric_node)
 
+
 func enter() -> void:
 	.enter()
 	AudioManager.play("AbilitySwitch")
+
 
 func process(_delta: float) -> ItemBaseState:
 	if GameManager.ground_turret_number <= 0:

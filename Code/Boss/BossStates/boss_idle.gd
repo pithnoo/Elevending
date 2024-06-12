@@ -1,40 +1,21 @@
 extends BossBaseState
 
-export(NodePath) var ghost_node
-export(NodePath) var vending_node 
-export(NodePath) var summon_node
+export(float) var hard_cooldown
+export(float) var easy_cooldown
 
-onready var ghost_state = get_node(ghost_node)
-onready var vending_state = get_node(vending_node)
-onready var summon_state = get_node(summon_node)
-
-var random = RandomNumberGenerator.new()
-
-var vending_counter = 0
-
-export(int) var attacks_til_ghost
+export(NodePath) var decide_node
+onready var decide_state = get_node(decide_node)
 
 func enter():
 	.enter()
 	boss.visible = true
+	if boss.hard_phase:
+		boss.boss_timer.start(hard_cooldown)
+	else:
+		boss.boss_timer.start(easy_cooldown)
 
 func process(_delta) -> BossBaseState:
-	random.randomize()
-
-	var boss_attack = random.randi_range(0,1)
-	
-	vending_counter += 1
-	match boss_attack:
-		0:
-			return vending_state
-		1:
-			return summon_state
-		_:
-			print("unknown attack chosen")
-
-	if vending_counter >= attacks_til_ghost:
-		# reset counter
-		vending_counter = 0
-		return ghost_state
+	if boss.boss_timer.is_stopped():
+		return decide_state
 
 	return null

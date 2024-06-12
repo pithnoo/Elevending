@@ -7,9 +7,11 @@ export(NodePath) var core_range
 onready var follow_state = get_node(follow_node)
 onready var core_detect = get_node(core_range)
 
+
 func enter() -> void:
-  .enter()
-  enemy.velocity = Vector2.ZERO
+	.enter()
+	enemy.velocity = Vector2.ZERO
+
 
 func process(_delta: float) -> EnemyBaseState:
 	if core_detect.entity_detected():

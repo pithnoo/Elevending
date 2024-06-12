@@ -3,19 +3,24 @@ extends Node
 
 export(String) var animation_name
 
-var item : Item
+var item: Item
+
 
 func enter() -> void:
 	item.animations.play(animation_name)
 
+
 func exit() -> void:
-  pass
+	pass
+
 
 func input(_event: InputEvent) -> ItemBaseState:
-  return null
+	return null
+
 
 func process(_delta: float) -> ItemBaseState:
-  return null
+	return null
+
 
 func physics_process(_delta: float) -> ItemBaseState:
-  return null
+	return null

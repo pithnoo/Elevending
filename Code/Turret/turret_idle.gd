@@ -1,4 +1,4 @@
-extends TurretBaseState 
+extends TurretBaseState
 
 export(NodePath) var attack_node
 export(NodePath) var manual_node
@@ -6,8 +6,10 @@ export(NodePath) var manual_node
 onready var attack_state: TurretBaseState = get_node(attack_node)
 onready var manual_state: TurretBaseState = get_node(manual_node)
 
+
 func enter() -> void:
 	.enter()
+
 
 func process(_delta: float) -> TurretBaseState:
 	if turret.manualControl == true:

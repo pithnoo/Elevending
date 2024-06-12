@@ -9,10 +9,12 @@ var animation_finished
 
 export(bool) var will_place = false
 
+
 func enter() -> void:
 	.enter()
 	animation_finished = false
 	AudioManager.play("TurretPlace")
+
 
 func process(_delta: float) -> TurretBaseState:
 	if animation_finished:
@@ -20,8 +22,9 @@ func process(_delta: float) -> TurretBaseState:
 			return empty_state
 		else:
 			return idle_state
-	
+
 	return null
+
 
 func start_finished():
 	animation_finished = true

@@ -1,4 +1,4 @@
-extends EnemyFollowState 
+extends EnemyFollowState
 
 export(NodePath) var idle_node
 export(NodePath) var attack_node
@@ -15,9 +15,11 @@ onready var attack_state: EnemyBaseState = get_node(attack_node)
 
 var canAttack = false
 
+
 func enter() -> void:
 	.enter()
 	enemy.velocity = Vector2.ZERO
+
 
 func physics_process(delta: float) -> EnemyBaseState:
 	if canAttack:
@@ -31,5 +33,5 @@ func physics_process(delta: float) -> EnemyBaseState:
 	return null
 
 
-func _on_AttackRange_body_entered(body:Node):
+func _on_AttackRange_body_entered(body: Node):
 	canAttack = true

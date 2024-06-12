@@ -5,12 +5,15 @@ export(PackedScene) var finish_particle
 export(NodePath) var emission_position
 onready var emission = get_node(emission_position)
 
+
 func enter() -> void:
 	.enter()
 	AudioManager.play("TurretPlace")
 
+
 func turret_slam():
 	AudioManager.play("TurretSlam")
+
 
 func attack_finished():
 	AudioManager.play("TurretUsed")

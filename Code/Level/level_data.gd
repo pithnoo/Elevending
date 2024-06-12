@@ -13,13 +13,14 @@ export(int) var level_ground_turrets
 export(int) var level_electric_turrets
 export(int) var core_health
 
-var previous_level_rating : int
-var level_rating : int
+var previous_level_rating: int
+var level_rating: int
 
 # bool to check if the level already has a rating
-var has_rating : bool
+var has_rating: bool
 
 onready var level_camera = $LevelCamera
+
 
 func _ready():
 	CoreStats.health = core_health
@@ -42,14 +43,23 @@ func _ready():
 	level_camera.current = true
 
 	# during transitions, the player will be unable to pause
-  #GameManager.can_pause = true
+
+
+#GameManager.can_pause = true
+
 
 func rate_level():
 	if GameManager.game_currency < coin_requirement1:
 		level_rating = 0
-	elif GameManager.game_currency >= coin_requirement1 && GameManager.game_currency < coin_requirement2:
+	elif (
+		GameManager.game_currency >= coin_requirement1
+		&& GameManager.game_currency < coin_requirement2
+	):
 		level_rating = 1
-	elif GameManager.game_currency >= coin_requirement2 && GameManager.game_currency < coin_requirement3:
+	elif (
+		GameManager.game_currency >= coin_requirement2
+		&& GameManager.game_currency < coin_requirement3
+	):
 		level_rating = 2
 	else:
 		# in any other case, the score exceeds all coin requirements
@@ -72,6 +82,7 @@ func rate_level():
 	#print(LevelManager.level_ratings)
 
 	GameManager.emit_signal("display_rating", level_rating)
+
 
 func goto_next_level():
 	# transition to next level

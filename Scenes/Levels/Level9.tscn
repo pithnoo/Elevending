@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PowerUps/HealShop.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Boss/VendingPositionEasy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Boss/VendingPositionHard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Code/Properties/stats.gd" type="Script" id=8]
+[ext_resource path="res://Art/particle1.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Turrets/Entities/TurretManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
@@ -14,6 +16,474 @@
 [ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Boss/BossLauncherFire.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=19]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=20]
+[ext_resource path="res://Art/Enemies/enemyShadows-Sheet-export.png" type="Texture" id=21]
+[ext_resource path="res://Code/Boss/boss.gd" type="Script" id=22]
+[ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/WaterLightGround.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Code/Boss/BossStates/boss_teleport_state.gd" type="Script" id=25]
+[ext_resource path="res://Code/Boss/BossStates/boss_summon_state.gd" type="Script" id=26]
+[ext_resource path="res://Code/Boss/BossStates/boss_dead_state.gd" type="Script" id=27]
+[ext_resource path="res://Code/Boss/BossStates/boss_idle.gd" type="Script" id=28]
+[ext_resource path="res://Code/Boss/BossStates/boss_anim_state.gd" type="Script" id=29]
+[ext_resource path="res://Code/Properties/HurtBox/hurt_box.gd" type="Script" id=30]
+[ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=31]
+[ext_resource path="res://Scenes/Boss/BossTurret.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Code/Boss/BossStates/boss_hurt_state.gd" type="Script" id=33]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/FireLightGround.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Code/Boss/BossStates/boss_ghost_state.gd" type="Script" id=35]
+[ext_resource path="res://Code/Boss/BossStates/boss_decide_state.gd" type="Script" id=36]
+[ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassLightGround.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=38]
+[ext_resource path="res://Scenes/Boss/BossLauncherWater.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Scenes/Boss/BossLauncherGrass.tscn" type="PackedScene" id=40]
+[ext_resource path="res://Code/Boss/BossStates/boss_vending_state.gd" type="Script" id=41]
+[ext_resource path="res://Code/Boss/boss_state_manager.gd" type="Script" id=42]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.630952, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=37]
+resource_local_to_scene = true
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = SubResource( 5 )
+color = Color( 0.501961, 0.501961, 0.501961, 1 )
+
+[sub_resource type="Curve" id=31]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.550562, 0.0181818 ), -3.74205, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=32]
+curve = SubResource( 31 )
+
+[sub_resource type="ParticlesMaterial" id=34]
+flag_disable_z = true
+direction = Vector3( 1, -5, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 32 )
+color = Color( 0.501961, 0.501961, 0.501961, 1 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 20 )
+shader_param/active = false
+shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 20 )
+shader_param/active = false
+shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.5, 16 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "Attack"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/BossAvatar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, -16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 19, 20, 21 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VendingArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Dead"
+
+[sub_resource type="Animation" id=23]
+resource_name = "Decide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("StateManager/Decide")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disappear"
+} ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "Hurt"
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle"
+length = 3.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6, 3.2 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ), Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/BossAvatar:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BossContainer/BossAvatar:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BossContainer/HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BossContainer/BossAvatar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BossContainer/BossAvatar:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("VendingArea/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Start"
+
+[sub_resource type="Animation" id=17]
+resource_name = "Teleport"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("StateManager/Teleport")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disappear"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Attack"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Dead"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Start"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Teleport"
+
+[sub_resource type="AnimationNodeStateMachine" id=36]
+states/Attack/node = SubResource( 18 )
+states/Attack/position = Vector2( 506, 96 )
+states/Dead/node = SubResource( 19 )
+states/Dead/position = Vector2( 686, 96 )
+states/Idle/node = SubResource( 6 )
+states/Idle/position = Vector2( 334, 96 )
+states/Start/node = SubResource( 20 )
+states/Start/position = Vector2( 177, 96 )
+states/Teleport/node = SubResource( 21 )
+states/Teleport/position = Vector2( 177, 182 )
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=38]
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Start"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossContainer/BossAvatar:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BossContainer/Machine:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="CircleShape2D" id=16]
+radius = 2.0
 
 [node name="Level9" type="Node2D"]
 script = ExtResource( 16 )
@@ -78,9 +548,9 @@ max_existing_items = 5
 distance_between_items = 30.0
 
 [node name="SpawnArea" type="ReferenceRect" parent="BossItemSpawnZone"]
-margin_left = 65.0
+margin_left = 64.0
 margin_top = 88.0
-margin_right = 315.0
+margin_right = 314.0
 margin_bottom = 200.0
 border_color = Color( 0.992157, 1, 0, 1 )
 __meta__ = {
@@ -147,7 +617,27 @@ position = Vector2( 280, 160 )
 position = Vector2( 148, 160 )
 
 [node name="VendingPositionHard2" parent="VendingAttackPositions" instance=ExtResource( 7 )]
-position = Vector2( 236, 160 )
+position = Vector2( 232, 160 )
+
+[node name="EnemySpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 32, 232 )
+
+[node name="Spawn2" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 96, 232 )
+
+[node name="Spawn3" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 160, 232 )
+
+[node name="Spawn4" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 224, 232 )
+
+[node name="Spawn5" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 288, 232 )
+
+[node name="Spawn6" type="Position2D" parent="EnemySpawnPoints"]
+position = Vector2( 352, 232 )
 
 [node name="BossAttackPositions" type="Node2D" parent="."]
 
@@ -165,3 +655,187 @@ position = Vector2( 416, 168 )
 
 [node name="IdlePosition" type="Position2D" parent="BossAttackPositions"]
 position = Vector2( 192, 128 )
+
+[node name="Boss" type="KinematicBody2D" parent="."]
+position = Vector2( 192, 120 )
+script = ExtResource( 22 )
+dead_node = NodePath("StateManager/Dead")
+ground_enemy_holder_node = NodePath("../YSort/EntityHolder/GroundEnemyHolder")
+
+[node name="BoostSmoke" type="Particles2D" parent="Boss"]
+visible = false
+position = Vector2( -16, 0 )
+process_material = SubResource( 37 )
+texture = ExtResource( 9 )
+
+[node name="Smoke" type="Particles2D" parent="Boss"]
+visible = false
+position = Vector2( 0, -8 )
+amount = 4
+process_material = SubResource( 34 )
+texture = ExtResource( 9 )
+
+[node name="ParticleGenerator" parent="Boss" instance=ExtResource( 17 )]
+
+[node name="BossTimer" type="Timer" parent="Boss"]
+one_shot = true
+
+[node name="Stats" type="Node" parent="Boss"]
+script = ExtResource( 8 )
+max_health = 100
+
+[node name="StateManager" type="Node" parent="Boss"]
+script = ExtResource( 42 )
+starting_state = NodePath("Idle")
+
+[node name="Start" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 29 )
+animation_name = "Start"
+
+[node name="Dead" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 27 )
+animation_name = "Dead"
+
+[node name="Idle" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 28 )
+animation_name = "Idle"
+hard_cooldown = 2.0
+easy_cooldown = 2.0
+decide_node = NodePath("../Decide")
+
+[node name="Teleport" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 25 )
+animation_name = "Teleport"
+idle_node = NodePath("../Idle")
+idle_position_node = NodePath("../../../BossAttackPositions/IdlePosition")
+
+[node name="Hurt" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 33 )
+animation_name = "Hurt"
+
+[node name="GhostAttack" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 35 )
+animation_name = "Attack"
+teleport_node = NodePath("../Teleport")
+hurt_node = NodePath("../Hurt")
+fire_machine = ExtResource( 18 )
+water_machine = ExtResource( 39 )
+grass_machine = ExtResource( 40 )
+left_attack = NodePath("../../../BossAttackPositions/AttackPosition1")
+right_attack = NodePath("../../../BossAttackPositions/AttackPosition2")
+
+[node name="VendingAttack" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 41 )
+animation_name = "Attack"
+teleport_node = NodePath("../Teleport")
+boss_vending_machine = ExtResource( 32 )
+start_position_node = NodePath("../../../BossAttackPositions/AttackPosition3")
+end_position_node = NodePath("../../../BossAttackPositions/AttackPosition4")
+easy_pause_time = 1.0
+hard_pause_time = 2.0
+move_speed = 1000.0
+smoke_node = NodePath("../../BoostSmoke")
+vending_positions = [ NodePath("../../../VendingAttackPositions/VendingPositionEasy"), NodePath("../../../VendingAttackPositions/VendingPositionEasy2"), NodePath("../../../VendingAttackPositions/VendingPositionEasy3"), NodePath("../../../VendingAttackPositions/VendingPositionHard"), NodePath("../../../VendingAttackPositions/VendingPositionHard2") ]
+
+[node name="SummonAttack" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 26 )
+animation_name = "Summon"
+teleport_node = NodePath("../Teleport")
+entities = [ ExtResource( 24 ), ExtResource( 37 ), ExtResource( 34 ) ]
+spawn_points = [ NodePath("../../../EnemySpawnPoints/Spawn1"), NodePath("../../../EnemySpawnPoints/Spawn2"), NodePath("../../../EnemySpawnPoints/Spawn3"), NodePath("../../../EnemySpawnPoints/Spawn4"), NodePath("../../../EnemySpawnPoints/Spawn5"), NodePath("../../../EnemySpawnPoints/Spawn6") ]
+spawn_cooldown = 1
+easy_entity_number = 6
+hard_entity_number = 10
+
+[node name="Decide" type="Node" parent="Boss/StateManager"]
+script = ExtResource( 36 )
+animation_name = "Decide"
+ghost_node = NodePath("../GhostAttack")
+vending_node = NodePath("../VendingAttack")
+summon_node = NodePath("../SummonAttack")
+attacks_til_ghost = 3
+
+[node name="BossContainer" type="Node2D" parent="Boss"]
+position = Vector2( 0, -3 )
+
+[node name="BossAvatar" type="Sprite" parent="Boss/BossContainer"]
+material = SubResource( 7 )
+position = Vector2( 0, -16 )
+texture = ExtResource( 31 )
+hframes = 23
+
+[node name="Machine" type="Sprite" parent="Boss/BossContainer"]
+material = SubResource( 8 )
+position = Vector2( 0, 1 )
+texture = ExtResource( 38 )
+hframes = 5
+
+[node name="BossCounter" type="Sprite" parent="Boss/BossContainer/Machine"]
+visible = false
+position = Vector2( 10, 4 )
+texture = ExtResource( 23 )
+hframes = 5
+
+[node name="BossHealth" type="Sprite" parent="Boss/BossContainer/Machine"]
+position = Vector2( -9, 3 )
+texture = ExtResource( 19 )
+hframes = 5
+
+[node name="HurtBox" type="Area2D" parent="Boss/BossContainer"]
+visible = false
+position = Vector2( 0, -0.375315 )
+collision_layer = 0
+collision_mask = 64
+script = ExtResource( 30 )
+entity_stats = NodePath("../../Stats")
+hit_flash = NodePath("../../HitFlash")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/BossContainer/HurtBox"]
+position = Vector2( -0.5, -1.47042 )
+shape = SubResource( 1 )
+
+[node name="BossShadow" type="Sprite" parent="Boss"]
+position = Vector2( 0, 24 )
+texture = ExtResource( 21 )
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
+visible = false
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Boss"]
+anims/Attack = SubResource( 13 )
+anims/Dead = SubResource( 14 )
+anims/Decide = SubResource( 23 )
+anims/Hurt = SubResource( 22 )
+anims/Idle = SubResource( 10 )
+anims/RESET = SubResource( 35 )
+anims/Start = SubResource( 15 )
+anims/Teleport = SubResource( 17 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Boss"]
+tree_root = SubResource( 36 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 38 )
+
+[node name="HitFlash" type="AnimationPlayer" parent="Boss"]
+reset_on_save = false
+anims/RESET = SubResource( 11 )
+anims/Start = SubResource( 12 )
+
+[node name="VendingArea" type="Area2D" parent="Boss"]
+position = Vector2( -4, 0 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/VendingArea"]
+shape = SubResource( 16 )
+disabled = true
+
+[node name="BossLauncherGrass" parent="." instance=ExtResource( 40 )]
+position = Vector2( 312, 104 )
+scale = Vector2( -1, 1 )
+
+[connection signal="no_health" from="Boss/Stats" to="Boss" method="_on_Stats_no_health"]
+[connection signal="area_entered" from="Boss/BossContainer/HurtBox" to="Boss/BossContainer/HurtBox" method="_on_HurtBox_area_entered"]

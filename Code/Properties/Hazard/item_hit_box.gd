@@ -13,15 +13,17 @@ signal item_heal
 signal item_ammo
 signal item_shoot
 
+
 func _ready():
 	life_timer.start(projectile_life_time)
+
 
 func _process(delta):
 	if life_timer.is_stopped():
 		collection_complete()
 
-func _on_HitBox_area_entered(area:Area2D):
 
+func _on_HitBox_area_entered(area: Area2D):
 	get_node(hit_flash).play("Start")
 
 	match area.type:
@@ -37,8 +39,9 @@ func _on_HitBox_area_entered(area:Area2D):
 	area.destroy()
 
 	# get_node(particle_generator).generate_particle(item_destroyed, particle_position)
-	
+
 	collection_complete()
+
 
 func collection_complete():
 	emit_signal("item_destroyed")

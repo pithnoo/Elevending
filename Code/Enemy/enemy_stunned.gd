@@ -1,4 +1,4 @@
-extends EnemyBaseState 
+extends EnemyBaseState
 
 export(NodePath) var follow_node
 onready var follow_state: EnemyBaseState = get_node(follow_node)
@@ -11,6 +11,7 @@ export(int) var stun_time
 
 var particle
 
+
 func enter() -> void:
 	.enter()
 	enemy.velocity = Vector2.ZERO
@@ -19,6 +20,7 @@ func enter() -> void:
 	enemy.add_child(particle)
 
 	timer.start(stun_time)
+
 
 func process(_delta: float) -> EnemyBaseState:
 	if timer.is_stopped():

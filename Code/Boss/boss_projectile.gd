@@ -7,8 +7,10 @@ onready var projectile_position = get_node(position_node)
 
 var velocity
 
+
 func _ready():
 	velocity = Vector2.ZERO
+
 
 func _physics_process(delta):
 	var target = GameManager.core_position.global_position
@@ -16,7 +18,8 @@ func _physics_process(delta):
 
 	velocity = velocity.move_toward(direction * 1000, delta * projectile_speed)
 
-	move_and_slide(velocity)	
+	move_and_slide(velocity)
+
 
 func _on_HitBox_collided():
-  AudioManager.play("EnemyDestroyed")
+	AudioManager.play("EnemyDestroyed")

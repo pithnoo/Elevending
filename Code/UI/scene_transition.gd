@@ -2,22 +2,23 @@ extends CanvasLayer
 
 onready var animations = $AnimationPlayer
 
-signal show_upgrades 
+signal show_upgrades
 
-var can_press : bool = false
+var can_press: bool = false
 
 export(NodePath) var particle_position_node
 onready var particle_position = get_node(particle_position_node)
 
 export(PackedScene) var destroy_effect
-var game_over : bool = false
+var game_over: bool = false
 
 onready var screen_shake = $ScreenShake
 onready var transition_camera = $TransitionCamera
 
 signal transition_shake
 
-func blind_transition(target : String) -> void:
+
+func blind_transition(target: String) -> void:
 	AudioManager.play("BlindTransition")
 	GameManager.can_pause = false
 
@@ -34,10 +35,11 @@ func blind_transition(target : String) -> void:
 	GameManager.change_game_cursor(0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-  # WARNING: this should be set if the tutorial panel isn't called
+
+# WARNING: this should be set if the tutorial panel isn't called
 
 
-func upgrade_transition(target : String) -> void:
+func upgrade_transition(target: String) -> void:
 	GameManager.can_pause = false
 
 	# pauses game for upgrade menu
@@ -62,7 +64,8 @@ func upgrade_transition(target : String) -> void:
 	emit_signal("show_upgrades")
 	GameManager.can_pause = true
 
-func return_transition(target : String) -> void:
+
+func return_transition(target: String) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	animations.play("ReturnEnter")
@@ -74,7 +77,8 @@ func return_transition(target : String) -> void:
 	yield(animations, "animation_finished")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func over_transition(target : String) -> void:
+
+func over_transition(target: String) -> void:
 	get_tree().paused = true
 
 	AudioManager.play("BlindTransition")
@@ -89,6 +93,7 @@ func over_transition(target : String) -> void:
 	GameManager.change_game_cursor(0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+
 func game_over_effect() -> void:
 	AudioManager.play("GameOver")
 	transition_camera.current = true
@@ -99,14 +104,16 @@ func game_over_effect() -> void:
 	particle_position.add_child(effect)
 	effect.global_position = particle_position.global_position
 
+
 func _on_MenuButton_pressed():
 	animations.play_backwards("GameReturn")
 	can_press = false
 
 	yield(animations, "animation_finished")
-	get_tree().paused = false 
+	get_tree().paused = false
+
 
 func unpause():
-  if not GameManager.has_tutorial:
-    get_tree().paused = false
-    GameManager.can_pause = true
+	if not GameManager.has_tutorial:
+		get_tree().paused = false
+		GameManager.can_pause = true

@@ -1,10 +1,11 @@
 class_name Hazard
-extends Area2D 
+extends Area2D
 
 export(PackedScene) var deathEffect
 export(int) var damage
 
 signal collided
+
 
 func destroy():
 	var effect = deathEffect.instance()

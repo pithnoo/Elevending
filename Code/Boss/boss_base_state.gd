@@ -3,7 +3,8 @@ extends Node
 
 export(String) var animation_name
 
-var boss: Boss 
+var boss: Boss
+
 
 func enter() -> void:
 	boss.animations.play(animation_name)
@@ -11,14 +12,18 @@ func enter() -> void:
 	# INFO: after teleporting, the boss needs to reappear
 	boss.visible = true
 
+
 func exit() -> void:
-  pass
+	pass
+
 
 func input(_event: InputEvent) -> BossBaseState:
-  return null
+	return null
+
 
 func process(_delta: float) -> BossBaseState:
-  return null
+	return null
+
 
 func physics_process(_delta: float) -> BossBaseState:
-  return null
+	return null

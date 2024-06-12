@@ -19,7 +19,8 @@ export(float) var place_time
 export(String, FILE, "*png") var turret_cursor
 export(String, FILE, "*png") var neutral_cursor
 
-var can_place : bool = true
+var can_place: bool = true
+
 
 func place_turret():
 	item.animations.play(animation_name)
@@ -37,6 +38,7 @@ func place_turret():
 
 	turret.global_position = turret_position
 	effect.global_position = fire_point
+
 
 func change_cursor():
 	if item.can_place:

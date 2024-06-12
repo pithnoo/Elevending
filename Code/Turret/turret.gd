@@ -22,17 +22,21 @@ var manualControl: bool = false
 var decreaseAmmo: bool = true
 
 # turret variables to be changed by turretManager
-export(float) var cooldown 
+export(float) var cooldown
+
 
 func _ready():
-  states.init(self)
+	states.init(self)
+
 
 # only information that needs to be updated is process
 func _process(delta):
 	states.process(delta)
 
+
 func power_up():
 	particleGenerator.generate_particle(power_up_effect, power_position)
+
 
 func reset_targets():
 	attackRange.clear_bodies()

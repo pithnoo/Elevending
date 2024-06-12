@@ -13,7 +13,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.630952, 0 ), 0.0, 0.0, 0, 
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=9]
 resource_local_to_scene = true
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
@@ -81,7 +81,7 @@ projectile_life_time = 1
 amount = 15
 lifetime = 0.75
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 9 )
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

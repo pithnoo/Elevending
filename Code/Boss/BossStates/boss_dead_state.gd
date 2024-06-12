@@ -1,4 +1,5 @@
-extends BossBaseState 
+extends BossBaseState
+
 
 func enter():
 	.enter()

@@ -2,7 +2,7 @@ extends Node
 
 onready var boostTimer = $BoostTimer
 export(int) var boostTime
-var has_boosted : bool = false
+var has_boosted: bool = false
 
 export(float) var fireRate
 var fireRateBuffer
@@ -13,7 +13,7 @@ export(int) var startingTurret
 export(Array, PackedScene) var turrets
 export(NodePath) var other_turret
 
-export(String) var turretInput 
+export(String) var turretInput
 export(String) var manualInput
 export(String) var resetInput
 export(String) var itemInput
@@ -27,10 +27,11 @@ onready var switchTimer = $SwitchTimer
 
 var currentTurret
 export(int) var maxAmmo = 10
-var currentAmmo : int
-var currentManual : bool
+var currentAmmo: int
+var currentManual: bool
 
-var activeTurret : int = 0
+var activeTurret: int = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,8 +43,8 @@ func _ready():
 	GameManager.connect("ammo_reload", self, "turret_reload")
 	GameManager.connect("fire_rate_doubled", self, "increase_fire_rate")
 
-func _process(delta):
 
+func _process(delta):
 	if boostTimer.is_stopped():
 		fireRate = fireRateBuffer
 
@@ -77,7 +78,6 @@ func _process(delta):
 		GameManager.is_manual = false
 
 	if switchInput && switchTimer.is_stopped() && currentTurret.ammo != 0:
-
 		switchTimer.start(cooldown)
 
 		# a reference to where the turret is, passes as a weakref in case turret does not exist yet
@@ -96,6 +96,7 @@ func _process(delta):
 		else:
 			switch_turret(activeTurret)
 
+
 func switch_turret(turretIndex: int):
 	# sets the current turret based on array in editor
 	currentTurret = turrets[turretIndex].instance()
@@ -107,9 +108,11 @@ func switch_turret(turretIndex: int):
 
 	GameManager.is_manual = false
 
+
 func turret_reload():
 	currentTurret.power_up()
 	currentTurret.ammo = maxAmmo
+
 
 func increase_fire_rate():
 	if !has_boosted:
@@ -124,4 +127,3 @@ func increase_fire_rate():
 
 	# if the turret has already increased, then just prolong the boost time
 	boostTimer.start(boostTime)
-

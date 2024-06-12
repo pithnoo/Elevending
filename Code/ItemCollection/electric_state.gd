@@ -2,9 +2,11 @@ extends ItemTurretState
 
 #var electric_cursor = "res://Art/Level/ElectricCursor.png"
 
+
 func enter() -> void:
 	.enter()
 	AudioManager.play("AbilitySwitch")
+
 
 func process(_delta: float) -> ItemBaseState:
 	if item.item_control || GameManager.electric_turret_number <= 0:
@@ -19,5 +21,5 @@ func process(_delta: float) -> ItemBaseState:
 		place_turret()
 
 	change_cursor()
-		
+
 	return null

@@ -5,7 +5,7 @@ onready var anim = $AnimationPlayer
 onready var particle_generator = $ParticleGenerator
 onready var particle_position = $ParticlePosition
 
-export(PackedScene) var death_effect 
+export(PackedScene) var death_effect
 export(PackedScene) var death_particle
 export(PackedScene) var boss_projectile
 
@@ -13,8 +13,7 @@ export(int) var turret_time
 
 func _ready():
 	turret_timer.start(turret_time)
-	#print(particle_generator)
-	#print(particle_position)
+	AudioManager.play("TurretPlace")
 
 func _process(delta):
 	if turret_timer.is_stopped():
@@ -26,6 +25,7 @@ func turret_attack():
 	particle_generator.generate_particle(death_effect, particle_position)
 	particle_generator.generate_particle(boss_projectile, particle_position)
 	queue_free()
+
 
 func _on_Stats_no_health():
 	AudioManager.play("EnemyDestroyed")

@@ -5,17 +5,22 @@ export(String) var animation_name
 
 var enemy: Enemy
 
+
 func enter() -> void:
 	enemy.animations.play(animation_name)
 
+
 func exit() -> void:
-  pass
+	pass
+
 
 func input(_event: InputEvent) -> EnemyBaseState:
-  return null
+	return null
+
 
 func process(_delta: float) -> EnemyBaseState:
-  return null
+	return null
+
 
 func physics_process(_delta: float) -> EnemyBaseState:
-  return null
+	return null

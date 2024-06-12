@@ -1,9 +1,10 @@
 extends Control
 
-var buttons : Array
+var buttons: Array
 
-var unlock_buffer : int = 0
+var unlock_buffer: int = 0
 onready var ratings_size = LevelManager.level_ratings.size()
+
 
 func _ready():
 	for button in get_children():
@@ -13,12 +14,12 @@ func _ready():
 		buttons[i].set_rating(0)
 
 		# check if locked / unlocked
-		if i+1 > LevelManager.levels_unlocked:
+		if i + 1 > LevelManager.levels_unlocked:
 			buttons[i].disabled = true
 		else:
 			buttons[i].disabled = false
 
-			if ratings_size > 0: 
+			if ratings_size > 0:
 				unlock_buffer += 1
 
 				if unlock_buffer <= ratings_size:

@@ -14,29 +14,33 @@ onready var core_detection = get_node(core_detection_node)
 # the core can pass this value
 var knockback_vector = Vector2.DOWN
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animations.play("Idle")
 	GameManager.core_position = core_position
 	GameManager.game_over = false
 
-func _on_AttackHurtBox_area_entered(area:Area2D):
+
+func _on_AttackHurtBox_area_entered(area: Area2D):
 	#print("core recorded: ", area.damage, " damage from ", area)
 
 	decrease_health(area.damage)
 
-func _on_HurtBox_area_entered(area:Area2D):
+
+func _on_HurtBox_area_entered(area: Area2D):
 	#print("core recorded: ", area.damage, " damage from ", area)
 
 	decrease_health(area.damage)
 	area.destroy()
 
-func decrease_health(damage_taken : int) -> void:
+
+func decrease_health(damage_taken: int) -> void:
 	if !GameManager.game_over:
 		CoreStats.health -= damage_taken
 		animations.play("Hurt")
 		get_node(hit_flash).play("Start")
-	
+
 	if CoreStats.health <= 0:
 		if !GameManager.game_over:
 			AudioManager.play("CoreDown")
@@ -57,6 +61,7 @@ func decrease_health(damage_taken : int) -> void:
 			yield(animations, "animation_finished")
 
 			SceneTransition.over_transition(menu)
+
 
 func hurt_finished():
 	animations.play("Idle")

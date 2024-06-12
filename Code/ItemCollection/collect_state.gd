@@ -13,20 +13,21 @@ onready var closed_state = get_node(closed_node)
 onready var ground_state = get_node(ground_node)
 onready var electric_state = get_node(electric_node)
 
-var shoot_control : bool
-var can_shoot : bool = true
+var shoot_control: bool
+var can_shoot: bool = true
+
 
 func enter() -> void:
 	.enter()
 	GameManager.change_game_cursor(2)
 	AudioManager.play("AbilitySwitch")
 
-func process(_delta : float) -> ItemBaseState:
 
+func process(_delta: float) -> ItemBaseState:
 	if item.shoot_control && can_shoot && item.is_active:
 		can_shoot = false
 		shoot_item()
-	
+
 	if item.item_control && GameManager.ground_turret_number > 0:
 		return ground_state
 	elif item.item_control && GameManager.electric_turret_number > 0:
@@ -36,6 +37,7 @@ func process(_delta : float) -> ItemBaseState:
 		return closed_state
 
 	return null
+
 
 # for item collection
 func shoot_item():
@@ -59,24 +61,28 @@ func shoot_item():
 
 	projectile.global_position = fire_point
 	effect.global_position = fire_point
-	
+
 	var mouse_position = get_viewport().get_mouse_position()
 	var direction = fire_point.direction_to(mouse_position)
 	var projectile_angle = direction.angle()
 
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectile_angle))
 
+
 func level_heal():
 	AudioManager.play("ItemPowerUp")
 	CoreStats.health += heal_amount
+
 
 func level_ammo():
 	AudioManager.play("Reload")
 	GameManager.emit_signal("ammo_reload")
 
+
 func level_shoot():
 	AudioManager.play("ItemPowerUp")
 	GameManager.emit_signal("fire_rate_doubled")
+
 
 func reset_shot():
 	can_shoot = true

@@ -1,5 +1,5 @@
 class_name Enemy
-extends KinematicBody2D 
+extends KinematicBody2D
 
 # properties of enemy to be used in game
 onready var animations = $AnimationPlayer
@@ -16,8 +16,8 @@ export(PackedScene) var death_particle
 export(int) var maxHealth
 export(int) var enemyDamage
 
-export(float) var follow_speed 
-export(float) var follow_acceleration 
+export(float) var follow_speed
+export(float) var follow_acceleration
 
 export(float) var resistance
 var knockback = Vector2.ZERO
@@ -25,42 +25,47 @@ var knockback = Vector2.ZERO
 export(Color) var buff_colour
 export(NodePath) var buff_particle
 
-var is_dead : bool = false
+var is_dead: bool = false
 signal enemy_dead
 
-var is_stunned : bool = false
+var is_stunned: bool = false
 
 # variables to be changed by the enemy manager
 var health: int
 var velocity = Vector2.ZERO
 
+
 func _ready():
 	states.init(self)
 	hitBox.damage = enemyDamage
 
+
 func _process(delta):
-  states.process(delta)
+	states.process(delta)
+
 
 func _physics_process(delta: float) -> void:
-  knockback = knockback.move_toward(Vector2.ZERO, resistance * delta)
-  knockback = move_and_slide(knockback)
+	knockback = knockback.move_toward(Vector2.ZERO, resistance * delta)
+	knockback = move_and_slide(knockback)
 
-  states.physics_process(delta)
+	states.physics_process(delta)
+
 
 func _on_Stats_no_health():
-  AudioManager.play("EnemyDestroyed")
+	AudioManager.play("EnemyDestroyed")
 
-  # instantiate death effect
-  particleGenerator.generate_particle(death_particle, particlePosition)
+	# instantiate death effect
+	particleGenerator.generate_particle(death_particle, particlePosition)
 
-  # signal of enemy's death for wave manager
-  if not is_dead:
-    emit_signal("enemy_dead")
-    is_dead = true
+	# signal of enemy's death for wave manager
+	if not is_dead:
+		emit_signal("enemy_dead")
+		is_dead = true
 
-  GameManager.game_currency += 1
+	GameManager.game_currency += 1
 
-  queue_free()
+	queue_free()
+
 
 func _on_HurtBox_enemy_buffed():
 	# note that this is only executed once because of enemy hurt box script
@@ -69,18 +74,20 @@ func _on_HurtBox_enemy_buffed():
 	follow_speed /= 2
 
 	sprite.modulate = buff_colour
-	
+
 	get_node(buff_particle).visible = true
+
 
 func _on_HurtBox_enemy_stunned():
 	is_stunned = true
 
+
 func _on_CoreHitBox_collided():
-  AudioManager.play("EnemyDestroyed")
+	AudioManager.play("EnemyDestroyed")
 
 	# signal of enemy's death for wave manager
-  if not is_dead:
-    emit_signal("enemy_dead")
-    is_dead = true
+	if not is_dead:
+		emit_signal("enemy_dead")
+		is_dead = true
 
-  queue_free()
+	queue_free()

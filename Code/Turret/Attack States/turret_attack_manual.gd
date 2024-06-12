@@ -10,15 +10,16 @@ onready var start_state: TurretBaseState = get_node(start_node)
 var shootInput: bool
 
 export(PackedScene) var Projectile
-export(PackedScene) var projectileEffect 
+export(PackedScene) var projectileEffect
+
 
 func enter() -> void:
 	.enter()
 	get_node(manual_effect).visible = true
 	AudioManager.play("TurretPlace")
 
-func process(delta: float) -> TurretBaseState:
 
+func process(delta: float) -> TurretBaseState:
 	if Input.is_action_just_pressed("shoot"):
 		shootInput = true
 	if Input.is_action_just_released("shoot"):
@@ -26,7 +27,7 @@ func process(delta: float) -> TurretBaseState:
 
 	if turret.manualControl == false || turret.ammo <= 0:
 		shootInput = false
-		get_node(manual_effect).visible = false 
+		get_node(manual_effect).visible = false
 		return start_state
 
 	elif turret.ammo > 0 && turret.rateTimer.is_stopped() && shootInput:
@@ -35,6 +36,7 @@ func process(delta: float) -> TurretBaseState:
 		shoot(mouse_position)
 
 	return null
+
 
 func shoot(target):
 	AudioManager.play("ManualShoot")
@@ -55,8 +57,8 @@ func shoot(target):
 	projectile.global_position = shootPoint
 	muzzleFlash.global_position = shootPoint
 
-	var direction = shootPoint.direction_to(target) 
+	var direction = shootPoint.direction_to(target)
 
 	var projectileAngle = direction.angle()
-	projectile.rotation = projectileAngle 
+	projectile.rotation = projectileAngle
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectileAngle))

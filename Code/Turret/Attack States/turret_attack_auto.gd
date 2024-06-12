@@ -1,4 +1,4 @@
-extends TurretBaseState 
+extends TurretBaseState
 
 export(NodePath) var idle_node
 export(NodePath) var empty_node
@@ -11,10 +11,12 @@ onready var manual_state: TurretBaseState = get_node(manual_node)
 onready var turret_detect = get_node(turret_range)
 
 export(PackedScene) var Projectile
-export(PackedScene) var projectileEffect 
+export(PackedScene) var projectileEffect
+
 
 func enter() -> void:
 	.enter()
+
 
 func process(_delta: float) -> TurretBaseState:
 	if turret.manualControl == true:
@@ -30,6 +32,7 @@ func process(_delta: float) -> TurretBaseState:
 		return idle_state
 
 	return null
+
 
 func shoot(target):
 	AudioManager.play("Shoot")
@@ -50,8 +53,8 @@ func shoot(target):
 	projectile.global_position = shootPoint
 	muzzleFlash.global_position = shootPoint
 
-	var direction = shootPoint.direction_to(target.global_position) 
+	var direction = shootPoint.direction_to(target.global_position)
 
 	var projectileAngle = direction.angle()
-	projectile.rotation = projectileAngle 
+	projectile.rotation = projectileAngle
 	projectile.apply_impulse(Vector2.ZERO, Vector2(300, 0).rotated(projectileAngle))
