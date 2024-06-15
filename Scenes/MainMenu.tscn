@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Art/Level/skull level.png" type="Texture" id=1]
-[ext_resource path="res://Code/test.gd" type="Script" id=3]
 [ext_resource path="res://Art/Level/levelShelf.png" type="Texture" id=4]
 [ext_resource path="res://Art/miniNoteFull.png" type="Texture" id=5]
 [ext_resource path="res://Art/Boss/bowls-Sheet.png" type="Texture" id=6]
@@ -41,10 +40,6 @@ atlas = ExtResource( 6 )
 region = Rect2( 76, 0, 19, 8 )
 
 [node name="MainMenu" type="Node2D"]
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
 

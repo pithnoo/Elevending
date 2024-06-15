@@ -145,6 +145,7 @@ window/stretch/aspect="keep"
 display=false
 cursor=false
 sizw=false
+stretch=false
 
 [gui]
 

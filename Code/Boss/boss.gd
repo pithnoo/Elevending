@@ -15,6 +15,7 @@ onready var ground_enemy_holder = get_node(ground_enemy_holder_node)
 
 # global counter to ensure that the boss doesn't enter it twice
 var vending_counter: int
+var vending_remains : bool = false
 var hard_phase: bool = false
 var velocity
 
@@ -33,3 +34,8 @@ func _on_Stats_no_health():
 
 	# INFO: No matter what, we will always transition to the dead state
 	states.change_state(dead_state)
+
+func vending_destroyed():
+	vending_counter -= 1
+	if vending_counter <= 0:
+		vending_remains = false

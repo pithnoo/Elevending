@@ -11,6 +11,7 @@ var teleport_finished : bool = false
 func enter():
 	.enter()
 	boss.global_position = idle_position
+	boss.visible = true
 	
 func disappear():
 	boss.visible = false

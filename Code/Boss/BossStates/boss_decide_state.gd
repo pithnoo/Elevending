@@ -10,39 +10,40 @@ onready var vending_state = get_node(vending_node)
 onready var summon_state = get_node(summon_node)
 
 var random = RandomNumberGenerator.new()
-var vending_counter = 0
+var attack_counter = 0
 
 var teleport_finished : bool = false
 
 func disappear():
-	teleport_finished = true
 	boss.visible = false
+	teleport_finished = true
 
 func enter():
-	.enter()
 	teleport_finished = false
+	.enter()
 
 func process(_delta) -> BossBaseState:
-  if teleport_finished:
-    random.randomize()
+	if teleport_finished == true:
+		random.randomize()
 
-    var boss_attack = random.randi_range(0, 1)
-    #var boss_attack = 0
-    #var boss_attack = 1
+		var boss_attack = random.randi_range(0, 1)
 
-    vending_counter += 1
-    print("current vending counter: ", vending_counter)
+		attack_counter += 1
+		#print("current attack counter: ", attack_counter)
 
-    if vending_counter >= attacks_til_ghost:
-      vending_counter = 0
-      return ghost_state
+		if attack_counter >= attacks_til_ghost:
+			attack_counter = 0
+			return ghost_state
 
-    match boss_attack:
-      0:
-        return vending_state
-      1:
-        return summon_state
-      _:
-        print("unknown attack chosen, check ranges in decision state")
+		match boss_attack:
+			0:
+				if boss.vending_remains:
+					return summon_state
+				else:
+					return vending_state
+			1:
+				return summon_state
+			_:
+				print("unknown attack chosen, check ranges in decision state")
 
-  return null
+	return null

@@ -26,6 +26,7 @@ var success_counter: int
 
 func enter():
 	.enter()
+	boss.visible = false
 
 	var launcher_element = random.randi_range(0, ELEMENTS-1)
 
@@ -37,8 +38,7 @@ func enter():
 		summon_counter += 1
 		var launcher_side = random.randi_range(0, 1)
 		if launcher_side == 0:
-			#decide_spawn(launcher_element, left_attack_position, LEFT)
-			decide_spawn(launcher_element, right_attack_position, RIGHT)
+			decide_spawn(launcher_element, left_attack_position, LEFT)
 		else:
 			decide_spawn(launcher_element, right_attack_position, RIGHT)
 
@@ -46,9 +46,9 @@ func process(delta):
 	# INFO: if no more machines are remaining, then the boss has been damaged
 	if summon_counter <= 0:
 		if success_counter > 0:
+			return hurt_state
+		else:
 			return teleport_state
-		return hurt_state
-
 	return null
 
 func decide_spawn(element : int, spawn_position, direction : int):
@@ -79,7 +79,7 @@ func spawn(machine, spawn_position, direction : int):
 
 func machine_down():
 	summon_counter -= 1
+	success_counter += 1
 
 func machine_launched():
 	summon_counter -= 1
-	success_counter += 1

@@ -9,7 +9,7 @@ func change_state(new_state: BossBaseState) -> void:
 		current_state.exit()
 
 	current_state = new_state
-	print(new_state)
+	#print(new_state)
 	current_state.enter()
 
 func init(boss: Boss) -> void:

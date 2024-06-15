@@ -26,6 +26,8 @@ var enemies_spawned: int
 
 func enter():
 	.enter()
+	boss.visible = false
+
 	wave_complete = false
 	random.randomize()
 	entityID = random.randi_range(0, entities.size() - 1)

@@ -14,7 +14,6 @@ export(float) var easy_pause_time
 export(float) var hard_pause_time
 export(float) var move_speed
 
-# TODO: make a smoke particle 2D to set active
 export(NodePath) var smoke_node
 onready var smoke_particle = get_node(smoke_node)
 
@@ -22,14 +21,14 @@ export(Array, NodePath) var vending_positions
 
 func enter():
 	.enter()
-	boss.visible = true
+	#boss.visible = false
+	boss.vending_remains = true
 
 	if boss.hard_phase:
 		boss.boss_timer.start(hard_pause_time)
 	else:
 		boss.boss_timer.start(easy_pause_time)
 
-	# INFO: set boss in starting position to then place hazards
 	boss.global_position = start_position
 
 	for vending_position in vending_positions:
@@ -52,18 +51,24 @@ func physics_process(delta):
 		boss.velocity = boss.move_and_slide(boss.velocity)
 
 		if boss.global_position.distance_to(end_position) < 5:
-			print("reached")
 			boss.velocity = Vector2.ZERO
 			smoke_particle.visible = false
 			return teleport_state
 
 	return null
 
-
 func spawn():
 	# INFO: particle generator will auto fetch boss global position so should be fine
-	boss.particle_generator.generate_particle(boss_vending_machine, boss)
+		
+	var entity = boss_vending_machine.instance()
 
+	entity.global_position = boss.global_position
+	boss.ground_enemy_holder.add_child(entity)
+
+	# TODO: check if decreasing the turret counter in parent works
+	entity.connect("turret_destroyed", boss, "vending_destroyed")
+
+	boss.vending_counter += 1
 
 func spawn_hard():
 	if boss.hard_phase:
