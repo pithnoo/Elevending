@@ -1,6 +1,7 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Boss/BossShadow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Boss/BossItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
@@ -667,6 +668,9 @@ texture = ExtResource( 9 )
 [node name="BossTimer" type="Timer" parent="Boss"]
 one_shot = true
 
+[node name="ShadowTimer" type="Timer" parent="Boss"]
+one_shot = true
+
 [node name="Stats" type="Node" parent="Boss"]
 script = ExtResource( 8 )
 max_health = 100
@@ -721,8 +725,8 @@ end_position_node = NodePath("../../../BossAttackPositions/AttackPosition4")
 easy_pause_time = 1.0
 hard_pause_time = 2.0
 move_speed = 1000.0
-smoke_node = NodePath("../../BoostSmoke")
 vending_positions = [ NodePath("../../../VendingAttackPositions/VendingPositionEasy"), NodePath("../../../VendingAttackPositions/VendingPositionEasy2"), NodePath("../../../VendingAttackPositions/VendingPositionEasy3"), NodePath("../../../VendingAttackPositions/VendingPositionHard"), NodePath("../../../VendingAttackPositions/VendingPositionHard2") ]
+boss_shadow = ExtResource( 2 )
 
 [node name="SummonAttack" type="Node" parent="Boss/StateManager"]
 script = ExtResource( 26 )
@@ -740,7 +744,7 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
-attacks_til_ghost = 3
+attacks_til_ghost = 4
 
 [node name="BossContainer" type="Node2D" parent="Boss"]
 position = Vector2( 0, -3 )

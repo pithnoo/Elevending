@@ -14,10 +14,9 @@ export(float) var easy_pause_time
 export(float) var hard_pause_time
 export(float) var move_speed
 
-export(NodePath) var smoke_node
-onready var smoke_particle = get_node(smoke_node)
-
 export(Array, NodePath) var vending_positions
+
+export(PackedScene) var boss_shadow
 
 func enter():
 	.enter()
@@ -38,34 +37,33 @@ func enter():
 
 	boss.velocity = Vector2.ZERO
 
-	# to show smoke as the boss is moving
-	smoke_particle.visible = true
 
 func physics_process(delta):
 	if boss.boss_timer.is_stopped():
 		var target = end_position
 		var direction = boss.global_position.direction_to(target)
 
-		# INFO: same movespeed as the boss projectile
 		boss.velocity = boss.velocity.move_toward(direction * 1000, delta * move_speed)
 		boss.velocity = boss.move_and_slide(boss.velocity)
 
+		if boss.shadow_timer.is_stopped():
+			boss.shadow_timer.start(0.10)
+			var entity = boss_shadow.instance()
+			entity.global_position = boss.global_position
+			boss.ground_enemy_holder.add_child(entity)	
+
 		if boss.global_position.distance_to(end_position) < 5:
 			boss.velocity = Vector2.ZERO
-			smoke_particle.visible = false
 			return teleport_state
 
 	return null
 
 func spawn():
-	# INFO: particle generator will auto fetch boss global position so should be fine
-		
 	var entity = boss_vending_machine.instance()
 
 	entity.global_position = boss.global_position
 	boss.ground_enemy_holder.add_child(entity)
 
-	# TODO: check if decreasing the turret counter in parent works
 	entity.connect("turret_destroyed", boss, "vending_destroyed")
 
 	boss.vending_counter += 1

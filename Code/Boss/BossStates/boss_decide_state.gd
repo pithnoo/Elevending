@@ -27,11 +27,11 @@ func process(_delta) -> BossBaseState:
 		random.randomize()
 
 		var boss_attack = random.randi_range(0, 1)
+		boss_attack = 0
 
 		attack_counter += 1
-		#print("current attack counter: ", attack_counter)
 
-		if attack_counter >= attacks_til_ghost:
+		if attack_counter > attacks_til_ghost:
 			attack_counter = 0
 			return ghost_state
 

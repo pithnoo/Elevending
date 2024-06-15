@@ -29,6 +29,21 @@
 [ext_resource path="res://Art/particle1.png" type="Texture" id=27]
 [ext_resource path="res://Code/Boss/boss_state_manager.gd" type="Script" id=28]
 
+[sub_resource type="Curve" id=31]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.550562, 0.0181818 ), -3.74205, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=32]
+curve = SubResource( 31 )
+
+[sub_resource type="ParticlesMaterial" id=34]
+flag_disable_z = true
+direction = Vector3( 1, -5, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 32 )
+color = Color( 0.501961, 0.501961, 0.501961, 1 )
+
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.630952, 0 ), 0.0, 0.0, 0, 0 ]
 
@@ -43,21 +58,6 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
 scale_curve = SubResource( 5 )
-color = Color( 0.501961, 0.501961, 0.501961, 1 )
-
-[sub_resource type="Curve" id=31]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.550562, 0.0181818 ), -3.74205, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=32]
-curve = SubResource( 31 )
-
-[sub_resource type="ParticlesMaterial" id=34]
-flag_disable_z = true
-direction = Vector3( 1, -5, 0 )
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 32 )
 color = Color( 0.501961, 0.501961, 0.501961, 1 )
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -463,12 +463,6 @@ radius = 2.0
 script = ExtResource( 21 )
 dead_node = NodePath("StateManager/Dead")
 
-[node name="BoostSmoke" type="Particles2D" parent="."]
-visible = false
-position = Vector2( -16, 0 )
-process_material = SubResource( 3 )
-texture = ExtResource( 27 )
-
 [node name="Smoke" type="Particles2D" parent="."]
 visible = false
 position = Vector2( 0, -8 )
@@ -529,7 +523,6 @@ boss_vending_machine = ExtResource( 26 )
 easy_pause_time = 1.0
 hard_pause_time = 2.0
 move_speed = 1000.0
-smoke_node = NodePath("../../BoostSmoke")
 
 [node name="SummonAttack" type="Node" parent="StateManager"]
 script = ExtResource( 3 )
@@ -549,6 +542,12 @@ attacks_til_ghost = 3
 
 [node name="BossContainer" type="Node2D" parent="."]
 position = Vector2( 0, -3 )
+
+[node name="BoostSmoke" type="Particles2D" parent="BossContainer"]
+visible = false
+position = Vector2( -16, 1.74545 )
+process_material = SubResource( 3 )
+texture = ExtResource( 27 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )

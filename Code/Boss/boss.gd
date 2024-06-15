@@ -7,6 +7,7 @@ onready var dead_state = get_node(dead_node)
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
 onready var boss_timer = $BossTimer
+onready var shadow_timer = $ShadowTimer
 onready var particle_generator = $ParticleGenerator
 onready var particle_position = $ParticlePosition
 

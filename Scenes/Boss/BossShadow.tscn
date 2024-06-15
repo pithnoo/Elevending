@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Code/Boss/boss_shadow.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/hit_flash.gdshader" type="Shader" id=3]
+[ext_resource path="res://Art/Boss/bossAvatar-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://Art/Boss/boss-Sheet.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/active = false
+shader_param/colour = Color( 0.984314, 0.419608, 0.113725, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/active = false
+shader_param/colour = Color( 0.984314, 0.419608, 0.113725, 1 )
+
+[node name="BossShadow" type="Node2D"]
+script = ExtResource( 1 )
+boss_avatar_node = NodePath("BossAvatar")
+boss_machine_node = NodePath("Machine")
+
+[node name="BossAvatar" type="Sprite" parent="."]
+material = SubResource( 7 )
+position = Vector2( 4, -14.3863 )
+texture = ExtResource( 4 )
+hframes = 23
+frame = 17
+
+[node name="Machine" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 0, 2.30541 )
+texture = ExtResource( 6 )
+hframes = 5
+
+[node name="Timer" type="Timer" parent="."]
