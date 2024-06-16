@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Code/Properties/HurtBox/launcher_hurt_box.gd" type="Script" id=1]
 [ext_resource path="res://Code/Properties/stats.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Boss/BossItemDestroy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathGrass.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Boss/BossItemProjectile.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/Charges/Heavy/chargeHeavyFire.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
@@ -229,7 +230,7 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, -0.903804 )
+position = Vector2( 0, 1.8358 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )
@@ -286,6 +287,8 @@ anims/Start = SubResource( 13 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="chargeHeavyFire" parent="." instance=ExtResource( 12 )]
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="BossContainer/HurtBox" to="BossContainer/HurtBox" method="_on_HurtBox_area_entered"]

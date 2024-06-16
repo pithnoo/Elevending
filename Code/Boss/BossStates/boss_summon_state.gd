@@ -56,10 +56,12 @@ func process(delta):
 
 		enemies_spawned += 1
 
-	if current_entity_number <= 0:
-		return teleport_state
+	if boss.hard_phase:
+		pass
+	else:
+		if current_entity_number <= 0:
+			return teleport_state
 
-	# INFO: if wave isn't complete, enemies will just continue to spawn
 	return null
 
 
