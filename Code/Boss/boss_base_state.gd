@@ -8,7 +8,7 @@ var boss: Boss
 func enter() -> void:
 	boss.animations.play(animation_name)
 
-	# INFO: after teleporting, the boss needs to reappear
+	# WARNING: boss reappears here
 	boss.visible = true
 
 func exit() -> void:

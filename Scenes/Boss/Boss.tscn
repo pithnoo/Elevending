@@ -484,11 +484,9 @@ starting_state = NodePath("Idle")
 
 [node name="Start" type="Node" parent="StateManager"]
 script = ExtResource( 11 )
-animation_name = "Start"
 
 [node name="Dead" type="Node" parent="StateManager"]
 script = ExtResource( 17 )
-animation_name = "Dead"
 
 [node name="Idle" type="Node" parent="StateManager"]
 script = ExtResource( 9 )

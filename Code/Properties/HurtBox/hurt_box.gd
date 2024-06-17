@@ -9,12 +9,10 @@ var invincible = false
 
 onready var stats = get_node(entity_stats)
 
-
 func _on_HurtBox_area_entered(area: Area2D):
-	get_node(hit_flash).play("Start")
+  if !invincible:
+    get_node(hit_flash).play("Start")
+    stats.health -= area.damage
 
-	if !invincible:
-		stats.health -= area.damage
-
-	if area.type != area.element.GROUND:
-		area.destroy()
+  if area.type != area.element.GROUND:
+    area.destroy()
