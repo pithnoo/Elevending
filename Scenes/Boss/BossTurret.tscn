@@ -178,14 +178,14 @@ death_particle = ExtResource( 8 )
 boss_projectile = ExtResource( 9 )
 turret_time = 5
 
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 3 )
+max_health = 2
+
 [node name="ParticleGenerator" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
 [node name="ParticlePosition" type="Position2D" parent="."]
-
-[node name="Stats" type="Node" parent="."]
-script = ExtResource( 3 )
-max_health = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 17 )

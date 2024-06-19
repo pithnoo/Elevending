@@ -1,6 +1,7 @@
 extends Node
 
 onready var turret_timer = $Timer
+onready var stats = $Stats
 onready var anim = $AnimationPlayer
 onready var particle_generator = $ParticleGenerator
 onready var particle_position = $ParticlePosition

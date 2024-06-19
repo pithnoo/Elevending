@@ -40,6 +40,8 @@ func enter():
 		current_entity_number = easy_entity_number
 		entity_number = easy_entity_number
 
+	# TODO: summon a heavy ground unit on phase 1, heavy air unit on phase 2
+
 
 func process(delta):
 	if boss.boss_timer.is_stopped() && (enemies_spawned < entity_number):
@@ -56,8 +58,10 @@ func process(delta):
 
 		enemies_spawned += 1
 
+	# TODO: adjust when the boss comes in, two enemies before or one enemy before?
 	if boss.hard_phase:
-		pass
+		if current_entity_number <= 1:
+			return teleport_state
 	else:
 		if current_entity_number <= 0:
 			return teleport_state

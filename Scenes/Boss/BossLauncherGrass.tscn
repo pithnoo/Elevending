@@ -230,7 +230,7 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, 0.166024 )
+position = Vector2( 0, -0.831773 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )

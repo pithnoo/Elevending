@@ -20,10 +20,9 @@ export(PackedScene) var boss_shadow
 
 func enter():
 	.enter()
-	#boss.visible = false
 	boss.vending_remains = true
 
-	if boss.hard_phase:
+	if boss.boss_phase >= 2:
 		boss.boss_timer.start(hard_pause_time)
 	else:
 		boss.boss_timer.start(easy_pause_time)
@@ -68,6 +67,9 @@ func spawn():
 
 	boss.vending_counter += 1
 
+	if boss.boss_phase >= 2:
+		entity.stats.set_health(1)
+
 func spawn_hard():
-	if boss.hard_phase:
+	if boss.boss_phase >= 2:
 		spawn()

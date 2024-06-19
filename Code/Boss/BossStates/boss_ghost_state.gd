@@ -16,9 +16,13 @@ const RIGHT = 5
 
 export(NodePath) var left_attack
 onready var left_attack_position = get_node(left_attack).global_position
-
 export(NodePath) var right_attack
 onready var right_attack_position = get_node(right_attack).global_position
+
+# WARNING: i'll lay this out l1,r1,l2,r2
+
+export(Array, NodePath) var attack_position_nodes
+var attack_positions : Array
 
 var random = RandomNumberGenerator.new()
 var summon_counter: int
@@ -28,19 +32,28 @@ func enter():
 	.enter()
 	boss.visible = false
 
-	var launcher_element = random.randi_range(0, ELEMENTS-1)
+	for node in attack_position_nodes:
+		attack_positions.append(get_node(node).global_position)
 
-	if boss.hard_phase:
-		summon_counter += 2
-		decide_spawn(launcher_element, left_attack_position, LEFT)
-		decide_spawn(launcher_element, right_attack_position, RIGHT)
-	else:
-		summon_counter += 1
-		var launcher_side = random.randi_range(0, 1)
-		if launcher_side == 0:
-			decide_spawn(launcher_element, left_attack_position, LEFT)
-		else:
-			decide_spawn(launcher_element, right_attack_position, RIGHT)
+
+	match boss.boss_phase:
+		2:
+			summon_counter += 2
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[1], RIGHT)
+		3:
+			summon_counter += 4
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[2], LEFT)
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[1], RIGHT)
+			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[3], RIGHT)
+		_:
+			summon_counter += 1
+			var launcher_side = random.randi_range(0, 1)
+			if launcher_side == 0:
+				decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
+			else:
+				decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[1], RIGHT)
 
 func process(delta):
 	# INFO: if no more machines are remaining, then the boss has been damaged
@@ -76,6 +89,14 @@ func spawn(machine, spawn_position, direction : int):
 		# TODO: flip the sprite so that it faces the right direction
 		entity.scale.x = -1
 		entity.flip_machine()
+	
+	match boss.boss_phase:
+		2:
+			entity.stats.set_health(2)
+		3:
+			entity.stats.set_health(1)
+		_:
+			entity.stats.set_health(3)
 
 func machine_down():
 	summon_counter -= 1

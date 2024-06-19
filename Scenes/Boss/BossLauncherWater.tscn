@@ -9,7 +9,7 @@
 [ext_resource path="res://Art/Boss/bossNumbers-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Boss/BossItemDestroy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathGrass.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathWater.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Boss/BossItemProjectile.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Enemies/Charges/Heavy/chargeHeavyWater.tscn" type="PackedScene" id=12]
 
@@ -230,7 +230,7 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, -1.62588 )
+position = Vector2( 0, -0.232791 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )

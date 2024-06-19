@@ -2,6 +2,7 @@ extends Node
 
 onready var particle_generator = $ParticleGenerator
 onready var particle_position = $ParticlePosition
+onready var stats = $Stats
 
 export(PackedScene) var death_effect
 export(PackedScene) var death_particle

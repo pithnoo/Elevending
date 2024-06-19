@@ -64,13 +64,10 @@ func _on_Stats_health_changed(health):
 
 	match boss_phase:
 		0:
-			if health <= round(boss_health * (3/4)):
+			if health <= round(boss_health * 0.75):
 				boss_phase += 1
-
-				# WARNING: ran into something here where it wasn't accpting health_bar as an onready var, so using get_node instead
+				# WARNING: ran into something here where it wasn't accepting health_bar as an onready var, so using get_node instead
 				get_node(health_bar_node).set_frame(1)
-			else:
-				print("current ", health, " boss ", boss_health * 3/4)
 		1:
 			if health <= round(boss_health / 2):
 				hard_phase = true  

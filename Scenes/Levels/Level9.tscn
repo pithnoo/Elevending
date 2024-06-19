@@ -532,7 +532,7 @@ one_shot = true
 
 [node name="BossItemSpawnZone" type="Node2D" parent="."]
 script = ExtResource( 5 )
-spawn_cooldown = 4
+spawn_cooldown = 5
 entities = [ ExtResource( 3 ) ]
 item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 max_existing_items = 5
@@ -608,7 +608,7 @@ position = Vector2( 280, 160 )
 position = Vector2( 148, 160 )
 
 [node name="VendingPositionHard2" parent="VendingAttackPositions" instance=ExtResource( 7 )]
-position = Vector2( 232, 160 )
+position = Vector2( 239, 160 )
 
 [node name="EnemySpawnPoints" type="Node2D" parent="."]
 
@@ -639,9 +639,15 @@ position = Vector2( 32, 24 )
 position = Vector2( 353, 24 )
 
 [node name="AttackPosition3" type="Position2D" parent="BossAttackPositions"]
-position = Vector2( -32, 168 )
+position = Vector2( 32, 168 )
 
 [node name="AttackPosition4" type="Position2D" parent="BossAttackPositions"]
+position = Vector2( 353, 168 )
+
+[node name="AttackPosition5" type="Position2D" parent="BossAttackPositions"]
+position = Vector2( -32, 168 )
+
+[node name="AttackPosition6" type="Position2D" parent="BossAttackPositions"]
 position = Vector2( 416, 168 )
 
 [node name="IdlePosition" type="Position2D" parent="BossAttackPositions"]
@@ -673,7 +679,7 @@ one_shot = true
 
 [node name="Stats" type="Node" parent="Boss"]
 script = ExtResource( 8 )
-max_health = 20
+max_health = 10
 
 [node name="StateManager" type="Node" parent="Boss"]
 script = ExtResource( 42 )
@@ -718,14 +724,15 @@ water_machine = ExtResource( 39 )
 grass_machine = ExtResource( 40 )
 left_attack = NodePath("../../../BossAttackPositions/AttackPosition1")
 right_attack = NodePath("../../../BossAttackPositions/AttackPosition2")
+attack_position_nodes = [ NodePath("../../../BossAttackPositions/AttackPosition1"), NodePath("../../../BossAttackPositions/AttackPosition2"), NodePath("../../../BossAttackPositions/AttackPosition3"), NodePath("../../../BossAttackPositions/AttackPosition4") ]
 
 [node name="VendingAttack" type="Node" parent="Boss/StateManager"]
 script = ExtResource( 41 )
 animation_name = "Attack"
 teleport_node = NodePath("../Teleport")
 boss_vending_machine = ExtResource( 32 )
-start_position_node = NodePath("../../../BossAttackPositions/AttackPosition3")
-end_position_node = NodePath("../../../BossAttackPositions/AttackPosition4")
+start_position_node = NodePath("../../../BossAttackPositions/AttackPosition5")
+end_position_node = NodePath("../../../BossAttackPositions/AttackPosition6")
 easy_pause_time = 1.0
 hard_pause_time = 2.0
 move_speed = 1000.0
@@ -748,6 +755,7 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
+attacks_til_ghost = 2
 
 [node name="BossShadow" type="Sprite" parent="Boss"]
 position = Vector2( 0, 24 )

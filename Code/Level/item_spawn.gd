@@ -52,8 +52,8 @@ func gen_random_pos():
 	random.randomize()
 
 	var current_point = (
-		spawn_area.rect_position
-		+ Vector2(randf() * spawn_area.rect_size.x, randf() * spawn_area.rect_size.y)
+		 spawn_area.rect_position
+		 + Vector2(randf() * spawn_area.rect_size.x, randf() * spawn_area.rect_size.y)
 	)
 
 	for prev_point in current_item_positions:
