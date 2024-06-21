@@ -4,6 +4,9 @@ export(NodePath) var teleport_node
 onready var teleport_state = get_node(teleport_node)
 
 export(Array, PackedScene) var entities
+export(Array, PackedScene) var heavy_entities
+export(Array, PackedScene) var air_entities
+
 export(Array, NodePath) var spawn_points
 
 var entityID: int
@@ -23,7 +26,6 @@ export(int) var hard_entity_number
 
 var enemies_spawned: int
 
-
 func enter():
 	.enter()
 	boss.visible = false
@@ -40,8 +42,22 @@ func enter():
 		current_entity_number = easy_entity_number
 		entity_number = easy_entity_number
 
-	# TODO: summon a heavy ground unit on phase 1, heavy air unit on phase 2
+	var spawn_point = get_node(spawn_points[spawnID])
 
+	# TODO: summon a heavy ground unit on phase 1, heavy air unit on phase 2
+	match boss.boss_phase:
+		2:
+			random.randomize()
+			entityID = random.randi_range(0, heavy_entities.size() - 1)
+			var entity = heavy_entities[entityID].instance()
+			boss.ground_enemy_holder.add_child(entity)
+			entity.global_position = spawn_point.global_position
+		3:
+			random.randomize()
+			entityID = random.randi_range(0, air_entities.size() - 1)
+			var entity = air_entities[entityID].instance()
+			boss.ground_enemy_holder.add_child(entity)
+			entity.global_position = spawn_point.global_position
 
 func process(delta):
 	if boss.boss_timer.is_stopped() && (enemies_spawned < entity_number):
@@ -59,12 +75,16 @@ func process(delta):
 		enemies_spawned += 1
 
 	# TODO: adjust when the boss comes in, two enemies before or one enemy before?
-	if boss.hard_phase:
-		if current_entity_number <= 1:
-			return teleport_state
-	else:
-		if current_entity_number <= 0:
-			return teleport_state
+	match boss.boss_phase:
+		2:
+			if current_entity_number <= 1:
+				return teleport_state
+		3:
+			if current_entity_number <= 2:
+				return teleport_state
+		_:
+			if current_entity_number <= 0:
+				return teleport_state
 
 	return null
 

@@ -40,6 +40,7 @@ atlas = ExtResource( 6 )
 region = Rect2( 76, 0, 19, 8 )
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2( 1, 0 )
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
 

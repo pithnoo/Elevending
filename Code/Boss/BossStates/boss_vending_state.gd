@@ -36,7 +36,6 @@ func enter():
 
 	boss.velocity = Vector2.ZERO
 
-
 func physics_process(delta):
 	if boss.boss_timer.is_stopped():
 		var target = end_position
@@ -45,6 +44,7 @@ func physics_process(delta):
 		boss.velocity = boss.velocity.move_toward(direction * 1000, delta * move_speed)
 		boss.velocity = boss.move_and_slide(boss.velocity)
 
+		# INFO: this is the trail behind the boss
 		if boss.shadow_timer.is_stopped():
 			boss.shadow_timer.start(0.10)
 			var entity = boss_shadow.instance()
@@ -71,5 +71,5 @@ func spawn():
 		entity.stats.set_health(1)
 
 func spawn_hard():
-	if boss.boss_phase >= 2:
+	if boss.boss_phase >= 3:
 		spawn()

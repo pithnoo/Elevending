@@ -5,7 +5,6 @@ var buttons: Array
 var unlock_buffer: int = 0
 onready var ratings_size = LevelManager.level_ratings.size()
 
-
 func _ready():
 	for button in get_children():
 		buttons.append(button)

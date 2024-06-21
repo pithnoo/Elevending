@@ -21,7 +21,6 @@ var has_rating: bool
 
 onready var level_camera = $LevelCamera
 
-
 func _ready():
 	CoreStats.health = core_health
 	GameManager.ground_turret_number = level_ground_turrets

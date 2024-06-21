@@ -24,6 +24,7 @@ onready var health_bar = get_node(health_bar_node)
 var vending_counter : int
 var vending_remains : bool = false
 var hard_phase: bool = false
+var can_items_spawn : bool = false
 var velocity
 
 export(int) var damage_threshold
@@ -40,6 +41,7 @@ func _ready():
   hurt_box.invincible = true
   boss_phase = 0
   hard_phase = false
+  can_items_spawn = false
 
 func _process(delta) -> void:
 	states.process(delta)
@@ -58,10 +60,6 @@ func _on_Stats_health_changed(health):
 	if damage_counter >= damage_threshold:
 		emit_signal("enough_damage")
 
-	#print(round(boss_health * 3/4))
-	#print(round(boss_health / 2))
-	#print(round(boss_health / 4))
-
 	match boss_phase:
 		0:
 			if health <= round(boss_health * 0.75):
@@ -71,6 +69,7 @@ func _on_Stats_health_changed(health):
 		1:
 			if health <= round(boss_health / 2):
 				hard_phase = true  
+				can_items_spawn = true
 				boss_phase += 1
 				get_node(health_bar_node).set_frame(2)
 		2:
@@ -80,6 +79,7 @@ func _on_Stats_health_changed(health):
 		3:
 			if health == 0:
 				get_node(health_bar_node).set_frame(4)
+				can_items_spawn = false
 
 
 func _on_Stats_no_health():

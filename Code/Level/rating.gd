@@ -10,7 +10,6 @@ var notes: int
 onready var notesUIFull = $Notes
 onready var notesUIEmpty = $NotesEmpty
 
-
 func set_rating(value):
 	notes = clamp(value, 0, max_notes)
 
@@ -18,13 +17,11 @@ func set_rating(value):
 		# 7 is the pixel size of the note sprite
 		notesUIFull.rect_size.x = notes * 7
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if notesUIEmpty != null:
 		# 7 is the pixel size of the empty note sprite
 		notesUIEmpty.rect_size.x = max_notes * 7
-
 
 func _process(_delta: float):
 	if is_pressed():
