@@ -67,7 +67,7 @@ func spawn():
 
 	boss.vending_counter += 1
 
-	if boss.boss_phase >= 2:
+	if boss.boss_phase >= 3:
 		entity.stats.set_health(1)
 
 func spawn_hard():
