@@ -25,6 +25,9 @@ var vending_counter : int
 var vending_remains : bool = false
 var hard_phase: bool = false
 var can_items_spawn : bool = false
+var boss_items_spawn : bool = false
+# preventing the boss from using the vending attack twice in a row
+var vending_before : bool = false
 var velocity
 
 export(int) var damage_threshold
@@ -42,6 +45,7 @@ func _ready():
   boss_phase = 0
   hard_phase = false
   can_items_spawn = false
+  boss_items_spawn = false
 
 func _process(delta) -> void:
 	states.process(delta)
@@ -50,26 +54,24 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 
 func _on_Stats_max_health_changed(health):
-	# INFO: to keep track of in the state machines
 	boss_health = health 
 
 func _on_Stats_health_changed(health):
-	# INFO: in hurt state, the boss should resume idle if it has taken enough damage
+
 	damage_counter += 1
 
-	if damage_counter >= damage_threshold:
+	if damage_counter > damage_threshold:
 		emit_signal("enough_damage")
-
+			
 	match boss_phase:
 		0:
 			if health <= round(boss_health * 0.75):
+				boss_items_spawn = true
 				boss_phase += 1
-				# WARNING: ran into something here where it wasn't accepting health_bar as an onready var, so using get_node instead
 				get_node(health_bar_node).set_frame(1)
 		1:
 			if health <= round(boss_health / 2):
 				hard_phase = true  
-				can_items_spawn = true
 				boss_phase += 1
 				get_node(health_bar_node).set_frame(2)
 		2:
@@ -79,11 +81,9 @@ func _on_Stats_health_changed(health):
 		3:
 			if health == 0:
 				get_node(health_bar_node).set_frame(4)
-				can_items_spawn = false
-
-
+				boss_items_spawn = false
+	
 func _on_Stats_no_health():
-	# TODO: initiate boss battle over (cutscene) transition to dead state
   if !boss_beaten:
 	  boss_beaten = true
 	  states.change_state(dead_state)

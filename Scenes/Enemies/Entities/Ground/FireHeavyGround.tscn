@@ -144,6 +144,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+type = 2
 death_particle = ExtResource( 16 )
 maxHealth = 10
 enemyDamage = 5

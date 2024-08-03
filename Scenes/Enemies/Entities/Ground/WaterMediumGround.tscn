@@ -147,6 +147,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+type = 1
 death_particle = ExtResource( 15 )
 maxHealth = 10
 enemyDamage = 4
@@ -248,8 +249,8 @@ collision_layer = 0
 collision_mask = 16
 script = ExtResource( 8 )
 entity_stats = NodePath("../Stats")
-type = 1
 hit_flash = NodePath("../HitFlash")
+type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0.5, 4.5 )

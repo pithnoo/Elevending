@@ -1,6 +1,9 @@
 class_name Enemy
 extends KinematicBody2D
 
+enum enemy_type { LIGHT, MEDIUM, HEAVY }
+export(enemy_type) var type
+
 # properties of enemy to be used in game
 onready var animations = $AnimationPlayer
 onready var states = $StateManager
@@ -83,7 +86,15 @@ func _on_HurtBox_enemy_stunned():
 
 
 func _on_CoreHitBox_collided():
-	AudioManager.play("EnemyDestroyed")
+	match type:
+		enemy_type.LIGHT:
+			AudioManager.play("LightAttack")
+		enemy_type.MEDIUM:
+			AudioManager.play("MediumAttack")
+		enemy_type.HEAVY:
+			AudioManager.play("HeavyAttack")
+		
+	#AudioManager.play("EnemyDestroyed")
 
 	# signal of enemy's death for wave manager
 	if not is_dead:

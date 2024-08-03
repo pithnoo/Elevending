@@ -7,8 +7,6 @@ var boss: Boss
 
 func enter() -> void:
 	boss.animations.play(animation_name)
-
-	# WARNING: boss reappears here
 	boss.visible = true
 
 func exit() -> void:

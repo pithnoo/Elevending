@@ -18,6 +18,7 @@ shader_param/active = false
 shader_param/colour = Color( 0.984314, 0.419608, 0.113725, 1 )
 
 [node name="BossShadow" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 boss_avatar_node = NodePath("BossAvatar")
 boss_machine_node = NodePath("Machine")

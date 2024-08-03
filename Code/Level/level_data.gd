@@ -64,14 +64,7 @@ func rate_level():
 		# in any other case, the score exceeds all coin requirements
 		level_rating = 3
 
-	# if the levels rating is higher than what is currently saved
-	# write new value rating
-	if has_rating && level_rating > previous_level_rating:
-		LevelManager.level_ratings[level_index] = level_rating
-		LevelManager.save_level_progress()
-		print("rewritten")
-	elif !has_rating:
-		LevelManager.level_ratings.append(level_rating)
+	write_level_data()
 
 	if level_index == LevelManager.levels_unlocked - 1:
 		LevelManager.levels_unlocked = level_number + 1
@@ -87,3 +80,28 @@ func goto_next_level():
 	# transition to next level
 	GameManager.reset_game_values()
 	SceneTransition.blind_transition(next_level)
+
+func _on_Dead_rate_boss_level():
+	var core_quarter = round(CoreStats.max_health / 4)
+	var core_half = round(CoreStats.max_health / 2)
+
+	if CoreStats.health == CoreStats.max_health:
+		level_rating = 3
+	elif CoreStats.health < CoreStats.max_health && CoreStats.health >= core_half:
+		level_rating = 2
+	elif CoreStats.health < core_half && CoreStats.health >= core_quarter:
+		level_rating = 1
+	else:
+		level_rating = 0
+
+	write_level_data()
+
+func write_level_data():
+	# if the levels rating is higher than what is currently saved
+	# write new value rating
+	if has_rating && level_rating > previous_level_rating:
+		LevelManager.level_ratings[level_index] = level_rating
+		LevelManager.save_level_progress()
+		print("rewritten")
+	elif !has_rating:
+		LevelManager.level_ratings.append(level_rating)

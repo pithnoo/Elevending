@@ -16,7 +16,6 @@ onready var notesUIEmpty = get_node(notes_UI_empty_node)
 onready var animations = $AnimationPlayer
 onready var timer = $Timer
 
-
 func set_notes(value):
 	if !GameManager.game_over:
 		GameManager.can_pause = false
@@ -50,7 +49,6 @@ func _ready():
 
 func _on_NextButton_pressed():
 	LevelManager.emit_signal("next_level")
-
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)

@@ -4,7 +4,7 @@
 [ext_resource path="res://Code/Effects/effect.gd" type="Script" id=2]
 
 [sub_resource type="Gradient" id=21]
-offsets = PoolRealArray( 0, 0.362445 )
+offsets = PoolRealArray( 0, 0.193548 )
 
 [sub_resource type="GradientTexture" id=22]
 gradient = SubResource( 21 )
@@ -15,7 +15,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.675 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=20]
 curve = SubResource( 19 )
 
-[sub_resource type="ParticlesMaterial" id=23]
+[sub_resource type="ParticlesMaterial" id=25]
 emission_shape = 1
 emission_sphere_radius = 50.0
 flag_rotate_y = true
@@ -32,16 +32,16 @@ angle_random = 1.0
 scale = 0.5
 scale_random = 1.0
 scale_curve = SubResource( 20 )
-color = Color( 0.466667, 0.270588, 0.239216, 1 )
+color = Color( 0.560784, 0.827451, 1, 1 )
 color_initial_ramp = SubResource( 22 )
 
-[node name="DestroyedParticle" type="Particles2D"]
+[node name="BossParticleWater" type="Particles2D"]
 position = Vector2( 50, -62 )
-amount = 30
+amount = 10
 lifetime = 2.0
 explosiveness = 1.0
 randomness = 1.0
-process_material = SubResource( 23 )
+process_material = SubResource( 25 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 life_time = 1.9

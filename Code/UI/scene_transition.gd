@@ -8,15 +8,18 @@ var can_press: bool = false
 
 export(NodePath) var particle_position_node
 onready var particle_position = get_node(particle_position_node)
+export(NodePath) var boss_particle_position_node
+onready var boss_particle_position = get_node(boss_particle_position_node)
 
 export(PackedScene) var destroy_effect
+export(Array, PackedScene) var boss_effects
+
 var game_over: bool = false
 
 onready var screen_shake = $ScreenShake
 onready var transition_camera = $TransitionCamera
 
 signal transition_shake
-
 
 func blind_transition(target: String) -> void:
 	AudioManager.play("BlindTransition")
@@ -36,10 +39,8 @@ func blind_transition(target: String) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
-# WARNING: this should be set if the tutorial panel isn't called
-
-
 func upgrade_transition(target: String) -> void:
+	# WARNING: this should be set if the tutorial panel isn't called
 	GameManager.can_pause = false
 
 	# pauses game for upgrade menu
@@ -94,6 +95,22 @@ func over_transition(target: String) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
+func boss_transition(target: String) -> void:
+	get_tree().paused = true
+
+	AudioManager.play("BlindTransition")
+	GameManager.can_pause = false
+
+	animations.play("BossOver")
+	yield(animations, "animation_finished")
+
+	get_tree().change_scene(target)
+
+	can_press = true
+	GameManager.change_game_cursor(0)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
 func game_over_effect() -> void:
 	AudioManager.play("GameOver")
 	transition_camera.current = true
@@ -105,8 +122,26 @@ func game_over_effect() -> void:
 	effect.global_position = particle_position.global_position
 
 
+func boss_effect() -> void:
+	AudioManager.play("GameOver")
+	transition_camera.current = true
+	screen_shake.apply_shake()
+
+	for boss_effect in boss_effects:
+		var effect = boss_effect.instance()
+		boss_particle_position.add_child(effect)
+		effect.global_position = boss_particle_position.global_position
+
 func _on_MenuButton_pressed():
 	animations.play_backwards("GameReturn")
+	can_press = false
+
+	yield(animations, "animation_finished")
+	get_tree().paused = false
+
+
+func _on_MenuButton2_pressed():
+	animations.play_backwards("BossReturn")
 	can_press = false
 
 	yield(animations, "animation_finished")
@@ -117,3 +152,4 @@ func unpause():
 	if not GameManager.has_tutorial:
 		get_tree().paused = false
 		GameManager.can_pause = true
+

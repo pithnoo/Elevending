@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Art/Level/blindsTransition1.png" type="Texture" id=1]
 [ext_resource path="res://Code/UI/scene_transition.gd" type="Script" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Art/Level/PauseButtons-Sheet.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/DestroyedParticle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Art/gameDone.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/BossParticleFire.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/BossParticleGrass.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/BossParticleWater.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=9]
 resource_name = "BlindsTransition"
@@ -36,6 +40,51 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "BossOver"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossOver:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( -6, -296 ), Vector2( -6, -10 ), Vector2( -6, -40 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "boss_effect"
+} ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "BossReturn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossOver:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( -6, -296 ), Vector2( -6, -10 ), Vector2( -6, -40 ) ]
+}
+
 [sub_resource type="Animation" id=15]
 resource_name = "GameOver"
 length = 2.0
@@ -49,7 +98,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.9 ),
 "transitions": PoolRealArray( -2, -2, -2 ),
 "update": 0,
-"values": [ Vector2( -8, -296 ), Vector2( -8, -10 ), Vector2( -8, -30 ) ]
+"values": [ Vector2( -6, -296 ), Vector2( -6, -10 ), Vector2( -6, -30 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -78,7 +127,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.9 ),
 "transitions": PoolRealArray( -2, -2, -2 ),
 "update": 0,
-"values": [ Vector2( -8, -296 ), Vector2( -8, 0 ), Vector2( -8, -30 ) ]
+"values": [ Vector2( -6, -296 ), Vector2( -6, 0 ), Vector2( -6, -30 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -130,6 +179,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -8, -296 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BossOver:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -4, -296 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -206,7 +267,9 @@ layer = 2
 follow_viewport_enable = true
 script = ExtResource( 2 )
 particle_position_node = NodePath("GameOver/ParticlePosiiton")
+boss_particle_position_node = NodePath("BossOver/BossParticlePosiiton")
 destroy_effect = ExtResource( 6 )
+boss_effects = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 
 [node name="ScreenShake" parent="." instance=ExtResource( 5 )]
 noise_shake_strength = 60.0
@@ -216,6 +279,8 @@ camera_node = NodePath("../TransitionCamera")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/BlindsTransition = SubResource( 9 )
+anims/BossOver = SubResource( 21 )
+anims/BossReturn = SubResource( 22 )
 anims/GameOver = SubResource( 15 )
 anims/GameReturn = SubResource( 18 )
 anims/RESET = SubResource( 10 )
@@ -225,9 +290,9 @@ anims/UpgradeEnter = SubResource( 11 )
 anims/UpgradeExit = SubResource( 13 )
 
 [node name="Blinds" type="TextureRect" parent="."]
-margin_left = -6.0
+margin_left = -8.0
 margin_top = -296.0
-margin_right = 94.0
+margin_right = 92.0
 margin_bottom = -223.0
 rect_scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
@@ -257,6 +322,28 @@ stretch_mode = 3
 [node name="ParticlePosiiton" type="Position2D" parent="GameOver"]
 position = Vector2( 50, -38 )
 
+[node name="BossOver" type="TextureRect" parent="."]
+margin_left = -4.0
+margin_top = -296.0
+margin_right = 96.0
+margin_bottom = -223.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="MenuButton2" type="TextureButton" parent="BossOver"]
+margin_left = 37.0
+margin_top = 43.5
+margin_right = 64.0
+margin_bottom = 62.5
+texture_normal = SubResource( 19 )
+texture_hover = SubResource( 20 )
+expand = true
+stretch_mode = 3
+
+[node name="BossParticlePosiiton" type="Position2D" parent="BossOver"]
+position = Vector2( 50, -38 )
+
 [node name="UpgradeTransition" type="ColorRect" parent="."]
 visible = false
 margin_left = -384.0
@@ -277,3 +364,4 @@ current = true
 smoothing_enabled = true
 
 [connection signal="pressed" from="GameOver/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="BossOver/MenuButton2" to="." method="_on_MenuButton2_pressed"]

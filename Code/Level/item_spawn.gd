@@ -18,15 +18,19 @@ onready var wave_spawner = get_node(wave_spawn_node)
 
 var can_spawn_items: bool = false
 
+export(bool) var boss_spawner = false
+
 var current_item_positions: Array
 var prev_point = Vector2.ZERO
-
 
 func _process(delta):
 	if wave_spawn_node == "":
 		can_spawn_items = true
-	else:
+	elif !boss_spawner:
 		can_spawn_items = wave_spawner.can_items_spawn
+	else:
+		# This is for the boss.gd file, which only has this boolean
+		can_spawn_items = wave_spawner.boss_items_spawn
 
 	if can_spawn_items:
 		if spawnTimer.is_stopped():
@@ -45,7 +49,6 @@ func _process(delta):
 				spawn(entityID, gen_random_pos())
 			else:
 				spawnTimer.start(spawn_cooldown)
-
 
 func gen_random_pos():
 	var random = RandomNumberGenerator.new()

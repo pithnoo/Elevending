@@ -23,7 +23,7 @@ signal launcher_destroyed
 signal launcher_ready
 
 func flip_machine():
-  count_sprite.flip_h = 1
+	count_sprite.flip_h = 1
 
 func _ready():
   if is_hard:

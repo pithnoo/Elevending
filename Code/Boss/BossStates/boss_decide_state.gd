@@ -14,14 +14,20 @@ var attack_counter = 0
 
 var teleport_finished : bool = false
 
+export(PackedScene) var warp_particle
+
 func disappear():
+	var particle = warp_particle.instance()
+	particle.global_position = boss.global_position
 	boss.visible = false
+	add_child(particle)
 	teleport_finished = true
 
 func enter():
-	teleport_finished = false
 	.enter()
-
+	teleport_finished = false
+	AudioManager.play("BossWarp")
+	
 func process(_delta) -> BossBaseState:
 	if teleport_finished == true:
 		random.randomize()
@@ -37,9 +43,11 @@ func process(_delta) -> BossBaseState:
 
 		match boss_attack:
 			0:
-				if boss.vending_remains:
+				if boss.vending_remains || boss.vending_before:
+					boss.vending_before = false
 					return summon_state
 				else:
+					boss.vending_before = true
 					return vending_state
 			1:
 				return summon_state

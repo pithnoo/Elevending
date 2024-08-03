@@ -22,9 +22,9 @@ export(float) var repulsion_speed
 
 var attack_finished: bool
 
-
 func enter() -> void:
 	.enter()
+	AudioManager.play("EnemyCharge")
 	attack_finished = false
 
 	enemy.velocity = Vector2.ZERO
@@ -62,3 +62,12 @@ func attack():
 	attack_effect.global_position = enemy.particlePosition.global_position
 
 	enemy.knockback = direction.normalized() * repulsion_speed
+
+	match enemy.type:
+			enemy.enemy_type.LIGHT:
+				AudioManager.play("LightAttack")
+			enemy.enemy_type.MEDIUM:
+				AudioManager.play("MediumAttack")
+			enemy.enemy_type.HEAVY:
+				AudioManager.play("HeavyAttack")
+

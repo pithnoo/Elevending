@@ -11,6 +11,7 @@ export(PackedScene) var warp_particle
 func enter():
   .enter()
   boss.global_position = idle_position
+  AudioManager.play("BossWarp")
   
 func process(delta):
   var particle = warp_particle.instance()
