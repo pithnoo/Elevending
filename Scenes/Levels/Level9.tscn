@@ -958,6 +958,7 @@ one_shot = true
 
 [node name="Stats" type="Node" parent="Boss"]
 script = ExtResource( 8 )
+max_health = 18
 
 [node name="StateManager" type="Node" parent="Boss"]
 script = ExtResource( 42 )
@@ -1041,6 +1042,7 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
+attacks_til_ghost = 4
 warp_particle = ExtResource( 43 )
 
 [node name="BossShadow" type="Sprite" parent="Boss"]

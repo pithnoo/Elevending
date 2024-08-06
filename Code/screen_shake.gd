@@ -26,7 +26,6 @@ onready var noise = OpenSimplexNoise.new()
 # to keep track of where we currently are in the noise
 var noise_i: float = 0.0
 
-
 func _ready():
 	rand.randomize()
 

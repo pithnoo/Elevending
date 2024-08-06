@@ -1,13 +1,190 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://Art/Level/skull level.png" type="Texture" id=1]
+[ext_resource path="res://Art/menu-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Art/MenuButtons-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Art/Level/levelShelf.png" type="Texture" id=4]
 [ext_resource path="res://Art/miniNoteFull.png" type="Texture" id=5]
 [ext_resource path="res://Art/Boss/bowls-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://Art/Level/LevelNumbers.png" type="Texture" id=7]
 [ext_resource path="res://Code/Level/level_button.gd" type="Script" id=8]
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Code/menu_button.gd" type="Script" id=10]
 [ext_resource path="res://Art/miniNoteEmpty.png" type="Texture" id=11]
 [ext_resource path="res://Code/Level/rating.gd" type="Script" id=12]
+[ext_resource path="res://GameUI.tres" type="Theme" id=13]
+[ext_resource path="res://Art/settings.png" type="Texture" id=14]
+[ext_resource path="res://Art/selectors-Sheet.png" type="Texture" id=15]
+[ext_resource path="res://Art/Level/bars-Sheet.png" type="Texture" id=16]
+[ext_resource path="res://Code/volume_controls.gd" type="Script" id=17]
+[ext_resource path="res://Code/Level/level_menu.gd" type="Script" id=18]
+[ext_resource path="res://Code/slider.gd" type="Script" id=19]
+[ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=20]
+[ext_resource path="res://Code/Level/main_menu.gd" type="Script" id=21]
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 288, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 864, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 1152, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 1440, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 1728, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 2016, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 2304, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 2592, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 2 )
+region = Rect2( 2880, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 3168, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 3456, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 2 )
+region = Rect2( 3744, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 2 )
+region = Rect2( 4032, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 4320, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 2 )
+region = Rect2( 4608, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 4896, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 5184, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 5472, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 5760, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 6048, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 6336, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 6624, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 6912, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 2 )
+region = Rect2( 7200, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 2 )
+region = Rect2( 7488, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 2 )
+region = Rect2( 7776, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 2 )
+region = Rect2( 8064, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 2 )
+region = Rect2( 8352, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 2 )
+region = Rect2( 8640, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 2 )
+region = Rect2( 8928, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 2 )
+region = Rect2( 9216, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 2 )
+region = Rect2( 9504, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 2 )
+region = Rect2( 9792, 0, 288, 162 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 2 )
+region = Rect2( 10080, 0, 288, 162 )
+
+[sub_resource type="SpriteFrames" id=50]
+animations = [ {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 91, 21 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 91, 0, 91, 21 )
+
+[sub_resource type="DynamicFont" id=51]
+size = 32
+font_data = ExtResource( 9 )
 
 [sub_resource type="AtlasTexture" id=4]
 resource_local_to_scene = true
@@ -39,15 +216,170 @@ region = Rect2( 95, 0, 19, 8 )
 atlas = ExtResource( 6 )
 region = Rect2( 76, 0, 19, 8 )
 
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 20 )
+region = Rect2( 152, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 20 )
+region = Rect2( 171, 0, 19, 13 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 4, 10 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 4, 10 )
+
+[sub_resource type="StyleBoxTexture" id=54]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=55]
+texture = ExtResource( 16 )
+region_rect = Rect2( 119, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=56]
+texture = ExtResource( 16 )
+region_rect = Rect2( 238, 0, 119, 4 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 15 )
+region = Rect2( 4, 0, 4, 10 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 15 )
+region = Rect2( 4, 0, 4, 10 )
+
+[sub_resource type="StyleBoxTexture" id=59]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=60]
+texture = ExtResource( 16 )
+region_rect = Rect2( 357, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=61]
+texture = ExtResource( 16 )
+region_rect = Rect2( 476, 0, 119, 4 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 15 )
+region = Rect2( 12, 0, 4, 10 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 15 )
+region = Rect2( 12, 0, 4, 10 )
+
+[sub_resource type="StyleBoxTexture" id=64]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=65]
+texture = ExtResource( 16 )
+region_rect = Rect2( 595, 0, 119, 4 )
+
+[sub_resource type="StyleBoxTexture" id=66]
+texture = ExtResource( 16 )
+region_rect = Rect2( 714, 0, 119, 4 )
+
 [node name="MainMenu" type="Node2D"]
 position = Vector2( 1, 0 )
+script = ExtResource( 21 )
+
+[node name="MenuUI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuUI"]
+margin_right = 384.0
+margin_bottom = 216.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="MenuUI/MarginContainer"]
+scale = Vector2( 1.33333, 1.33333 )
+frames = SubResource( 50 )
+frame = 26
+playing = true
+centered = false
+
+[node name="PlayButton" type="TextureButton" parent="MenuUI"]
+margin_left = 236.0
+margin_top = 77.0
+margin_right = 357.0
+margin_bottom = 106.0
+texture_normal = SubResource( 12 )
+texture_pressed = SubResource( 13 )
+texture_hover = SubResource( 13 )
+expand = true
+script = ExtResource( 10 )
+start_colour = Color( 0.901961, 0.564706, 0.305882, 1 )
+reset_colour = Color( 0.803922, 0.407843, 0.239216, 1 )
+level_menu_node = NodePath("../../LevelUI/LevelSelect")
+
+[node name="Label" type="Label" parent="MenuUI/PlayButton"]
+margin_left = 41.0
+margin_top = -3.0
+margin_right = 83.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 51 )
+text = "PLAY"
+align = 1
+
+[node name="SettingsButton" type="TextureButton" parent="MenuUI"]
+margin_left = 236.0
+margin_top = 119.0
+margin_right = 357.0
+margin_bottom = 148.0
+texture_normal = SubResource( 12 )
+texture_pressed = SubResource( 13 )
+texture_hover = SubResource( 13 )
+expand = true
+script = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": ""
+}
+start_colour = Color( 0.901961, 0.564706, 0.305882, 1 )
+reset_colour = Color( 0.803922, 0.407843, 0.239216, 1 )
+settings_menu_node = NodePath("../../LevelUI/SettingsMenu")
+
+[node name="Label" type="Label" parent="MenuUI/SettingsButton"]
+margin_left = 27.0
+margin_top = -3.0
+margin_right = 99.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 51 )
+text = "SETTINGS"
+align = 1
+
+[node name="QuitButton" type="TextureButton" parent="MenuUI"]
+margin_left = 236.0
+margin_top = 162.0
+margin_right = 357.0
+margin_bottom = 191.0
+texture_normal = SubResource( 12 )
+texture_pressed = SubResource( 13 )
+texture_hover = SubResource( 13 )
+expand = true
+script = ExtResource( 10 )
+start_colour = Color( 0.901961, 0.564706, 0.305882, 1 )
+reset_colour = Color( 0.803922, 0.407843, 0.239216, 1 )
+
+[node name="Label" type="Label" parent="MenuUI/QuitButton"]
+margin_left = 41.0
+margin_top = -3.0
+margin_right = 83.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 51 )
+text = "QUIT"
+align = 1
 
 [node name="LevelUI" type="CanvasLayer" parent="."]
 
 [node name="LevelSelect" type="Control" parent="LevelUI"]
+visible = false
 margin_top = 8.0
 margin_right = 40.0
 margin_bottom = 48.0
+script = ExtResource( 18 )
 
 [node name="SelectBackground" type="TextureRect" parent="LevelUI/LevelSelect"]
 margin_left = -12.0
@@ -419,3 +751,131 @@ margin_bottom = 10.5
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 4
+
+[node name="ExitButton" type="TextureButton" parent="LevelUI/LevelSelect"]
+margin_left = 343.0
+margin_top = -10.0
+margin_right = 383.0
+margin_bottom = 30.0
+texture_normal = SubResource( 67 )
+texture_hover = SubResource( 68 )
+expand = true
+stretch_mode = 3
+
+[node name="SettingsMenu" type="Control" parent="LevelUI"]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 18 )
+
+[node name="ColorRect" type="ColorRect" parent="LevelUI/SettingsMenu"]
+margin_right = 384.0
+margin_bottom = 216.0
+color = Color( 0.466667, 0.270588, 0.239216, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="LevelUI/SettingsMenu"]
+margin_left = 169.0
+margin_right = 209.0
+margin_bottom = 40.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelUI/SettingsMenu"]
+margin_left = 128.0
+margin_top = 40.0
+margin_right = 248.0
+margin_bottom = 210.0
+theme = ExtResource( 13 )
+script = ExtResource( 17 )
+
+[node name="Label" type="Label" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 34.0
+text = "Master"
+align = 1
+
+[node name="MasterSlider" type="HSlider" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_top = 38.0
+margin_right = 120.0
+margin_bottom = 48.0
+custom_icons/grabber_highlight = SubResource( 52 )
+custom_icons/grabber = SubResource( 53 )
+custom_styles/slider = SubResource( 54 )
+custom_styles/grabber_area_highlight = SubResource( 55 )
+custom_styles/grabber_area = SubResource( 56 )
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource( 19 )
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_top = 52.0
+margin_right = 120.0
+margin_bottom = 86.0
+text = "Sound Effects"
+align = 1
+
+[node name="SfxSlider" type="HSlider" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_top = 90.0
+margin_right = 120.0
+margin_bottom = 100.0
+custom_icons/grabber_highlight = SubResource( 57 )
+custom_icons/grabber = SubResource( 58 )
+custom_styles/slider = SubResource( 59 )
+custom_styles/grabber_area_highlight = SubResource( 60 )
+custom_styles/grabber_area = SubResource( 61 )
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource( 19 )
+bus_name = "Sfx"
+
+[node name="Label3" type="Label" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_top = 104.0
+margin_right = 120.0
+margin_bottom = 138.0
+text = "Music"
+align = 1
+
+[node name="MusicSlider" type="HSlider" parent="LevelUI/SettingsMenu/VBoxContainer"]
+margin_top = 142.0
+margin_right = 120.0
+margin_bottom = 152.0
+custom_icons/grabber_highlight = SubResource( 62 )
+custom_icons/grabber = SubResource( 63 )
+custom_styles/slider = SubResource( 64 )
+custom_styles/grabber_area_highlight = SubResource( 65 )
+custom_styles/grabber_area = SubResource( 66 )
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource( 19 )
+bus_name = "Music"
+
+[node name="ExitButton" type="TextureButton" parent="LevelUI/SettingsMenu"]
+margin_left = 343.0
+margin_top = -2.0
+margin_right = 383.0
+margin_bottom = 38.0
+texture_normal = SubResource( 67 )
+texture_hover = SubResource( 68 )
+expand = true
+stretch_mode = 3
+
+[connection signal="mouse_entered" from="MenuUI/PlayButton" to="MenuUI/PlayButton" method="_on_PlayButton_mouse_entered"]
+[connection signal="mouse_exited" from="MenuUI/PlayButton" to="MenuUI/PlayButton" method="_on_PlayButton_mouse_exited"]
+[connection signal="pressed" from="MenuUI/PlayButton" to="MenuUI/PlayButton" method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="MenuUI/SettingsButton" to="MenuUI/SettingsButton" method="_on_SettingsButton_mouse_entered"]
+[connection signal="mouse_exited" from="MenuUI/SettingsButton" to="MenuUI/SettingsButton" method="_on_SettingsButton_mouse_exited"]
+[connection signal="pressed" from="MenuUI/SettingsButton" to="MenuUI/SettingsButton" method="_on_SettingsButton_pressed"]
+[connection signal="mouse_entered" from="MenuUI/QuitButton" to="MenuUI/QuitButton" method="_on_QuitButton_mouse_entered"]
+[connection signal="mouse_exited" from="MenuUI/QuitButton" to="MenuUI/QuitButton" method="_on_QuitButton_mouse_exited"]
+[connection signal="pressed" from="MenuUI/QuitButton" to="MenuUI/QuitButton" method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="LevelUI/LevelSelect/ExitButton" to="LevelUI/LevelSelect" method="_on_ExitButton_pressed"]
+[connection signal="mouse_exited" from="LevelUI/SettingsMenu/VBoxContainer/MasterSlider" to="LevelUI/SettingsMenu/VBoxContainer" method="_on_MasterSlider_mouse_exited"]
+[connection signal="mouse_exited" from="LevelUI/SettingsMenu/VBoxContainer/SfxSlider" to="LevelUI/SettingsMenu/VBoxContainer" method="_on_SfxSlider_mouse_exited"]
+[connection signal="mouse_exited" from="LevelUI/SettingsMenu/VBoxContainer/MusicSlider" to="LevelUI/SettingsMenu/VBoxContainer" method="_on_MusicSlider_mouse_exited"]
+[connection signal="pressed" from="LevelUI/SettingsMenu/ExitButton" to="LevelUI/SettingsMenu" method="_on_ExitButton_pressed"]

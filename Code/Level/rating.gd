@@ -25,6 +25,6 @@ func _ready():
 
 func _process(_delta: float):
 	if is_pressed():
-		# go to level
+		AudioManager.stop_playing("Soba")
 		SceneTransition.blind_transition(level_buffer)
 		GameManager.reset_game_values()

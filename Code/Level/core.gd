@@ -43,6 +43,9 @@ func decrease_health(damage_taken: int) -> void:
 
 	if CoreStats.health <= 0:
 		if !GameManager.game_over:
+			# current theme is managed by the audio manager
+			AudioManager.stop_playing(AudioManager.current_theme)
+
 			AudioManager.play("CoreDown")
 
 			core_detection.queue_free()

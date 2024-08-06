@@ -14,7 +14,6 @@ export(String, FILE, "*png") var neutral_cursor
 export(String, FILE, "*png") var manual_cursor
 export(String, FILE, "*png") var item_cursor
 export(String, FILE, "*png") var turret_cursor
-
 var current_cursor: int
 
 # turrets

@@ -21,7 +21,24 @@ var has_rating: bool
 
 onready var level_camera = $LevelCamera
 
+func start_level_theme():
+	# make sure to set the current theme too
+	if level_number == 9:
+		# boss theme
+		pass
+	elif level_number == 8 && level_number == 7:
+		# hard theme
+		pass
+	elif level_number <= 6 && level_number >= 4:
+		# medium theme
+		pass
+	else:
+		# easy theme
+		pass
+
 func _ready():
+	start_level_theme()
+	
 	CoreStats.health = core_health
 	GameManager.ground_turret_number = level_ground_turrets
 	GameManager.electric_turret_number = level_electric_turrets
@@ -40,12 +57,6 @@ func _ready():
 
 	# sets camera to level for screen shake, game over screen switches camera
 	level_camera.current = true
-
-	# during transitions, the player will be unable to pause
-
-
-#GameManager.can_pause = true
-
 
 func rate_level():
 	if GameManager.game_currency < coin_requirement1:

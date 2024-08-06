@@ -111,7 +111,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Elevending"
-run/main_scene="res://Scenes/Levels/Level9.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
 

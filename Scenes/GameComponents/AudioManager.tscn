@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Sounds/SFX/turretUsed.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/SFX/reload.wav" type="AudioStream" id=2]
@@ -21,15 +21,19 @@
 [ext_resource path="res://Sounds/SFX/lightChargeAttack.wav" type="AudioStream" id=19]
 [ext_resource path="res://Sounds/SFX/heavyChargeAttack.wav" type="AudioStream" id=20]
 [ext_resource path="res://Sounds/SFX/bosswhoosh.wav" type="AudioStream" id=21]
+[ext_resource path="res://Sounds/Music/Soba.wav" type="AudioStream" id=22]
 
 [node name="AudioManager" type="Node"]
 pause_mode = 2
 script = ExtResource( 4 )
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+[node name="Soba" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -5.0
 bus = "Music"
 
-[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+[node name="Udon" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 bus = "Music"
 
 [node name="EnemyDestroyed" type="AudioStreamPlayer" parent="."]
