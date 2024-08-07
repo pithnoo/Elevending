@@ -299,7 +299,7 @@ margin_bottom = 216.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MenuUI/MarginContainer"]
 scale = Vector2( 1.33333, 1.33333 )
 frames = SubResource( 50 )
-frame = 3
+frame = 18
 playing = true
 centered = false
 

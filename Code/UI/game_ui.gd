@@ -90,6 +90,7 @@ func _ready():
 	self.num_electric = GameManager.electric_turret_number
 
 	CoreStats.connect("health_changed", self, "set_hearts")
+	CoreStats.connect("max_health_changed", self, "set_max_hearts")
 	GameManager.connect("currency_changed", self, "set_currency")
 	GameManager.connect("ground_changed", self, "set_ground")
 	GameManager.connect("electric_changed", self, "set_electric")

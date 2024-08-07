@@ -39,8 +39,15 @@ func start_level_theme():
 func _ready():
 	start_level_theme()
 	
+	# debugging health changes from ui in game
+	#print("level: ", level_number, " health: ", core_health)
+
 	CoreStats.max_health = core_health
 	CoreStats.health = core_health
+
+	CoreStats.emit_signal("max_health_changed", core_health)
+	CoreStats.emit_signal("health_changed", core_health)
+
 	GameManager.ground_turret_number = level_ground_turrets
 	GameManager.electric_turret_number = level_electric_turrets
 

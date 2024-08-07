@@ -70,36 +70,30 @@ func change_game_cursor(cursor_type):
 		_:
 			print("invalid cursor type")
 
-
 # for game UI
 func display_wave():
 	emit_signal("show_wave", current_wave + 1)
-
 
 func set_currency(value):
 	game_currency = value
 
 	emit_signal("currency_changed", value)
 
-
 func set_ground(value):
 	ground_turret_number = value
 
 	emit_signal("ground_changed", value)
-
 
 func set_electric(value):
 	electric_turret_number = value
 
 	emit_signal("electric_changed", value)
 
-
 # returning to the games menu, values should be reset should the player
 # try again
 func reset_game_values():
 	current_wave = 0
 	self.game_currency = 0
-
 
 func _ready():
 	reset_game_values()

@@ -6,7 +6,6 @@ export(int) var damage
 
 signal collided
 
-
 func destroy():
 	var effect = deathEffect.instance()
 	var main = get_tree().current_scene

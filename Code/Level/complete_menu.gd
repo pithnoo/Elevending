@@ -36,7 +36,6 @@ func set_notes(value):
 			# 28 is the pixel size of the note sprite
 			notesUIFull.rect_size.x = notes * 28
 
-
 func _ready():
 	visible = false
 
@@ -45,7 +44,6 @@ func _ready():
 		notesUIEmpty.rect_size.x = max_notes * 28
 
 	GameManager.connect("display_rating", self, "set_notes")
-
 
 func _on_NextButton_pressed():
 	LevelManager.emit_signal("next_level")
