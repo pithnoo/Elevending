@@ -15,7 +15,7 @@
 [ext_resource path="res://Code/volume_controls.gd" type="Script" id=13]
 [ext_resource path="res://Code/slider.gd" type="Script" id=14]
 [ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=15]
-[ext_resource path="res://Code/Level/settings_menu.gd" type="Script" id=16]
+[ext_resource path="res://Code/settings_menu.gd" type="Script" id=16]
 
 [sub_resource type="AtlasTexture" id=2]
 resource_local_to_scene = true
@@ -178,6 +178,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
 menu = "res://Scenes/MainMenu.tscn"
+settings_menu_node = NodePath("../SettingsMenu")
 
 [node name="BlackOverlay" type="ColorRect" parent="PauseMenu"]
 margin_right = 384.0

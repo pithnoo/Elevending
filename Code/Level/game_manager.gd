@@ -1,5 +1,8 @@
 extends Node
 
+# to show level select screen if returning to menu
+var level_select_first : bool = false
+
 # to ensure player can't pause during transitions
 var can_pause: bool = true
 # this ensures that when a tutorial is in level, blind transition won't unpause
@@ -50,7 +53,6 @@ signal display_rating(value)
 
 # for sound menu
 signal show_sound_settings
-
 
 func change_game_cursor(cursor_type):
 	current_cursor = cursor_type

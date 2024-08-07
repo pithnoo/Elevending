@@ -13,6 +13,11 @@ onready var electric_label = $ElectricTurretNumber
 onready var wave_label1 = $Wave1
 onready var wave_label2 = $Wave2
 
+export(Color) var high_colour
+export(Color) var med_colour
+export(Color) var low_colour
+
+var health_phase : int
 
 func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts)
@@ -20,13 +25,18 @@ func set_hearts(value):
 	if health_label != null:
 		health_label.text = str(hearts)
 
+		if value == max_hearts:
+			health_label.self_modulate = high_colour
+		elif value < max_hearts && value > round(max_hearts / 2):
+			health_label.self_modulate = med_colour
+		else:
+			health_label.self_modulate = low_colour
 
 func set_max_hearts(value):
 	max_hearts = max(value, 1)
 
 	if health_label != null:
 		health_label.text = str(hearts)
-
 
 func set_currency(value):
 	currency = value

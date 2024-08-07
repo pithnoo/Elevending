@@ -39,6 +39,7 @@ func start_level_theme():
 func _ready():
 	start_level_theme()
 	
+	CoreStats.max_health = core_health
 	CoreStats.health = core_health
 	GameManager.ground_turret_number = level_ground_turrets
 	GameManager.electric_turret_number = level_electric_turrets

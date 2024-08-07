@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Art/Level/skull level.png" type="Texture" id=1]
 [ext_resource path="res://Art/menu-Sheet.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Code/slider.gd" type="Script" id=19]
 [ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=20]
 [ext_resource path="res://Code/Level/main_menu.gd" type="Script" id=21]
+[ext_resource path="res://Code/settings_menu.gd" type="Script" id=22]
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
@@ -287,6 +288,7 @@ region_rect = Rect2( 714, 0, 119, 4 )
 [node name="MainMenu" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 21 )
+level_menu_node = NodePath("LevelUI/LevelSelect")
 
 [node name="MenuUI" type="CanvasLayer" parent="."]
 
@@ -297,7 +299,7 @@ margin_bottom = 216.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MenuUI/MarginContainer"]
 scale = Vector2( 1.33333, 1.33333 )
 frames = SubResource( 50 )
-frame = 26
+frame = 3
 playing = true
 centered = false
 
@@ -767,7 +769,7 @@ pause_mode = 2
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 18 )
+script = ExtResource( 22 )
 
 [node name="ColorRect" type="ColorRect" parent="LevelUI/SettingsMenu"]
 margin_right = 384.0

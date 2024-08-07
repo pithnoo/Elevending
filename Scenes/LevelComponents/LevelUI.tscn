@@ -157,6 +157,9 @@ margin_top = 96.0
 margin_right = 360.0
 margin_bottom = 136.0
 script = ExtResource( 2 )
+high_colour = Color( 0.34902, 0.752941, 0.137255, 1 )
+med_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
+low_colour = Color( 0.545098, 0.137255, 0.172549, 1 )
 
 [node name="Health" type="Label" parent="StatsUI"]
 margin_left = -245.0

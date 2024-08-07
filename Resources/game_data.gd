@@ -1,18 +1,13 @@
 class_name SaveFile
 extends Resource
 
+const SAVE_GAME_PATH := "user://save.json"
+var _file := File.new()
 var levels_unlocked: int = 1
 var level_ratings: Array
 
-const SAVE_GAME_PATH := "user://save.json"
-
-# := the variable type is inferred by its content
-var _file := File.new()
-
-
 func save_exists() -> bool:
 	return _file.file_exists(SAVE_GAME_PATH)
-
 
 func write_game() -> void:
 	var error := _file.open(SAVE_GAME_PATH, File.WRITE)
@@ -21,15 +16,14 @@ func write_game() -> void:
 		return
 
 	# data to be written in a json file
-	var data := {"levels_unlocked": levels_unlocked, "level_ratings": level_ratings}
-
-	print("check")
-	print(data)
+	var data := {
+		"levels_unlocked": levels_unlocked,
+		"level_ratings": level_ratings,
+		}
 
 	var json_string := JSON.print(data)
 	_file.store_string(json_string)
 	_file.close()
-
 
 func load_game() -> void:
 	var error := _file.open(SAVE_GAME_PATH, File.READ)

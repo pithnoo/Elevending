@@ -80,6 +80,7 @@ func return_transition(target: String) -> void:
 
 
 func over_transition(target: String) -> void:
+	GameManager.level_select_first = true
 	get_tree().paused = true
 
 	AudioManager.play("BlindTransition")
@@ -96,6 +97,7 @@ func over_transition(target: String) -> void:
 
 
 func boss_transition(target: String) -> void:
+	GameManager.level_select_first = true
 	get_tree().paused = true
 
 	AudioManager.play("BlindTransition")
@@ -132,6 +134,7 @@ func boss_effect() -> void:
 		boss_particle_position.add_child(effect)
 		effect.global_position = boss_particle_position.global_position
 
+
 func _on_MenuButton_pressed():
 	animations.play_backwards("GameReturn")
 	can_press = false
@@ -139,14 +142,12 @@ func _on_MenuButton_pressed():
 	yield(animations, "animation_finished")
 	get_tree().paused = false
 
-
 func _on_MenuButton2_pressed():
 	animations.play_backwards("BossReturn")
 	can_press = false
 
 	yield(animations, "animation_finished")
 	get_tree().paused = false
-
 
 func unpause():
 	if not GameManager.has_tutorial:

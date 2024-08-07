@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "AudioFile",
+"language": "GDScript",
+"path": "res://Resources/audio_data.gd"
+}, {
 "base": "Node",
 "class": "BaseState",
 "language": "GDScript",
@@ -90,6 +95,7 @@ _global_script_classes=[ {
 "path": "res://Code/Turret/turret_base_state.gd"
 } ]
 _global_script_class_icons={
+"AudioFile": "",
 "BaseState": "",
 "Boss": "",
 "BossBaseState": "",
