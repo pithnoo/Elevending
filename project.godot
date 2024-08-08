@@ -117,9 +117,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Elevending"
-run/main_scene="res://Scenes/MainMenu.tscn"
+config/description="Funny vending man game"
+run/main_scene="res://Scenes/ControlSplash.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
+config/macos_native_icon="res://Elevending.icns"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

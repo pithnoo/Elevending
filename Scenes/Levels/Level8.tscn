@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/LevelComponents/LevelUIs/HardLevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=16]
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=17]
@@ -59,7 +59,7 @@ smoothing_enabled = true
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
-[node name="LevelUI" parent="." instance=ExtResource( 14 )]
+[node name="HardLevelUI" parent="." instance=ExtResource( 14 )]
 
 [node name="EnemySpawnZone2" type="Node2D" parent="."]
 script = ExtResource( 17 )

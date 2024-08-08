@@ -32,6 +32,10 @@ func enter():
 	.enter()
 	boss.visible = false
 
+	# resetting boss stats on each entry
+	success_counter = 0
+	summon_counter = 0
+
 	for node in attack_position_nodes:
 		attack_positions.append(get_node(node).global_position)
 

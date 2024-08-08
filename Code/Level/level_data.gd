@@ -25,7 +25,8 @@ func start_level_theme():
 	# make sure to set the current theme too
 	if level_number == 9:
 		# boss theme
-		pass
+		AudioManager.play("Udon")
+		AudioManager.current_theme = "Udon"
 	elif level_number == 8 && level_number == 7:
 		# hard theme
 		pass

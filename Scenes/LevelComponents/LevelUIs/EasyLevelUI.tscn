@@ -1,0 +1,225 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Fonts/TinyUnicode.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/LevelComponents/ShopScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Code/Level/shop_screen.gd" type="Script" id=3]
+[ext_resource path="res://Code/UI/game_ui.gd" type="Script" id=4]
+[ext_resource path="res://Art/Level/shopUI-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://Art/levelBackground-Sheet.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "StatsIdle"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "TurretIdle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "WaveIdleLeft"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "WaveIdleRight"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "StatsIdle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "TurretIdle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "WaveIdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "WaveIdleRight"
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/StatsIdle/node = SubResource( 7 )
+states/StatsIdle/position = Vector2( 329, 84 )
+states/TurretIdle/node = SubResource( 8 )
+states/TurretIdle/position = Vector2( 547, 84 )
+states/WaveIdleLeft/node = SubResource( 11 )
+states/WaveIdleLeft/position = Vector2( 94, 84 )
+states/WaveIdleRight/node = SubResource( 12 )
+states/WaveIdleRight/position = Vector2( 779, 84 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
+[sub_resource type="DynamicFont" id=14]
+font_data = ExtResource( 1 )
+
+[node name="EasyLevelUI" type="CanvasLayer"]
+layer = -1
+
+[node name="LevelBackground" type="Sprite" parent="."]
+position = Vector2( 192, 109 )
+texture = ExtResource( 6 )
+hframes = 4
+
+[node name="ShopScreen" type="Sprite" parent="."]
+position = Vector2( 58, 40 )
+texture = ExtResource( 5 )
+hframes = 8
+frame = 2
+script = ExtResource( 3 )
+wave_spawner_node = NodePath("../../EnemySpawnZone")
+starting_animation = "StatsIdle"
+idle_animation = "WaveIdleLeft"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShopScreen"]
+reset_on_save = false
+anims/RESET = SubResource( 1 )
+anims/StatsIdle = SubResource( 2 )
+anims/TurretIdle = SubResource( 3 )
+anims/WaveIdleLeft = SubResource( 10 )
+anims/WaveIdleRight = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="ShopScreen"]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 13 )
+
+[node name="ShopScreen2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 328, 40 )
+wave_spawner_node = NodePath("../../EnemySpawnZone")
+starting_animation = "TurretIdle"
+idle_animation = "WaveIdleRight"
+
+[node name="StatsUI" type="Control" parent="."]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 360.0
+margin_bottom = 136.0
+script = ExtResource( 4 )
+high_colour = Color( 0.34902, 0.752941, 0.137255, 1 )
+med_colour = Color( 0.976471, 0.760784, 0.168627, 1 )
+low_colour = Color( 0.545098, 0.137255, 0.172549, 1 )
+
+[node name="Health" type="Label" parent="StatsUI"]
+margin_left = -245.0
+margin_top = -67.0
+margin_right = -207.0
+margin_bottom = -38.0
+custom_fonts/font = SubResource( 14 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="Currency" type="Label" parent="StatsUI"]
+margin_left = -245.0
+margin_top = -51.0
+margin_right = -207.0
+margin_bottom = -25.0
+custom_fonts/font = SubResource( 14 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="ElectricTurretNumber" type="Label" parent="StatsUI"]
+margin_left = -34.0
+margin_top = -66.0
+margin_right = 4.0
+margin_bottom = -40.0
+custom_fonts/font = SubResource( 14 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="GroundTurretNumber" type="Label" parent="StatsUI"]
+margin_left = -34.0
+margin_top = -51.0
+margin_right = 4.0
+margin_bottom = -25.0
+custom_fonts/font = SubResource( 14 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="Wave1" type="Label" parent="StatsUI"]
+visible = false
+margin_left = -252.0
+margin_top = -61.0
+margin_right = -214.0
+margin_bottom = -32.0
+custom_fonts/font = SubResource( 14 )
+text = "WAVE 1"
+align = 1
+valign = 1
+
+[node name="Wave2" type="Label" parent="StatsUI"]
+visible = false
+margin_left = -41.0
+margin_top = -61.0
+margin_right = -3.0
+margin_bottom = -32.0
+custom_fonts/font = SubResource( 14 )
+text = "WAVE 1"
+align = 1
+valign = 1

@@ -21,11 +21,6 @@ var _audio_save = AudioFile.new()
 func load_audio_progress():
 	if _audio_save.audio_exists():
 		_audio_save.load_audio()
-	else:
-		_audio_save.master_vol = master_vol
-		_audio_save.music_vol = music_vol
-		_audio_save.sfx_vol = sfx_vol
-		_audio_save.write_audio()
 
 func save_audio_progress():
 	_audio_save.master_vol = master_vol
@@ -51,6 +46,7 @@ func save_level_progress():
 
 func _ready():
 	# loading previously set audio settings
+	# this doesn't require a new file to be made if not
 	load_audio_progress()
 
 	# load game save resource, storing current levels and the player upgrades

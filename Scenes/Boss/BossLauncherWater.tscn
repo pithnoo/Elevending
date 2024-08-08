@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Code/Properties/HurtBox/launcher_hurt_box.gd" type="Script" id=1]
 [ext_resource path="res://Code/Properties/stats.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/Enemies/EnemyDeath/EnemyDeathWater.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Boss/BossItemProjectile.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Enemies/Charges/Heavy/chargeHeavyWater.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Art/Boss/bossHealth-Sheet.png" type="Texture" id=13]
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
@@ -217,6 +218,7 @@ death_effect = ExtResource( 9 )
 death_particle = ExtResource( 10 )
 boss_projectile = ExtResource( 11 )
 count_animations = NodePath("BossContainer/Machine/CounterPlayer")
+machine_health_node = NodePath("BossContainer/Machine/BossHealth")
 machine_node = NodePath(".")
 count_sprite_node = NodePath("BossContainer/Machine/BossCounter")
 
@@ -230,7 +232,7 @@ max_health = 3
 position = Vector2( 0, 3 )
 
 [node name="BossContainer" type="Node2D" parent="."]
-position = Vector2( 0, -0.232791 )
+position = Vector2( 0, -1.65901 )
 
 [node name="BossAvatar" type="Sprite" parent="BossContainer"]
 material = SubResource( 7 )
@@ -255,6 +257,12 @@ hframes = 5
 anims/EasyCounter = SubResource( 15 )
 anims/HardCounter = SubResource( 16 )
 anims/RESET = SubResource( 17 )
+
+[node name="BossHealth" type="Sprite" parent="BossContainer/Machine"]
+position = Vector2( -9, 3 )
+texture = ExtResource( 13 )
+hframes = 5
+frame = 1
 
 [node name="HurtBox" type="Area2D" parent="BossContainer"]
 position = Vector2( 0, -0.375315 )
@@ -292,3 +300,4 @@ one_shot = true
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="BossContainer/HurtBox" to="BossContainer/HurtBox" method="_on_HurtBox_area_entered"]
+[connection signal="damage_dealt" from="BossContainer/HurtBox" to="." method="_on_HurtBox_damage_dealt"]

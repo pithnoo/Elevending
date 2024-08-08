@@ -8,6 +8,12 @@ var animation_finished: bool
 
 func enter():
 	.enter()
+
+	AudioManager.stop_playing(AudioManager.current_theme)
+
+	# don't play menu theme until player returns
+	GameManager.play_menu_theme = false
+
 	GameManager.can_pause = false
 	boss.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_tree().paused = true

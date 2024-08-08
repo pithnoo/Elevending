@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Art/Level/blindsTransition1.png" type="Texture" id=1]
 [ext_resource path="res://Code/UI/scene_transition.gd" type="Script" id=2]
@@ -83,6 +83,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( -2, -2, -2 ),
 "update": 0,
 "values": [ Vector2( -6, -296 ), Vector2( -6, -10 ), Vector2( -6, -40 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "FadeTransition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -192,6 +208,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( -4, -296 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("FadeTransition:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "ReturnEnter"
@@ -281,6 +309,7 @@ reset_on_save = false
 anims/BlindsTransition = SubResource( 9 )
 anims/BossOver = SubResource( 21 )
 anims/BossReturn = SubResource( 22 )
+anims/FadeTransition = SubResource( 23 )
 anims/GameOver = SubResource( 15 )
 anims/GameReturn = SubResource( 18 )
 anims/RESET = SubResource( 10 )
@@ -344,15 +373,19 @@ stretch_mode = 3
 [node name="BossParticlePosiiton" type="Position2D" parent="BossOver"]
 position = Vector2( 50, -38 )
 
+[node name="FadeTransition" type="ColorRect" parent="."]
+margin_right = 383.998
+margin_bottom = 216.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
 [node name="UpgradeTransition" type="ColorRect" parent="."]
-visible = false
 margin_left = -384.0
 margin_right = 0.00012207
 margin_bottom = 216.0
 color = Color( 0.901961, 0.564706, 0.305882, 1 )
 
 [node name="ReturnTransition" type="ColorRect" parent="."]
-visible = false
 margin_left = 384.0
 margin_right = 767.998
 margin_bottom = 216.0

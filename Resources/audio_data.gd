@@ -3,6 +3,7 @@ extends Resource
 
 const SAVE_AUDIO_PATH := "user://audio.json"
 var _audio_file := File.new()
+
 var master_vol : float
 var music_vol : float
 var sfx_vol : float

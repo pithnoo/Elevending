@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Level/vending machines.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/LevelComponents/LevelUIs/EasyLevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=16]
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=17]
@@ -137,15 +137,15 @@ Reset all machines to normal with Space
 scroll_active = false
 
 [node name="Subtitle4" type="RichTextLabel" parent="TutorialUI/TutorialMenu"]
-margin_left = 200.0
+margin_left = 192.0
 margin_top = 136.0
 margin_right = 288.0
 margin_bottom = 176.0
 custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Point and click to [color=#FFA500]aim[/color] and [color=#FFA500]shoot[/color] with mouse
+bbcode_text = "[center]Point and click/hold to [color=#FFA500]aim[/color] and [color=#FFA500]shoot[/color] with mouse
 "
-text = "Point and click to aim and shoot with mouse
+text = "Point and click/hold to aim and shoot with mouse
 "
 scroll_active = false
 
@@ -180,7 +180,7 @@ texture = SubResource( 8 )
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
-[node name="LevelUI" parent="." instance=ExtResource( 14 )]
+[node name="EasyLevelUI" parent="." instance=ExtResource( 14 )]
 
 [node name="EnemySpawnZone2" type="Node2D" parent="."]
 script = ExtResource( 17 )
@@ -191,7 +191,7 @@ spawn_cooldown = 1
 entities = [ ExtResource( 28 ), ExtResource( 9 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 8 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
 wave_cooldown = 3
 spawn_points = [ NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6") ]
-wave_holder = [ "3" ]
+wave_holder = [ "0 0 0 0 0 0 0 0 0", "0 0 0 0 3 3 3 3", "6 6 6 6 3 0 0 3 3 0 0", "4 4 3 3 3 6 6 7 6 0 0 0 0" ]
 ground_enemy_holder_node = NodePath("../YSort/EntityHolder/GroundEnemyHolder")
 air_enemy_holder_node = NodePath("../YSort/EntityHolder/AirEnemyHolder")
 

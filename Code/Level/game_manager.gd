@@ -2,6 +2,7 @@ extends Node
 
 # to show level select screen if returning to menu
 var level_select_first : bool = false
+var play_menu_theme : bool = true 
 
 # to ensure player can't pause during transitions
 var can_pause: bool = true

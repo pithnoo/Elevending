@@ -3,6 +3,7 @@ extends HurtBox
 enum damage_type { GRASS, WATER, FIRE }
 export(damage_type) var type
 
+signal damage_dealt
 
 func _on_HurtBox_area_entered(area: Area2D):
 	match type:
@@ -11,6 +12,7 @@ func _on_HurtBox_area_entered(area: Area2D):
 				area.element.FIRE:
 					get_node(hit_flash).play("Start")
 					stats.health -= area.damage
+					emit_signal("damage_dealt")
 				_:
 					pass
 		damage_type.WATER:
@@ -18,6 +20,7 @@ func _on_HurtBox_area_entered(area: Area2D):
 				area.element.GRASS:
 					get_node(hit_flash).play("Start")
 					stats.health -= area.damage
+					emit_signal("damage_dealt")
 				_:
 					pass
 		damage_type.FIRE:
@@ -25,6 +28,7 @@ func _on_HurtBox_area_entered(area: Area2D):
 				area.element.WATER:
 					get_node(hit_flash).play("Start")
 					stats.health -= area.damage
+					emit_signal("damage_dealt")
 				_:
 					pass
 

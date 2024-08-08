@@ -1,6 +1,7 @@
 [gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/LevelComponents/LevelUIs/EasyLevelUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Enemies/Entities/Air/FireHeavyAir.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Art/tutorial panel.png" type="Texture" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
@@ -12,7 +13,6 @@
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/Level/PauseButtons-Sheet-export.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=16]
 [ext_resource path="res://Code/Level/enemy_spawn.gd" type="Script" id=17]
@@ -260,7 +260,7 @@ texture = SubResource( 9 )
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
-[node name="LevelUI" parent="." instance=ExtResource( 14 )]
+[node name="EasyLevelUI" parent="." instance=ExtResource( 2 )]
 
 [node name="EnemySpawnZone" type="Node2D" parent="."]
 position = Vector2( 3, 0 )

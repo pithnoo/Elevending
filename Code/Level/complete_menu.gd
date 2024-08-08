@@ -50,3 +50,4 @@ func _on_NextButton_pressed():
 
 func _on_MenuButton_pressed():
 	SceneTransition.blind_transition(menu)
+	GameManager.level_select_first = true

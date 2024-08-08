@@ -13,6 +13,8 @@ export(bool) var is_hard
 export(NodePath) var count_animations
 onready var count_anim = get_node(count_animations)
 
+export(NodePath) var machine_health_node
+
 export(NodePath) var machine_node
 onready var machine_container = get_node(machine_node)
 
@@ -26,13 +28,28 @@ func flip_machine():
 	count_sprite.flip_h = 1
 
 func _ready():
-  if is_hard:
-    count_anim.play("HardCounter")
-  else:
-    count_anim.play("EasyCounter")
+	change_health()
+
+	if is_hard:
+		count_anim.play("HardCounter")
+	else:
+		count_anim.play("EasyCounter")
+
+func _on_HurtBox_damage_dealt():
+	change_health()
+
+func change_health():
+	match stats.health:
+		0:
+			get_node(machine_health_node).set_frame(4)
+		1:
+			get_node(machine_health_node).set_frame(3)
+		2:
+			get_node(machine_health_node).set_frame(2)
+		3:
+			get_node(machine_health_node).set_frame(1)
 
 func shoot():
-	# TODO: add enemy attack sound effect
 	emit_signal("launcher_ready")
 	particle_generator.generate_particle(boss_projectile, particle_position)
 	particle_generator.generate_particle(death_effect, particle_position)

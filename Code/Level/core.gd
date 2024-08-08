@@ -24,13 +24,11 @@ func _ready():
 
 func _on_AttackHurtBox_area_entered(area: Area2D):
 	#print("core recorded: ", area.damage, " damage from ", area)
-
 	decrease_health(area.damage)
 
 
 func _on_HurtBox_area_entered(area: Area2D):
 	#print("core recorded: ", area.damage, " damage from ", area)
-
 	decrease_health(area.damage)
 	area.destroy()
 
@@ -45,6 +43,9 @@ func decrease_health(damage_taken: int) -> void:
 		if !GameManager.game_over:
 			# current theme is managed by the audio manager
 			AudioManager.stop_playing(AudioManager.current_theme)
+
+			# don't play menu theme until player returns
+			GameManager.play_menu_theme = false
 
 			AudioManager.play("CoreDown")
 

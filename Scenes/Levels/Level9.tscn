@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/GameComponents/ScreenShake.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LevelComponents/CollectionStation/CollectionStation.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/LevelComponents/Core.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/LevelComponents/LevelUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/LevelComponents/LevelUIs/BossLevelUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GameComponents/GameUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Code/Level/level_data.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/LevelComponents/ParticleGenerator.tscn" type="PackedScene" id=17]
@@ -779,7 +779,7 @@ smoothing_enabled = true
 
 [node name="GameUI" parent="." instance=ExtResource( 15 )]
 
-[node name="LevelUI" parent="." instance=ExtResource( 14 )]
+[node name="BossLevelUI" parent="." instance=ExtResource( 14 )]
 
 [node name="ItemSpawnZone" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -958,7 +958,7 @@ one_shot = true
 
 [node name="Stats" type="Node" parent="Boss"]
 script = ExtResource( 8 )
-max_health = 18
+max_health = 4
 
 [node name="StateManager" type="Node" parent="Boss"]
 script = ExtResource( 42 )
@@ -1042,7 +1042,6 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
-attacks_til_ghost = 4
 warp_particle = ExtResource( 43 )
 
 [node name="BossShadow" type="Sprite" parent="Boss"]
