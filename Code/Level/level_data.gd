@@ -31,8 +31,8 @@ func start_level_theme():
 		# hard theme
 		pass
 	elif level_number <= 6 && level_number >= 4:
-		# medium theme
-		pass
+		AudioManager.play("Somen")
+		AudioManager.current_theme = "Somen"
 	else:
 		# easy theme
 		pass

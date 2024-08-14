@@ -26,6 +26,7 @@ var vending_remains : bool = false
 var hard_phase: bool = false
 var can_items_spawn : bool = false
 var boss_items_spawn : bool = false
+
 # preventing the boss from using the vending attack twice in a row
 var vending_before : bool = false
 var velocity

@@ -79,7 +79,7 @@ shader = ExtResource( 20 )
 shader_param/active = false
 shader_param/colour = Color( 0.909804, 0.231373, 0.231373, 1 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 19.5, 16 )
 
 [sub_resource type="Animation" id=13]
@@ -751,7 +751,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=16]
-radius = 2.0
+radius = 5.0
 
 [node name="Level9" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -874,19 +874,19 @@ turret_holder_node = NodePath("../../EntityHolder/TurretHolder")
 position = Vector2( 0, 8 )
 
 [node name="VendingPositionEasy" parent="VendingAttackPositions" instance=ExtResource( 6 )]
-position = Vector2( 192, 160 )
+position = Vector2( 191, 160 )
 
 [node name="VendingPositionEasy2" parent="VendingAttackPositions" instance=ExtResource( 6 )]
 position = Vector2( 104, 160 )
 
 [node name="VendingPositionEasy3" parent="VendingAttackPositions" instance=ExtResource( 6 )]
-position = Vector2( 280, 160 )
+position = Vector2( 279, 160 )
 
 [node name="VendingPositionHard" parent="VendingAttackPositions" instance=ExtResource( 7 )]
 position = Vector2( 148, 160 )
 
 [node name="VendingPositionHard2" parent="VendingAttackPositions" instance=ExtResource( 7 )]
-position = Vector2( 239, 160 )
+position = Vector2( 235, 160 )
 
 [node name="EnemySpawnPoints" type="Node2D" parent="."]
 
@@ -958,7 +958,7 @@ one_shot = true
 
 [node name="Stats" type="Node" parent="Boss"]
 script = ExtResource( 8 )
-max_health = 4
+max_health = 18
 
 [node name="StateManager" type="Node" parent="Boss"]
 script = ExtResource( 42 )
@@ -1042,6 +1042,7 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
+attacks_til_ghost = 4
 warp_particle = ExtResource( 43 )
 
 [node name="BossShadow" type="Sprite" parent="Boss"]
@@ -1085,12 +1086,12 @@ hit_flash = NodePath("../../HitFlash")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/BossContainer/HurtBox"]
 position = Vector2( -0.5, -1.47042 )
-shape = SubResource( 1 )
+shape = SubResource( 37 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
 visible = false
 position = Vector2( -0.5, -0.5 )
-shape = SubResource( 1 )
+shape = SubResource( 37 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Boss"]
 anims/Attack = SubResource( 13 )

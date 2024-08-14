@@ -3,7 +3,7 @@
 [ext_resource path="res://Code/Boss/boss_vending_point.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 1.0
+radius = 2.0
 
 [node name="VendingPositionHard" type="Position2D"]
 script = ExtResource( 1 )

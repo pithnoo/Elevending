@@ -26,6 +26,7 @@ var attack_positions : Array
 
 var random = RandomNumberGenerator.new()
 var summon_counter: int
+var summon_quota : int
 var success_counter: int
 
 func enter():
@@ -35,6 +36,7 @@ func enter():
 	# resetting boss stats on each entry
 	success_counter = 0
 	summon_counter = 0
+	summon_quota = 0
 
 	for node in attack_position_nodes:
 		attack_positions.append(get_node(node).global_position)
@@ -43,16 +45,19 @@ func enter():
 	match boss.boss_phase:
 		2:
 			summon_counter += 2
+			summon_quota = 2
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[1], RIGHT)
 		3:
 			summon_counter += 4
+			summon_quota = 4
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[2], LEFT)
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[1], RIGHT)
 			decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[3], RIGHT)
 		_:
 			summon_counter += 1
+			summon_quota = 1
 			var launcher_side = random.randi_range(0, 1)
 			if launcher_side == 0:
 				decide_spawn(random.randi_range(0, ELEMENTS-1), attack_positions[0], LEFT)
@@ -62,7 +67,7 @@ func enter():
 func process(delta):
 	# INFO: if no more machines are remaining, then the boss has been damaged
 	if summon_counter <= 0:
-		if success_counter > 0:
+		if success_counter >= summon_quota:
 			return hurt_state
 		else:
 			return teleport_state
