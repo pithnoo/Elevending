@@ -68,11 +68,11 @@ func _on_Stats_health_changed(health):
 		0:
 			if health <= round(boss_health * 0.75):
 				boss_items_spawn = true
+				hard_phase = true  
 				boss_phase += 1
 				get_node(health_bar_node).set_frame(1)
 		1:
 			if health <= round(boss_health / 2):
-				hard_phase = true  
 				boss_phase += 1
 				get_node(health_bar_node).set_frame(2)
 		2:

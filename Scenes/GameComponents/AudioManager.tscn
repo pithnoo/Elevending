@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Sounds/SFX/turretUsed.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/SFX/reload.wav" type="AudioStream" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Sounds/Music/Soba.wav" type="AudioStream" id=22]
 [ext_resource path="res://Sounds/Music/Udon.wav" type="AudioStream" id=23]
 [ext_resource path="res://Sounds/Music/Somen.wav" type="AudioStream" id=24]
+[ext_resource path="res://Sounds/Music/Tsukemen.wav" type="AudioStream" id=25]
 
 [node name="AudioManager" type="Node"]
 pause_mode = 2
@@ -41,6 +42,11 @@ bus = "Music"
 
 [node name="Somen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 24 )
+volume_db = -3.0
+bus = "Music"
+
+[node name="Tsukemen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
 volume_db = -3.0
 bus = "Music"
 

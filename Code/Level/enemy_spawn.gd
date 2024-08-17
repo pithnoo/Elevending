@@ -65,10 +65,6 @@ func _ready():
 	# setting the current number of enemies supposed to be active, based on entered list
 	current_entity_number = wave_lengths[GameManager.current_wave]
 
-	#print(wave_codes)
-	#print("total enemy count: ", enemy_counter)
-
-
 func _process(delta):
 	# continues to spawn until end of array is reached
 	if waveTimer.is_stopped() && !waves_complete:

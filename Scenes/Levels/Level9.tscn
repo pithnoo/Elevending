@@ -1032,6 +1032,7 @@ entities = [ ExtResource( 24 ), ExtResource( 37 ), ExtResource( 34 ) ]
 heavy_entities = [ ExtResource( 47 ), ExtResource( 45 ), ExtResource( 49 ) ]
 air_entities = [ ExtResource( 44 ), ExtResource( 48 ), ExtResource( 46 ) ]
 spawn_points = [ NodePath("../../../EnemySpawnPoints/Spawn1"), NodePath("../../../EnemySpawnPoints/Spawn2"), NodePath("../../../EnemySpawnPoints/Spawn3"), NodePath("../../../EnemySpawnPoints/Spawn4"), NodePath("../../../EnemySpawnPoints/Spawn5"), NodePath("../../../EnemySpawnPoints/Spawn6") ]
+extra_summons = 2
 spawn_cooldown = 1
 easy_entity_number = 6
 hard_entity_number = 10
@@ -1042,7 +1043,8 @@ animation_name = "Decide"
 ghost_node = NodePath("../GhostAttack")
 vending_node = NodePath("../VendingAttack")
 summon_node = NodePath("../SummonAttack")
-attacks_til_ghost = 4
+easy_attacks_til_ghost = 4
+hard_attacks_til_ghost = 6
 warp_particle = ExtResource( 43 )
 
 [node name="BossShadow" type="Sprite" parent="Boss"]

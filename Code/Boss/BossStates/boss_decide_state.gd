@@ -3,7 +3,8 @@ extends BossBaseState
 export(NodePath) var ghost_node
 export(NodePath) var vending_node
 export(NodePath) var summon_node
-export(int) var attacks_til_ghost
+export(int) var easy_attacks_til_ghost
+export(int) var hard_attacks_til_ghost
 
 onready var ghost_state = get_node(ghost_node)
 onready var vending_state = get_node(vending_node)
@@ -37,9 +38,15 @@ func process(_delta) -> BossBaseState:
 
 		attack_counter += 1
 
-		if attack_counter > attacks_til_ghost:
-			attack_counter = 0
-			return ghost_state
+		match boss.boss_phase:
+			2:
+				if attack_counter > hard_attacks_til_ghost:
+					attack_counter = 0
+					return ghost_state
+			_:
+				if attack_counter > easy_attacks_til_ghost:
+					attack_counter = 0
+					return ghost_state
 
 		match boss_attack:
 			0:

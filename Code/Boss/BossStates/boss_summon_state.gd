@@ -13,14 +13,15 @@ var entityID: int
 var spawnID: int
 
 export(int) var current_entity_number
+export(int) var extra_summons
 
 var random = RandomNumberGenerator.new()
-
 var wave_complete: bool
 export(int) var spawn_cooldown
 
 # INFO: adding entity number so that it can change depending on the boss' difficulty
 var entity_number
+
 export(int) var easy_entity_number
 export(int) var hard_entity_number
 
@@ -42,19 +43,27 @@ func enter():
 		current_entity_number = easy_entity_number
 		entity_number = easy_entity_number
 
-	var spawn_point = get_node(spawn_points[spawnID])
-
 	# TODO: summon a heavy ground unit on phase 1, heavy air unit on phase 2
-	match boss.boss_phase:
-		2:
-			random.randomize()
-			entityID = random.randi_range(0, heavy_entities.size() - 1)
+	if boss.boss_phase == 1:
+		random.randomize()
+		entityID = random.randi_range(0, heavy_entities.size() - 1)
+
+		for i in extra_summons:
+			spawnID = random.randi_range(0, spawn_points.size() - 1)
+			var spawn_point = get_node(spawn_points[spawnID])
+
 			var entity = heavy_entities[entityID].instance()
 			boss.ground_enemy_holder.add_child(entity)
 			entity.global_position = spawn_point.global_position
-		3:
-			random.randomize()
-			entityID = random.randi_range(0, air_entities.size() - 1)
+
+	elif boss.boss_phase >= 2:
+		random.randomize()
+		entityID = random.randi_range(0, air_entities.size() - 1)
+
+		for i in extra_summons:
+			spawnID = random.randi_range(0, spawn_points.size() - 1)
+			var spawn_point = get_node(spawn_points[spawnID])
+
 			var entity = air_entities[entityID].instance()
 			boss.ground_enemy_holder.add_child(entity)
 			entity.global_position = spawn_point.global_position

@@ -26,7 +26,6 @@ func fade_transition(target: String) -> void:
 	yield(animations, "animation_finished")
 
 	get_tree().change_scene(target)
-
 	animations.play_backwards("FadeTransition")
 	yield(animations, "animation_finished")
 	

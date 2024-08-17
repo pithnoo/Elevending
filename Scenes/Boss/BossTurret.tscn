@@ -186,10 +186,11 @@ max_health = 2
 script = ExtResource( 5 )
 
 [node name="ParticlePosition" type="Position2D" parent="."]
+position = Vector2( -3, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 17 )
-position = Vector2( -1, 0 )
+position = Vector2( -4, 0 )
 texture = ExtResource( 1 )
 hframes = 3
 
@@ -217,7 +218,7 @@ shape = SubResource( 18 )
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2( -2, 0 )
+position = Vector2( -5, 0 )
 collision_layer = 0
 collision_mask = 16
 script = ExtResource( 4 )

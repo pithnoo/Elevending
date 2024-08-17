@@ -27,9 +27,9 @@ func start_level_theme():
 		# boss theme
 		AudioManager.play("Udon")
 		AudioManager.current_theme = "Udon"
-	elif level_number == 8 && level_number == 7:
-		# hard theme
-		pass
+	elif level_number == 8 || level_number == 7:
+		AudioManager.play("Tsukemen")
+		AudioManager.current_theme = "Tsukemen"
 	elif level_number <= 6 && level_number >= 4:
 		AudioManager.play("Somen")
 		AudioManager.current_theme = "Somen"
@@ -68,32 +68,31 @@ func _ready():
 	level_camera.current = true
 
 func rate_level():
-	if GameManager.game_currency < coin_requirement1:
-		level_rating = 0
-	elif (
-		GameManager.game_currency >= coin_requirement1
-		&& GameManager.game_currency < coin_requirement2
-	):
-		level_rating = 1
-	elif (
-		GameManager.game_currency >= coin_requirement2
-		&& GameManager.game_currency < coin_requirement3
-	):
-		level_rating = 2
-	else:
-		# in any other case, the score exceeds all coin requirements
-		level_rating = 3
+	if !GameManager.game_over:
+		if GameManager.game_currency < coin_requirement1:
+			level_rating = 0
+		elif (
+			GameManager.game_currency >= coin_requirement1
+			&& GameManager.game_currency < coin_requirement2
+		):
+			level_rating = 1
+		elif (
+			GameManager.game_currency >= coin_requirement2
+			&& GameManager.game_currency < coin_requirement3
+		):
+			level_rating = 2
+		else:
+			# in any other case, the score exceeds all coin requirements
+			level_rating = 3
 
-	write_level_data()
+		write_level_data()
 
-	if level_index == LevelManager.levels_unlocked - 1:
-		LevelManager.levels_unlocked = level_number + 1
-		LevelManager.save_level_progress()
-		#print(LevelManager.levels_unlocked)
+		if level_index == LevelManager.levels_unlocked - 1:
+			LevelManager.levels_unlocked = level_number + 1
+			LevelManager.save_level_progress()
 
-	#print(LevelManager.level_ratings)
-
-	GameManager.emit_signal("display_rating", level_rating)
+		# current theme is stopped in complete_menu
+		GameManager.emit_signal("display_rating", level_rating)
 
 
 func goto_next_level():

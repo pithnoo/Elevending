@@ -32,6 +32,8 @@ func set_notes(value):
 		animations.play("Complete")
 		notes = clamp(value, 0, max_notes)
 
+		AudioManager.stop_playing(AudioManager.current_theme)
+
 		if notesUIFull != null:
 			# 28 is the pixel size of the note sprite
 			notesUIFull.rect_size.x = notes * 28

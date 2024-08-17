@@ -1,9 +1,8 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scenes/PowerUps/AmmoReload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/tutorial panel.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Enemies/Entities/Air/FireHeavyAir.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/PowerUps/RapidFire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Code/Level/item_spawn.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/GrassMediumGround.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/Entities/Ground/FireMediumGround.tscn" type="PackedScene" id=7]
@@ -276,7 +275,7 @@ position = Vector2( 352, 232 )
 [node name="ItemSpawnZone" type="Node2D" parent="."]
 script = ExtResource( 5 )
 spawn_cooldown = 5
-entities = [ ExtResource( 1 ), ExtResource( 4 ) ]
+entities = [ ExtResource( 1 ) ]
 item_holder_node = NodePath("../YSort/EntityHolder/ItemHolder")
 crates_before_reload = 5
 max_existing_items = 20
